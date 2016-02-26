@@ -1,0 +1,32 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="logForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="priority" type="java.lang.String" />
+			<form-property name="begin" type="java.lang.String" />
+			<form-property name="end" type="java.lang.String" />
+			<form-property name="message" type="java.lang.String" />
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="logs" type="java.util.ArrayList" />
+			<!--page-->
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<!--page-->
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/Log" parameter="method" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="logForm">
+			<forward name="listlogOK"
+				path="/WEB-INF/page/log/logList.jsp" redirect="false" />
+			<forward name="viewlogOK" path="/WEB-INF/page/log/log.jsp"
+				redirect="false" />
+		</action>
+	</action-mappings>
+</struts-config>

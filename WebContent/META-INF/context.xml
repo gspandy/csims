@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+
+	<Resource 
+		name="jdbc/csims" 
+		auth="container" 
+		type="javax.sql.DataSource" 
+		maxActive="100" 
+		maxIdle="30" 
+		maxWait="1000" 
+		username="dmall" 
+		password="sweet"
+		driverClassName="com.ibm.db2.jcc.DB2Driver" 
+		url="jdbc:db2://localhost:50000/csims"/>
+</Context>

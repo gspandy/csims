@@ -1,0 +1,41 @@
+﻿<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="messageForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="title" type="java.lang.String" />
+			<form-property name="message" type="java.lang.String" />
+			<form-property name="receiver" type="java.lang.String" />
+			<form-property name="sender" type="java.lang.String" />
+			<form-property name="createdate" type="java.lang.String" />
+			<form-property name="type" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="category" type="java.lang.String" />
+			<form-property name="end" type="java.lang.String" />
+			<form-property name="begin" type="java.lang.String" />
+			<form-property name="messageList"
+				type="java.util.ArrayList" />
+			<!--page-->
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<!--page-->
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		
+		<action path="/messageManage"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="method" scope="request" name="messageForm">
+			<forward name="toMessage"
+				path="/WEB-INF/page/message/messageInfo.jsp" />
+			<forward name="toMessageDetail"
+				path="/WEB-INF/page/message/messageDetail.jsp" />
+			<forward name="toIndexShow"
+				path="/WEB-INF/page/frame/loginSuccess.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>

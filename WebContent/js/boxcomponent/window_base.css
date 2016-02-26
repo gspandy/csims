@@ -1,0 +1,66 @@
+	.window_root{
+		position : absolute;
+		font-size : 12px;
+		width : 1px;
+		heigth : 1px;
+		display : none;
+		z-index : 200;
+		background-color:#ECF3F9;
+		border: 1px solid #8db2e3;
+	}
+	.window_body{
+		float:left;
+	}
+	.window_load{
+		margin-left:50%;
+		width:32px;
+		height:32px;
+		background-image : url(loading.gif);
+	}
+	
+	.window_title{
+		float : left;
+		width : 100%;
+		height : 19px;
+		line-height: 19px;
+		background-color : #ECFFFF;
+	}
+	.window_text{
+		
+		font-size : 12px;
+		height : 19px;
+		float : left;
+		width : 80%;
+		color : white;
+		font-weight: bold;
+	}
+	.window_close_on{
+		float : right;
+		width : 12px;
+		height : 19px;
+		margin-right:2px;
+		border:0px;
+		background-image : url(tab-close-on.gif);
+		background-repeat : no-repeat;
+		background-position : center center;
+		cursor:pointer;
+	}
+		
+
+	.window_shadow{
+		position : absolute;
+		left : 0px;
+		top : 0px;
+		z-index:100;
+		width:0px;
+		height:0px;
+		display:none;
+		filter:Alpha(Opacity=40);
+		background-color:#eeeeee;
+	}
+	.mouseOver{
+			background-color:#ECF3F9;
+	}
+	.mouseOut{
+			background-color:#ECF3F9;
+	}

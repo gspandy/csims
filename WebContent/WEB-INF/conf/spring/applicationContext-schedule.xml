@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="clearUselessAeinspRelativeMethodInvokingJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="enforceService" />
+		<property name="targetMethod" value="clearUselessAeinspRelative" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="clearUselessAeinspRelativeJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="clearUselessAeinspRelativeMethodInvokingJob" />
+		<property name="cronExpression" value="${clear.UselessAeinspRelative.cron}" />
+	</bean>
+
+	<bean id="schedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="clearUselessAeinspRelativeJobCronTrigger" />
+				<ref bean="doQueryDbAndWriteTmpFileJobCronTrigger" />
+				<ref bean="doZipAndRecordPathJobCronTrigger" />
+				<!-- <ref bean="createPrintJobCronTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+	<!-- Csims db backup job configrution -->
+	<bean id="backupDbService" class="com.gtm.csims.job.backup.BackupDbService">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	<bean id="backupFileService" class="com.gtm.csims.job.backup.FileService">
+		<property name="webRealPath" value="D:/" />
+	</bean>
+	<bean id="generateTempFileThread" class="com.gtm.csims.job.backup.GenerateTempFileThread"
+		scope="prototype">
+		<property name="backupDbService" ref="backupDbService" />
+	</bean>
+	<bean id="generateSqlTempFileThread" class="com.gtm.csims.job.backup.GenerateSqlTempFileThread"
+		scope="prototype">
+		<property name="backupDbService" ref="backupDbService" />
+		<property name="backupFileService" ref="backupFileService" />
+	</bean>
+	<bean id="backupExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="keepAliveSeconds" value="3000" />
+		<property name="maxPoolSize" value="20" />
+		<!-- <property name="queueCapacity" value="50" /> -->
+	</bean>
+	<bean id="backupDbJob" class="com.gtm.csims.job.backup.BackupDbJob">
+		<property name="backupExecutor" ref="backupExecutor" />
+		<property name="backupDbService" ref="backupDbService" />
+		<property name="fileService" ref="backupFileService" />
+	</bean>
+	<bean id="doQueryDbAndWriteTmpFileMethodInvokingJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="backupDbJob" />
+		<property name="targetMethod" value="doQueryDbAndWriteTmpFile" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="doZipAndRecordPathMethodInvokingJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="backupDbJob" />
+		<property name="targetMethod" value="doZipAndRecordPath" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="doQueryDbAndWriteTmpFileJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="doQueryDbAndWriteTmpFileMethodInvokingJob" />
+		<property name="cronExpression" value="0 0 4 ? * SAT" />
+	</bean>
+	<bean id="doZipAndRecordPathJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="doZipAndRecordPathMethodInvokingJob" />
+		<property name="cronExpression" value="0 0 4 ? * SUN" />
+	</bean>
+	<!-- Csims db backup job configrution -->
+</beans>

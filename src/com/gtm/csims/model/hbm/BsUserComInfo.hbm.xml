@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsUserComInfo"
+		table="BS_USERCOMINFO"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+		<property
+			name="LoginId"
+			column="LOGINID"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="ComDate"
+			column="COMDATE"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="ComContent"
+			column="COMCONTENT"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="ComOrgNo"
+			column="COMORGNO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ComOrgName"
+			column="COMORGNAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+	</class>	
+</hibernate-mapping>

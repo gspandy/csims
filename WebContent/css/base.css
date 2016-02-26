@@ -1,0 +1,351 @@
+/* CSS Document */
+*{
+	margin:0px;
+	padding:0px;
+	border:0px;
+	font-size:12px;
+}
+body{
+	font-family:"宋体";
+	font-size:12px;
+	color:#1B1B1B;
+	border:0px;
+	background:#ACAFB6;
+	style:overflow:scroll;
+	/*overflow-x:hidden;*/
+}
+a{
+	text-decoration:none;
+	color:#1B1B1B;
+}
+
+
+#wait{
+	width:100%;
+	height:507px;
+	background:url(../image/progress.gif) center no-repeat;
+	background-color:#ACAFB6;
+}
+/*--左导航--*/
+#leftedge{
+	width:100%;
+	background:url(../image/lbg1.jpg) ;
+	height:100%;
+}
+#A1Parent,#B1Parent,#C1Parent,#D1Parent,#E1Parent,#F1Parent,#G1Parent{
+	height:25px;
+	line-height:25px;
+	background:url(../image/navbg.jpg) left top repeat-x;
+}
+#A1Parent a,#B1Parent a,#C1Parent a,#D1Parent a,#E1Parent a,#F1Parent a,#G1Parent a{
+	color:#1B1B1B;
+}
+
+#A1Child a:active,#G1Child a:active,#F1Child a:active,#R1Child a:active,#Z1Child a:active,#B1Child a:active,#C1Child a:active,#D1Child a:active,#E1Child a:active{
+	color:#DDDDDD;
+	font-weight: bold;
+}
+
+.lg{
+	background:url(../image/navl.jpg) top left no-repeat;
+	width:60%;
+	padding-left:32px;
+	height:25px;
+}
+.rg{
+	background:url(../image/navr.jpg) top right no-repeat;
+	height:25px;
+	padding-right:32px;
+}
+#leftedge li{
+	height:20px;
+	list-style-image:url(../image/liimg.jpg);
+	margin-left:45px;
+	line-height:20px;
+}
+
+/*--主页面--*/
+#main{/*主页面总设置*/
+	background:#ACAFB6;
+	width:100%;
+	min-width:750px;
+	height:100%;
+}
+#current{/*当前位置*/
+	height:23px;
+	border:#DDDEDF solid 1px;
+	background:url(../image/titbg.jpg) top left repeat-x;
+	line-height:23px;
+	padding-left:25px;
+}
+#content{/*内容*/
+	padding:5px 25px 10px 25px;
+}
+.wt1{/*按钮位置*/
+	float:left;
+	padding-left:80px;
+	width:703px;
+}
+.wt2{/*按钮位置*/
+	padding-left:630px;
+	padding-bottom:10px;
+}
+.wt4{
+	padding-left:200px;
+}
+.query{/*主体上部显示*/
+	padding-top:10px;
+	padding-bottom:10px;
+	border-bottom:#DDDEDF solid 2px;
+	margin-bottom:5px;
+}
+.show{/*主体上部显示*/
+	padding-top:20px;
+	border-bottom:#DDDEDF solid 2px;
+	margin-bottom:5px;
+}
+h1{/*标题样式*/
+	font-size:15px;
+	height:25px;
+}
+.maintext{/*主文本框样式*/
+	width:200px;
+}
+.wta{/*次文本框样式*/
+	width:87px;
+}
+.selwt{/*下拉框样式*/
+		width:200px;
+}
+tfoot a{/*翻页设置*/
+	font-size:12px;
+	float:left;
+	margin:0px 10px;
+	padding-top:1px;
+}
+.butwt1{
+	margin-top:5px;
+}
+.buttonf{
+	background:url(../image/buttonf.jpg) top left no-repeat;
+	width:50px;
+	height:16px;
+	font-size:12px;
+	margin-left:120px;
+	border:0px;
+	margin-top:5px;
+}
+.buttong{
+	background:url(../image/buttong.jpg) top left no-repeat;
+	width:50px;
+	height:16px;
+	font-size:12px;
+	margin-right:10px;
+	border:0px;
+	margin-top:5px;
+}
+.query{
+	padding-bottom:20px;
+	border-bottom:#DDDEDF solid 2px;
+	margin-bottom:5px;
+}
+#content li{
+	list-style-type:none;
+	line-height:25px;
+}
+#content label{
+	width:100px;
+	text-align:right;
+	padding-right:5px;
+	float:left;
+	clear:both;
+}
+#content ul{
+	margin-bottom:10px;
+}
+#content ul input{
+	height:18px;
+	border:#70757C solid 1px;
+	line-height:18px;
+	font-size:12px;
+}
+.dkbutton{
+	padding-left:100px;
+}
+.buttona{
+	background:url(../image/buttona.jpg) top left no-repeat;
+	width:61px;
+	height:21px;
+	font-size:13px;
+	margin-right:10px;
+	border:0px;
+}
+.buttona1111{
+	background:url(../image/button3.jpg) top left no-repeat;
+	width:170px;
+	height:21px;
+	font-size:13px;
+	margin-right:10px;
+	border:0px;
+}
+#content table{
+	width:900px;
+}
+#content table thead{
+	font-size:14px;
+}
+#content table thead td{
+	border-bottom:#70757C solid 2px;
+	height:30px;
+	line-height:30px;
+}
+#content table tbody td{
+	border-bottom:#70757C solid 1px;
+	height:26px;
+	line-height:26px;
+}
+.buttonb{
+	background:url(../image/buttonb.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+.buttonc{
+	background:url(../image/buttonc.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+.buttond{
+	background:url(../image/buttond.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+	
+}
+.buttone{
+	background:url(../image/buttone.jpg) top left no-repeat;
+	width:50px;
+	height:16px;
+}
+.buttonh{
+	background:url(../image/buttonh.jpg) top left no-repeat;
+	width:50px;
+	height:16px;
+}
+.buttonj{
+	background:url(../image/buttonj.jpg) top left no-repeat;
+	width:50px;
+	height:16px;
+}
+.buttoni{
+	background:url(../image/buttoni.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+.buttonk{
+	background:url(../image/buttonk.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+.buttonl{
+	background:url(../image/buttonl.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+.buttonm{
+	background:url(../image/buttonm.jpg) top left no-repeat;
+	width:60px;
+	height:16px;
+}
+.buttonn{
+	background:url(../image/buttonn.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+#ckbbmain table thead td{
+	border-bottom:#70757C solid 2px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+}
+#ckbbmain select{
+	width:60px;
+	float:left;
+	font-size:12px;
+	text-align:center;
+}
+.cksztext{
+	width:50px;
+	height:20px;
+	line-height:20px;
+	font-size:12px;
+}
+tfoot{
+	height:50px;
+	font-size:8px;
+	float:left;
+}
+#top{
+	background:url(../image/top.jpg) left top no-repeat #F6F7F9;
+	width:100%;
+	min-width:1000px;
+	height:10px;
+	padding-top:10px;
+}
+.logwt{
+	float:right;
+	text-align:right;
+	margin-right:60px;
+}
+#foot{
+	height:30px;
+	background:url(../image/foot.jpg) top left repeat-x;
+	}
+ .buttono{
+	background:url(../image/buttono.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+ .buttonp{
+	background:url(../image/buttonp.jpg) top left no-repeat;
+	width:40px;
+	height:16px;
+}
+.hasunderline{
+	text-decoration:underline;
+	}
+.redfont{
+	color:#EF3100;
+	}
+.wt5{
+	padding-left:200px;
+	padding-top: 20px;
+}	
+.wt5 a{
+    margin-right: 10px;
+}
+
+.boldFont{
+    font-weight: bold;
+}
+
+.hiddenDiv{ 
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width:200px; 
+	height:200px;
+	background-color: #FFFFFF;
+	display:none;
+	z-index:1;
+	filter: Alpha(Opacity=50);
+}
+
+.printTitleNormal{
+    font-weight: normal;
+}
+.printTitleBold{
+    font-weight: bold;
+}
+
+sliverfont{
+	color: #DDDDDD;
+}

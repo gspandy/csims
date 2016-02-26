@@ -1,0 +1,27 @@
+﻿<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+  <form-beans>
+
+    <form-bean name="statisticsForm"
+      type="org.apache.struts.action.DynaActionForm">
+      <form-property name="fromDate" type="java.lang.String"></form-property>
+      <form-property name="toDate" type="java.lang.String"></form-property>
+      <form-property name="reportType" type="java.lang.String"></form-property>
+      <form-property name="reportYear" type="java.lang.String"></form-property>
+      <form-property name="organization" type="java.lang.String" />
+    </form-bean>
+  </form-beans>
+
+  <action-mappings>
+    <action path="/StatisticsAction" parameter="method" scope="request"
+      type="org.springframework.web.struts.DelegatingActionProxy"
+      name="statisticsForm">
+      <forward name="toinitPage"
+        path="/WEB-INF/page/dataapp/statistics/init.jsp"
+        redirect="false" />
+      <forward name="toresultPage"
+        path="/WEB-INF/page/dataapp/statistics/result.jsp"
+        redirect="false" />
+    </action>
+  </action-mappings>
+</struts-config>

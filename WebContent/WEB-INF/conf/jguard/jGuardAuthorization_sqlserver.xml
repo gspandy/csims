@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration SYSTEM "../../dtd/jGuardAuthorization_1.00.dtd">
+<configuration>
+	<authorization>
+		<scope>local</scope>
+		<permissionResolutionCaching>false</permissionResolutionCaching>
+		<authorizationManager>
+			net.sf.jguard.ext.authorization.manager.JdbcAuthorizationManager
+		</authorizationManager>
+		<authorizationManagerOptions>
+			<option>
+				<name>JNDI</name>
+				<value>java:/comp/env/jdbc/ec</value>
+			</option>
+			<!-- <option>
+				<name>databaseDriver</name>
+				<value>com.microsoft.sqlserver.jdbc.SQLServerDriver</value>
+				</option>
+				<option>
+				<name>databaseDriverUrl</name>
+				<value>jdbc:sqlserver://localhost:1433;DatabaseName=sweet_pro_db</value>
+				</option>
+				<option>
+				<name>databaseDriverLogin</name>
+				<value>sa</value>
+				</option>
+				<option>
+				<name>databaseDriverPassword</name>
+				<value>123</value>
+				</option>  -->
+			<option>
+				<name>authorizationXmlFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/jGuardPrincipalsPermissions.xml
+				</value>
+			</option>
+			<option>
+				<name>authorizationDatabaseFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/authorization.sqlserver.properties
+				</value>
+			</option>
+			<option>
+				<name>debug</name>
+				<value>true</value>
+			</option>
+		</authorizationManagerOptions>
+	</authorization>
+</configuration>

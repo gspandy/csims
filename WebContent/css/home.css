@@ -1,0 +1,74 @@
+body {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #1A4885;
+	margin: 0px;
+}
+
+body,table,tr,td,select
+{font-size: 12px;}
+
+a.white:link {
+	color: #00557D;
+	text-decoration: none;
+}
+a.white:visited {
+	color: #00557D;
+	text-decoration: none;
+}
+a.white:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.blackfonts {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+}
+.bottomfonts {
+	font-family: "宋体";
+	font-size: 10px;
+	color: #D3E5F3;
+	padding-right: 10px;
+}
+.whitefonts {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #ffffff;
+	padding-right: 20px;
+}
+
+.title{
+    background-image: url(../images/main_r5_c15_r13_c4.jpg);
+	FONT-SIZE: 12px; COLOR: #327FB1; FONT-FAMILY: 宋体;
+	font-weight: bold;
+	height:25px; width:135px;
+	text-align: center;
+	vertical-align: middle;
+	cursor:pointer;
+}
+.h30
+{
+	text-align: left;
+	vertical-align: middle;
+	height: 30px;
+}
+.h30 td
+{
+	padding-left: 31px;
+	background-attachment: fixed;
+	background-image: url(../images/main_r8_c3.jpg);
+	background-repeat: no-repeat;
+	background-position: 18px center;
+}
+A.left:link {
+	FONT-SIZE: 12px; COLOR: #1A4885; TEXT-DECORATION: none
+}
+A.left:visited {
+	FONT-SIZE: 12px; COLOR: #1A4885; TEXT-DECORATION: none
+}
+A.left:hover {
+	FONT-SIZE: 12px; COLOR: #1A4885
+}
+.hand
+{cursor:pointer;}

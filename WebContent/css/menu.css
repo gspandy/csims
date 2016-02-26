@@ -1,0 +1,27 @@
+/*----------menu Style----------*/
+body{
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+table.menu {
+	background-image: url(../images/menu_bg.jpg);
+	background-repeat: repeat-y;
+	width: 160px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #2c5c9d;
+	           }			   			   
+a {color:black;text-decoration: none}
+a:hover {color:#4753A5;text-decoration: underline}
+td{font-size:9pt}
+.sec_menu{overflow:hidden}
+.menu_title{background-color: #CC6600}
+.menu_title span{color:#FFFFFF;}
+.menu_title2{background-color: #FF9900}
+.menu_title2 span{color:#C8C8C8; }
+.showtitle{position:relative; top:-2px; left:-6px; border:1pt solid #C3D4E7;
+z-index:0; height:26; background-color: #0080C0; padding-top:5; padding-left:5}
+.alp{FILTER: alpha(opacity=0,finishopacity=100,style=1,startx=0,starty=5,
+finishx=250,finishy=85}

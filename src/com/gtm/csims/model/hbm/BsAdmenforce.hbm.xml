@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+  <class name="BsAdmenforce" table="BS_ADMENFORCE">
+    <meta attribute="sync-DAO">false</meta>
+    <id name="Id" type="string" column="ID">
+      <generator class="org.hibernate.id.UUIDHexGenerator" />
+    </id>
+
+    <property name="Aeno" column="AENO" type="string" not-null="true"
+      length="50" />
+    <property name="Aeorgnm" column="AEORGNM" type="string"
+      not-null="true" length="100" />
+    <property name="Aeorgno" column="AEORGNO" type="string"
+      not-null="true" length="50" />
+    <property name="Aeedorgnm" column="AEEDORGNM" type="string"
+      not-null="true" length="1000" />
+    <property name="Aeedorgno" column="AEEDORGNO" type="string"
+      not-null="true" length="1000" />
+    <property name="Aeplanstdate" column="AEPLANSTDATE" type="timestamp"
+      not-null="false" length="26" />
+    <property name="Aeplantmdate" column="AEPLANTMDATE" type="timestamp"
+      not-null="false" length="26" />
+    <property name="Prjnm" column="PRJNM" type="string"
+      not-null="false" length="200" />
+    <property name="Prjbasis" column="PRJBASIS" type="string"
+      not-null="false" length="500" />
+    <property name="Aebasis" column="AEBASIS" type="string"
+      not-null="false" length="500" />
+    <property name="Aecontent" column="AECONTENT" type="string"
+      not-null="false" length="500" />
+    <property name="Aelimt" column="AELIMT" type="string"
+      not-null="false" length="100" />
+    <property name="Aeway" column="AEWAY" type="string"
+      not-null="false" length="50" />
+    <property name="Aepeople" column="AEPEOPLE" type="string"
+      not-null="false" length="100" />
+    <property name="Aeplan" column="AEPLAN" type="string"
+      not-null="false" length="500" />
+    <property name="Dptopnion" column="DPTOPNION" type="string"
+      not-null="false" length="500" />
+    <property name="Dptpeople" column="DPTPEOPLE" type="string"
+      not-null="false" length="50" />
+    <property name="Dptpeopleorg" column="DPTPEOPLEORG" type="string"
+      not-null="false" length="100" />
+    <property name="Dptpeopleorgno" column="DPTPEOPLEORGNO"
+      type="string" not-null="false" length="50" />
+    <property name="Chairopnion" column="CHAIROPNION" type="string"
+      not-null="false" length="500" />
+    <property name="Chairpeople" column="CHAIRPEOPLE" type="string"
+      not-null="false" length="50" />
+    <property name="Chairpeopleorg" column="CHAIRPEOPLEORG"
+      type="string" not-null="false" length="100" />
+    <property name="Chairpeopleorgno" column="CHAIRPEOPLEORGNO"
+      type="string" not-null="false" length="50" />
+    <property name="Aestat" column="AESTAT" type="string"
+      not-null="false" length="20" />
+    <property name="Regpep" column="REGPEP" type="string"
+      not-null="false" length="20" />
+    <property name="Regorgnm" column="REGORGNM" type="string"
+      not-null="false" length="100" />
+    <property name="Regorgno" column="REGORGNO" type="string"
+      not-null="false" length="50" />
+    <property name="Regdt" column="REGDT" type="timestamp"
+      not-null="false" length="26" />
+    <property name="Stat" column="STAT" type="string" not-null="false"
+      length="50" />
+    <property name="Flag" column="FLAG" type="string" not-null="false"
+      length="50" />
+    <property name="Createdate" column="CREATEDATE" type="timestamp"
+      not-null="false" length="26" />
+    <property name="Updatedate" column="UPDATEDATE" type="timestamp"
+      not-null="false" length="26" />
+    <property name="Maxino" column="MAXINO" type="integer"
+      not-null="false" length="10" />
+    <property name="Aesummary" column="AESUMMARY" type="string"
+      not-null="false" length="500" />
+    <property name="Step" column="STEP" type="string" not-null="false"
+      length="5" />
+    <property name="Aeheadman" column="AEHEADMAN" type="string"
+      not-null="false" length="255" />
+    <property name="Aeother" column="AEOTHER" type="string"
+      not-null="false" length="1000" />
+    <property name="Aemaster" column="AEMASTER" type="string"
+      not-null="false" length="1000" />
+    <property name="Chairman" column="CHAIRMAN" type="string"
+      not-null="false" length="50" />
+    <property name="Deptman" column="DEPTMAN" type="string"
+      not-null="false" length="50" />
+    <property name="Deptauditdate" column="DEPTAUDITDATE" type="timestamp"
+      not-null="false" length="26" />
+    <property name="Chairauditdate" column="CHAIRAUDITDATE"
+      type="timestamp" not-null="false" length="26" />
+    <property name="Crtlogin" column="CRTLOGIN" type="string"
+      not-null="false" length="100" />
+    <property name="Innerno" column="INNERNO" type="string"
+      not-null="false" length="50" />
+    <property name="Isfinished" type="yes_no">
+      <column name="ISFINISH" sql-type="BOOLEAN" />
+    </property>
+    <property name="Canbeupdate" type="yes_no">
+      <column name="CANBEUPDATE" sql-type="BOOLEAN" />
+    </property>
+
+
+  </class>
+</hibernate-mapping>

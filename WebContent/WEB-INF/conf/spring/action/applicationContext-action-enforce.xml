@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- qhy -->
+	<bean name="/AdminEnforceManagerAction"
+		class="com.gtm.csims.controll.enforce.AdministrationEnforceManagerAction">
+		<property name="noGenerator" ref="noGenerator"></property>
+		<property name="enforceService" ref="enforceService"></property>
+		<property name="punishService" ref="punishService"></property>
+		<property name="fileHandler" ref="fileService"></property>
+		<property name="remindService" ref="remindService"></property>
+		<property name="systemBaseInfoManager"
+			ref="systemBaseInfoManager" />
+		<property name="bsDictionaryDao" ref="bsDictionaryDao" />
+		<property name="wordGenerator" ref="wordGenerator" />
+		<property name="aeinspectionAnlStsicSvce"
+			ref="aeinspectionAnlStsicSvce" />
+	</bean>
+
+	<bean name="/AdminSanctionManagerAction"
+		class="com.gtm.csims.controll.enforce.AdministrativeSanctionManagerAction">
+		<property name="punishService" ref="punishService"></property>
+		<property name="noGenerator" ref="noGenerator"></property>
+		<property name="enforceService" ref="enforceService"></property>
+		<property name="remindService" ref="remindService"></property>
+		<property name="systemBaseInfoManager"
+			ref="systemBaseInfoManager" />
+		<property name="fileHandler" ref="fileService"></property>
+		<property name="wordGenerator" ref="wordGenerator" />
+		<property name="bsDictionaryDao" ref="bsDictionaryDao" />
+
+	</bean>
+
+	<bean name="/EnforceOfficerManagerAction"
+		class="com.gtm.csims.controll.enforce.EnforcementOfficerManagerAction">
+		<property name="enforcePeopleService"
+			ref="enforcePeopleService">
+		</property>
+		<property name="userService" ref="userService"></property>
+		<property name="systemBaseInfoManager"
+			ref="systemBaseInfoManager" />
+		<property name="remindService" ref="remindService"></property>
+	</bean>
+	<!-- qhy end -->
+
+</beans>

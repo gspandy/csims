@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="utils">
+	<typeAlias alias="osCacheController"
+		type="com.ibatis.sqlmap.engine.cache.oscache.OSCacheController" />
+	<cacheModel id="pojoOSCache" type="osCacheController"
+		readOnly="true" serialize="false">
+		<flushInterval hours="24" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<select id="selectAreaByParent" resultClass="com.gtm.csims.model.BsArea"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">
+		WITH TempArea (id,name,parent,flag,createdate,updatedate,level,isleaf) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf 
+			FROM bs_area ROOT WHERE parent = #parentNo:VARCHAR#
+			UNION ALL  
+				SELECT CHILD.id, CHILD.name, CHILD.parent, CHILD.flag, CHILD.createdate, CHILD.updatedate, CHILD.level, CHILD.isleaf
+					FROM bs_area CHILD ,TempArea PARENT WHERE PARENT.id = CHILD.parent
+		 )
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM TempArea
+			ORDER BY id
+	</select>	
+	<select id="selectOrganizationByParent" resultClass="com.gtm.csims.model.BsOrganization"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">		
+		WITH TempOrganization (id,name,parent,flag,createdate,updatedate,level,isleaf,iscpb) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf,ROOT.iscpb  
+			FROM BS_ORGANIZATION ROOT WHERE parent = #parentNo:VARCHAR#
+			UNION ALL  
+				SELECT CHILD.id, CHILD.name, CHILD.parent, CHILD.flag, CHILD.createdate, CHILD.updatedate, CHILD.level, CHILD.isleaf, CHILD.iscpb
+					FROM BS_ORGANIZATION CHILD ,TempOrganization PARENT WHERE PARENT.id = CHILD.parent
+		 )
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM TempOrganization
+			ORDER BY id
+	</select>
+	
+	<select id="isChildArea" resultClass="com.gtm.csims.model.BsArea"
+		parameterClass="com.gtm.csims.model.BsOrganization" cacheModel="pojoOSCache">		
+		WITH TempArea (id,name,parent,flag,createdate,updatedate,level,isleaf) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf 
+			FROM bs_area ROOT WHERE parent = #status:VARCHAR#
+			UNION ALL  
+				SELECT CHILD.id, CHILD.name, CHILD.parent, CHILD.flag, CHILD.createdate, CHILD.updatedate, CHILD.level, CHILD.isleaf
+					FROM bs_area CHILD ,TempArea PARENT WHERE PARENT.id = CHILD.parent
+		 )
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM TempArea
+			WHERE id = #id:VARCHAR#
+	</select>
+	
+	<select id="isChildOrganization" resultClass="com.gtm.csims.model.BsOrganization"
+		parameterClass="com.gtm.csims.model.BsOrganization" cacheModel="pojoOSCache">		
+		WITH TempOrganization (id,name,parent,flag,createdate,updatedate,level,isleaf,iscpb) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf,ROOT.iscpb  
+			FROM BS_ORGANIZATION ROOT WHERE parent = #status:VARCHAR#
+			UNION ALL  
+				SELECT CHILD.id, CHILD.name, CHILD.parent, CHILD.flag, CHILD.createdate, CHILD.updatedate, CHILD.level, CHILD.isleaf, CHILD.iscpb
+					FROM BS_ORGANIZATION CHILD ,TempOrganization PARENT WHERE PARENT.id = CHILD.parent
+		 )
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM TempOrganization
+			WHERE id = #id:VARCHAR#
+	</select>
+	
+	<select id="queryAreaByParentNo" resultClass="com.gtm.csims.model.BsArea" parameterClass="java.lang.String"  cacheModel="pojoOSCache" >
+		WITH TempArea (id,name,parent,flag,createdate,updatedate,level,isleaf) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf 
+			FROM bs_area ROOT WHERE parent = #parentNo:VARCHAR#
+		 )
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM TempArea
+			ORDER BY id
+	</select>
+	
+	<select id="queryOrgByParentNo" resultClass="com.gtm.csims.model.BsOrganization" parameterClass="java.lang.String" cacheModel="pojoOSCache" >
+		WITH TempOrganization (id,name,parent,flag,createdate,updatedate,level,isleaf,iscpb) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf,ROOT.iscpb  
+			FROM BS_ORGANIZATION ROOT WHERE parent = #parentNo:VARCHAR#
+		)
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM TempOrganization
+			ORDER BY id
+	</select>
+	
+	<select id="queryAreaById" resultClass="com.gtm.csims.model.BsArea" parameterClass="java.lang.String"  cacheModel="pojoOSCache" >
+		WITH TempArea (id,name,parent,flag,createdate,updatedate,level,isleaf) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf 
+			FROM bs_area ROOT WHERE id = #id:VARCHAR#
+		 )
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM TempArea
+			ORDER BY id
+	</select>
+		
+	<select id="queryOrgById" resultClass="com.gtm.csims.model.BsOrganization" parameterClass="java.lang.String" cacheModel="pojoOSCache" >
+		WITH TempOrganization (id,name,parent,flag,createdate,updatedate,level,isleaf,iscpb) AS (
+		SELECT ROOT.id, ROOT.name, ROOT.parent,ROOT.flag,ROOT.createdate,ROOT.updatedate,ROOT.level,ROOT.isleaf,ROOT.iscpb  
+			FROM BS_ORGANIZATION ROOT WHERE id = #id:VARCHAR#
+		)
+		SELECT id AS id, name AS name, parent AS status, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM TempOrganization
+			ORDER BY id
+	</select>
+	
+	
+		
+		
+</sqlMap>

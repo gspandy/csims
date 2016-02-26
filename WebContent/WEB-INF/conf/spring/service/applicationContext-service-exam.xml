@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+  <bean id="examService" class="com.gtm.csims.business.exam.ExamService">
+    <property name="bsExamscoreDao" ref="bsExamscoreDao" />
+    <property name="jdbcTemplate" ref="jdbcTemplate" />
+    <property name="bsOrgDao" ref="bsOrgDao" />
+  </bean>
+
+  <!-- Exam submit -->
+  <bean id="examScoreConfig"
+    class="com.gtm.csims.business.datacollection.submit.config.ExamScoreConfig"
+    parent="baseReportConfig">
+  </bean>
+  <bean id="examScoreReader"
+    class="com.gtm.csims.business.datacollection.submit.reader.ExamScoreReader"
+    parent="baseReportReader">
+    <property name="validator" ref="examScoreValidator" />
+    <property name="config" ref="examScoreConfig" />
+    <property name="bsExamscoreDao" ref="bsExamscoreDao" />
+    <property name="bsOrgDao" ref="bsOrgDao" />
+  </bean>
+  <bean id="examScoreValidator"
+    class="com.gtm.csims.business.datacollection.submit.validator.ExamScoreValidator"
+    parent="baseReportValidator">
+    <property name="config" ref="examScoreConfig" />
+  </bean>
+  
+  <bean id="examScoreCsvReader"
+    class="com.gtm.csims.business.datacollection.submit.reader.ExamScoreCsvReader"
+    parent="csvFileReader">
+    <property name="bsExamscoreDao" ref="bsExamscoreDao" />
+    <property name="bsOrgDao" ref="bsOrgDao" />
+  </bean>
+</beans>

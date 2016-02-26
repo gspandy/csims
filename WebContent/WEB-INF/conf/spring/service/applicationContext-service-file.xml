@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="fileService"
+		class="com.gtm.csims.file.impl.FileHandlerImpl">
+		<property name="folderNames">
+			<map>
+				<entry key="${upload.key}" value="${upload.value}"></entry>
+				<entry key="${template.key}"
+					value="${template.value}">
+				</entry>
+				<entry key="${prefix.key}" value="${prefix.value}"></entry>
+				<entry key="${postfix.key}" value="${postfix.value}"></entry>
+			</map>
+		</property>
+		<property name="bsAttcachmentsDao" ref="bsAttcachmentsDao" />
+		<property name="bsPhotoDao" ref="bsPhotoDao" />
+	</bean>
+</beans>

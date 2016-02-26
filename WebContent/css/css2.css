@@ -1,0 +1,370 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #F1F8FC;
+}
+
+/**
+* 超链接 <a>
+*/
+A {
+	cursor:pointer;
+}
+A:link {
+	font-size: 12px; color: #1A4885; text-decoration: none;
+}
+A:visited {
+	font-size: 12px; color: #1A4885; text-decoration: none;
+}
+A:hover {
+	font-size: 12px; color: #1A4885; text-decoration: underline;
+}
+
+A.but:link {
+	font-size: 12px; color: #1A4885; text-decoration: none
+}
+A.but:visited {
+	font-size: 12px; color: #1A4885; text-decoration: none
+}
+A.but:hover {
+	font-size: 12px; color: #1A4885; text-decoration: underline;
+}
+
+/**
+*导航提示
+*/
+.ndwz {
+	background-image: url(../images/weiz.jpg);
+	background-repeat: no-repeat;
+	background-position: left center;
+	width: 83px;
+	height: 20px;
+}
+.ndwzzml {
+	background-image: url(../images/weiz2.jpg);
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-family: "宋体", verdana;
+	font-size: 12px;
+	color: #333333;
+}
+.nawzjj {
+	padding-left: 20px;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 40px;
+}
+
+/**
+*下拉
+*/
+.dropDown {
+	font-family: "宋体";
+	font-size: 13px;
+	line-height: 18px;
+	color: #333333;
+	border: 1px solid #999999;
+}
+.dropDown_usedepselect {
+	font-family: "宋体";
+	font-size: 13px;
+	line-height: 18px;
+	color: #333333;
+	border: 1px solid #999999;
+	width: 200px;
+}
+.dropDown_select {
+	font-family: "宋体";
+	font-size: 13px;
+	line-height: 18px;
+	color: #333333;
+	border: 1px solid #999999;
+	width: 70px;
+}
+
+/**
+*表头文本 如：查询条件输入框的说明
+*/
+
+.lable {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #0D4671;
+	padding-right: 2px;
+}
+
+.lable1 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #0D4671;
+	text-align: right;
+	padding-right: 2px;
+}
+
+.lable2 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #0D4671;
+	text-align: center;
+	padding-right: 2px;
+}
+
+.lable3 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #0D4671;
+	text-align: left;
+	padding-right: 2px;
+}
+
+.textfield01 {
+	font-family: "宋体";
+	font-size: 13px;
+	color: #0D4671;
+	text-align: left;
+	padding: 3px 2px 2px 2px;
+	height:23px;
+}
+
+/**
+*表格
+*/
+.table01 {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: #66ACCE;
+	border-right-color: #66ACCE;
+	border-bottom-color: #66ACCE;
+	border-left-color: #66ACCE;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	color: #0C3C52;
+	padding-left: 3px;
+	line-height: 20px;
+	padding-right: 3px;
+	background-color: #FFFFFF;
+}
+.table01 td {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-top-color: #66ACCE;
+	border-right-color: #66ACCE;
+	border-bottom-color: #66ACCE;
+	border-left-color: #66ACCE;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	line-height: 24px;
+	white-space: nowrap;
+	text-indent: 3px;
+}
+.table01 td table td {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	line-height: 24px;
+	white-space: nowrap;
+}
+
+
+
+.tablestyle {
+	padding-right: 20px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+}
+
+.table02{
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	}
+
+.table03 {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: #66ACCE;
+	border-right-color: #66ACCE;
+	border-bottom-color: #66ACCE;
+	border-left-color: #66ACCE;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	color: #0C3C52;
+	padding-left: 3px;
+	line-height: 20px;
+	padding-right: 3px;
+	background-color: #FFFFFF;
+}
+.table03 td {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-top-color: #66ACCE;
+	border-right-color: #66ACCE;
+	border-bottom-color: #66ACCE;
+	border-left-color: #66ACCE;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	line-height: 24px;
+	white-space: nowrap;
+	text-indent: 3px;
+}
+
+
+/**
+*表头 <tr>
+*/
+.txt03 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 27px;
+	font-weight: bold;
+	color: #1266A4;
+	background-image: url(../images/linedddd.jpg);
+	background-repeat: repeat-x;
+	vertical-align: middle;
+}
+
+.txt04 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 27px;
+	font-weight: bold;
+	color: #1266A4;
+	text-align: center;
+	background-image: url(../images/linedddd.jpg);
+	background-repeat: repeat-x;
+	vertical-align: middle;
+}
+.txt05 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #FF4A5D;
+	text-indent: 5px;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: left;
+	line-height: 25px;
+}
+
+.txt06 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #FF4A5D;
+	text-indent: 2px;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+
+/**
+*竖形表 表头
+*/
+.tablabhed {
+	background-image: url(../images/zhenxin27.jpg);
+	background-repeat: repeat-x;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #232D52;
+	text-decoration: none;
+	line-height: 26px;
+	padding-left: 5px;
+}
+
+/**
+*竖形表 表体
+*/
+.tablableft {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: normal;
+	color: #333333;
+	background-color: #ECF3F9;
+	text-align: right;
+	padding-right: 5px;
+}
+.tablableft2 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: normal;
+	color: #333333;
+	background-color: #ECF3F9;
+	text-align: center;
+	padding-right: 5px;
+}
+
+.tablabright {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+
+/**
+*按钮
+*/
+.but01 {
+	background-color: transparent;
+	background-image: url(../images/button01.jpg);
+	height: 24px;
+	width: 64px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	color: #385382;
+	text-decoration: none;
+	cursor: hand;
+}
+.but02 {
+	background-color: transparent;
+	background-image: url(../images/xinzhen.jpg);
+	height: 24px;
+	width: 84px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	color: #385382;
+	text-decoration: none;
+	cursor: hand;
+}
+
+.filepath01 {
+	font-family: "宋体", verdana;
+	font-size: 14px;
+	color: #333333;
+	border: 1px solid #999999;
+}
+
+

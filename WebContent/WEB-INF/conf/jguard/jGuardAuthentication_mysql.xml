@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration SYSTEM "../../dtd/jGuardAuthentication_1.00.dtd">
+<configuration>
+	<authentication>
+		<scope>local</scope>
+		<debug>true</debug>
+		<includeOldConfig>false</includeOldConfig>
+		<includeConfigFromJavaParam>false</includeConfigFromJavaParam>
+		<includePolicyFromJavaParam>false</includePolicyFromJavaParam>
+		<!-- <salt>582697sweetjg</salt> -->
+		<digestAlgorithm>MD5</digestAlgorithm>
+		<authenticationManager>
+			net.sf.jguard.ext.authentication.manager.JdbcAuthenticationManager
+		</authenticationManager>
+		<authenticationManagerOptions>
+			<option>
+				<name>JNDI</name>
+				<value>java:/comp/env/jdbc/csims</value>
+			</option>
+			<!-- <option>
+				<name>databaseDriver</name>
+				<value>com.mysql.jdbc.Driver</value>
+				</option>
+				<option>
+				<name>databaseDriverUrl</name>
+				<value>jdbc:mysql://localhost:3306/sweet</value>
+				</option>
+				<option>
+				<name>databaseDriverLogin</name>
+				<value>root</value>
+				</option>
+				<option>
+				<name>databaseDriverPassword</name>
+				<value>123</value>
+				</option>
+			-->
+			<option>
+				<name>authenticationXmlFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/jGuardUsersPrincipals.xml
+				</value>
+			</option>
+			<option>
+				<name>authenticationDatabaseFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/authentication.mysql.properties
+				</value>
+			</option>
+		</authenticationManagerOptions>
+
+		<loginModules>
+			<!-- 
+				<loginModule>
+				<name>
+				net.sf.jguard.ext.authentication.loginmodules.JCaptchaLoginModule
+				</name>
+				<flag>REQUIRED</flag>
+				</loginModule>
+			-->
+			<loginModule>
+				<name>
+					net.sf.jguard.ext.authentication.loginmodules.JdbcLoginModule
+				</name><!-- net.sweet.security.Axis1LoginModule -->
+				<flag>REQUIRED</flag>
+				<loginModuleOptions>
+					<option>
+						<name>debug</name>
+						<value>false</value>
+					</option>
+				</loginModuleOptions>
+			</loginModule>
+		</loginModules>
+	</authentication>
+</configuration>

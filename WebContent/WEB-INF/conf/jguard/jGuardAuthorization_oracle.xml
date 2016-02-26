@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration SYSTEM "../../dtd/jGuardAuthorization_1.00.dtd">
+<configuration>
+	<authorization>
+		<scope>local</scope>
+		<permissionResolutionCaching>false</permissionResolutionCaching>
+		<authorizationManager>
+			net.sf.jguard.ext.authorization.manager.JdbcAuthorizationManager
+		</authorizationManager>
+		<authorizationManagerOptions>
+			<option>
+				<name>JNDI</name>
+				<value>java:/comp/env/jdbc/sweetOracle</value>
+			</option>
+			<!-- <option>
+				<name>databaseDriver</name>
+				<value>oracle.jdbc.driver.OracleDriver</value>
+				</option>
+				<option>
+				<name>databaseDriverUrl</name>
+				<value>jdbc:oracle:thin:@localhost:1521:XE</value>
+				</option>
+				<option>
+				<name>databaseDriverLogin</name>
+				<value>sweet</value>
+				</option>
+				<option>
+				<name>databaseDriverPassword</name>
+				<value>sweet</value>
+				</option>
+			 -->		
+			<option>
+				<name>authorizationXmlFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/jGuardPrincipalsPermissions.xml
+				</value>
+			</option>
+			<option>
+				<name>authorizationDatabaseFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/authorization.oracle.properties
+				</value>
+			</option>
+			<option>
+				<name>debug</name>
+				<value>true</value>
+			</option>
+		</authorizationManagerOptions>
+	</authorization>
+</configuration>

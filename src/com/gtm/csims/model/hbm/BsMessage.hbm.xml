@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsMessage"
+		table="BS_MESSAGE"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+
+		<property
+			name="Title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Message"
+			column="MESSAGE"
+			type="string"
+			not-null="false"
+			length="1000"
+		/>
+		<property
+			name="Receiver"
+			column="RECEIVER"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Sender"
+			column="SENDER"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Createdate"
+			column="CREATEDATE"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Status"
+			column="STATUS"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Category"
+			column="CATEGORY"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Receivedate"
+			column="RECEIVEDATE"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,9 @@
+package com.gtm.csims.dao.hibernate;
+
+import com.gtm.csims.dao.$(moduleName)DAO;
+import net.sweet.dao.generic.HibernateEntityDAO;
+import com.gtm.csims.model.$(moduleName);
+
+public class $(moduleName)DAOImpl extends HibernateEntityDAO<$(moduleName)> implements $(moduleName)DAO {
+
+}

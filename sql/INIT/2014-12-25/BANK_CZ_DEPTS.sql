@@ -1,0 +1,14 @@
+insert into bs_dept (ID,name,orgno,orgname) values ('30000001','科技部','C1093651000016','都江堰金都村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000002','综合业务部','C1093651000016','都江堰金都村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000003','资金财务部','C1094051000012','内江兴隆村镇银行股份有限公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000004','资金财务部','C1093851000018','邛崃国民村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000005','科技部','C1259051000012','西昌金信村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000006','营业部','C1093651000016','都江堰金都村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000007','风险控制部','C1094651000018','广元市包商贵民村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000008','信贷管理部','C1094051000012','内江兴隆村镇银行股份有限公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000009','信贷管理部','C1094051000012','内江兴隆村镇银行股份有限公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000010','营业部','C1093851000018','邛崃国民村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000011','小微信贷中心','C1259051000012','西昌金信村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000012','小微信贷中心','C1259051000012','西昌金信村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000013','业务拓展部','C1259051000012','西昌金信村镇银行有限责任公司');
+insert into bs_dept (ID,name,orgno,orgname) values ('30000014','业务拓展部','C1259051000012','西昌金信村镇银行有限责任公司');

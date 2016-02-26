@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<display-name>csims</display-name>
+	<description>
+		This is a finance right management system of people bank.
+	</description>
+
+	<!-- Spring context setting -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/conf/spring/applicationContext-properties.xml,
+			/WEB-INF/conf/spring/applicationContext-datasource.xml,
+			/WEB-INF/conf/spring/applicationContext-persistence.xml,
+			/WEB-INF/conf/spring/applicationContext-serial-number.xml,
+            /WEB-INF/conf/spring/applicationContext-schedule.xml,
+
+			/WEB-INF/conf/spring/action/applicationContext-action-jaas.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-system.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-log.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-message.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-enforce.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-dailymgr.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-file.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-zxmarket.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-exam.xml,
+			
+			/WEB-INF/conf/spring/service/applicationContext-service-jaas.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-system.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-log.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-enforce.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-dailymgr.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-file.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-message.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-statisticcs.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-zxmarket.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-exam.xml
+		</param-value>
+	</context-param>
+
+	<!-- jguard context setting -->
+	<context-param>
+		<param-name>authenticationConfigurationLocation</param-name>
+		<param-value>
+			/WEB-INF/conf/jguard/jGuardAuthentication_db2.xml
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>authenticationScope</param-name>
+		<param-value>local</param-value>
+	</context-param>
+	<context-param>
+		<param-name>authorizationConfigurationLocation</param-name>
+		<param-value>
+			/WEB-INF/conf/jguard/jGuardAuthorization_db2.xml
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>authorizationScope</param-name>
+		<param-value>local</param-value>
+	</context-param>
+	<context-param>
+		<param-name>enableJMX</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<!-- <filter> <filter-name>localeFilter</filter-name> <filter-class> net.sweet.web.filter.LocaleManageFilter 
+		</filter-class> <init-param> <param-name>defaultlocale</param-name> <param-value>en_US</param-value> 
+		</init-param> </filter> -->
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+		</filter-class>
+		<!-- <init-param> <param-name>flushMode</param-name> <param-value>AUTO</param-value> 
+			</init-param> <init-param> <param-name>singleSession</param-name> <param-value>false</param-value> 
+			</init-param> -->
+	</filter>
+
+	<filter>
+		<filter-name>AccessFilter</filter-name>
+		<filter-class>
+			net.sf.jguard.jee.authentication.http.AccessFilter
+		</filter-class>
+		<init-param>
+			<param-name>configurationLocation</param-name>
+			<param-value>
+				/WEB-INF/conf/jguard/jGuardFilter.xml
+			</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>AccessFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			net.sf.jguard.jee.listeners.ContextListener
+		</listener-class>
+	</listener>
+	<!-- <servlet> <servlet-name>context</servlet-name> <servlet-class> org.springframework.web.context.ContextLoaderServlet 
+		</servlet-class> <load-on-startup>1</load-on-startup> </servlet> -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			org.apache.struts.action.ActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/conf/struts/struts-config-frame.xml,
+				/WEB-INF/conf/struts/struts-config-jguard.xml,
+				/WEB-INF/conf/struts/struts-config-message.xml,
+				/WEB-INF/conf/struts/struts-config-log.xml,
+				/WEB-INF/conf/struts/struts-config-systembaseinfo.xml,
+				/WEB-INF/conf/struts/struts-config-enforce.xml,
+				/WEB-INF/conf/struts/struts-config-dailymgr.xml,
+				/WEB-INF/conf/struts/struts-config-zxmarket.xml,
+				/WEB-INF/conf/struts/struts-config-exam.xml,
+                /WEB-INF/conf/struts/struts-config-dataapp.xml,
+                /WEB-INF/conf/struts/struts-config-file.xml
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>locale</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>convertNull</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+		<init-param>
+			<param-name>config-1</param-name>
+			<param-value>/WEB-INF/conf/dwr/dwr.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>classes</param-name>
+			<param-value>java.lang.Object</param-value>
+		</init-param>
+		<init-param>
+			<param-name>crossDomainSessionSecurity</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>fckeditorConnector</servlet-name>
+		<servlet-class>
+			net.fckeditor.connector.ConnectorServlet
+		</servlet-class>
+		<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/editor/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>axisServlet</servlet-name>
+		<servlet-class>
+			org.apache.axis.transport.http.AxisServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>transformListenServlet</servlet-name>
+		<servlet-class>
+			com.gtm.csims.business.datacollection.servlet.TransformListenServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>processControllerServlet</servlet-name>
+		<servlet-class>
+			com.gtm.csims.business.datacollection.servlet.ProcessControllerServlet
+		</servlet-class>
+	</servlet>
+
+	<!-- <servlet> <servlet-name>SchedulerServlet</servlet-name> <servlet-class> 
+		net.sweet.job.jbpm.SchedulerServlet </servlet-class> <init-param> <param-name>interval</param-name> 
+		<param-value>5000</param-value> </init-param> <init-param> <param-name>historyMaxSize</param-name> 
+		<param-value>50</param-value> </init-param> <load-on-startup>5</load-on-startup> 
+		</servlet> -->
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>fckeditorConnector</servlet-name>
+		<!-- Do not wrap this line otherwise Glassfish will fail to load this file -->
+		<url-pattern>
+			/fckeditor/editor/filemanager/connectors/*
+		</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>axisServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>transformListenServlet</servlet-name>
+		<url-pattern>/upload/trfmlisn.svt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>processControllerServlet</servlet-name>
+		<url-pattern>/upload/prcscontl.svt</url-pattern>
+	</servlet-mapping>
+	<!-- <servlet-mapping> <servlet-name>SchedulerServlet</servlet-name> <url-pattern>/jbpmscheduler</url-pattern> 
+		</servlet-mapping> -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<mime-mapping>
+		<extension>ico</extension>
+		<mime-type>image/x-icon</mime-type>
+	</mime-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref>
+		<description>JNDI JDBC DataSource of Sweet</description>
+		<res-ref-name>jdbc/csims</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<!--<security-constraint> <web-resource-collection> <web-resource-name>all 
+		the webapp</web-resource-name> <description></description> <url-pattern>/*</url-pattern> 
+		</web-resource-collection> <user-data-constraint> <description>This part 
+		requires SSL</description> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+		</user-data-constraint> </security-constraint> -->
+</web-app>

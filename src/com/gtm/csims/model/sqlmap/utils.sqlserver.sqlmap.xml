@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="utils">
+	<typeAlias alias="osCacheController"
+		type="com.ibatis.sqlmap.engine.cache.oscache.OSCacheController" />
+	<cacheModel id="pojoOSCache" type="osCacheController"
+		readOnly="true" serialize="false">
+		<flushInterval hours="24" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<select id="selectAreaByParent" resultClass="com.gtm.csims.model.BsArea"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM Bs_Area WHERE parent = #parentNo:VARCHAR# 
+	</select>	
+	<select id="selectOrganizationByParent" resultClass="com.gtm.csims.model.BsOrganization"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">		
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM BS_ORGANIZATION WHERE parent = #parentNo:VARCHAR# 
+	</select>
+	
+	<select id="isChildArea" resultClass="com.gtm.csims.model.BsArea"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">		
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM Bs_Area
+			WHERE id = #id:VARCHAR#
+	</select>
+	
+	<select id="isChildOrganization" resultClass="com.gtm.csims.model.BsOrganization"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">		
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM BS_ORGANIZATION
+			WHERE id = #id:VARCHAR#
+	</select>	
+</sqlMap>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsDept"
+		table="BS_DEPT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+
+		<property
+			name="Name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Orgno"
+			column="ORGNO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Orgname"
+			column="ORGNAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Status"
+			column="STATUS"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,5 @@
+#foreach $module in $modules {
+<bean id="$(module)Dao" class="com.gtm.csims.dao.hibernate.$(module)DAOImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration SYSTEM "../../dtd/jGuardPrincipalsPermissions_1.00.dtd">
+<configuration>
+	<permissions>
+		<domain>
+			<name>public</name>
+			<permission>
+				<name>accessDenied</name>
+				<class>
+					net.sf.jguard.core.authorization.permissions.URLPermission
+				</class>
+				<actions>
+					<action>/AccessDenied.do</action>					
+				</actions>
+			</permission>
+			<permission>
+				<name>welcome</name>
+				<class>
+					net.sf.jguard.core.authorization.permissions.URLPermission
+				</class>
+				<actions>
+					<action>/Welcome.do</action>
+				</actions>
+			</permission>
+			<permission>
+				<name>captcha</name>
+				<class>
+					net.sf.jguard.core.authorization.permissions.URLPermission
+				</class>
+				<actions>
+					<action>/Captcha.do</action>
+				</actions>
+			</permission>
+			<permission>
+				<name>registration</name>
+				<class>
+					net.sf.jguard.core.authorization.permissions.URLPermission
+				</class>
+				<actions>
+					<action>/Registration.do</action>
+				</actions>
+			</permission>
+
+		</domain>
+
+		<domain>
+			<name>vip</name>
+			<permission>
+				<name>allAccess</name>
+				<class>
+					net.sf.jguard.core.authorization.permissions.URLPermission
+				</class>
+				<actions>
+					<action>/*</action>					
+				</actions>
+			</permission>
+			<!-- only use MBeanPermission if your jre is java 5 or higher
+				
+				<permission>
+				<name>*</name>
+				<class>javax.management.MBeanPermission</class>
+				<actions>
+				<action>*</action>
+				</actions>
+				</permission> -->
+		</domain>
+	</permissions>
+
+	<principals>
+		<principal>
+			<name>guest</name>
+			<class>net.sf.jguard.core.principals.RolePrincipal</class>
+			<permissionsRef>
+				<permissionRef name="accessDenied" />
+				<permissionRef name="welcome" />
+				<permissionRef name="captcha" />
+				<permissionRef name="registration" />
+			</permissionsRef>
+		</principal>		
+
+		<principal>
+			<name>admin</name>
+			<class>net.sf.jguard.core.principals.RolePrincipal</class>
+			<permissionsRef>
+				<domainRef name="public" />
+				<domainRef name="vip" />
+			</permissionsRef>			
+		</principal>
+	</principals>
+</configuration>

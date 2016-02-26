@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver.test}" />
+		<property name="url" value="${jdbc.url.test}" />
+		<property name="username" value="${jdbc.username.test}" />
+		<property name="password" value="${jdbc.password.test}" />
+	</bean>
+
+	
+	<!-- 
+		<bean id="sqlServerDataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+		value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+		value="jdbc:sqlserver://localhost:1433;database=cmm_blank" />
+		<property name="username" value="sa" />
+		<property name="password" value="sweet" />
+		</bean>
+		<bean id="sqlServerJdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="sqlServerDataSource" />
+		</bean>
+	-->
+	<!-- MySQL Spring Container DataSource
+		<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+		value="jdbc:mysql://localhost:3306/sweet_pro_db?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		</bean> -->
+
+	<!-- SQLServer Spring Container DataSource 
+		<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+		value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+		value="jdbc:sqlserver://localhost:1433;DatabaseName=sweet_pro_db" />
+		<property name="username" value="sa" />
+		<property name="password" value="sweet" />
+		</bean>
+	-->
+
+	<!-- Oracle Spring Container DataSource 
+		<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+		value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="username" value="sweet" />
+		<property name="password" value="sweet" />
+		</bean>
+	-->
+</beans>

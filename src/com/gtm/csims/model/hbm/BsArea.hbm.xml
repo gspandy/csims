@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsArea"
+		table="BS_AREA"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+		<!-- <generator class="org.hibernate.id.UUIDHexGenerator"/> -->
+		</id>
+
+		<property
+			name="Name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Level"
+			column="LEVEL"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Isleaf"
+			column="ISLEAF"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Status"
+			column="STATUS"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Shortname"
+			column="SHORTNAME"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Createdate"
+			column="CREATEDATE"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Updatedate"
+			column="UPDATEDATE"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<many-to-one
+			name="Parent"
+			column="PARENT"
+			class="BsArea"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="BsAreas" inverse="true">
+			<key column="ID"/>
+			<one-to-many class="BsArea"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

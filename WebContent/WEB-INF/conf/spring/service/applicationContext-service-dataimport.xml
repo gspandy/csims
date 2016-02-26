@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+  <bean id="userDataInitialService"
+    class="com.gtm.csims.business.importdata.user.UserDataInitialService">
+    <property name="jdbcTemplate" ref="jdbcTemplate" />
+    <property name="bsDeptDao" ref="bsDeptDao" />
+    <property name="bsOrgDao" ref="bsOrgDao" />
+  </bean>
+
+  <bean id="orgCsvReader"
+    class="com.gtm.csims.business.datacollection.submit.reader.OrgCsvReader"
+    parent="csvFileReader">
+    <property name="bsOrgDao" ref="bsOrgDao" />
+  </bean>
+
+  <bean id="allOrgInitCsvReader"
+    class="com.gtm.csims.business.datacollection.submit.reader.AllOrgInitCsvReader"
+    parent="csvFileReader">
+    <property name="jdbcTemplate" ref="jdbcTemplate" />
+  </bean>
+
+</beans>

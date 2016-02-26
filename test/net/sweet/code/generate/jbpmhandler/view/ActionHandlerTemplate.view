@@ -1,0 +1,20 @@
+package net.sweet.jbpm.processdefinition.$(pdName).handler.action;
+
+import net.sweet.log.level.Logger;
+
+import org.jbpm.graph.def.ActionHandler;
+import org.jbpm.graph.exe.ExecutionContext;
+
+/**
+ * @author Sweet
+ * @see $(className)
+ */
+@SuppressWarnings("serial")
+public class $(className) implements ActionHandler {
+
+	public void execute(ExecutionContext executeContext) throws Exception {
+		Logger.debug("$(className) has begin......");
+		// TODO
+		Logger.debug("$(className) has finished......");
+	}
+}

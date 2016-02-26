@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsDictionary"
+		table="BS_DICTIONARY"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+
+		<property
+			name="Type"
+			column="TYPE"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Dkey"
+			column="DKEY"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Dvalue"
+			column="DVALUE"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="DSumry"
+			column="DSumry"
+			type="string"
+			not-null="false"
+			length="1000"
+		/>
+		<property
+			name="Stat"
+			column="STAT"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+    <property
+      name="Isenable"
+      column="ISENABLE"
+      type="string"
+      not-null="false"
+      length="50"
+    />
+		<property
+			name="Createdate"
+			column="CREATEDATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+		<property
+			name="Updateate"
+			column="UPDATEATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsLog"
+		table="bs_log"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+
+		<property 
+			name="Message"
+			column="MESSAGE"
+			type="string"
+			not-null="false"
+			length="1000"
+		/>
+		<property 
+			name="Processer"
+			column="PROCESSER"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property 
+			name="Createdate"
+			column="CREATEDATE"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property 
+			name="Priority"
+			column="PRIORITY"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
+		<property 
+			name="Category"
+			column="CATEGORY"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property 
+			name="Thread"
+			column="THREAD"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

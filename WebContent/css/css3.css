@@ -1,0 +1,212 @@
+
+.tablewline {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	line-height: 26px;
+}
+.tablewline2 {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	background-image: url(../images/bbsbg.jpg);
+	background-repeat: repeat-x;
+	text-align: center;
+}
+.tableline04 {
+
+    border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: #66ACCE;
+	border-right-color: #66ACCE;
+	border-bottom-color: #66ACCE;
+	border-left-color: #66ACCE;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	color: #0C3C52;
+	line-height: 20px;
+	background-color: #FFFFFF;
+}
+.tablewline3 {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #3E5171;
+	text-decoration: none;
+	background-color: #F5F7F6;
+	padding-left: 3px;
+	line-height: 20px;
+}
+.tablewlineico {
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-bottom-color: #FFFFFF;
+	background-color: #F5F7F6;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.tablewline4 {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #3E5171;
+	text-decoration: none;
+	background-color: #F1F3F2;
+	padding-left: 3px;
+	line-height: 20px;
+}
+.bottonbbs {
+
+	background-color: transparent;
+	background-image: url(../images/newbbs.jpg);
+	height: 24px;
+	width: 64px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	color: #385382;
+	text-decoration: none;
+	cursor: hand;
+}
+.bottonbbs01 {
+	background-color: transparent;
+	background-image: url(../images/newbbs01.jpg);
+	height: 24px;
+	width: 64px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	color: #385382;
+	text-decoration: none;
+	cursor: hand;
+}
+.tablewline2Copy {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	background-image: url(../images/bbsbg.jpg);
+	background-repeat: repeat-x;
+	text-align: center;
+	border-left-color: #FFFFFF;
+	border-left-width: 1px;
+}
+.tablewlineb {
+
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #385382;
+	line-height: 26px;
+}
+.tablewline5 {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #3E5171;
+	text-decoration: none;
+	background-color: #FAFAFA;
+	padding-left: 3px;
+	line-height: 20px;
+}
+.tablewline6 {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #3E5171;
+	text-decoration: none;
+	background-color: #EFEFEF;
+	padding-left: 3px;
+	line-height: 30px;
+}
+.bottonbbs02 {
+
+
+	background-color: transparent;
+	background-image: url(../images/newbbs02.jpg);
+	height: 24px;
+	width: 64px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 25px;
+	color: #385382;
+	text-decoration: none;
+	cursor: hand;
+}
+.textbbstyle {
+	padding-bottom: 5px;
+}
+.tablewline2Copy1 {
+
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	background-image: url(../images/bbsbg.jpg);
+	background-repeat: repeat-x;
+	border-left-color: #FFFFFF;
+	border-left-width: 1px;
+}

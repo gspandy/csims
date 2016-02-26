@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration SYSTEM "../../dtd/jGuardFilter_1.00.dtd">
+<configuration>
+	<filter>
+		<indexURI>/index.jsp</indexURI>
+		<authenticationFailedURI>
+			/AuthenticationFailed.do
+		</authenticationFailedURI>
+		<logonURI>/Logon.do</logonURI>
+		<logonProcessURI>/LogonProcess.do</logonProcessURI>
+		<registerURI>/Registration.do</registerURI>
+		<registerProcessURI>/RegistrationProcess.do</registerProcessURI>
+		<logoffURIs>
+			<logoffURI>/Logoff.do</logoffURI>
+		</logoffURIs>
+		<accessDeniedURI>/AccessDenied.do</accessDeniedURI>
+		<authScheme>FORM</authScheme>
+		<loginField>login</loginField>
+		<passwordField>password</passwordField>
+		<goToLastAccessDeniedUriOnSuccess>
+			false
+		</goToLastAccessDeniedUriOnSuccess>
+	</filter>
+</configuration>

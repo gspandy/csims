@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN" "validator_1_1_3.dtd" >
+
+<form-validation>
+  <formset>
+    <form name="enforceInfoForm">
+      <field property="prjnm" depends="required">
+        <arg key="label.prjNm" resource="true" />
+      </field>
+    </form>
+  </formset>
+</form-validation>

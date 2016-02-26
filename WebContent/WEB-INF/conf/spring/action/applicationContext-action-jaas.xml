@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean name="/Welcome" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/AccessDenied" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/AuthenticationFailed"
+		class="com.gtm.csims.jaas.action.AuthenticationFailedAction">
+	</bean>
+	<bean name="/Logon" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/LogonProcess" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/left" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/top" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/Logoff" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/Administration" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/Registration" class="org.apache.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/Captcha" class="com.gtm.csims.jaas.action.CaptchaAction">
+	</bean>
+	<bean name="/User" class="com.gtm.csims.jaas.action.UserDispatchAction">
+		<property name="userService" ref="userService" />
+		<property name="systemBaseInfoManager" ref="systemBaseInfoManager" />
+		<property name="remindService" ref="remindService"></property>
+		<property name="fileHandler" ref="fileService"></property>
+	</bean>
+	<bean name="/Principal" class="com.gtm.csims.jaas.action.PrincipalDispatchAction">
+	</bean>
+	<bean name="/Permission" class="com.gtm.csims.jaas.action.PermissionDispatchAction">
+	</bean>
+	<bean name="/Domain" class="com.gtm.csims.jaas.action.DomainDispatchAction">
+	</bean>
+	<bean name="/resetPassword" class="com.gtm.csims.jaas.action.PasswordResetAction">
+		<property name="userService" ref="userService"></property>
+		<!--
+			<property name="mmaSynchronizeWebServiceUri"
+			value="${mma.synchronize.webservice.uri}"> </property>
+		-->
+	</bean>
+</beans>

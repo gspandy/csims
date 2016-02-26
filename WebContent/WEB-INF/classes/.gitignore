@@ -1,0 +1,14 @@
+/.DS_Store
+/.svn/
+/ApplicationResources.properties
+/ApplicationResources_en_US.properties
+/ApplicationResources_zh_CN.properties
+/com/
+/csims_config.properties
+/hibernate.cfg.xml
+/log4j.properties
+/net/
+/spy.properties
+/sqlmap-config.xml
+/webmacro.properties
+/workspace_path.properties

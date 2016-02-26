@@ -1,0 +1,46 @@
+<project basedir="F:\MyWorkSapces\csims" default="copy_change" name="csims">
+	<property name="dist" value="F:/dist" />
+	<property name="src" value="src" />
+	<property name="conf.spring" value="WebRoot\WEB-INF\conf\spring" />
+	<property name="conf.struts" value="WebRoot\WEB-INF\conf\struts" />
+	<property name="conf.page" value="WebRoot\WEB-INF\page" />
+	<target name="delete_dist">
+		<delete dir="${dist}">
+		</delete>
+	</target>
+	<target name="create_dist" depends="delete_dist">
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}/src" />
+		<mkdir dir="${dist}/spring" />
+		<mkdir dir="${dist}/struts" />
+		<mkdir dir="${dist}/page" />
+	</target>
+	<target name="copy_change" depends="create_dist">
+		<copy todir="${dist}/spring">
+			<fileset dir="${conf.spring}">
+				<include name="service/applicationContext-service-enforce.xml" />
+				<include name="action/applicationContext-action-enforce.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist}/struts">
+			<fileset dir="${conf.struts}">
+				<include name="struts-config-enforce.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist}/src">
+			<fileset dir="${src}/com/gtm/csims/business/enforce">
+				<include name="*.java" />
+			</fileset>
+		</copy>
+		<copy todir="${dist}/src">
+			<fileset dir="${src}/com/gtm/csims/controll/enforce">
+				<include name="*.java" />
+			</fileset>
+		</copy>
+		<copy todir="${dist}/page">
+			<fileset dir="${conf.page}">
+				<include name="enforce/**/*.jsp" />
+			</fileset>
+		</copy>
+	</target>
+</project>

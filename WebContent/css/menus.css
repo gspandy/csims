@@ -1,0 +1,111 @@
+a.white:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a.white:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a.white:hover {
+	color: #003366;
+	text-decoration: none;
+}
+.blackfonts {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+}
+.bottomfonts {
+	font-family: "宋体";
+	font-size: 10px;
+	color: #D3E5F3;
+	padding-right: 10px;
+}
+.whitefonts {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #ffffff;
+	padding-right: 20px;
+}
+
+.title{
+	FONT-SIZE: 12px;
+	COLOR: #FFFFFF;
+	FONT-FAMILY: Arial, "宋体";
+	font-weight: bold;
+	height:19px;
+	width:154px;
+	text-align: left;
+	cursor:pointer;
+	line-height: 20px;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	text-indent: 30px;
+	text-decoration: none;
+	letter-spacing: 2px;
+	background-image: url(../images/zhenxin14.jpg);
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+.h30
+{
+	text-align: left;
+	vertical-align: middle;
+	height: 24px;
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #00557D;
+	text-indent: 30px;
+	background-image: url(../images/iocn1.gif);
+	background-repeat: no-repeat;
+	background-position: 15px 5px;
+}
+.h30 td
+{
+	background-color: #ECF5FB;
+	width: 160px;
+}
+A.left:link {
+	FONT-SIZE: 12px; COLOR: #1A4885; TEXT-DECORATION: none
+}
+A.left:visited {
+	FONT-SIZE: 12px; COLOR: #1A4885; TEXT-DECORATION: none
+}
+A.left:hover {
+	FONT-SIZE: 12px; COLOR: #1A4885; TEXT-DECORATION: underline
+}
+.hand
+{cursor:pointer;}
+.a{
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.a:hover {
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.tablejj10 {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.table01{
+	background-color: #ECF5FB;
+	padding: 5px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-color: #B3D3E8;
+	border-left-color: #B3D3E8;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>		
+		<form-bean name="dailymgrInfoForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<form-property name="id" type="java.lang.String"></form-property>
+			<form-property name="trainingno" type="java.lang.String" />
+			<form-property name="tranorgnm" type="java.lang.String" />
+			<form-property name="tranorgno" type="java.lang.String" />
+			<form-property name="tranedorgnm" type="java.lang.String" />
+			<form-property name="tranedorgno" type="java.lang.String" />
+			<form-property name="transtartdt" type="java.lang.String" />
+			<form-property name="tranenddt" type="java.lang.String" />
+			<form-property name="org" type="java.lang.String" />
+			<form-property name="orgChoice" type="java.lang.String" />
+			<form-property name="user" type="java.lang.String" />
+			<form-property name="userChoice" type="java.lang.String" />
+			<form-property name="operdpt" type="java.lang.String" />
+			<form-property name="deptList" type="java.util.ArrayList" />
+			<form-property name="tele" type="java.lang.String" />
+			<form-property name="tranuser" type="java.lang.String" />
+			<form-property name="hours" type="java.lang.String" />
+			<form-property name="minute" type="java.lang.String" />
+			<form-property name="trancont" type="java.lang.String" />
+			<form-property name="tranterm" type="java.lang.String" />
+			
+			<form-property name="chkstartdt" type="java.lang.String" />
+			<form-property name="chkenddt" type="java.lang.String" />
+			<form-property name="chkorgno" type="java.lang.String" />
+			<form-property name="chkorgnm" type="java.lang.String" />
+			<form-property name="chkedorgno" type="java.lang.String" />
+			<form-property name="chkedorgnm" type="java.lang.String" />
+			<form-property name="workchkno" type="java.lang.String" />
+			<form-property name="chkOrg" type="java.lang.String" />
+			<form-property name="chkOrgChoice" type="java.lang.String" />
+			<form-property name="chkedOrg" type="java.lang.String" />
+			<form-property name="chkedOrgChoice" type="java.lang.String" />
+			<form-property name="chkeduser" type="java.lang.String" />
+			<form-property name="chkcont" type="java.lang.String" />
+			<form-property name="chkorgtele" type="java.lang.String" />
+			<form-property name="chkdt" type="java.lang.String" />
+			<form-property name="busievalno" type="java.lang.String" />
+			<form-property name="evalorgnm" type="java.lang.String" />
+			<form-property name="evalorgno" type="java.lang.String" />
+			<form-property name="evaledorgnm" type="java.lang.String" />
+			<form-property name="evaledorgno" type="java.lang.String" />
+			<form-property name="evalCondition" type="java.lang.String" />
+			<form-property name="evalInfo" type="java.lang.String" />
+			<form-property name="evalContent" type="java.lang.String" />
+			<form-property name="evaldt" type="java.lang.String" />
+			<form-property name="evalOrg" type="java.lang.String" />
+			<form-property name="evalOrgChoice" type="java.lang.String" />
+			<form-property name="evaledOrg" type="java.lang.String" />
+			<form-property name="evaledOrgChoice" type="java.lang.String" />
+			<form-property name="evalstartdt" type="java.lang.String" />
+			<form-property name="evalenddt" type="java.lang.String" />
+			<form-property name="deScore" type="java.lang.String" />
+			<form-property name="organizationChoice" type="java.lang.String" />
+			<form-property name="organization" type="java.lang.String" />
+			<form-property name="baseScore" type="java.lang.String" />
+			<form-property name="evalRule" type="java.lang.String" />
+			<form-property name="evalYear" type="java.lang.String" />
+			<form-property name="evalDuring" type="java.lang.String" />
+			<form-property name="busiEvalId" type="java.lang.String" />
+		</form-bean>
+	</form-beans>
+	
+	<action-mappings>
+		<action path="/DailyMgrAction" parameter="method" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="dailymgrInfoForm">
+			<forward name="toCreateTrainingPage" path="/WEB-INF/page/dailymgr/training/creatTrainingPage.jsp" redirect="false" />
+			<forward name="toTrainingList" path="/WEB-INF/page/dailymgr/training/trainingList.jsp" redirect="false" />
+			<forward name="toTrainingDetailPage" path="/WEB-INF/page/dailymgr/training/trainingDetailPage.jsp" redirect="false" />
+			<forward name="toUpdateTrainingPage" path="/WEB-INF/page/dailymgr/training/updateTrainingPage.jsp" redirect="false" />
+			<forward name="toDailyMgrMessage" path="/WEB-INF/page/dailymgr/training/dailyMgrMessage.jsp" redirect="false" />
+			
+			<forward name="toCreateWorkcheckPage" path="/WEB-INF/page/dailymgr/workcheck/createWorkcheckPage.jsp" redirect="false" />
+			<forward name="toWorkcheckList" path="/WEB-INF/page/dailymgr/workcheck/workcheckList.jsp" redirect="false" />
+			<forward name="toWorkcheckDetailPage" path="/WEB-INF/page/dailymgr/workcheck/workcheckDetailPage.jsp" redirect="false" />
+			<forward name="toUpdateWorkcheckPage" path="/WEB-INF/page/dailymgr/workcheck/updateWorkcheckPage.jsp" redirect="false" />
+			
+			<forward name="toCreateOffsitecheckPage" path="/WEB-INF/page/dailymgr/offsitecheck/createOffsitecheckPage.jsp" redirect="false" />
+			<forward name="toOffsitecheckList" path="/WEB-INF/page/dailymgr/offsitecheck/offsitecheckList.jsp" redirect="false" />
+			<forward name="toOffsitecheckDetailPage" path="/WEB-INF/page/dailymgr/offsitecheck/offsitecheckDetailPage.jsp" redirect="false" />
+			<forward name="toUpdateOffsitecheckPage" path="/WEB-INF/page/dailymgr/offsitecheck/updateOffsitecheckPage.jsp" redirect="false" />
+			
+			<forward name="toCreateBusievalPage" path="/WEB-INF/page/dailymgr/busieval/createBusievalPage.jsp" redirect="false" />
+			<forward name="toBusievalList" path="/WEB-INF/page/dailymgr/busieval/busievalList.jsp" redirect="false" />
+			<forward name="toBusievalDetailPage" path="/WEB-INF/page/dailymgr/busieval/busievalDetailPage.jsp" redirect="false" />
+			<forward name="toBusievalStaPage" path="/WEB-INF/page/dailymgr/busieval/busievalStaPage.jsp" redirect="false" />
+			<forward name="toBusievalStaResultPage" path="/WEB-INF/page/dailymgr/busieval/busievalStaResultPage.jsp" redirect="false" />
+			<forward name="toUpdateBusievalPage" path="/WEB-INF/page/dailymgr/busieval/updateBusievalPage.jsp" redirect="false" />
+		</action>
+		
+	</action-mappings>
+</struts-config>

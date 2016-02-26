@@ -1,0 +1,15 @@
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://www.getahead.ltd.uk/dwr//dwr20.dtd">
+<dwr>
+	<allow> 
+		<!--<create creator="spring" javascript="dwrService">
+			<param name="beanName" value="dwrService" />
+		</create>
+		 <create creator="new" javascript="SelectValue">
+			<param name="class"
+			value="com.sofmit.fam.dwr.selecttype.SelectValue" />
+			</create> -->
+	    <create creator="spring" javascript="SelectSystemDataBase">
+	      <param name="beanName" value="SelectSystemDataBase"></param>
+	    </create>
+	</allow>
+</dwr>

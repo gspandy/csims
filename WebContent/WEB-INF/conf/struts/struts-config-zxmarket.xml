@@ -1,0 +1,54 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="zxMarketForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<form-property name="name" type="java.lang.String"></form-property>
+			<form-property name="organization" type="java.lang.String"></form-property>
+			<form-property name="organizationChoice" type="java.lang.String"></form-property>
+			<form-property name="orgCodeOfZz" type="java.lang.String"></form-property>
+			<form-property name="six" type="java.lang.String"></form-property>
+			<form-property name="zjCode" type="java.lang.String"></form-property>
+			<form-property name="dept" type="java.lang.String" />
+			<form-property name="postLevel" type="java.lang.String" />
+			<form-property name="postName" type="java.lang.String"></form-property>
+			<form-property name="majorPost" type="java.lang.String"></form-property>
+			<form-property name="education" type="java.lang.String"></form-property>
+			<form-property name="majorEd" type="java.lang.String"></form-property>
+			<form-property name="infoType" type="java.lang.String"></form-property>
+			<form-property name="recordName" type="java.lang.String"></form-property>
+			<form-property name="infoLevel" type="java.lang.String" />
+			<form-property name="infoContent" type="java.lang.String" />
+			<form-property name="infoDate" type="java.lang.String"></form-property>
+			<form-property name="publishUnit" type="java.lang.String"></form-property>
+			<form-property name="recordDate" type="java.lang.String"></form-property>
+			<form-property name="remark" type="java.lang.String"></form-property>
+			<form-property name="orgCodeOfXy" type="java.lang.String"></form-property>
+			<form-property name="year" type="java.lang.String"></form-property>
+			<form-property name="attpath" type="org.apache.struts.upload.FormFile"></form-property>
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/ZxMarketMgrAction" parameter="method"
+			scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="zxMarketForm">
+			<forward name="toZxOrgIntegrityDocumentList"
+				path="/WEB-INF/page/zxmarket/zxOrgIntegrityDocumentList.jsp" redirect="false" />
+			<forward name="toZxPersonalIntegrityDocumentList"
+				path="/WEB-INF/page/zxmarket/zxPersonalIntegrityDocumentList.jsp" redirect="false" />
+			<forward name="toZxOrgIntegrityDocumentInit"
+				path="/WEB-INF/page/zxmarket/zxOrgIntegrityDocumentInit.jsp" redirect="false" />
+			<forward name="toZxPersonalIntegrityDocumentInit"
+				path="/WEB-INF/page/zxmarket/zxPersonalIntegrityDocumentInit.jsp" redirect="false" />
+			<forward name="toMessage"
+				path="/WEB-INF/page/zxmarket/message.jsp" redirect="false" />
+		</action>
+	</action-mappings>
+</struts-config>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration SYSTEM "../../dtd/jGuardAuthentication_1.00.dtd">
+<configuration>
+	<authentication>
+		<scope>local</scope>
+		<debug>true</debug>
+		<includeOldConfig>false</includeOldConfig>
+		<includeConfigFromJavaParam>false</includeConfigFromJavaParam>
+		<includePolicyFromJavaParam>false</includePolicyFromJavaParam>
+		<digestAlgorithm>MD5</digestAlgorithm>
+		<authenticationManager>
+			net.sf.jguard.ext.authentication.manager.JdbcAuthenticationManager
+		</authenticationManager>
+		<authenticationManagerOptions>
+			<option>
+				<name>JNDI</name>
+				<value>java:/comp/env/jdbc/csims</value>
+			</option>
+			<option>
+				<name>authenticationXmlFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/jGuardUsersPrincipals.xml
+				</value>
+			</option>
+			<option>
+				<name>authenticationDatabaseFileLocation</name>
+				<value>
+					WEB-INF/conf/jguard/authentication.db2.properties
+				</value>
+			</option>
+		</authenticationManagerOptions>
+
+		<loginModules>
+			<loginModule>
+				<name>
+					com.gtm.csims.jaas.MarkLoginTimeLoginModule
+				</name>
+				<flag>REQUIRED</flag>
+				<loginModuleOptions>
+					<option>
+						<name>debug</name>
+						<value>false</value>
+					</option>
+				</loginModuleOptions>
+			</loginModule>
+		</loginModules>
+	</authentication>
+</configuration>

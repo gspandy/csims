@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="userService"
+		class="com.gtm.csims.jaas.service.impl.UserServiceImpl">
+		<property name="authenImpl" value="${authentication.implement}" />
+		<property name="isPasswordMD5" value="${password.encrypt}" />
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="bsUserInfoOfJgDao" ref="bsUserInfoOfJgDao" />
+		<property name="bsUserInfoOfZxDao" ref="bsUserInfoOfZxDao" />
+		<property name="bsUserApplyInfoDao" ref="bsUserApplyInfoDao" />
+		<property name="bsUserReportInfoDao" ref="bsUserReportInfoDao"></property>
+		<property name="fileHandler" ref="fileService"></property>
+		<property name="systemBaseInfoManager" ref="systemBaseInfoManager"></property>
+		<property name="bsUserComInfoDao" ref="bsUserComInfoDao" />
+	</bean>
+	<bean id="credentialService"
+		class="com.gtm.csims.jaas.service.impl.CredentialServiceImpl">
+		<property name="bsOrgDao" ref="bsOrgDao" />
+	</bean>
+
+	<bean id="dataAuthorizationService"
+		class="com.gtm.csims.jaas.service.impl.JGuardDataAuthorizationService">
+		<property name="bsOrgDao" ref="bsOrgDao" />
+	</bean>
+
+</beans>

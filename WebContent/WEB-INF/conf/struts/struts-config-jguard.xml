@@ -1,0 +1,310 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="generalForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="begin" type="java.lang.String" />
+			<form-property name="end" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="permissionName"
+				type="java.lang.String" />
+			<form-property name="domainName" type="java.lang.String" />
+			<form-property name="Domains" type="java.util.ArrayList" />
+			<form-property name="DomainsNotBound"
+				type="java.util.ArrayList" />
+			<form-property name="permissionsNotBound"
+				type="java.util.ArrayList" />
+			<form-property name="description" type="java.lang.String" />
+			<form-property name="permissionURI" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="oldPermissionName"
+				type="java.lang.String" />
+			<form-property name="oldDomainName" type="java.lang.String" />
+			<form-property name="principals" type="java.util.ArrayList" />
+			<form-property name="principalName" type="java.lang.String" />
+			<form-property name="principalAsc" type="java.lang.String" />
+			<form-property name="principalDesc" type="java.lang.String" />
+			<form-property name="oldPrincipalName"
+				type="java.lang.String" />
+			<form-property name="principal"
+				type="net.sf.jguard.core.principals.RolePrincipal" />
+			<form-property name="domainNames" type="java.lang.String" />
+			<form-property name="permissionNames"
+				type="java.lang.String" />
+			<form-property name="permissionActions"
+				type="java.lang.String" />
+			<form-property name="permissionClass"
+				type="java.lang.String" />
+			<form-property name="scriptText" type="java.lang.String" />
+			<form-property name="scriptResult" type="java.lang.String" />
+			<form-property name="location" type="java.lang.String" />
+			<form-property name="login" type="java.lang.String" />
+			<form-property name="users" type="java.util.ArrayList" />
+			<form-property name="userPrincipalsNames"
+				type="java.lang.String" />
+			<form-property name="brhName" type="java.lang.String" />
+			<form-property name="loginname" type="java.lang.String" />
+			<form-property name="rolename" type="java.lang.String" />
+			<form-property name="userRole" type="java.lang.String" />
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="name" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="organizationChoice"
+				type="java.lang.String" />
+			<form-property name="organization" type="java.lang.String" />
+			<form-property name="orgName" type="java.lang.String" />
+			<form-property name="dept" type="java.lang.String" />
+			<form-property name="deptName" type="java.lang.String" />
+			<form-property name="deptNo" type="java.lang.String" />
+			<form-property name="photo" type="java.lang.String" />
+			<form-property name="zxName" type="java.lang.String" />
+			<form-property name="zxName1" type="java.lang.String" />
+			<form-property name="zxName2" type="java.lang.String" />
+			<form-property name="zxName3" type="java.lang.String" />
+			<form-property name="zxName4" type="java.lang.String" />
+			<form-property name="zxName5" type="java.lang.String" />
+			<form-property name="zxName6" type="java.lang.String" />
+			<form-property name="zxName7" type="java.lang.String" />
+			<form-property name="zxName8" type="java.lang.String" />
+			<form-property name="zxName9" type="java.lang.String" />
+			
+			<form-property name="zxOrg1" type="java.lang.String" />
+			<form-property name="zxOrg2" type="java.lang.String" />
+			<form-property name="zxOrg3" type="java.lang.String" />
+			<form-property name="zxOrg4" type="java.lang.String" />
+			<form-property name="zxOrg5" type="java.lang.String" />
+			<form-property name="zxOrg6" type="java.lang.String" />
+			<form-property name="zxOrg7" type="java.lang.String" />
+			<form-property name="zxOrg8" type="java.lang.String" />
+			<form-property name="zxOrg9" type="java.lang.String" />
+			
+			<form-property name="zxOrg1Choice" type="java.lang.String" />
+			<form-property name="zxOrg2Choice" type="java.lang.String" />
+			<form-property name="zxOrg3Choice" type="java.lang.String" />
+			<form-property name="zxOrg4Choice" type="java.lang.String" />
+			<form-property name="zxOrg5Choice" type="java.lang.String" />
+			<form-property name="zxOrg6Choice" type="java.lang.String" />
+			<form-property name="zxOrg7Choice" type="java.lang.String" />
+			<form-property name="zxOrg8Choice" type="java.lang.String" />
+			<form-property name="zxOrg9Choice" type="java.lang.String" />
+			<form-property name="reportType" type="java.lang.String" />
+			<form-property name="userCode" type="java.lang.String" />
+			<form-property name="cardType" type="java.lang.String" />
+			<form-property name="cardId" type="java.lang.String" />
+			<form-property name="jgPrincipal" type="java.lang.String" />
+			<form-property name="zxPrincipal" type="java.lang.String" />
+			<form-property name="education" type="java.lang.String" />
+			<form-property name="post" type="java.lang.String" />
+			<form-property name="phone" type="java.lang.String" />
+			<form-property name="userType" type="java.lang.String" />
+			<form-property name="orgCodeOfJr" type="java.lang.String" />
+			<form-property name="orgCodeOfZz" type="java.lang.String" />
+			<form-property name="orgCodeOfXy" type="java.lang.String" />
+			<form-property name="userStatus" type="java.lang.String" />
+			<form-property name="managerCode" type="java.lang.String" />
+			<form-property name="createrCode" type="java.lang.String" />
+			<form-property name="stoperCode" type="java.lang.String" />
+			<form-property name="applyName" type="java.lang.String" />
+			<form-property name="createrName" type="java.lang.String" />
+			<form-property name="stoperName" type="java.lang.String" />
+			<form-property name="createDate" type="java.lang.String" />
+			<form-property name="stopDate" type="java.lang.String" />
+			<form-property name="oldLoginId" type="java.lang.String" />
+			<form-property name="loginDate" type="java.lang.String" />
+			<form-property name="auditResult" type="java.lang.String" />
+			<form-property name="oldId" type="java.lang.String" />
+			<form-property name="loginId" type="java.lang.String" />
+			<form-property name="reportDate" type="java.util.Date" />
+			<form-property name="reporter" type="java.lang.String" />
+			<form-property name="adr" type="java.lang.String" />
+			<form-property name="userZxOrgName" type="java.lang.String" />
+			<form-property name="userZxName" type="java.lang.String" />
+			<form-property name="zxXtName" type="java.lang.String" />
+			<form-property name="zxXtType" type="java.lang.String" />
+			<form-property name="useDeptList" type="java.util.ArrayList" />
+			<form-property name="principalList" type="java.util.ArrayList" />
+			<form-property name="excelpath" type="org.apache.struts.upload.FormFile"></form-property>
+			<form-property name="photopath" type="org.apache.struts.upload.FormFile"></form-property>
+			<form-property name="endRow" type="java.lang.String" />
+			<form-property name="statisticsWay" type="java.lang.String" />
+			<form-property name="areaChoice" type="java.lang.String" />
+			<form-property name="area" type="java.lang.String" />
+			<form-property name="queryWay" type="java.lang.String" />
+			<form-property name="zxUserType" type="java.lang.String" />
+			<form-property name="zxUserCount" type="java.lang.String" />
+			<form-property name="comDate" type="java.lang.String" />
+			<form-property name="comContent" type="java.lang.String" />
+			<form-property name="userCard" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="passwordResetForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="old" type="java.lang.String" />
+			<form-property name="new" type="java.lang.String" />
+			<form-property name="newAgain" type="java.lang.String" />
+		</form-bean>
+	</form-beans>
+
+	<global-forwards>
+		<forward name="logon" path="/Logon.do" contextRelative="true" />
+		<forward name="logoff" path="/Logoff.do" />
+		<forward name="vipArea" path="/VipArea.do" />
+		<forward name="register" path="/Registration.do" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/AccessDenied"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="/WEB-INF/page/jguard/access_denied.jsp" />
+
+		<action path="/AuthenticationFailed"
+			parameter="/WEB-INF/page/jguard/authentication_failed.jsp"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm" validate="false">
+			<forward name="authenticationFailedOK" redirect="false"
+				path="/WEB-INF/page/jguard/authentication_failed.jsp" />
+		</action>
+
+		<action path="/Logon" parameter="/WEB-INF/page/jguard/logon.jsp"
+			type="org.springframework.web.struts.DelegatingActionProxy" />
+
+		<action path="/LogonProcess"
+			parameter="/WEB-INF/page/frame/welcome.jsp"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm" />
+
+		<action path="/Logoff"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="/WEB-INF/page/jguard/logonTemp.jsp" />
+
+		<action path="/Registration"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="/WEB-INF/page/jguard/registration.jsp" name="generalForm" />
+
+		<action path="/Captcha"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm" />
+
+		<action path="/User" parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm" scope="request">
+			<forward name="toUserList" redirect="false"
+				path="/WEB-INF/page/jguard/userList.jsp" />
+			<forward name="toUserListOfNK" redirect="false"
+				path="/WEB-INF/page/jguard/userListOfNK.jsp" />
+			<forward name="toPluralUserList" redirect="false"
+				path="/WEB-INF/page/jguard/pluralUserList.jsp" />
+			<forward name="toAuditUserList" redirect="false"
+				path="/WEB-INF/page/jguard/auditUserList.jsp" />
+			<forward name="toAuditUserPage" redirect="false"
+				path="/WEB-INF/page/jguard/auditUserPage.jsp" />
+			<forward name="toApplyUserPage" redirect="false"
+				path="/WEB-INF/page/jguard/applyUserPage.jsp" />
+			<forward name="toApplyUserList" redirect="false"
+				path="/WEB-INF/page/jguard/applyUserList.jsp" />
+			<forward name="toCreateUserPage" redirect="false"
+				path="/WEB-INF/page/jguard/createUserPage.jsp" />
+			<forward name="toCreateUserPageOfNK" redirect="false"
+				path="/WEB-INF/page/jguard/createUserPageOfNK.jsp" />
+			<forward name="toUserInfoPage" redirect="false"
+				path="/WEB-INF/page/jguard/userInfoPage.jsp" />
+			<forward name="toAddUserInfoPage" redirect="false"
+				path="/WEB-INF/page/jguard/addUserInfoPage.jsp" />
+			<forward name="toUpdateUserPage" redirect="false"
+				path="/WEB-INF/page/jguard/updateUserPage.jsp" />
+			<forward name="toUpdateUserPageOfNK" redirect="false"
+				path="/WEB-INF/page/jguard/updateUserPageOfNK.jsp" />
+			<forward name="toUserMessgePage" redirect="false"
+				path="/WEB-INF/page/jguard/userMessgePage.jsp" />
+			<forward name="createUserOK" redirect="false"
+				path="/User.do?method=list" />
+			<forward name="deleteUserOK" redirect="false"
+				path="/User.do?method=list" />
+			<forward name="updateUserOK" path="/User.do?method=list"
+				redirect="false" />
+			<forward name="toPersonalInfoPage" redirect="false"
+				path="/WEB-INF/page/jguard/personalInfoPage.jsp" />
+			<forward name="toUserReportOfPList" redirect="false"
+				path="/WEB-INF/page/jguard/userReportOfPList.jsp" />
+			<forward name="toUserReportInfoPageOfP" redirect="false"
+				path="/WEB-INF/page/jguard/userReportInfoPageOfP.jsp" />
+			<forward name="toUserReportOfTList" redirect="false"
+				path="/WEB-INF/page/jguard/userReportOfTList.jsp" />
+			<forward name="toUserStopExcelPage" redirect="false"
+				path="/WEB-INF/page/jguard/userStopExcelPage.jsp" />
+			<forward name="toUserStatisticsPage" redirect="false"
+				path="/WEB-INF/page/jguard/userStatisticsPage.jsp" />
+			<forward name="toUserStatisticsResultPage" redirect="false"
+				path="/WEB-INF/page/jguard/userStatisticsResultPage.jsp" />
+			<forward name="toUserInfoQueryPage" redirect="false"
+				path="/WEB-INF/page/jguard/userInfoQueryPage.jsp" />
+			<forward name="toUserInfoQueryResultPage" redirect="false"
+				path="/WEB-INF/page/jguard/userInfoQueryResultPage.jsp" />
+			<forward name="toUserInfoQueryResultPageOfJg" redirect="false"
+				path="/WEB-INF/page/jguard/userInfoQueryResultPageOfJg.jsp" />
+			<forward name="toUploadUserComInfoPage" redirect="false"
+				path="/WEB-INF/page/jguard/uploadUserComInfoPage.jsp" />
+		</action>
+
+		<action path="/Principal" parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm" scope="request">
+			<forward name="listPrincipalsOK" redirect="false"
+				path="/WEB-INF/page/jguard/principalsList.jsp" />
+			<forward name="createPrincipalOK" redirect="false"
+				path="/Principal.do?method=list" />
+			<forward name="addInheritanceOK" redirect="false"
+				path="/Principal.do?method=list" />
+			<forward name="deletePrincipalOK" redirect="false"
+				path="/Principal.do?method=list" />
+			<forward name="updatePrincipalOK"
+				path="/Principal.do?method=list" redirect="false" />
+			<forward name="clonePrincipalOK"
+				path="/Principal.do?method=list" redirect="false" />
+			<forward name="readPrincipalOK"
+				path="/WEB-INF/page/jguard/principal.jsp" redirect="false" />
+			<forward name="readPrincipalCheckBoxOK"
+				path="/WEB-INF/page/jguard/principalCheckBox.jsp" redirect="false" />
+		</action>
+
+		<action path="/Permission"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm" parameter="method">
+			<forward name="createPermissionOK" redirect="false"
+				path="/Domain.do?method=list" />
+			<forward name="listPermissionsOK"
+				path="/WEB-INF/page/jguard/permissionsList.jsp" redirect="false"
+				contextRelative="true" />
+			<forward name="updatePermissionOK" redirect="false"
+				path="/Domain.do?method=list" />
+			<forward name="deletePermissionOK" redirect="false"
+				path="/Domain.do?method=list" />
+		</action>
+
+		<action path="/Domain" parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="generalForm">
+			<forward name="listDomainsOK"
+				path="/WEB-INF/page/jguard/permissionsList.jsp" redirect="false" />
+			<forward name="createDomainOK" redirect="false"
+				contextRelative="false" path="/Domain.do?method=list" />
+			<forward name="deleteDomainOK" redirect="false"
+				path="/Domain.do?method=list" />
+			<forward name="updateDomainOK" path="/Domain.do?method=list"
+				redirect="false" />
+		</action>
+
+		<action path="/resetPassword" parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="passwordResetForm">
+			<forward name="toReset"
+				path="/WEB-INF/page/jguard/passwordReset.jsp" redirect="false" />
+		</action>
+	</action-mappings>
+</struts-config>

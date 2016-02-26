@@ -1,0 +1,92 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="systemBaseInfoForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<form-property name="orgNo" type="java.lang.String"></form-property>
+			<form-property name="orgName" type="java.lang.String"></form-property>
+			<form-property name="orgCodeOfZz" type="java.lang.String"></form-property>
+			<form-property name="orgCodeOfXy" type="java.lang.String"></form-property>
+			<form-property name="e" type="java.lang.String" />
+			<form-property name="g" type="java.lang.String" />
+			<form-property name="j" type="java.lang.String"></form-property>
+			<form-property name="k" type="java.lang.String"></form-property>
+			<form-property name="kChoice" type="java.lang.String"></form-property>
+			<form-property name="l" type="java.lang.String"></form-property>
+			<form-property name="m" type="java.lang.String"></form-property>
+			<form-property name="mChoice" type="java.lang.String"></form-property>
+			<form-property name="o" type="java.lang.String" />
+			<form-property name="q" type="java.lang.String" />
+			<form-property name="s" type="java.lang.String"></form-property>
+			<form-property name="t" type="java.lang.String"></form-property>
+			<form-property name="z" type="java.lang.String"></form-property>
+			<form-property name="aa" type="java.lang.String"></form-property>
+			<form-property name="newE" type="java.lang.String" />
+			<form-property name="newG" type="java.lang.String" />
+			<form-property name="newJ" type="java.lang.String"></form-property>
+			<form-property name="newK" type="java.lang.String"></form-property>
+			<form-property name="newKChoice" type="java.lang.String"></form-property>
+			<form-property name="newL" type="java.lang.String"></form-property>
+			<form-property name="newM" type="java.lang.String"></form-property>
+			<form-property name="newMChoice" type="java.lang.String"></form-property>
+			<form-property name="newO" type="java.lang.String" />
+			<form-property name="newQ" type="java.lang.String" />
+			<form-property name="newS" type="java.lang.String"></form-property>
+			<form-property name="newT" type="java.lang.String"></form-property>
+			<form-property name="newZ" type="java.lang.String"></form-property>
+			<form-property name="newAA" type="java.lang.String"></form-property>
+			<form-property name="newOrgNo" type="java.lang.String"></form-property>
+			<form-property name="newOrgName" type="java.lang.String"></form-property>
+			<form-property name="newOrgCodeOfZz"
+				type="java.lang.String">
+			</form-property>
+			<form-property name="newOrgCodeOfXy"
+				type="java.lang.String">
+			</form-property>
+			<form-property name="isPcb" type="java.lang.String"></form-property>
+			<form-property name="newIsPcb" type="java.lang.String"></form-property>
+			<form-property name="organization" type="java.lang.String" />
+			<form-property name="organizationChoice"
+				type="java.lang.String" />
+			<form-property name="deptNo" type="java.lang.String" />
+			<form-property name="deptName" type="java.lang.String" />
+			<form-property name="comDate" type="java.lang.String" />
+			<form-property name="comContent" type="java.lang.String" />
+			<form-property name="endRow" type="java.lang.String" />
+			<form-property name="excelpath" type="org.apache.struts.upload.FormFile"></form-property>
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/SystemBaseInfoManagerAction" parameter="method"
+			scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			name="systemBaseInfoForm">
+			<forward name="toOrgMain"
+				path="/WEB-INF/page/managment/system/orgMain.jsp" redirect="false" />
+			<forward name="toOrgList"
+				path="/WEB-INF/page/managment/system/orgList.jsp" redirect="false" />
+			<forward name="toReadOrg"
+				path="/WEB-INF/page/managment/system/orgInfoMain.jsp" redirect="false" />
+			<forward name="toDeptMain"
+				path="/WEB-INF/page/managment/system/deptMain.jsp" redirect="false" />
+			<forward name="toCreateDeptPage"
+				path="/WEB-INF/page/managment/system/createDeptPage.jsp"
+				redirect="false" />
+			<forward name="toUpdateDeptPage"
+				path="/WEB-INF/page/managment/system/updateDeptPage.jsp"
+				redirect="false" />
+			<forward name="toMessage"
+				path="/WEB-INF/page/managment/system/message.jsp" redirect="false" />
+			<forward name="toDeptMessage"
+				path="/WEB-INF/page/managment/system/deptMessage.jsp" redirect="false" />
+			<forward name="toUploadOrgComInfoPage"
+				path="/WEB-INF/page/managment/system/uploadOrgComInfoPage.jsp" redirect="false" />
+		</action>
+	</action-mappings>
+</struts-config>

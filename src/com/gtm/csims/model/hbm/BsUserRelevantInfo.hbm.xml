@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsUserRelevantInfo"
+		table="BS_USERRELEVANTINFO"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+		<property
+			name="UserLoginId"
+			column="USERLIGONID"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="UserName"
+			column="USERNAME"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="InfoType"
+			column="INFOTYPE"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="RelevantId"
+			column="RELEVANTID"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="RelevantInfo"
+			column="RELEVANTINFO"
+			type="string"
+			not-null="false"
+			length="300"
+		/>
+		<property
+			name="RelevantDate"
+			column="RELEVANTDATE"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Stat"
+			column="STAT"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+
+	</class>	
+</hibernate-mapping>

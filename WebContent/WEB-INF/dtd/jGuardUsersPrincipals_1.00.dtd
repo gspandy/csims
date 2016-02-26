@@ -1,0 +1,59 @@
+<!--
+jGuard is a security framework based on top of jaas (java authentication and authorization security).
+it is written for web applications, to resolve simply, access control problems.
+version $Name: v090beta3 $
+http://sourceforge.net/projects/jguard/
+
+Copyright (C) 2004  Charles GAY
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+jGuard project home page:
+http://sourceforge.net/projects/jguard/
+
+-->
+<!-- jGuardUsersPrincipals_1.00.dtd release -->
+<!ELEMENT usersPrincipals (principals,users)>
+<!ELEMENT principals (principal+)>
+<!ELEMENT principal (name,class,applicationName)>
+<!ELEMENT class (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT users (userTemplate,user+)>
+<!ELEMENT userTemplate (name,privateRequiredCredentials,publicRequiredCredentials,privateOptionalCredentials,publicOptionalCredentials,genericPrincipals,specificPrincipalFactories)>
+<!ELEMENT privateRequiredCredentials (credTemplateId*)>
+<!ELEMENT publicRequiredCredentials (credTemplateId*)>
+<!ELEMENT privateOptionalCredentials (credTemplateId*)>
+<!ELEMENT publicOptionalCredentials (credTemplateId*)>
+<!ELEMENT credTemplateId (#PCDATA)>
+<!ATTLIST credTemplateId digestNeeded (false|true) "false" >
+<!ATTLIST credTemplateId identity (false|true) "false">
+<!ELEMENT user (privateCredentials,publicCredentials,principalsRef)>
+<!ELEMENT applicationName (#PCDATA)>
+<!ELEMENT privateCredentials (credential+)>
+<!ELEMENT publicCredentials (credential*)>
+<!ELEMENT genericPrincipals (principalRef*)>
+<!ELEMENT specificPrincipalFactories (specificPrincipalFactory*)>
+<!ELEMENT specificPrincipalFactory (#PCDATA)>
+<!ELEMENT credential (id,value)>
+<!ATTLIST credential digestNeeded (false|true) "false" >
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT value (#PCDATA)>
+<!ELEMENT principalsRef (principalRef*)>
+<!ELEMENT principalRef (#PCDATA)>
+<!ATTLIST principalRef name CDATA  #REQUIRED >
+<!ATTLIST principalRef applicationName CDATA  #REQUIRED >
+<!ATTLIST principalRef active (false|true) "true" >
+<!ATTLIST principalRef definition CDATA "true" >

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.broker_url}" />
+		<!-- <property name="brokerURL" value="tcp://10.10.3.63:61616" /> -->
+	</bean>
+
+	<!-- Spring JmsTemplate config -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<!-- lets wrap in a pool to avoid creating a connection per send -->
+			<bean class="org.springframework.jms.connection.SingleConnectionFactory">
+				<property name="targetConnectionFactory" ref="jmsConnectionFactory" />
+			</bean>
+		</property>
+		<!-- custom MessageConverter -->
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+
+	<bean id="dbMessageQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0">
+			<value>RCMIS.DB.Queue</value>
+		</constructor-arg>
+	</bean>
+	<bean id="mailMessageQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0">
+			<value>RCMIS.Mail.Queue</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="messageConverter" class="com.gtm.csims.message.MessageConverterImpl" />
+
+	<bean id="dbMessageProducer" class="com.gtm.csims.message.db.DBMessageProducer">
+		<property name="template" ref="jmsTemplate" />
+		<property name="destination" ref="dbMessageQueue" />
+	</bean>
+
+	<bean id="dbMessageConsumer" class="com.gtm.csims.message.db.DBMessageConsumer">
+		 
+	</bean>
+
+	<bean id="mailMessageProducer" class="com.gtm.csims.message.mail.MailMessageProducer">
+		<property name="template" ref="jmsTemplate" />
+		<property name="destination" ref="mailMessageQueue" />
+	</bean>
+
+	<bean id="mailMessageConsumer" class="com.gtm.csims.message.mail.MailMessageConsumer">
+		<!-- 	<property gtm.csimsnder" ref="mailSender" /> -->
+	</bean>
+
+
+	<!-- Message Driven POJO (MDP) -->
+	<bean id="dbMessageListener"
+		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="dbMessageConsumer" />
+		<property name="defaultListenerMethod" value="consume" />
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+
+	<bean id="mailMessageListener"
+		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="mailMessageConsumer" />
+		<property name="defaultListenerMethod" value="consume" />
+		<property name="messageConverter" ref="messageConverter" />
+	</bean>
+
+	<!-- listener container，MDP无需实现接口 -->
+	<bean id="dbMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="destination" ref="dbMessageQueue" />
+		<property name="messageListener" ref="dbMessageListener" />
+	</bean>
+
+	<bean id="mailMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="destination" ref="mailMessageQueue" />
+		<property name="messageListener" ref="mailMessageListener" />
+	</bean>
+
+	<bean id="messageSendFacade" class="com.gtm.csims.message.MessageSendFacade">
+		<property name="senders">
+			<set>
+				<ref bean="dbMessageProducer" />
+				<!-- <ref bean="mailMessageProducer" /> -->
+			</set>
+		</property>
+	</bean>
+</beans>

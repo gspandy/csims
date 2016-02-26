@@ -1,0 +1,48 @@
+SELECT
+    COUNT(*)
+FROM
+    IMPORTUSERTEMP;
+SELECT
+    COUNT(*)
+FROM
+    BS_USERINFOOFJG;
+SELECT
+    COUNT(*)
+FROM
+    BS_USERINFOOFZX;
+SELECT
+    COUNT(*)
+FROM
+    JG_CREDENTIAL;
+SELECT
+    COUNT(*)
+FROM
+    JG_USER;
+SELECT
+    COUNT(*)
+FROM
+    JG_USER_PRINCIPAL;
+    
+SELECT DISTINCT
+    (principal_id)
+FROM
+    JG_USER_PRINCIPAL;
+    
+SELECT
+    principal_id,
+    COUNT(principal_id)
+FROM
+    JG_USER_PRINCIPAL
+GROUP BY
+    principal_id;
+    
+SELECT
+    MAX(ID)
+FROM
+    JG_USER;
+SELECT
+    MAX(ID)
+FROM
+    JG_CREDENTIAL;
+ALTER SEQUENCE jg_credential_seq RESTART WITH 100000;
+ALTER SEQUENCE jg_user_seq RESTART WITH 20000;

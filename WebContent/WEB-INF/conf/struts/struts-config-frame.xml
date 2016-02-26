@@ -1,0 +1,38 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans />
+
+	<global-exceptions>
+		<exception scope="request" path="/error.jsp" key="Exception"
+			handler="com.gtm.csims.controll.BusinessExceptionHandler" type="java.lang.Exception">
+		</exception>
+	</global-exceptions>
+
+	<global-forwards>
+		<forward name="welcome" path="/Welcome.do" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/Welcome"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="/WEB-INF/page/frame/welcome.jsp" />
+
+		<action path="/left" parameter="/WEB-INF/page/frame/left.jsp"
+			type="org.springframework.web.struts.DelegatingActionProxy" />
+
+		<action path="/top" parameter="/WEB-INF/page/frame/top.jsp"
+			type="org.springframework.web.struts.DelegatingActionProxy" />
+	</action-mappings>
+
+	<controller locale="false" inputForward="true"
+		processorClass="org.apache.struts.action.RequestProcessor"
+		contentType="text/html" />
+
+	<message-resources parameter="ApplicationResources" />
+
+	<!-- <plug-in
+		className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation"
+		value="/WEB-INF/conf/spring/applicationContext-action.xml" />
+		</plug-in> -->
+</struts-config>

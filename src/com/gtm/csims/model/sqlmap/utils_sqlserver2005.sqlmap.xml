@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="utils">
+	<typeAlias alias="osCacheController"
+		type="com.ibatis.sqlmap.engine.cache.oscache.OSCacheController" />
+	<cacheModel id="pojoOSCache" type="osCacheController"
+		readOnly="true" serialize="false">
+		<flushInterval hours="24" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<select id="selectAreaByParent" resultClass="com.gtm.csims.model.BsArea"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">
+		WITH TempArea AS (
+    		SELECT id,name,parent,flag,createdate,updatedate,level,isleaf 
+       		FROM Bs_Area 
+       		WHERE parent = #parentNo:VARCHAR# 
+           		UNION ALL 
+           			SELECT a2.id,a2.name,a2.parent,a2.flag,a2.createdate,a2.updatedate,a2.level,a2.isleaf
+           			FROM Bs_Area a2 
+           		INNER JOIN TempArea ta ON a2.parent = ta.id 
+		) 
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM TempArea
+	</select>	
+	<select id="selectOrganizationByParent" resultClass="com.gtm.csims.model.BsOrganization"
+		parameterClass="java.lang.String" cacheModel="pojoOSCache">		
+		WITH TempOrganization AS (
+    		SELECT id,name,parent,flag,createdate,updatedate,level,isleaf,iscpb 
+       		FROM BS_ORGANIZATION
+       		WHERE parent = #parentNo:VARCHAR# 
+           		UNION ALL 
+           			SELECT a2.id,a2.name,a2.parent,a2.flag,a2.createdate,a2.updatedate,a2.level,a2.isleaf,a2.iscpb
+           			FROM BS_ORGANIZATION a2 
+           		INNER JOIN TempOrganization ta ON a2.parent = ta.id 
+		) 
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM TempOrganization
+	</select>
+	
+	<select id="isChildArea" resultClass="com.gtm.csims.model.BsArea"
+		parameterClass="com.gtm.csims.model.BsOrganization" cacheModel="pojoOSCache">		
+		WITH TempArea AS (
+    		SELECT id,name,parent,flag,createdate,updatedate,level,isleaf 
+       		FROM Bs_Area 
+       		WHERE parent = #state:VARCHAR# 
+           		UNION ALL 
+           			SELECT a2.id,a2.name,a2.parent,a2.flag,a2.createdate,a2.updatedate,a2.level,a2.isleaf
+           			FROM Bs_Area a2 
+           		INNER JOIN TempArea ta ON a2.parent = ta.id 
+		) 
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf FROM TempArea
+			WHERE id = #id:VARCHAR#
+	</select>
+	
+	<select id="isChildOrganization" resultClass="com.gtm.csims.model.BsOrganization"
+		parameterClass="com.gtm.csims.model.BsOrganization" cacheModel="pojoOSCache">		
+		WITH TempOrganization AS (
+    		SELECT id,name,parent,flag,createdate,updatedate,level,isleaf,iscpb 
+       		FROM BS_ORGANIZATION
+       		WHERE parent = #state:VARCHAR# 
+           		UNION ALL 
+           			SELECT a2.id,a2.name,a2.parent,a2.flag,a2.createdate,a2.updatedate,a2.level,a2.isleaf,a2.iscpb
+           			FROM BS_ORGANIZATION a2 
+           		INNER JOIN TempOrganization ta ON a2.parent = ta.id 
+		) 
+		SELECT id AS id, name AS name, parent AS state, flag AS flag, createdate AS createdate,
+			updatedate AS updatedate, level AS level, isleaf AS isleaf, iscpb AS iscpb FROM TempOrganization
+			WHERE id = #id:VARCHAR#
+	</select>	
+</sqlMap>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE usersPrincipals SYSTEM "../../dtd/jGuardUsersPrincipals_1.00.dtd">
+<usersPrincipals>
+	<principals>
+		<principal>
+			<name>admin</name>
+			<class>net.sf.jguard.core.principals.RolePrincipal</class>
+			<applicationName>sweet</applicationName>
+		</principal>
+		<principal>
+			<name>guest</name>
+			<class>net.sf.jguard.core.principals.RolePrincipal</class>
+			<applicationName>sweet</applicationName>
+		</principal>
+	</principals>
+	<users>
+		<userTemplate>
+			<name>default</name>
+			<privateRequiredCredentials>
+				<credTemplateId identity="true">login</credTemplateId>
+				<credTemplateId digestNeeded="true">password</credTemplateId>
+			</privateRequiredCredentials>
+			<publicRequiredCredentials>
+				<credTemplateId>nickname</credTemplateId>
+			</publicRequiredCredentials>
+			<privateOptionalCredentials />
+			<publicOptionalCredentials />
+			<genericPrincipals>
+				<principalRef name="admin" applicationName="sweet" />
+			</genericPrincipals>
+			<specificPrincipalFactories />
+		</userTemplate>
+
+		<user>
+			<privateCredentials>
+				<credential>
+					<id>login</id>
+					<value>admin</value>
+				</credential>
+				<credential>
+					<id>password</id>
+					<value>admin</value>
+				</credential>
+			</privateCredentials>
+			<publicCredentials>
+				<credential>
+					<id>nickname</id>
+					<value>Sysetm Administrator</value>
+				</credential>
+			</publicCredentials>
+			<principalsRef>
+				<principalRef name="admin" applicationName="sweet"
+					active="true" />
+			</principalsRef>
+		</user>
+		<user>
+			<privateCredentials>
+				<credential>
+					<id>login</id>
+					<value>guest</value>
+				</credential>
+				<credential>
+					<id>password</id>
+					<value>guest</value>
+				</credential>
+			</privateCredentials>
+			<publicCredentials />
+			<principalsRef>
+				<principalRef name="guest" applicationName="sweet" />
+			</principalsRef>
+		</user>
+	</users>
+</usersPrincipals>

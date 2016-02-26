@@ -1,0 +1,21 @@
+package net.sweet.jbpm.processdefinition.$(pdName).handler.assignment;
+
+import net.sweet.log.level.Logger;
+
+import org.jbpm.graph.exe.ExecutionContext;
+import org.jbpm.taskmgmt.def.AssignmentHandler;
+import org.jbpm.taskmgmt.exe.Assignable;
+
+/**
+ * @author Sweet
+ * @see $(className)
+ */
+@SuppressWarnings("serial")
+public class $(className) implements AssignmentHandler {
+
+	public void assign(Assignable arg0, ExecutionContext arg1) throws Exception {
+		Logger.debug("$(className) has begin......");
+		// TODO Auto-generated method stub
+		Logger.debug("$(className) has finished......");
+	}
+}
