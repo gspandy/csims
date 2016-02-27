@@ -1,108 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:aop="http://www.springframework.org/schema/aop"
-  xmlns:tx="http://www.springframework.org/schema/tx"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
-  <bean id="enforceService"
-    class="com.gtm.csims.business.enforce.EnforceService">
-    <property name="bsAdmenforceDao" ref="bsAdmenforceDao" />
-    <property name="bsAeinspectionDao" ref="bsAeinspectionDao" />
-    <property name="bsAeconclusionDao" ref="bsAeconclusionDao" />
-    <property name="bsAerectificationDao" ref="bsAerectificationDao" />
-    <property name="bsWorkbasisDao" ref="bsWorkbasisDao" />
-    <property name="bsWorkcomingDao" ref="bsWorkcomingDao" />
-    <property name="bsWorkgoawayDao" ref="bsWorkgoawayDao" />
-    <property name="bsWorktalksummaryDao" ref="bsWorktalksummaryDao" />
-    <property name="bsAeinspectionAnlDao" ref="bsAeinspectionAnlDao" />
-    <property name="bsFactbookDao" ref="bsFactbookDao" />
-    <property name="bsDictionaryDao" ref="bsDictionaryDao" />
-    <property name="noGenerator" ref="noGenerator" />
-    <property name="bsUserInfoOfJgDao" ref="bsUserInfoOfJgDao" />
-    <property name="bsOrgDao" ref="bsOrgDao" />
-    <property name="bsAepeopleDao" ref="bsAepeopleDao" />
-    <property name="jdbcTemplate" ref="jdbcTemplate" />
-    <property name="bsUserRelevantInfoDao" ref="bsUserRelevantInfoDao" />
-    <property name="bsOrgRelevantInfoDao" ref="bsOrgRelevantInfoDao" />
-    <property name="remindService" ref="remindService"></property>
-  </bean>
-  <bean id="punishService"
-    class="com.gtm.csims.business.enforce.PunishService">
-    <property name="bsAdmpunishDao" ref="bsAdmpunishDao" />
-    <property name="bsAdmpunishconsDao" ref="bsAdmpunishconsDao" />
-    <property name="bsAeconclusionDao" ref="bsAeconclusionDao" />
-    <property name="bsUserInfoOfJgDao" ref="bsUserInfoOfJgDao" />
-    <property name="bsOrgDao" ref="bsOrgDao" />
-    <property name="jdbcTemplate" ref="jdbcTemplate" />
-    <property name="noGenerator" ref="noGenerator" />
-  </bean>
-  <bean id="enforcePeopleService"
-    class="com.gtm.csims.business.enforce.EnforcePeopleService">
-    <property name="bsAepeopleDao" ref="bsAepeopleDao" />
-  </bean>
-  <bean id="enforceAnalysService"
-    class="com.gtm.csims.business.enforce.EnforceAnalysService">
-    <property name="bsAdmenfcanlyDao" ref="bsAdmenfcanlyDao" />
-  </bean>
+	<bean id="enforceService" class="com.gtm.csims.business.enforce.EnforceService">
+		<property name="bsAdmenforceDao" ref="bsAdmenforceDao" />
+		<property name="bsAeinspectionDao" ref="bsAeinspectionDao" />
+		<property name="bsAeconclusionDao" ref="bsAeconclusionDao" />
+		<property name="bsAerectificationDao" ref="bsAerectificationDao" />
+		<property name="bsWorkbasisDao" ref="bsWorkbasisDao" />
+		<property name="bsWorkcomingDao" ref="bsWorkcomingDao" />
+		<property name="bsWorkgoawayDao" ref="bsWorkgoawayDao" />
+		<property name="bsWorktalksummaryDao" ref="bsWorktalksummaryDao" />
+		<property name="bsAeinspectionAnlDao" ref="bsAeinspectionAnlDao" />
+		<property name="bsFactbookDao" ref="bsFactbookDao" />
+		<property name="bsDictionaryDao" ref="bsDictionaryDao" />
+		<property name="noGenerator" ref="noGenerator" />
+		<property name="bsUserInfoOfJgDao" ref="bsUserInfoOfJgDao" />
+		<property name="bsOrgDao" ref="bsOrgDao" />
+		<property name="bsAepeopleDao" ref="bsAepeopleDao" />
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="bsUserRelevantInfoDao" ref="bsUserRelevantInfoDao" />
+		<property name="bsOrgRelevantInfoDao" ref="bsOrgRelevantInfoDao" />
+		<property name="remindService" ref="remindService"></property>
+		<property name="bsAdmpunishDao" ref="bsAdmpunishDao" />
+		<property name="bsAdmpunishconsDao" ref="bsAdmpunishconsDao" />
+	</bean>
+	<bean id="punishService" class="com.gtm.csims.business.enforce.PunishService">
+		<property name="bsAdmpunishDao" ref="bsAdmpunishDao" />
+		<property name="bsAdmpunishconsDao" ref="bsAdmpunishconsDao" />
+		<property name="bsAeconclusionDao" ref="bsAeconclusionDao" />
+		<property name="bsUserInfoOfJgDao" ref="bsUserInfoOfJgDao" />
+		<property name="bsOrgDao" ref="bsOrgDao" />
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="noGenerator" ref="noGenerator" />
+	</bean>
+	<bean id="enforcePeopleService" class="com.gtm.csims.business.enforce.EnforcePeopleService">
+		<property name="bsAepeopleDao" ref="bsAepeopleDao" />
+	</bean>
+	<bean id="enforceAnalysService" class="com.gtm.csims.business.enforce.EnforceAnalysService">
+		<property name="bsAdmenfcanlyDao" ref="bsAdmenfcanlyDao" />
+	</bean>
 
 
-  <!-- submit base class -->
-  <bean id="baseReportConfig"
-    class="com.gtm.csims.business.datacollection.submit.base.BaseReportConfig"
-    abstract="true">
-  </bean>
-  <bean id="baseReportReader"
-    class="com.gtm.csims.business.datacollection.submit.base.BaseReportReader"
-    abstract="true">
-  </bean>
-  <bean id="csvFileReader"
-    class="com.gtm.csims.business.datacollection.submit.base.CSVFileReader"
-    abstract="true">
-  </bean>
-  <bean id="baseReportValidator"
-    class="com.gtm.csims.business.datacollection.submit.base.BaseReportValidator"
-    abstract="true">
-  </bean>
-  <!-- Administration enforce submit -->
-  <bean id="aenforcConfig"
-    class="com.gtm.csims.business.datacollection.submit.config.AEnforcConfig"
-    parent="baseReportConfig">
-  </bean>
-  <bean id="aenforcReader"
-    class="com.gtm.csims.business.datacollection.submit.reader.AEnforcReader"
-    parent="baseReportReader">
-    <property name="validator" ref="aenforcValidator" />
-    <property name="config" ref="aenforcConfig" />
-    <property name="bsAdmenforceDao" ref="bsAdmenforceDao" />
-  </bean>
-  <bean id="aenforcValidator"
-    class="com.gtm.csims.business.datacollection.submit.validator.AEnforcValidator"
-    parent="baseReportValidator">
-    <property name="config" ref="aenforcConfig" />
-  </bean>
+	<!-- submit base class -->
+	<bean id="baseReportConfig"
+		class="com.gtm.csims.business.datacollection.submit.base.BaseReportConfig"
+		abstract="true">
+	</bean>
+	<bean id="baseReportReader"
+		class="com.gtm.csims.business.datacollection.submit.base.BaseReportReader"
+		abstract="true">
+	</bean>
+	<bean id="csvFileReader"
+		class="com.gtm.csims.business.datacollection.submit.base.CSVFileReader"
+		abstract="true">
+	</bean>
+	<bean id="baseReportValidator"
+		class="com.gtm.csims.business.datacollection.submit.base.BaseReportValidator"
+		abstract="true">
+	</bean>
+	<!-- Administration enforce submit -->
+	<bean id="aenforcConfig"
+		class="com.gtm.csims.business.datacollection.submit.config.AEnforcConfig"
+		parent="baseReportConfig">
+	</bean>
+	<bean id="aenforcReader"
+		class="com.gtm.csims.business.datacollection.submit.reader.AEnforcReader"
+		parent="baseReportReader">
+		<property name="validator" ref="aenforcValidator" />
+		<property name="config" ref="aenforcConfig" />
+		<property name="bsAdmenforceDao" ref="bsAdmenforceDao" />
+	</bean>
+	<bean id="aenforcValidator"
+		class="com.gtm.csims.business.datacollection.submit.validator.AEnforcValidator"
+		parent="baseReportValidator">
+		<property name="config" ref="aenforcConfig" />
+	</bean>
 
-  <!-- Administration enforce inspection submit -->
-  <bean id="aeinspectionAnlConfig"
-    class="com.gtm.csims.business.datacollection.submit.config.AEinspectionAnlConfig"
-    parent="baseReportConfig">
-  </bean>
-  <bean id="aeinspectionAnlReader"
-    class="com.gtm.csims.business.datacollection.submit.reader.AEinspectionAnlReader"
-    parent="baseReportReader">
-    <property name="validator" ref="aeinspectionAnlValidator" />
-    <property name="config" ref="aeinspectionAnlConfig" />
-    <property name="bsAeinspectionAnlDao" ref="bsAeinspectionAnlDao" />
-  </bean>
-  <bean id="aeinspectionAnlValidator"
-    class="com.gtm.csims.business.datacollection.submit.validator.AEinspectionAnlValidator"
-    parent="baseReportValidator">
-    <property name="config" ref="aeinspectionAnlConfig" />
-  </bean>
-  <bean id="wordGenerator"
-    class="com.gtm.csims.business.word.WordGenerator">
-  </bean>
+	<!-- Administration enforce inspection submit -->
+	<bean id="aeinspectionAnlConfig"
+		class="com.gtm.csims.business.datacollection.submit.config.AEinspectionAnlConfig"
+		parent="baseReportConfig">
+	</bean>
+	<bean id="aeinspectionAnlReader"
+		class="com.gtm.csims.business.datacollection.submit.reader.AEinspectionAnlReader"
+		parent="baseReportReader">
+		<property name="validator" ref="aeinspectionAnlValidator" />
+		<property name="config" ref="aeinspectionAnlConfig" />
+		<property name="bsAeinspectionAnlDao" ref="bsAeinspectionAnlDao" />
+	</bean>
+	<bean id="aeinspectionAnlValidator"
+		class="com.gtm.csims.business.datacollection.submit.validator.AEinspectionAnlValidator"
+		parent="baseReportValidator">
+		<property name="config" ref="aeinspectionAnlConfig" />
+	</bean>
+	<bean id="wordGenerator" class="com.gtm.csims.business.word.WordGenerator">
+	</bean>
 
 </beans>

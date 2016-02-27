@@ -57,6 +57,12 @@ Ext.MessageBox.minWidth = 400;
 		document.getElementById("aeplanstdate").value="";
 		document.getElementById("aeplantmdate").value="";
 	}
+    
+    function exportCvs(){
+        document.forms[0].action="./AdminEnforceManagerAction.do?method=exportCvs&obj=3";
+        document.forms[0].submit();
+    }
+    
 	function isDelete(id){ 
         Ext.Msg.confirm('提示', '是否确认删除行政执法检查结论信息?' , function(btn) {
                     if(btn == 'yes') {
@@ -66,6 +72,7 @@ Ext.MessageBox.minWidth = 400;
                     }
                 });
     }
+	
     function isRepeal(id){ 
         Ext.Msg.confirm('提示', '是否确认撤销行政处罚立项?' , function(btn) {
                     if(btn == 'yes') {
@@ -154,6 +161,8 @@ Ext.MessageBox.minWidth = 400;
 																	onclick="search();" value="查 询" />
 																<input name="button2" type="button" class="botton01"
 																	onclick="resets();" value="重 置" />
+																<input name="button" type="button" class="botton01"
+																	onclick="exportCvs();" value="导 出" />
 															</td>
 														</tr>
 													</table>
