@@ -28,6 +28,7 @@ import net.sf.json.JsonConfig;
 import net.sweet.dao.generic.support.Page;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -69,6 +70,7 @@ import com.gtm.csims.model.BsWorkbasis;
 import com.gtm.csims.model.BsWorkcoming;
 import com.gtm.csims.model.BsWorkgoaway;
 import com.gtm.csims.model.BsWorktalksummary;
+import com.gtm.csims.utils.Constants;
 import com.gtm.csims.utils.DateUtil;
 import com.gtm.csims.utils.JsonDateValueProcessor;
 import com.gtm.csims.utils.RequestUtil;
@@ -97,6 +99,14 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	static {
 		JSON_CONFIG.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
 	}
+
+	/**
+	 * 特权人民银行机构编号.<br>
+	 * 
+	 * 配置的编号机构可以选择任意金融机构为被检查机构
+	 */
+	private static final String[] PRIVILEGE_PBC_ORGS = new String[] { "A1000151000410"// 营管部
+	};
 
 	private NoGenerator noGenerator;
 	private FileHandler fileHandler;
@@ -3282,10 +3292,12 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 				return null;
 			}
 		}
-		if (BooleanUtils.isFalse(bs.isCanbeupdate())) {
-			this.printMessage(request, response, String.format(ERROR9, bs.getAeno(), "行政执法工作检查记录"), ATTR_ERROR);
-			return null;
-		}
+		// 工作检查记录能否修改开关，如果开启，则工作检查记录流程结束则不能修改，否则可以修改
+		// if (BooleanUtils.isFalse(bs.isCanbeupdate())) {
+		// this.printMessage(request, response, String.format(ERROR9,
+		// bs.getAeno(), "行政执法工作检查记录"), ATTR_ERROR);
+		// return null;
+		// }
 		BsAdmenforce af = enforceService.getAdmenforceByNo(bs.getAeno());
 		request.setAttribute("prjnm", af.getPrjnm());
 		RequestUtil.setFormFromBean(dyna, bs);
@@ -3768,36 +3780,41 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 				BsAeconclusion bs = RequestUtil.getBeanFromParams(request, BsAeconclusion.class);
 				String[] decisionArr = request.getParameterValues("decision");
 				bs.setDecision(StringUtil.join(decisionArr, StringUtils.EMPTY, StringUtils.EMPTY, ","));
-				String relpeoples = request.getParameter("relpeoples");
-				if (StringUtils.isNotBlank(relpeoples)) {
-					try {
-						String[] relpeoplesArr = relpeoples.split(",");
-						for (int i = 0; i < relpeoplesArr.length; i++) {
-							// System.out.println(relpeoplesArr[i]);
-							// 插入涉及用户档案信息
-							String[] tempArr = relpeoplesArr[i].split("--");
-							enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1], tempArr[0], "在《执法检查意见书（"
-							        + StringUtils.trimToEmpty(bs.getAeopnionno()) + "）》中被指定为涉及人员");
-						}
-					} catch (Exception e) {
-						LOGGER.error("检查结论保存方法", e);
-					}
-				}
-				String relorgnm = request.getParameter("relorgnm");
-				if (StringUtils.isNotBlank(relorgnm)) {
-					try {
-						String[] relorgnmArr = relorgnm.split(",");
-						for (int i = 0; i < relorgnmArr.length; i++) {
-							// System.out.println(relpeoplesArr[i]);
-							// 插入涉及用户档案信息
-							String[] tempArr2 = relorgnmArr[i].split("--");
-							enforceService.relateOrgProfile(tempArr2[1], tempArr2[0],
-							        "在《执法检查意见书（" + StringUtils.trimToEmpty(bs.getAeopnionno()) + "）》中被指定为涉及机构");
-						}
-					} catch (Exception e) {
-						LOGGER.error("检查结论保存方法", e);
-					}
-				}
+				// 关闭关联违法人员档案信息
+				// String relpeoples = request.getParameter("relpeoples");
+				// if (StringUtils.isNotBlank(relpeoples)) {
+				// try {
+				// String[] relpeoplesArr = relpeoples.split(",");
+				// for (int i = 0; i < relpeoplesArr.length; i++) {
+				// // System.out.println(relpeoplesArr[i]);
+				// // 插入涉及用户档案信息
+				// String[] tempArr = relpeoplesArr[i].split("--");
+				// enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1],
+				// tempArr[0], "在《执法检查意见书（"
+				// + StringUtils.trimToEmpty(bs.getAeopnionno()) +
+				// "）》中被指定为涉及人员");
+				// }
+				// } catch (Exception e) {
+				// LOGGER.error("检查结论保存方法", e);
+				// }
+				// }
+				// 关闭关联违法机构档案信息
+				// String relorgnm = request.getParameter("relorgnm");
+				// if (StringUtils.isNotBlank(relorgnm)) {
+				// try {
+				// String[] relorgnmArr = relorgnm.split(",");
+				// for (int i = 0; i < relorgnmArr.length; i++) {
+				// // System.out.println(relpeoplesArr[i]);
+				// // 插入涉及用户档案信息
+				// String[] tempArr2 = relorgnmArr[i].split("--");
+				// enforceService.relateOrgProfile(tempArr2[1], tempArr2[0],
+				// "在《执法检查意见书（" + StringUtils.trimToEmpty(bs.getAeopnionno()) +
+				// "）》中被指定为涉及机构");
+				// }
+				// } catch (Exception e) {
+				// LOGGER.error("检查结论保存方法", e);
+				// }
+				// }
 				if (dyna.get("aeopnionno") != null) {
 					bs.setAeopnionno(dyna.get("aeopnionno").toString());
 				}
@@ -4714,13 +4731,18 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		List<BsOrg> childrenOrgslt = null;
 		try {
 			if (StringUtils.isNotBlank(parent) && StringUtils.isNotBlank(nowloginerOrgNo) && bsOrg != null) {
-				if (nowloginerOrgNo.equals("A1000151000028")) {
+				// 特权人行机构
+				if (ArrayUtils.contains(PRIVILEGE_PBC_ORGS, nowloginerOrgNo)) {
+					childrenOrgslt = enforceService.getOrgsByParentOrgNo(parent);
+				} else if (nowloginerOrgNo.equals(Constants.PCB_SC_ORG_NO)) {
 					// 如果当前用户为成都分行用户
 					childrenOrgslt = enforceService.getOrgsByParentOrgNo(parent);
-				} else if (StringUtils.isNotBlank(bsOrg.getParentno()) && bsOrg.getParentno().equals("A1000151000028")) {
+				} else if (StringUtils.isNotBlank(bsOrg.getParentno())
+				        && bsOrg.getParentno().equals(Constants.PCB_SC_ORG_NO)) {
 					// 如果为县支行
 					childrenOrgslt = enforceService.getOrgsByParentOrgNoForZHOrXZH(parent, nowloginerOrgNo);
-				} else if (StringUtils.isNotBlank(bsOrg.getParentno()) && !bsOrg.getParentno().equals("A1000151000028")) {
+				} else if (StringUtils.isNotBlank(bsOrg.getParentno())
+				        && !bsOrg.getParentno().equals(Constants.PCB_SC_ORG_NO)) {
 					// 如果为中支
 					childrenOrgslt = enforceService.getOrgsByParentOrgNoForZHOrXZH(parent, nowloginerOrgNo);
 				}

@@ -1,0 +1,1 @@
+update JG_PERMISSION set ACTIONS = '/AdminSanctionManagerAction.do?method=downloadAtt&*,ANY' where id = 276;

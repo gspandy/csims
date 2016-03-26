@@ -1024,7 +1024,7 @@ public class EnforceService extends BaseEnforceService {
 	@Transactional(readOnly = true)
 	public Page queryAeconclusionByBank(String aeNo, String aeOpnionNo, String aeorgName, String aeedorgName,
 	        String aeplanstDate, String aeplantmDate, Integer pageNo, Integer pageSize, String orgNo) {
-		if (orgNo == null || StringUtils.isBlank(orgNo)) {
+		if (StringUtils.isBlank(orgNo)) {
 			return null;
 		}
 		StringBuffer sb = new StringBuffer("from BsAeconclusion where 1=1 ");
@@ -1061,12 +1061,18 @@ public class EnforceService extends BaseEnforceService {
 			// }
 			BsOrg loginOrg = bsOrgDao.get(orgNo);
 			if (loginOrg != null) {
-				sb.append(" and aeedOrgBankType = ? ");
-				if (StringUtils.equals(loginOrg.getF(), "3")) {
-					// 登录机构为农村信用合作社（含联社）
-					param.add("3");
+				// 如果当前金融机构的所属人民银行为成都分行，则认为该机构属于省级机构
+				if (StringUtils.equals(loginOrg.getPcbno(), Constants.PCB_SC_ORG_NO)) {
+					sb.append(" and aeedOrgBankType = ? ");
+					if (StringUtils.equals(loginOrg.getF(), "3")) {
+						// 登录机构为农村信用合作社（含联社）
+						param.add("3");
+					} else {
+						param.add(loginOrg.getH());
+					}
 				} else {
-					param.add(loginOrg.getH());
+					sb.append(" and aeedorgno = ? ");
+					param.add(orgNo);
 				}
 			}
 		}
