@@ -28,6 +28,8 @@
 		<property name="remindService" ref="remindService"></property>
 		<property name="bsAdmpunishDao" ref="bsAdmpunishDao" />
 		<property name="bsAdmpunishconsDao" ref="bsAdmpunishconsDao" />
+		<property name="bsAeFeedBackDao" ref="bsAeFeedBackDao" />
+		<property name="bsAePublishFeedBackDao" ref="bsAePublishFeedBackDao" />
 	</bean>
 	<bean id="punishService" class="com.gtm.csims.business.enforce.PunishService">
 		<property name="bsAdmpunishDao" ref="bsAdmpunishDao" />

@@ -187,9 +187,27 @@ var form = new Ext.form.FormPanel({
         handler : function() {//点击取消按钮的操作事件
             form.getForm().reset();
         }
+    },{
+        text : '检查结论反馈',
+        handler : function() {
+        	var record = grid.getSelectionModel().getSelected();
+            if(record == null || record.get('id') == null){
+            	Ext.Msg.alert('提示', '请选择列表中的检查结论');
+            }
+            viewFeedBack(record.get('id'));
+        }
+    },{
+        text : '行政处罚反馈',
+        handler : function() {
+        	var record = grid.getSelectionModel().getSelected();
+            if(record == null || record.get('id') == null){
+            	Ext.Msg.alert('提示', '请选择列表中的检查结论');
+            }
+            viewPublishFeedBack(record.get('id'));
+        }
     }]
 });
-//=============================================  GRID ====================================
+//=============================================  Detail GRID ====================================
 var cm = new Ext.grid.ColumnModel([{
     header : 'ID',
     dataIndex : 'id',
@@ -299,7 +317,9 @@ var _panel = new Ext.Panel({
         }
     }]
 })
-// ======================查看行政执法相关信息详情========================
+
+
+//======================查看行政执法相关信息详情========================
 function viewAeCon(id) {
     var row1 = {
         layout : 'column',
@@ -493,6 +513,340 @@ function viewAeCon(id) {
                 Ext.getCmp('punishbookno_v').setValue(responseJson.punishbookno);
                 Ext.getCmp('aeopnionbook_v').setValue(responseJson.aeopnionbook);
                 Ext.getCmp('punishbookatta_v').setValue(responseJson.punishbookatta);
+            } else {
+                Ext.Msg.confirm('失败', '请求超时或网络故障,错误编号：[' + response.status + ']是否要重新发送？', function(btn) {
+                    if(btn == 'yes') {
+                        Ext.Ajax.request(options);
+                    }
+                });
+            }
+        }
+    });
+}
+
+//======================录入检查结论 反馈意见========================
+function viewFeedBack(id) {
+    var row1 = {
+        layout : 'column',
+        items : [{
+            columnWidth : .5,
+            layout : 'form',
+            items : [{
+                id : 'aeno_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '检查记录编号',
+                width : 345,
+                readOnly : true
+            }]
+        }, {
+            columnWidth : .5,
+            layout : 'form', //从上往下布局
+            items : [{
+                id : 'aeopnionno_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '执法意见书编号',
+                width : 345,
+                readOnly : true
+            }]
+        }]
+    };
+    var row2 = {
+        layout : 'column',
+        items : [{
+            columnWidth : .5,
+            layout : 'form',
+            items : [{
+                id : 'aeorgnm_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '检查机构',
+                width : 345,
+                readOnly : true
+            }]
+        }, {
+            columnWidth : .5,
+            layout : 'form', //从上往下布局
+            items : [{
+                id : 'aeedorgnm_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '被检查机构',
+                width : 345,
+                readOnly : true
+            }]
+        }]
+    };
+
+    var row4 = {
+        layout : 'form',
+        items : [{
+            id : 'feedbackOpnion_v',
+            xtype : 'textarea',
+            value : '',
+            fieldLabel : '反馈意见',
+            height : 200,
+            width : 820
+        }]
+    };
+    var row5 = {
+        layout : 'form',
+        items : [{
+            id : 'feedbackdate_v',
+            xtype : 'textfield',
+            value : '',
+            fieldLabel : '反馈日期',
+            width : 345,
+            readOnly : true
+        }]
+    };
+
+    var fp = new Ext.form.FormPanel({
+        title : '检查结论反馈录入',
+        width : 990,
+        autoHeight : true,
+        bodyStyle : 'padding:5px 5px 0',
+        //renderTo : Ext.getBody(),
+        frame : true,
+        layout : 'form',
+        url : '',
+        method : 'post',
+        labelWidth : 120,
+        labelAlign : 'right',
+        items : [row1, row2,  row4, row5],
+        buttonAlign : 'center',
+        style : 'padding:10px',
+        buttons : [{
+            text : '保存',
+            handler : function() {
+            	Ext.Msg.confirm('提示', '是否确认保存当前反馈意见？', function(btn) {
+                    if(btn == 'yes') {
+                        //FormPanel自身带异步提交方式
+                        fp.getForm().submit({
+                            url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=saveFeedBack',
+                            waitTitle : '请等待',
+                            waitMsg : '正在保存当前反馈意见',
+                            success : function(form, action) {
+                                //url后台返回的数据{success:true,msg:'成功'}
+                                Ext.Msg.alert('提示', action.result.msg);
+                                addBasisWin.close();
+                                fp.destroy();
+                                addBasisWin.destroy();
+                            },
+                            failure : function(form, action) {
+                                Ext.Msg.alert('提示', '保存保存当前反馈意见失败！请重新填写');
+                            }
+                        });
+                    }
+                });
+            }
+        }, {
+            text : '关闭',
+            handler : function() {
+                addBasisWin.close();
+                fp.destroy();
+                addBasisWin.destroy();
+            }
+        }]
+    });
+
+    var addBasisWin = new Ext.Window({
+        title : '检查结论反馈',
+        width : 1000,
+        height : 450,
+        resizable : false,
+        closeAction : 'close',
+        constrainHeader : true,
+        modal : true,
+        plain : true,
+        items : [fp]
+    });
+    addBasisWin.show();
+    Ext.Ajax.request({
+        url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=getFeedbackInfo',
+        params : {
+            id : id
+        },
+        method : 'POST',
+        callback : function(options, success, response) {
+            if(success) {
+            	//对返回字符串中的\n做处理
+                var responseJson = Ext.util.JSON.decode(response.responseText.replace(/\n/g, '\\n'));
+               
+                Ext.getCmp('aeno_v').setValue(responseJson.aeno);
+                Ext.getCmp('aeopnionno_v').setValue(responseJson.aeopnionno);
+                Ext.getCmp('aeorgnm_v').setValue(responseJson.aeorgnm);
+                Ext.getCmp('aeedorgnm_v').setValue(responseJson.aeedorgnm);
+                Ext.getCmp('feedbackOpnion_v').setValue(responseJson.feedbackopnion);
+                Ext.getCmp('feedbackdate_v').setValue(responseJson.feedbackdt);
+            } else {
+                Ext.Msg.confirm('失败', '请求超时或网络故障,错误编号：[' + response.status + ']是否要重新发送？', function(btn) {
+                    if(btn == 'yes') {
+                        Ext.Ajax.request(options);
+                    }
+                });
+            }
+        }
+    });
+}
+
+//======================录入行政处罚 反馈意见========================
+function viewPublishFeedBack(id) {
+    var row1 = {
+        layout : 'column',
+        items : [{
+            columnWidth : .5,
+            layout : 'form',
+            items : [{
+                id : 'aeno_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '检查记录编号',
+                width : 345,
+                readOnly : true
+            }]
+        }, {
+            columnWidth : .5,
+            layout : 'form', //从上往下布局
+            items : [{
+                id : 'punishbookno_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '行政处罚决定书编号',
+                width : 345,
+                readOnly : true
+            }]
+        }]
+    };
+    var row2 = {
+        layout : 'column',
+        items : [{
+            columnWidth : .5,
+            layout : 'form',
+            items : [{
+                id : 'aeorgnm_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '检查机构',
+                width : 345,
+                readOnly : true
+            }]
+        }, {
+            columnWidth : .5,
+            layout : 'form', //从上往下布局
+            items : [{
+                id : 'aeedorgnm_v',
+                xtype : 'textfield',
+                value : '',
+                fieldLabel : '被检查机构',
+                width : 345,
+                readOnly : true
+            }]
+        }]
+    };
+
+    var row4 = {
+        layout : 'form',
+        items : [{
+            id : 'publishfeedbackOpnion_v',
+            xtype : 'textarea',
+            value : '',
+            fieldLabel : '反馈意见',
+            height : 200,
+            width : 820
+        }]
+    };
+    var row5 = {
+        layout : 'form',
+        items : [{
+            id : 'publishfeedbackdate_v',
+            xtype : 'textfield',
+            value : '',
+            fieldLabel : '反馈日期',
+            width : 345,
+            readOnly : true
+        }]
+    };
+
+    var fp = new Ext.form.FormPanel({
+        title : '行政处罚反馈录入',
+        width : 990,
+        autoHeight : true,
+        bodyStyle : 'padding:5px 5px 0',
+        //renderTo : Ext.getBody(),
+        frame : true,
+        layout : 'form',
+        url : '',
+        method : 'post',
+        labelWidth : 120,
+        labelAlign : 'right',
+        items : [row1, row2,  row4, row5],
+        buttonAlign : 'center',
+        style : 'padding:10px',
+        buttons : [{
+            text : '保存',
+            handler : function() {
+            	Ext.Msg.confirm('提示', '是否确认保存当前反馈意见？', function(btn) {
+                    if(btn == 'yes') {
+                        //FormPanel自身带异步提交方式
+                        fp.getForm().submit({
+                            url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=savePublishFeedBack',
+                            waitTitle : '请等待',
+                            waitMsg : '正在保存当前反馈意见',
+                            success : function(form, action) {
+                                //url后台返回的数据{success:true,msg:'成功'}
+                                Ext.Msg.alert('提示', action.result.msg);
+                                addBasisWin.close();
+                                fp.destroy();
+                                addBasisWin.destroy();
+                            },
+                            failure : function(form, action) {
+                                Ext.Msg.alert('提示', '保存保存当前反馈意见失败！请重新填写');
+                            }
+                        });
+                    }
+                });
+            }
+        }, {
+            text : '关闭',
+            handler : function() {
+                addBasisWin.close();
+                fp.destroy();
+                addBasisWin.destroy();
+            }
+        }]
+    });
+
+    var addBasisWin = new Ext.Window({
+        title : '行政处罚反馈',
+        width : 1000,
+        height : 450,
+        resizable : false,
+        closeAction : 'close',
+        constrainHeader : true,
+        modal : true,
+        plain : true,
+        items : [fp]
+    });
+    addBasisWin.show();
+    Ext.Ajax.request({
+        url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=getPublishFeedbackInfo',
+        params : {
+            id : id
+        },
+        method : 'POST',
+        callback : function(options, success, response) {
+            if(success) {
+            	//对返回字符串中的\n做处理
+                var responseJson = Ext.util.JSON.decode(response.responseText.replace(/\n/g, '\\n'));
+               
+                Ext.getCmp('aeno_v').setValue(responseJson.aeno);
+                Ext.getCmp('punishbookno_v').setValue(responseJson.punishbookno);
+                Ext.getCmp('aeorgnm_v').setValue(responseJson.aeorgnm);
+                Ext.getCmp('aeedorgnm_v').setValue(responseJson.aeedorgnm);
+                Ext.getCmp('publishfeedbackOpnion_v').setValue(responseJson.feedbackopnion);
+                Ext.getCmp('publishfeedbackdate_v').setValue(responseJson.feedbackdt);
             } else {
                 Ext.Msg.confirm('失败', '请求超时或网络故障,错误编号：[' + response.status + ']是否要重新发送？', function(btn) {
                     if(btn == 'yes') {
