@@ -1,6 +1,6 @@
 package com.gtm.csims.business.dataapp.statistics.impl;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,13 +103,11 @@ public class AeFeedbackStsicSvce extends BaseStatisticsService implements Statis
      * 
      * @param uuid
      */
-    private void calculateTempData(String uuid) { 
+    private void calculateTempData(String uuid) {
         // 按照报送机构所属银行类型分组加总然后存入临时表
         StringBuffer s1 = new StringBuffer("INSERT INTO BS_AEFEEDBACK_TMP (id,D1,D2,D3,D4,D5")
-                .append(",BankTypeNo,BankTypeName)")
-                .append(" SELECT '")
-                .append(uuid)
-                .append("',0,0,0,0,CASE WHEN SUM(D1) = 0 THEN 0 ELSE decimal(SUM(D4)/SUM(D1),13,2) END ")
+                .append(",BankTypeNo,BankTypeName)").append(" SELECT '").append(uuid)
+                .append("',0,0,0,0,CASE WHEN SUM(D1) = 0 THEN 0 ELSE decimal(SUM(D4)/SUM(D1),18,6) END ")
                 .append(",BankTypeNo,MAX(BankTypeName) ").append(" FROM ").append(" BS_AEFEEDBACK_TMP ")
                 .append(" WHERE id = '").append(uuid).append("'");
         s1.append(" GROUP BY BankTypeNo ");
@@ -130,7 +128,7 @@ public class AeFeedbackStsicSvce extends BaseStatisticsService implements Statis
     private Map<String, Object> getResultData(String uuid, Map<String, String> paramsMap) {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         StringBuffer querySql = new StringBuffer(
-                "SELECT MAX(BankTypeName),SUM(decimal(D1,13,0)),SUM(decimal(D2,13,0)),SUM(decimal(D3,13,0)),SUM(decimal(D4,13,0)),SUM(decimal(D5,13,2)) ")
+                "SELECT MAX(BankTypeName),SUM(decimal(D1,13,0)),SUM(decimal(D2,13,0)),SUM(decimal(D3,13,0)),SUM(decimal(D4,13,0)),SUM(decimal(D5,18,6)) ")
                 .append(" FROM ").append("BS_AEFEEDBACK_TMP").append(" WHERE id = '").append(uuid).append("'");
         querySql.append(" GROUP BY BankTypeNo  order by SUM(decimal(D5,13,2)) DESC");
         // System.out.println(querySql.toString());
@@ -159,6 +157,13 @@ public class AeFeedbackStsicSvce extends BaseStatisticsService implements Statis
                     resultMap.put(j + "-" + (i + 1), "0");
                     // System.out.println("set map" + j + "-" + i + ":" + "0");
                 }
+            }
+            BigDecimal d3 = new BigDecimal(resultMap.get(j + "-" + 3).toString());
+            if (d3.compareTo(BigDecimal.ZERO) != 0) {
+                resultMap.put(j + "-" + this.getxCount(),
+                        new BigDecimal(resultMap.get(j + "-" + 6).toString()).divide(d3, 2, BigDecimal.ROUND_HALF_UP));
+            } else {
+                resultMap.put(j + "-" + this.getxCount(), "0.00");
             }
         }
         return resultMap;
