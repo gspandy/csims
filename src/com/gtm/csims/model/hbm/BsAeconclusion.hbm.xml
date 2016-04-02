@@ -4,206 +4,77 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.gtm.csims.model">
-	<class
-		name="BsAeconclusion"
-		table="BS_AECONCLUSION"
-	>
+	<class name="BsAeconclusion" table="BS_AECONCLUSION">
 		<meta attribute="sync-DAO">false</meta>
-		<id
-			name="Id"
-			type="string"
-			column="ID"
-		>
-			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		<id name="Id" type="string" column="ID">
+			<generator class="org.hibernate.id.UUIDHexGenerator" />
 		</id>
 
-		<property
-			name="Aeno"
-			column="AENO"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="Aeorgnm"
-			column="AEORGNM"
-			type="string"
-			not-null="true"
-			length="100"
-		/>
-		<property
-			name="Aeorgno"
-			column="AEORGNO"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="Aeedorgnm"
-			column="AEEDORGNM"
-			type="string"
-			not-null="true"
-			length="100"
-		/>
-		<property
-			name="Aeedorgno"
-			column="AEEDORGNO"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="Aeplanstdate"
-			column="AEPLANSTDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Aeplantmdate"
-			column="AEPLANTMDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Aeopnionno"
-			column="AEOPNIONNO"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="Aeopnionbook"
-			column="AEOPNIONBOOK"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Relpeoples"
-			column="RELPEOPLES"
-			type="string"
-			not-null="false"
-			length="1000"
-		/>
-		<property
-			name="Creator"
-			column="CREATOR"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Creatororg"
-			column="CREATORORG"
-			type="string"
-			not-null="false"
-			length="100"
-		/>
-		<property
-			name="Creatororgno"
-			column="CREATORORGNO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Crtdate"
-			column="CRTDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Stat"
-			column="STAT"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Flag"
-			column="FLAG"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Createdate"
-			column="CREATEDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Updateate"
-			column="UPDATEATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Relorgnm"
-			column="RELORGNM"
-			type="string"
-			not-null="false"
-			length="1000"
-		/>
-		<property
-			name="Decision"
-			column="DECISION"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Crtlogin"
-			column="CRTLOGIN"
-			type="string"
-			not-null="false"
-			length="100"
-		/>
-		<property
-			name="Aeedorgzzno"
-			column="AEEDORGZZNO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Aeedorgxzhno"
-			column="AEEDORGXZHNO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Aeedorgzznm"
-			column="AEEDORGZZNM"
-			type="string"
-			not-null="false"
-			length="100"
-		/>
-		<property
-			name="Aeedorgxzhnm"
-			column="AEEDORGXZHNM"
-			type="string"
-			not-null="false"
-			length="100"
-		/>
- <property name="Isfinished" type="yes_no">
-      <column name="ISFINISH" sql-type="BOOLEAN" />
-    </property>
-<property name="Canbeupdate" type="yes_no">
-      <column name="CANBEUPDATE" sql-type="BOOLEAN" />
-    </property>
-    <property
-			name="aeedOrgBankType"
-			column="AEEDORGBANKTYPE"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-	</class>	
+		<property name="Aeno" column="AENO" type="string" not-null="true"
+			length="50" />
+		<property name="Aeorgnm" column="AEORGNM" type="string"
+			not-null="true" length="100" />
+		<property name="Aeorgno" column="AEORGNO" type="string"
+			not-null="true" length="50" />
+		<property name="Aeedorgnm" column="AEEDORGNM" type="string"
+			not-null="true" length="100" />
+		<property name="Aeedorgno" column="AEEDORGNO" type="string"
+			not-null="true" length="50" />
+		<property name="Aeplanstdate" column="AEPLANSTDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Aeplantmdate" column="AEPLANTMDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Aeopnionno" column="AEOPNIONNO" type="string"
+			not-null="true" length="50" />
+		<property name="Aeopnionbook" column="AEOPNIONBOOK" type="string"
+			not-null="false" length="50" />
+		<property name="Relpeoples" column="RELPEOPLES" type="string"
+			not-null="false" length="1000" />
+		<property name="Creator" column="CREATOR" type="string"
+			not-null="false" length="50" />
+		<property name="Creatororg" column="CREATORORG" type="string"
+			not-null="false" length="100" />
+		<property name="Creatororgno" column="CREATORORGNO" type="string"
+			not-null="false" length="50" />
+		<property name="Crtdate" column="CRTDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Stat" column="STAT" type="string" not-null="false"
+			length="50" />
+		<property name="Flag" column="FLAG" type="string" not-null="false"
+			length="50" />
+		<property name="Createdate" column="CREATEDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Updateate" column="UPDATEATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Relorgnm" column="RELORGNM" type="string"
+			not-null="false" length="1000" />
+		<property name="Decision" column="DECISION" type="string"
+			not-null="false" length="50" />
+		<property name="Crtlogin" column="CRTLOGIN" type="string"
+			not-null="false" length="100" />
+		<property name="Aeedorgzzno" column="AEEDORGZZNO" type="string"
+			not-null="false" length="50" />
+		<property name="Aeedorgxzhno" column="AEEDORGXZHNO" type="string"
+			not-null="false" length="50" />
+		<property name="Aeedorgzznm" column="AEEDORGZZNM" type="string"
+			not-null="false" length="100" />
+		<property name="Aeedorgxzhnm" column="AEEDORGXZHNM" type="string"
+			not-null="false" length="100" />
+		<property name="Isfinished" type="yes_no">
+			<column name="ISFINISH" sql-type="BOOLEAN" />
+		</property>
+		<property name="Canbeupdate" type="yes_no">
+			<column name="CANBEUPDATE" sql-type="BOOLEAN" />
+		</property>
+		<property name="aeedOrgBankType" column="AEEDORGBANKTYPE"
+			type="string" not-null="false" length="50" />
+		<property name="topLevelBankNm" column="TopLevelBankNm" type="string"
+			not-null="false" length="100" />
+		<property name="topLevelBankNo" column="TopLevelBankNo" type="string"
+			not-null="false" length="50" />
+		<property name="directParentlBankNm" column="DirectParentlBankNm"
+			type="string" not-null="false" length="100" />
+		<property name="directParentlBankNo" column="DirectParentlBankNo"
+			type="string" not-null="false" length="50" />
+	</class>
 </hibernate-mapping>

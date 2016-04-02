@@ -19,6 +19,7 @@ import org.apache.struts.action.DynaActionForm;
 
 import com.gtm.csims.base.BaseAction;
 import com.gtm.csims.business.dataapp.statistics.StatisticsService;
+import com.gtm.csims.business.dataapp.statistics.impl.AeFeedbackStsicSvce;
 import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
 import com.gtm.csims.jaas.UserCredentialName;
 import com.gtm.csims.model.BsOrg;
@@ -32,6 +33,7 @@ import com.gtm.csims.model.BsOrg;
 public class StatisticsAction extends BaseAction {
     private StatisticsService wtgkStsicSvce;
     private SystemBaseInfoManager systemBaseInfoManager;
+    private AeFeedbackStsicSvce aeFeedbackStsicSvce;
 
     /**
      * 初始化辖内问题概况统计筛选条件页面.
@@ -64,8 +66,8 @@ public class StatisticsAction extends BaseAction {
      * @throws SaveTargetException
      * @throws Exception
      */
-    public ActionForward displayHtml(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward displayHtml(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
         DynaActionForm dyna = (DynaActionForm) form;
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String> keyValue = new HashMap<String, String>();
@@ -92,8 +94,7 @@ public class StatisticsAction extends BaseAction {
         }
         keyValue.put("DURING", reportYear);
         /** 获取参数 */
-        String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request,
-                response);
+        String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
         BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
         // 获取当前登录人是否为人行用户
         if (bsorg != null) {
@@ -110,8 +111,7 @@ public class StatisticsAction extends BaseAction {
         } else {
             keyValue.put("ANL_ORG", StringUtils.EMPTY);
         }
-        String htmlStr = wtgkStsicSvce.getHTMLString("3", wtgkStsicSvce.doStatistics(params),
-                keyValue);
+        String htmlStr = wtgkStsicSvce.getHTMLString("3", wtgkStsicSvce.doStatistics(params), keyValue);
         request.setAttribute("htmlStr", htmlStr);
         return mapping.findForward("toresultPage");
     }
@@ -125,8 +125,8 @@ public class StatisticsAction extends BaseAction {
      * @param response
      * @return
      */
-    public ActionForward displayExcel(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward displayExcel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         DynaActionForm dyna = (DynaActionForm) form;
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String> keyValue = new HashMap<String, String>();
@@ -153,8 +153,7 @@ public class StatisticsAction extends BaseAction {
         }
         keyValue.put("DURING", reportYear);
         /** 获取参数 */
-        String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request,
-                response);
+        String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
         BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
         // 获取当前登录人是否为人行用户
         if (bsorg != null) {
@@ -178,8 +177,97 @@ public class StatisticsAction extends BaseAction {
             OutputStream repos = response.getOutputStream();
             String fileName = excelFileName + "_" + System.currentTimeMillis() + ".xls";
             response.setContentType("application/vnd.ms-excel");
-            response.addHeader("Content-Disposition",
-                    "attachment;filename=" + new String(fileName.getBytes("gb2312"), "ISO8859-1"));
+            response.addHeader("Content-Disposition", "attachment;filename="
+                    + new String(fileName.getBytes("gb2312"), "ISO8859-1"));
+            wb.write(repos);
+            repos.flush();
+            repos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 初始化辖内问题概况统计筛选条件页面.
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward initFeedback(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        List<String> years = new ArrayList<String>();
+        for (int i = 2014; i <= year; i++) {
+            years.add(String.valueOf(i));
+        }
+        request.setAttribute("years", years);
+        return mapping.findForward("toinitFeedbackPage");
+    }
+
+    /**
+     * 以HTML视图方式展示辖内问题概况统计结果.
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws SaveTargetException
+     * @throws Exception
+     */
+    public ActionForward displayFeedbackHtml(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        DynaActionForm dyna = (DynaActionForm) form;
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> keyValue = new HashMap<String, String>();
+        String reportYear = dyna.getString("reportYear");
+        if (StringUtils.isBlank(reportYear)) {
+            Calendar now = Calendar.getInstance();
+            reportYear = String.valueOf(now.get(Calendar.YEAR));
+        }
+
+        keyValue.put("YEAR", reportYear);
+        params.put("YEAR", reportYear);
+        String htmlStr = aeFeedbackStsicSvce.getHTMLString("4", aeFeedbackStsicSvce.doStatistics(params), keyValue);
+        request.setAttribute("htmlStr", htmlStr);
+        return mapping.findForward("toFeedBackresultPage");
+    }
+
+    /**
+     * 以Excel视图方式展示辖内问题概况统计结果.
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward displayFeedbackExcel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
+        DynaActionForm dyna = (DynaActionForm) form;
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> keyValue = new HashMap<String, String>();
+        String reportYear = dyna.getString("reportYear");
+        if (StringUtils.isBlank(reportYear)) {
+            Calendar now = Calendar.getInstance();
+            reportYear = String.valueOf(now.get(Calendar.YEAR));
+        }
+
+        keyValue.put("YEAR", reportYear);
+        params.put("YEAR", reportYear);
+        HSSFWorkbook wb = null;
+        wb = aeFeedbackStsicSvce.generateExcel("4", aeFeedbackStsicSvce.doStatistics(params), keyValue);
+        String excelFileName = "意见反馈信息表";
+        try {
+            OutputStream repos = response.getOutputStream();
+            String fileName = excelFileName + "_" + System.currentTimeMillis() + ".xls";
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("Content-Disposition", "attachment;filename="
+                    + new String(fileName.getBytes("gb2312"), "ISO8859-1"));
             wb.write(repos);
             repos.flush();
             repos.close();
@@ -196,4 +284,9 @@ public class StatisticsAction extends BaseAction {
     public void setSystemBaseInfoManager(SystemBaseInfoManager systemBaseInfoManager) {
         this.systemBaseInfoManager = systemBaseInfoManager;
     }
+
+    public void setAeFeedbackStsicSvce(AeFeedbackStsicSvce aeFeedbackStsicSvce) {
+        this.aeFeedbackStsicSvce = aeFeedbackStsicSvce;
+    }
+
 }

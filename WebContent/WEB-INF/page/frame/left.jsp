@@ -645,6 +645,16 @@ function goMainPage(type,url){
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </jguard:authorized>
+                                                                                         <jguard:authorized
+                                                                                            uri="/StatisticsAction.do?method=initFeedback">
+                                                                                            <tr class="h30">
+                                                                                                <td>
+                                                                                                    <a
+                                                                                                        href="<%=request.getContextPath()%>/StatisticsAction.do?method=initFeedback"
+                                                                                                        target="mainFrame" class="left">反馈情况统计</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>

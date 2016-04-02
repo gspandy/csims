@@ -12,6 +12,8 @@ public class Constants {
     public static Date TASK_DUE_DATE;
 
     public static final String PCB_SC_ORG_NO = "A1000151000028";
+    
+    public static final String ZONG_BU = "总部";
 
     static {
         String dueDateStr = "2009-12-31";

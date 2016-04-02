@@ -856,6 +856,21 @@ public class EnforceService extends BaseEnforceService {
                 }
             }
         }
+        
+        BsOrg aeedOrg = this.getOrgByNo(ae.getAeedorgno());
+        BsOrg topLevelBank = this.getTopLevelOrgByNo(ae.getAeedorgno());
+        ae.setDirectParentlBankNm(aeedOrg.getParentname());
+        ae.setDirectParentlBankNo(aeedOrg.getParentno());
+        ae.setTopLevelBankNm(topLevelBank.getName());
+        ae.setTopLevelBankNo(topLevelBank.getNo());
+        bsAeconclusionDao.save(ae);
+    }
+    
+    /**
+     * 保存执法检查结论
+     */
+    @Transactional(readOnly = false)
+    public void saveAeconclusionSimple(BsAeconclusion ae) {
         bsAeconclusionDao.save(ae);
     }
 
@@ -2744,14 +2759,40 @@ public class EnforceService extends BaseEnforceService {
      */
     @Transactional(readOnly = true)
     public BsOrg getTopLevelOrg(String orgType) {
-        List<BsOrg> orgs = bsOrgDao.find("from BsOrg where h = ? and pcbno = ? ", orgType, Constants.PCB_SC_ORG_NO);
+        List<BsOrg> orgs = bsOrgDao.find("from BsOrg where h = ? and c = ?", orgType, Constants.ZONG_BU);
         if (CollectionUtils.isEmpty(orgs)) {
-            return null;
+            List<BsOrg> orgs2 = bsOrgDao.find("from BsOrg where h = ? and pcbno = ?", orgType, Constants.PCB_SC_ORG_NO);
+            if (CollectionUtils.isEmpty(orgs2)) {
+                return null;
+            } else {
+                return orgs2.get(0);
+            }
+        } else {
+            return orgs.get(0);
         }
-        return orgs.get(0);
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * 根据银行No获取该银行的最上级机构（一般为省级机构）.
+     * 
+     * @param orgType
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public BsOrg getTopLevelOrgByNo(String orgNo) {
+        BsOrg org = bsOrgDao.get(orgNo);
+        if (org != null) {
+            BsOrg parent = bsOrgDao.get(org.getParentno());
+            if (parent.getParentno().equals("0")) {
+                return org;
+            } else {
+                return getTopLevelOrgByNo(parent.getNo());
+            }
+        } else {
+            return null;
+        }
+    }
+
     @Transactional(readOnly = true)
     public List<BsOrg> orgListByParentNo(String parentNo) {
         try {
@@ -2765,7 +2806,6 @@ public class EnforceService extends BaseEnforceService {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     public List<BsOrg> orgListByParentNoForZH(String parentNo, String pcbNo) {
         try {

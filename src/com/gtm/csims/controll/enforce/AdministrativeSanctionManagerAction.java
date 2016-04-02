@@ -1438,7 +1438,9 @@ public class AdministrativeSanctionManagerAction extends BaseAction {
                 e.printStackTrace();
             }
             BsOrg aeedOrg = enforceService.getOrgByNo(aeCon.getAeedorgno());
-            BsOrg topLevelBank = enforceService.getTopLevelOrg(aeCon.getAeedOrgBankType());
+            // BsOrg topLevelBank =
+            // enforceService.getTopLevelOrg(aeCon.getAeedOrgBankType());
+            BsOrg topLevelBank = enforceService.getTopLevelOrgByNo(aeCon.getAeedorgno());
             feedback.setDirectParentlBankNm(aeedOrg.getParentname());
             feedback.setDirectParentlBankNo(aeedOrg.getParentno());
             feedback.setTopLevelBankNm(topLevelBank.getName());
@@ -1454,6 +1456,13 @@ public class AdministrativeSanctionManagerAction extends BaseAction {
             LOGGER.error("保存检查结论反馈意见发生错误", e);
             out.print("{success:false,msg:'保存检查结论反馈意见发生错误" + e.getMessage() + "'}");
             return null;
+        }
+        if (StringUtils.isBlank(aeCon.getTopLevelBankNo())) {
+            aeCon.setDirectParentlBankNm(feedback.getDirectParentlBankNm());
+            aeCon.setDirectParentlBankNo(feedback.getDirectParentlBankNo());
+            aeCon.setTopLevelBankNm(feedback.getTopLevelBankNm());
+            aeCon.setTopLevelBankNo(feedback.getTopLevelBankNo());
+            enforceService.saveAeconclusionSimple(aeCon);
         }
         if (out != null) {
             out.print("{success:true,msg:'保存检查结论反馈意见:" + feedback.getAeno() + "成功'}");
@@ -1568,7 +1577,7 @@ public class AdministrativeSanctionManagerAction extends BaseAction {
                 e.printStackTrace();
             }
             BsOrg aeedOrg = enforceService.getOrgByNo(aeCon.getAeedorgno());
-            BsOrg topLevelBank = enforceService.getTopLevelOrg(aeCon.getAeedOrgBankType());
+            BsOrg topLevelBank = enforceService.getTopLevelOrgByNo(aeCon.getAeedorgno());
             feedback.setDirectParentlBankNm(aeedOrg.getParentname());
             feedback.setDirectParentlBankNo(aeedOrg.getParentno());
             feedback.setTopLevelBankNm(topLevelBank.getName());
@@ -1584,6 +1593,13 @@ public class AdministrativeSanctionManagerAction extends BaseAction {
             LOGGER.error("保存行政处罚反馈意见发生错误", e);
             out.print("{success:false,msg:'保存行政处罚反馈意见发生错误" + e.getMessage() + "'}");
             return null;
+        }
+        if (StringUtils.isBlank(aeCon.getTopLevelBankNo())) {
+            aeCon.setDirectParentlBankNm(feedback.getDirectParentlBankNm());
+            aeCon.setDirectParentlBankNo(feedback.getDirectParentlBankNo());
+            aeCon.setTopLevelBankNm(feedback.getTopLevelBankNm());
+            aeCon.setTopLevelBankNo(feedback.getTopLevelBankNo());
+            enforceService.saveAeconclusionSimple(aeCon);
         }
         if (out != null) {
             out.print("{success:true,msg:'保存行政处罚反馈意见:" + feedback.getAeno() + "成功'}");
