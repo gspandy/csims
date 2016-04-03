@@ -189,7 +189,7 @@ public class StatisticsAction extends BaseAction {
     }
 
     /**
-     * 初始化辖内问题概况统计筛选条件页面.
+     * 初始化反馈意见统计筛选条件页面.
      * 
      * @param mapping
      * @param form
@@ -209,7 +209,7 @@ public class StatisticsAction extends BaseAction {
     }
 
     /**
-     * 以HTML视图方式展示辖内问题概况统计结果.
+     * 以HTML视图方式展示反馈意见统计结果.
      * 
      * @param mapping
      * @param form
@@ -238,7 +238,7 @@ public class StatisticsAction extends BaseAction {
     }
 
     /**
-     * 以Excel视图方式展示辖内问题概况统计结果.
+     * 以Excel视图方式展示反馈意见统计结果.
      * 
      * @param mapping
      * @param form
