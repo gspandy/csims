@@ -1457,13 +1457,13 @@ public class AdministrativeSanctionManagerAction extends BaseAction {
             out.print("{success:false,msg:'保存检查结论反馈意见发生错误" + e.getMessage() + "'}");
             return null;
         }
-        if (StringUtils.isBlank(aeCon.getTopLevelBankNo())) {
-            aeCon.setDirectParentlBankNm(feedback.getDirectParentlBankNm());
-            aeCon.setDirectParentlBankNo(feedback.getDirectParentlBankNo());
-            aeCon.setTopLevelBankNm(feedback.getTopLevelBankNm());
-            aeCon.setTopLevelBankNo(feedback.getTopLevelBankNo());
-            enforceService.saveAeconclusionSimple(aeCon);
-        }
+        // if (StringUtils.isBlank(aeCon.getTopLevelBankNo())) {
+        // aeCon.setDirectParentlBankNm(feedback.getDirectParentlBankNm());
+        // aeCon.setDirectParentlBankNo(feedback.getDirectParentlBankNo());
+        // aeCon.setTopLevelBankNm(feedback.getTopLevelBankNm());
+        // aeCon.setTopLevelBankNo(feedback.getTopLevelBankNo());
+        // enforceService.saveAeconclusionSimple(aeCon);
+        // }
         if (out != null) {
             out.print("{success:true,msg:'保存检查结论反馈意见:" + feedback.getAeno() + "成功'}");
         }
@@ -1594,19 +1594,51 @@ public class AdministrativeSanctionManagerAction extends BaseAction {
             out.print("{success:false,msg:'保存行政处罚反馈意见发生错误" + e.getMessage() + "'}");
             return null;
         }
-        if (StringUtils.isBlank(aeCon.getTopLevelBankNo())) {
-            aeCon.setDirectParentlBankNm(feedback.getDirectParentlBankNm());
-            aeCon.setDirectParentlBankNo(feedback.getDirectParentlBankNo());
-            aeCon.setTopLevelBankNm(feedback.getTopLevelBankNm());
-            aeCon.setTopLevelBankNo(feedback.getTopLevelBankNo());
-            enforceService.saveAeconclusionSimple(aeCon);
-        }
+        // if (StringUtils.isBlank(aeCon.getTopLevelBankNo())) {
+        // aeCon.setDirectParentlBankNm(feedback.getDirectParentlBankNm());
+        // aeCon.setDirectParentlBankNo(feedback.getDirectParentlBankNo());
+        // aeCon.setTopLevelBankNm(feedback.getTopLevelBankNm());
+        // aeCon.setTopLevelBankNo(feedback.getTopLevelBankNo());
+        // enforceService.saveAeconclusionSimple(aeCon);
+        // }
         if (out != null) {
             out.print("{success:true,msg:'保存行政处罚反馈意见:" + feedback.getAeno() + "成功'}");
         }
 
         return null;
 
+    }
+
+    /**
+     * 初始隐藏后台工具.
+     */
+    public ActionForward toTools(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
+        return mapping.findForward("toTools");
+    }
+
+    /**
+     * 刷新工作检查记录顶级机构.<br>
+     * 
+     * 由于后加的反馈意见统计功能，需要将检查结论中增加顶级机构字段以便统计
+     * 
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward refreshAeConclusionTopLevelOrgs(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) {
+        try {
+            enforceService.refreshAeConclusionTopLevelOrgs();
+        } catch (Exception e) {
+            super.printMessage(request, response, "刷新失败！错误原因：" + e.getMessage(), ATTR_ERROR);
+            return null;
+        }
+        super.printMessage(request, response, "刷新成功", ATTR_ERROR);
+        return null;
     }
 
     public void setPunishService(PunishService punishService) {

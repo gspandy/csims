@@ -856,7 +856,7 @@ public class EnforceService extends BaseEnforceService {
                 }
             }
         }
-        
+
         BsOrg aeedOrg = this.getOrgByNo(ae.getAeedorgno());
         BsOrg topLevelBank = this.getTopLevelOrgByNo(ae.getAeedorgno());
         ae.setDirectParentlBankNm(aeedOrg.getParentname());
@@ -865,7 +865,7 @@ public class EnforceService extends BaseEnforceService {
         ae.setTopLevelBankNo(topLevelBank.getNo());
         bsAeconclusionDao.save(ae);
     }
-    
+
     /**
      * 保存执法检查结论
      */
@@ -1261,6 +1261,26 @@ public class EnforceService extends BaseEnforceService {
             return (BsAePublishFeedBack) list.get(0);
         }
         return null;
+    }
+
+    /**
+     * 查询行政处罚反馈详情
+     * 
+     * @param id
+     * @return
+     */
+    @Transactional(readOnly = false)
+    public void refreshAeConclusionTopLevelOrgs() {
+        List<BsAeconclusion> aeCons = bsAeconclusionDao.find("from BsAeconclusion ", null);
+        for (BsAeconclusion bsAeconclusion : aeCons) {
+            BsOrg aeedOrg = this.getOrgByNo(bsAeconclusion.getAeedorgno());
+            BsOrg topLevelBank = this.getTopLevelOrgByNo(bsAeconclusion.getAeedorgno());
+            bsAeconclusion.setDirectParentlBankNm(aeedOrg.getParentname());
+            bsAeconclusion.setDirectParentlBankNo(aeedOrg.getParentno());
+            bsAeconclusion.setTopLevelBankNm(topLevelBank.getName());
+            bsAeconclusion.setTopLevelBankNo(topLevelBank.getNo());
+            bsAeconclusionDao.save(bsAeconclusion);
+        }
     }
 
     /**

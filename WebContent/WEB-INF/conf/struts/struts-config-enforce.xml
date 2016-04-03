@@ -1,373 +1,361 @@
 <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
 <struts-config>
-  <form-beans>
-    <form-bean name="enforceInfoForm"
-      type="org.apache.struts.action.DynaActionForm">
-      <form-property name="pageNo" type="java.lang.String" />
-      <form-property name="pageSize" type="java.lang.String" />
-      <form-property name="pageCount" type="java.lang.Integer" />
-      <form-property name="previous" type="java.lang.String" />
-      <form-property name="next" type="java.lang.String" />
-      <form-property name="updateate" type="java.lang.String"></form-property>
-      <form-property name="createdate" type="java.lang.String"></form-property>
-      <form-property name="flag" type="java.lang.String"></form-property>
-      <form-property name="stat" type="java.lang.String"></form-property>
-      <form-property name="creatororgno" type="java.lang.String">
-      </form-property>
-      <form-property name="creatororg" type="java.lang.String"></form-property>
-      <form-property name="aepeoples" type="java.lang.String"></form-property>
-      <form-property name="aeoutdate" type="java.lang.String"></form-property>
-      <form-property name="aeindate" type="java.lang.String"></form-property>
+	<form-beans>
+		<form-bean name="enforceInfoForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<form-property name="updateate" type="java.lang.String"></form-property>
+			<form-property name="createdate" type="java.lang.String"></form-property>
+			<form-property name="flag" type="java.lang.String"></form-property>
+			<form-property name="stat" type="java.lang.String"></form-property>
+			<form-property name="creatororgno" type="java.lang.String">
+			</form-property>
+			<form-property name="creatororg" type="java.lang.String"></form-property>
+			<form-property name="aepeoples" type="java.lang.String"></form-property>
+			<form-property name="aeoutdate" type="java.lang.String"></form-property>
+			<form-property name="aeindate" type="java.lang.String"></form-property>
 
-      <form-property name="aeorgnm" type="java.lang.String"></form-property>
-      <form-property name="aeorgno" type="java.lang.String"></form-property>
-      <form-property name="aeedorgnm" type="java.lang.String"></form-property>
-      <form-property name="aeedorgno" type="java.lang.String"></form-property>
-      <form-property name="aetext" type="java.lang.String"></form-property>
-      <form-property name="aeyear" type="java.lang.String"></form-property>
-      <form-property name="aeindex" type="java.lang.Long"></form-property>
-      <form-property name="id" type="java.lang.String"></form-property>
-      <form-property name="aeno" type="java.lang.String"></form-property>
-      <form-property name="maxino" type="java.lang.String"></form-property>
-      <form-property name="aeorgChoice" type="java.lang.String"></form-property>
-      <form-property name="aeorg" type="java.lang.String"></form-property>
-      <form-property name="step" type="java.lang.String" />
-      <form-property name="aeedorgChoice" type="java.lang.String">
-      </form-property>
-      <form-property name="aeedorg" type="java.lang.String"></form-property>
-      <form-property name="aeplanstdate" type="java.lang.String">
-      </form-property>
-      <form-property name="aeplantmdate" type="java.lang.String">
-      </form-property>
-      <form-property name="prjnm" type="java.lang.String"></form-property>
-      <form-property name="prjbasis" type="java.lang.String"></form-property>
-      <form-property name="aecontent" type="java.lang.String"></form-property>
-      <form-property name="aeway" type="java.lang.String"></form-property>
-      <form-property name="aeheadmanChoice" type="java.lang.String">
-      </form-property>
-      <form-property name="aeheadman" type="java.lang.String"></form-property>
-      <form-property name="aemasterChoice" type="java.lang.String">
-      </form-property>
-      <form-property name="aeother" type="java.lang.String"></form-property>
-      <form-property name="aemaster" type="java.lang.String"></form-property>
-      <form-property name="aeotherChoice" type="java.lang.String">
-      </form-property>
-      <form-property name="aeplanpath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="aeplan" type="java.lang.String"></form-property>
-      <form-property name="aeplanname" type="java.lang.String"></form-property>
-      <form-property name="aesummary" type="java.lang.String"></form-property>
-      <form-property name="dptopnion" type="java.lang.String"></form-property>
-      <form-property name="chairopnion" type="java.lang.String"></form-property>
-      <form-property name="jobLoggingValue" type="java.lang.String">
-      </form-property>
-      <form-property name="conclusionValue" type="java.lang.String">
-      </form-property>
-      <form-property name="rectifyValue" type="java.lang.String">
-      </form-property>
-      <form-property name="aerecordno" type="java.lang.String"></form-property>
-      <form-property name="aereviewerChoice" type="java.lang.String">
-      </form-property>
-      <form-property name="aereviewer" type="java.lang.String"></form-property>
-      <form-property name="aelimt" type="java.lang.String"></form-property>
-      <form-property name="aepeople" type="java.lang.String"></form-property>
-      <form-property name="dptpeople" type="java.lang.String"></form-property>
-      <form-property name="dptpeopleorg" type="java.lang.String">
-      </form-property>
-      <form-property name="dptpeopleorgno" type="java.lang.String">
-      </form-property>
-      <form-property name="chairpeople" type="java.lang.String"></form-property>
-      <form-property name="chairpeopleorg" type="java.lang.String">
-      </form-property>
-      <form-property name="chairpeopleorgno" type="java.lang.String">
-      </form-property>
-      <form-property name="ino" type="java.lang.String"></form-property>
-      <form-property name="aeprjnm" type="java.lang.String"></form-property>
-      <form-property name="creator" type="java.lang.String"></form-property>
-      <form-property name="crtdate" type="java.lang.String"></form-property>
-      <form-property name="probsumr" type="java.lang.String"></form-property>
-      <form-property name="attId" type="java.lang.String"></form-property>
+			<form-property name="aeorgnm" type="java.lang.String"></form-property>
+			<form-property name="aeorgno" type="java.lang.String"></form-property>
+			<form-property name="aeedorgnm" type="java.lang.String"></form-property>
+			<form-property name="aeedorgno" type="java.lang.String"></form-property>
+			<form-property name="aetext" type="java.lang.String"></form-property>
+			<form-property name="aeyear" type="java.lang.String"></form-property>
+			<form-property name="aeindex" type="java.lang.Long"></form-property>
+			<form-property name="id" type="java.lang.String"></form-property>
+			<form-property name="aeno" type="java.lang.String"></form-property>
+			<form-property name="maxino" type="java.lang.String"></form-property>
+			<form-property name="aeorgChoice" type="java.lang.String"></form-property>
+			<form-property name="aeorg" type="java.lang.String"></form-property>
+			<form-property name="step" type="java.lang.String" />
+			<form-property name="aeedorgChoice" type="java.lang.String">
+			</form-property>
+			<form-property name="aeedorg" type="java.lang.String"></form-property>
+			<form-property name="aeplanstdate" type="java.lang.String">
+			</form-property>
+			<form-property name="aeplantmdate" type="java.lang.String">
+			</form-property>
+			<form-property name="prjnm" type="java.lang.String"></form-property>
+			<form-property name="prjbasis" type="java.lang.String"></form-property>
+			<form-property name="aecontent" type="java.lang.String"></form-property>
+			<form-property name="aeway" type="java.lang.String"></form-property>
+			<form-property name="aeheadmanChoice" type="java.lang.String">
+			</form-property>
+			<form-property name="aeheadman" type="java.lang.String"></form-property>
+			<form-property name="aemasterChoice" type="java.lang.String">
+			</form-property>
+			<form-property name="aeother" type="java.lang.String"></form-property>
+			<form-property name="aemaster" type="java.lang.String"></form-property>
+			<form-property name="aeotherChoice" type="java.lang.String">
+			</form-property>
+			<form-property name="aeplanpath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="aeplan" type="java.lang.String"></form-property>
+			<form-property name="aeplanname" type="java.lang.String"></form-property>
+			<form-property name="aesummary" type="java.lang.String"></form-property>
+			<form-property name="dptopnion" type="java.lang.String"></form-property>
+			<form-property name="chairopnion" type="java.lang.String"></form-property>
+			<form-property name="jobLoggingValue" type="java.lang.String">
+			</form-property>
+			<form-property name="conclusionValue" type="java.lang.String">
+			</form-property>
+			<form-property name="rectifyValue" type="java.lang.String">
+			</form-property>
+			<form-property name="aerecordno" type="java.lang.String"></form-property>
+			<form-property name="aereviewerChoice" type="java.lang.String">
+			</form-property>
+			<form-property name="aereviewer" type="java.lang.String"></form-property>
+			<form-property name="aelimt" type="java.lang.String"></form-property>
+			<form-property name="aepeople" type="java.lang.String"></form-property>
+			<form-property name="dptpeople" type="java.lang.String"></form-property>
+			<form-property name="dptpeopleorg" type="java.lang.String">
+			</form-property>
+			<form-property name="dptpeopleorgno" type="java.lang.String">
+			</form-property>
+			<form-property name="chairpeople" type="java.lang.String"></form-property>
+			<form-property name="chairpeopleorg" type="java.lang.String">
+			</form-property>
+			<form-property name="chairpeopleorgno" type="java.lang.String">
+			</form-property>
+			<form-property name="ino" type="java.lang.String"></form-property>
+			<form-property name="aeprjnm" type="java.lang.String"></form-property>
+			<form-property name="creator" type="java.lang.String"></form-property>
+			<form-property name="crtdate" type="java.lang.String"></form-property>
+			<form-property name="probsumr" type="java.lang.String"></form-property>
+			<form-property name="attId" type="java.lang.String"></form-property>
 
-      <form-property name="awaynotext" type="java.lang.String"></form-property>
-      <form-property name="awaynoyear" type="java.lang.String"></form-property>
-      <form-property name="awaynoindex" type="java.lang.Long"></form-property>
+			<form-property name="awaynotext" type="java.lang.String"></form-property>
+			<form-property name="awaynoyear" type="java.lang.String"></form-property>
+			<form-property name="awaynoindex" type="java.lang.Long"></form-property>
 
-      <form-property name="innotext" type="java.lang.String"></form-property>
-      <form-property name="innoyear" type="java.lang.String"></form-property>
-      <form-property name="innoindex" type="java.lang.Long"></form-property>
+			<form-property name="innotext" type="java.lang.String"></form-property>
+			<form-property name="innoyear" type="java.lang.String"></form-property>
+			<form-property name="innoindex" type="java.lang.Long"></form-property>
 
-      <form-property name="factnotext" type="java.lang.String"></form-property>
-      <form-property name="factnoyear" type="java.lang.String"></form-property>
-      <form-property name="factnoindex" type="java.lang.Long"></form-property>
+			<form-property name="factnotext" type="java.lang.String"></form-property>
+			<form-property name="factnoyear" type="java.lang.String"></form-property>
+			<form-property name="factnoindex" type="java.lang.Long"></form-property>
 
 
-      <form-property name="aebasispath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="aebasis" type="java.lang.String"></form-property>
+			<form-property name="aebasispath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="aebasis" type="java.lang.String"></form-property>
 
-      <form-property name="enquirercdpath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="enquirercd" type="java.lang.String"></form-property>
+			<form-property name="enquirercdpath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="enquirercd" type="java.lang.String"></form-property>
 
-      <form-property name="inrcdpath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="inrcdno" type="java.lang.String"></form-property>
-      <form-property name="inrcd" type="java.lang.String"></form-property>
+			<form-property name="inrcdpath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="inrcdno" type="java.lang.String"></form-property>
+			<form-property name="inrcd" type="java.lang.String"></form-property>
 
-      <form-property name="outrcdpath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="outrcdno" type="java.lang.String"></form-property>
-      <form-property name="outrcd" type="java.lang.String"></form-property>
+			<form-property name="outrcdpath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="outrcdno" type="java.lang.String"></form-property>
+			<form-property name="outrcd" type="java.lang.String"></form-property>
 
-      <form-property name="actualrcdpath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="actualrcdno" type="java.lang.String"></form-property>
-      <form-property name="actualrcd" type="java.lang.String"></form-property>
+			<form-property name="actualrcdpath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="actualrcdno" type="java.lang.String"></form-property>
+			<form-property name="actualrcd" type="java.lang.String"></form-property>
 
-      <form-property name="aeopnionbookpath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="aeopnionbook" type="java.lang.String">
-      </form-property>
-      <form-property name="aeopnionno" type="java.lang.String"></form-property>
-      <form-property name="relpeoples" type="java.lang.String"></form-property>
-      <form-property name="relorgnm" type="java.lang.String"></form-property>
+			<form-property name="aeopnionbookpath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="aeopnionbook" type="java.lang.String">
+			</form-property>
+			<form-property name="aeopnionno" type="java.lang.String"></form-property>
+			<form-property name="relpeoples" type="java.lang.String"></form-property>
+			<form-property name="relorgnm" type="java.lang.String"></form-property>
 
-      <form-property name="trackcontend" type="java.lang.String">
-      </form-property>
-      <form-property name="decision" type="java.lang.String"></form-property>
-      <form-property name="trackno" type="java.lang.String"></form-property>
-      <form-property name="majorPost" type="java.lang.String"></form-property>
-      <form-property name="sex" type="java.lang.String"></form-property>
-      <form-property name="education" type="java.lang.String"></form-property>
-      <form-property name="orgCodeOfZz" type="java.lang.String"></form-property>
-      <form-property name="orgCodeOfXy" type="java.lang.String"></form-property>
+			<form-property name="trackcontend" type="java.lang.String">
+			</form-property>
+			<form-property name="decision" type="java.lang.String"></form-property>
+			<form-property name="trackno" type="java.lang.String"></form-property>
+			<form-property name="majorPost" type="java.lang.String"></form-property>
+			<form-property name="sex" type="java.lang.String"></form-property>
+			<form-property name="education" type="java.lang.String"></form-property>
+			<form-property name="orgCodeOfZz" type="java.lang.String"></form-property>
+			<form-property name="orgCodeOfXy" type="java.lang.String"></form-property>
 
 
-      <form-property name="userid" type="java.lang.String"></form-property>
-      <form-property name="pepname" type="java.lang.String"></form-property>
-      <form-property name="certno" type="java.lang.String"></form-property>
-      <form-property name="deptnm" type="java.lang.String"></form-property>
-      <form-property name="dept" type="java.lang.String"></form-property>
-      <form-property name="orgnm" type="java.lang.String"></form-property>
-      <form-property name="prcipal" type="java.lang.String"></form-property>
-      <form-property name="cardid" type="java.lang.String"></form-property>
-      <form-property name="tele" type="java.lang.String"></form-property>
-      <form-property name="useDeptList" type="java.util.ArrayList" />
-      <form-property name="pepList" type="java.util.ArrayList" />
-      <form-property name="organization" type="java.lang.String" />
-      <form-property name="organizationChoice" type="java.lang.String" />
-      <form-property name="punishno" type="java.lang.String"></form-property>
-      <form-property name="illegalunit" type="java.lang.String"></form-property>
-      <form-property name="pbnshnotext" type="java.lang.String"></form-property>
-      <form-property name="pbnshnoyear" type="java.lang.String"></form-property>
-      <form-property name="illegalpeople" type="java.lang.String">
-      </form-property>
-      <form-property name="pbnshnoindex" type="java.lang.Long"></form-property>
-      <form-property name="reason" type="java.lang.String"></form-property>
-      <form-property name="summarys" type="java.lang.String"></form-property>
-      <form-property name="peopleopnion" type="java.lang.String">
-      </form-property>
-      <form-property name="peopleChoice" type="java.lang.String">
-      </form-property>
-      <form-property name="people" type="java.lang.String"></form-property>
-      <form-property name="aeOpnionNoList" type="java.util.ArrayList" />
-      <form-property name="punishgzbookattapath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="punishbookattapath"
-        type="org.apache.struts.upload.FormFile">
-      </form-property>
-      <form-property name="punishbookno" type="java.lang.String">
-      </form-property>
-      <form-property name="punishbookatta" type="java.lang.String">
-      </form-property>
-      <form-property name="punishgzbookatta" type="java.lang.String">
-      </form-property>
-      <form-property name="enforceunit" type="java.lang.String"></form-property>
-      <form-property name="enforceunitno" type="java.lang.String">
-      </form-property>
-      <form-property name="punishunit" type="java.lang.String"></form-property>
-      <form-property name="punishunitno" type="java.lang.String">
-      </form-property>
-      <form-property name="sumryatta" type="java.lang.String"></form-property>
-      <form-property name="aestat" type="java.lang.String"></form-property>
-      <form-property name="regpep" type="java.lang.String"></form-property>
-      <form-property name="regorgnm" type="java.lang.String"></form-property>
-      <form-property name="regorgno" type="java.lang.String"></form-property>
-      <form-property name="regdt" type="java.lang.String"></form-property>
-      <form-property name="updatedate" type="java.lang.String"></form-property>
-      <form-property name="deptman" type="java.lang.String"></form-property>
-      <form-property name="deptauditdate" type="java.lang.String">
-      </form-property>
-      <form-property name="chairman" type="java.lang.String"></form-property>
-      <form-property name="chairauditdate" type="java.lang.String">
-      </form-property>
-      <form-property name="trackatta" type="java.lang.String">
-      </form-property>
-      <form-property name="dpter" type="java.lang.String"></form-property>
-      <form-property name="chairer" type="java.lang.String"></form-property>
-      <form-property name="peopler" type="java.lang.String"></form-property>
-      <form-property name="dpterdate" type="java.lang.String"></form-property>
-      <form-property name="chairerdate" type="java.lang.String"></form-property>
-      <form-property name="peoplerdate" type="java.lang.String"></form-property>
-      <form-property name="rectificationstdate"
-        type="java.lang.String">
-      </form-property>
-      <form-property name="rectificationtmdate"
-        type="java.lang.String">
-      </form-property>
-      <form-property name="punishcount" type="java.lang.String">
-      </form-property>
-      <form-property name="crtlogin" type="java.lang.String">
-      </form-property>
-      <form-property name="innerno" type="java.lang.String"></form-property>
-      <form-property name="aeedorgzzno" type="java.lang.String"></form-property>
-      <form-property name="aeedorgxzhno" type="java.lang.String"></form-property>
-      <form-property name="aeedorgzznm" type="java.lang.String"></form-property>
-      <form-property name="aeedorgxzhnm" type="java.lang.String"></form-property>
-    </form-bean>
-  </form-beans>
+			<form-property name="userid" type="java.lang.String"></form-property>
+			<form-property name="pepname" type="java.lang.String"></form-property>
+			<form-property name="certno" type="java.lang.String"></form-property>
+			<form-property name="deptnm" type="java.lang.String"></form-property>
+			<form-property name="dept" type="java.lang.String"></form-property>
+			<form-property name="orgnm" type="java.lang.String"></form-property>
+			<form-property name="prcipal" type="java.lang.String"></form-property>
+			<form-property name="cardid" type="java.lang.String"></form-property>
+			<form-property name="tele" type="java.lang.String"></form-property>
+			<form-property name="useDeptList" type="java.util.ArrayList" />
+			<form-property name="pepList" type="java.util.ArrayList" />
+			<form-property name="organization" type="java.lang.String" />
+			<form-property name="organizationChoice" type="java.lang.String" />
+			<form-property name="punishno" type="java.lang.String"></form-property>
+			<form-property name="illegalunit" type="java.lang.String"></form-property>
+			<form-property name="pbnshnotext" type="java.lang.String"></form-property>
+			<form-property name="pbnshnoyear" type="java.lang.String"></form-property>
+			<form-property name="illegalpeople" type="java.lang.String">
+			</form-property>
+			<form-property name="pbnshnoindex" type="java.lang.Long"></form-property>
+			<form-property name="reason" type="java.lang.String"></form-property>
+			<form-property name="summarys" type="java.lang.String"></form-property>
+			<form-property name="peopleopnion" type="java.lang.String">
+			</form-property>
+			<form-property name="peopleChoice" type="java.lang.String">
+			</form-property>
+			<form-property name="people" type="java.lang.String"></form-property>
+			<form-property name="aeOpnionNoList" type="java.util.ArrayList" />
+			<form-property name="punishgzbookattapath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="punishbookattapath" type="org.apache.struts.upload.FormFile">
+			</form-property>
+			<form-property name="punishbookno" type="java.lang.String">
+			</form-property>
+			<form-property name="punishbookatta" type="java.lang.String">
+			</form-property>
+			<form-property name="punishgzbookatta" type="java.lang.String">
+			</form-property>
+			<form-property name="enforceunit" type="java.lang.String"></form-property>
+			<form-property name="enforceunitno" type="java.lang.String">
+			</form-property>
+			<form-property name="punishunit" type="java.lang.String"></form-property>
+			<form-property name="punishunitno" type="java.lang.String">
+			</form-property>
+			<form-property name="sumryatta" type="java.lang.String"></form-property>
+			<form-property name="aestat" type="java.lang.String"></form-property>
+			<form-property name="regpep" type="java.lang.String"></form-property>
+			<form-property name="regorgnm" type="java.lang.String"></form-property>
+			<form-property name="regorgno" type="java.lang.String"></form-property>
+			<form-property name="regdt" type="java.lang.String"></form-property>
+			<form-property name="updatedate" type="java.lang.String"></form-property>
+			<form-property name="deptman" type="java.lang.String"></form-property>
+			<form-property name="deptauditdate" type="java.lang.String">
+			</form-property>
+			<form-property name="chairman" type="java.lang.String"></form-property>
+			<form-property name="chairauditdate" type="java.lang.String">
+			</form-property>
+			<form-property name="trackatta" type="java.lang.String">
+			</form-property>
+			<form-property name="dpter" type="java.lang.String"></form-property>
+			<form-property name="chairer" type="java.lang.String"></form-property>
+			<form-property name="peopler" type="java.lang.String"></form-property>
+			<form-property name="dpterdate" type="java.lang.String"></form-property>
+			<form-property name="chairerdate" type="java.lang.String"></form-property>
+			<form-property name="peoplerdate" type="java.lang.String"></form-property>
+			<form-property name="rectificationstdate" type="java.lang.String">
+			</form-property>
+			<form-property name="rectificationtmdate" type="java.lang.String">
+			</form-property>
+			<form-property name="punishcount" type="java.lang.String">
+			</form-property>
+			<form-property name="crtlogin" type="java.lang.String">
+			</form-property>
+			<form-property name="innerno" type="java.lang.String"></form-property>
+			<form-property name="aeedorgzzno" type="java.lang.String"></form-property>
+			<form-property name="aeedorgxzhno" type="java.lang.String"></form-property>
+			<form-property name="aeedorgzznm" type="java.lang.String"></form-property>
+			<form-property name="aeedorgxzhnm" type="java.lang.String"></form-property>
+		</form-bean>
+	</form-beans>
 
-  <action-mappings>
-    <action path="/AdminEnforceManagerAction" parameter="method"
-      scope="request"
-      type="org.springframework.web.struts.DelegatingActionProxy"
-      name="enforceInfoForm">
-      <forward name="toAdminEnforceInitPage"
-        path="/WEB-INF/page/enforce/adminEnforce/adminEnforceInitPage.jsp"
-        redirect="false" />
-      <forward name="toAdminEnforceExcel"
-        path="/WEB-INF/page/enforce/adminEnforce/adminEnforceExcel.jsp"
-        redirect="false" />
-      <forward name="toAEInspectionAnlExcel"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionAnlExcel.jsp"
-        redirect="false" />
-      <forward name="toAdminEnforceList"
-        path="/WEB-INF/page/enforce/adminEnforce/adminEnforceList.jsp"
-        redirect="false" />
-      <forward name="toAdminEnforceDetailPage"
-        path="/WEB-INF/page/enforce/adminEnforce/adminEnforceDetailPage.jsp"
-        redirect="false" />
-      <forward name="toUpdateAdminEnforcePage"
-        path="/WEB-INF/page/enforce/adminEnforce/updateAdminEnforcePage.jsp"
-        redirect="false" />
-      <forward name="toAdminEnforceMessage"
-        path="/WEB-INF/page/enforce/adminEnforce/adminEnforceMessage.jsp"
-        redirect="false" />
+	<action-mappings>
+		<action path="/AdminEnforceManagerAction" parameter="method"
+			scope="request" type="org.springframework.web.struts.DelegatingActionProxy"
+			name="enforceInfoForm">
+			<forward name="toAdminEnforceInitPage"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceInitPage.jsp"
+				redirect="false" />
+			<forward name="toAdminEnforceExcel"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceExcel.jsp"
+				redirect="false" />
+			<forward name="toAEInspectionAnlExcel"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionAnlExcel.jsp"
+				redirect="false" />
+			<forward name="toAdminEnforceList"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceList.jsp"
+				redirect="false" />
+			<forward name="toAdminEnforceDetailPage"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceDetailPage.jsp"
+				redirect="false" />
+			<forward name="toUpdateAdminEnforcePage"
+				path="/WEB-INF/page/enforce/adminEnforce/updateAdminEnforcePage.jsp"
+				redirect="false" />
+			<forward name="toAdminEnforceMessage"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceMessage.jsp"
+				redirect="false" />
 
-      <forward name="toAeinspectionInitPage"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionInitPage.jsp"
-        redirect="false" />
-      <forward name="toAeinspectionList"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionList.jsp"
-        redirect="false" />
-      <forward name="toAeinspectionDetailPage"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionDetailPage.jsp"
-        redirect="false" />
-      <forward name="toUpdateAeinspectionPage"
-        path="/WEB-INF/page/enforce/adminEnforce/updateAeinspectionPage.jsp"
-        redirect="false" />
+			<forward name="toAeinspectionInitPage"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionInitPage.jsp"
+				redirect="false" />
+			<forward name="toAeinspectionList"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionList.jsp"
+				redirect="false" />
+			<forward name="toAeinspectionDetailPage"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionDetailPage.jsp"
+				redirect="false" />
+			<forward name="toUpdateAeinspectionPage"
+				path="/WEB-INF/page/enforce/adminEnforce/updateAeinspectionPage.jsp"
+				redirect="false" />
 
-      <forward name="toAeinspectionListForCreateConcl"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionListForCreateConcl.jsp"
-        redirect="false" />
-      <forward name="toAeconclusionInitPage"
-        path="/WEB-INF/page/enforce/adminEnforce/aeconclusionInitPage.jsp"
-        redirect="false" />
-      <forward name="toAeconclusionList"
-        path="/WEB-INF/page/enforce/adminEnforce/aeconclusionList.jsp"
-        redirect="false" />
-      <forward name="toAeconclusionDetailPage"
-        path="/WEB-INF/page/enforce/adminEnforce/aeconclusionDetailPage.jsp"
-        redirect="false" />
-      <forward name="toUpdateAeconclusionPage"
-        path="/WEB-INF/page/enforce/adminEnforce/updateAeconclusionPage.jsp"
-        redirect="false" />
+			<forward name="toAeinspectionListForCreateConcl"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionListForCreateConcl.jsp"
+				redirect="false" />
+			<forward name="toAeconclusionInitPage"
+				path="/WEB-INF/page/enforce/adminEnforce/aeconclusionInitPage.jsp"
+				redirect="false" />
+			<forward name="toAeconclusionList"
+				path="/WEB-INF/page/enforce/adminEnforce/aeconclusionList.jsp"
+				redirect="false" />
+			<forward name="toAeconclusionDetailPage"
+				path="/WEB-INF/page/enforce/adminEnforce/aeconclusionDetailPage.jsp"
+				redirect="false" />
+			<forward name="toUpdateAeconclusionPage"
+				path="/WEB-INF/page/enforce/adminEnforce/updateAeconclusionPage.jsp"
+				redirect="false" />
 
-      <forward name="toAeinspectionListForCreateRecti"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionListForCreateRecti.jsp"
-        redirect="false" />
-      <forward name="toAerectificationInitPage"
-        path="/WEB-INF/page/enforce/adminEnforce/aerectificationInitPage.jsp"
-        redirect="false" />
-      <forward name="toAerectificationList"
-        path="/WEB-INF/page/enforce/adminEnforce/aerectificationList.jsp"
-        redirect="false" />
-      <forward name="toAerectificationDetailPage"
-        path="/WEB-INF/page/enforce/adminEnforce/aerectificationDetailPage.jsp"
-        redirect="false" />
-      <forward name="toUpdateAerectificationPage"
-        path="/WEB-INF/page/enforce/adminEnforce/updateAerectificationPage.jsp"
-        redirect="false" />
-      <forward name="toAEInspectionAnalyse"
-        path="/WEB-INF/page/enforce/adminEnforce/aeinspectionAnalyse.jsp"
-        redirect="false" />
+			<forward name="toAeinspectionListForCreateRecti"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionListForCreateRecti.jsp"
+				redirect="false" />
+			<forward name="toAerectificationInitPage"
+				path="/WEB-INF/page/enforce/adminEnforce/aerectificationInitPage.jsp"
+				redirect="false" />
+			<forward name="toAerectificationList"
+				path="/WEB-INF/page/enforce/adminEnforce/aerectificationList.jsp"
+				redirect="false" />
+			<forward name="toAerectificationDetailPage"
+				path="/WEB-INF/page/enforce/adminEnforce/aerectificationDetailPage.jsp"
+				redirect="false" />
+			<forward name="toUpdateAerectificationPage"
+				path="/WEB-INF/page/enforce/adminEnforce/updateAerectificationPage.jsp"
+				redirect="false" />
+			<forward name="toAEInspectionAnalyse"
+				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionAnalyse.jsp"
+				redirect="false" />
 
-    </action>
+		</action>
 
-    <action path="/AdminSanctionManagerAction" parameter="method"
-      scope="request"
-      type="org.springframework.web.struts.DelegatingActionProxy"
-      name="enforceInfoForm">
-      <forward name="toAeSanctionList"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionList.jsp"
-        redirect="false" />
-      <forward name="toAeSanctionMessage"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionMessage.jsp"
-        redirect="false" />
-      <forward name="toAeSanctionInitPage"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionInitPage.jsp"
-        redirect="false" />
-      <forward name="toAeSanctionDetailPage"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionDetailPage.jsp"
-        redirect="false" />
-      <forward name="toUpdateAeSanctionPage"
-        path="/WEB-INF/page/enforce/adminSanction/updateAeSanctionPage.jsp"
-        redirect="false" />
-      <forward name="toAeSanctionConInitPage"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionConInitPage.jsp"
-        redirect="false" />
-      <forward name="toAeSanctionConList"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionConList.jsp"
-        redirect="false" />
-      <forward name="toAeSanctionConDetailPage"
-        path="/WEB-INF/page/enforce/adminSanction/aeSanctionConDetailPage.jsp"
-        redirect="false" />
-      <forward name="toSetSystemParam"
-        path="/WEB-INF/page/enforce/adminSanction/systemParamSet.jsp"
-        redirect="false" />
-      <forward name="toPageAeconclusionInfo"
-        path="/WEB-INF/page/enforce/adminSanction/aeconclusionInfoList.jsp"
-        redirect="false" />
-    </action>
+		<action path="/AdminSanctionManagerAction" parameter="method"
+			scope="request" type="org.springframework.web.struts.DelegatingActionProxy"
+			name="enforceInfoForm">
+			<forward name="toAeSanctionList"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionList.jsp"
+				redirect="false" />
+			<forward name="toAeSanctionMessage"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionMessage.jsp"
+				redirect="false" />
+			<forward name="toAeSanctionInitPage"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionInitPage.jsp"
+				redirect="false" />
+			<forward name="toAeSanctionDetailPage"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionDetailPage.jsp"
+				redirect="false" />
+			<forward name="toUpdateAeSanctionPage"
+				path="/WEB-INF/page/enforce/adminSanction/updateAeSanctionPage.jsp"
+				redirect="false" />
+			<forward name="toAeSanctionConInitPage"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionConInitPage.jsp"
+				redirect="false" />
+			<forward name="toAeSanctionConList"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionConList.jsp"
+				redirect="false" />
+			<forward name="toAeSanctionConDetailPage"
+				path="/WEB-INF/page/enforce/adminSanction/aeSanctionConDetailPage.jsp"
+				redirect="false" />
+			<forward name="toSetSystemParam"
+				path="/WEB-INF/page/enforce/adminSanction/systemParamSet.jsp"
+				redirect="false" />
+			<forward name="toPageAeconclusionInfo"
+				path="/WEB-INF/page/enforce/adminSanction/aeconclusionInfoList.jsp"
+				redirect="false" />
+			<forward name="toTools"
+				path="/WEB-INF/page/enforce/tools.jsp"
+				redirect="false" />
+		</action>
 
-    <action path="/EnforceOfficerManagerAction" parameter="method"
-      scope="request"
-      type="org.springframework.web.struts.DelegatingActionProxy"
-      name="enforceInfoForm">
-      <forward name="toEnOfficerList"
-        path="/WEB-INF/page/enforce/enforceOfficer/enOfficerList.jsp"
-        redirect="false" />
-      <forward name="toCreateEnOfficerPage"
-        path="/WEB-INF/page/enforce/enforceOfficer/createEnOfficerPage.jsp"
-        redirect="false" />
-      <forward name="toEnOfficerMessage"
-        path="/WEB-INF/page/enforce/enforceOfficer/enOfficerMessage.jsp"
-        redirect="false" />
-      <forward name="toEnOfficerDetailPage"
-        path="/WEB-INF/page/enforce/enforceOfficer/enOfficerDetailPage.jsp"
-        redirect="false" />
-    </action>
+		<action path="/EnforceOfficerManagerAction" parameter="method"
+			scope="request" type="org.springframework.web.struts.DelegatingActionProxy"
+			name="enforceInfoForm">
+			<forward name="toEnOfficerList"
+				path="/WEB-INF/page/enforce/enforceOfficer/enOfficerList.jsp"
+				redirect="false" />
+			<forward name="toCreateEnOfficerPage"
+				path="/WEB-INF/page/enforce/enforceOfficer/createEnOfficerPage.jsp"
+				redirect="false" />
+			<forward name="toEnOfficerMessage"
+				path="/WEB-INF/page/enforce/enforceOfficer/enOfficerMessage.jsp"
+				redirect="false" />
+			<forward name="toEnOfficerDetailPage"
+				path="/WEB-INF/page/enforce/enforceOfficer/enOfficerDetailPage.jsp"
+				redirect="false" />
+		</action>
 
-  </action-mappings>
-  <!-- <plug-in className="org.apache.struts.validator.ValidatorPlugIn"> <set-property 
-    property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" 
-    /> </plug-in> -->
+	</action-mappings>
+	<!-- <plug-in className="org.apache.struts.validator.ValidatorPlugIn"> <set-property 
+		property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" 
+		/> </plug-in> -->
 </struts-config>
