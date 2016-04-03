@@ -46,8 +46,14 @@ import org.apache.struts.upload.FormFile;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.gtm.csims.base.BaseAction;
+import com.gtm.csims.business.dataapp.statistics.impl.AdmenforceStsicSvce;
+import com.gtm.csims.business.dataapp.statistics.impl.AdmpunishStsicSvce;
+import com.gtm.csims.business.dataapp.statistics.impl.AdmpunishconsStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AeFeedbackStsicSvce;
+import com.gtm.csims.business.dataapp.statistics.impl.AeconclusionStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AeinspectionAnlStsicSvce;
+import com.gtm.csims.business.dataapp.statistics.impl.AeinspectionStsicSvce;
+import com.gtm.csims.business.dataapp.statistics.impl.AerectificationStsicSvce;
 import com.gtm.csims.business.enforce.EnforceService;
 import com.gtm.csims.business.enforce.PunishService;
 import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
@@ -120,6 +126,13 @@ public class AdministrationEnforceManagerAction extends BaseAction {
     private SystemBaseInfoManager systemBaseInfoManager;
     private AeinspectionAnlStsicSvce aeinspectionAnlStsicSvce;
     private AeFeedbackStsicSvce aeFeedbackStsicSvce;
+
+    private AdmenforceStsicSvce admenforceStsicSvce;
+    private AeinspectionStsicSvce aeinspectionStsicSvce;
+    private AeconclusionStsicSvce aeconclusionStsicSvce;
+    private AerectificationStsicSvce aerectificationStsicSvce;
+    private AdmpunishStsicSvce admpunishStsicSvce;
+    private AdmpunishconsStsicSvce admpunishconsStsicSvce;
 
     /**
      * 下载附件.
@@ -4899,7 +4912,6 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 
             // 生成cvs文件
             enforceService.generateCvs(repos, datas);
-
             repos.flush();
             return null;
         } catch (Exception e) {
@@ -4907,16 +4919,8 @@ public class AdministrationEnforceManagerAction extends BaseAction {
             super.printMessage(request, response, "导出数据到cvs文件失败！错误原因:" + e.getMessage(), ATTR_ERROR);
             return null;
         } finally {
-            try {
-                if (fis != null) {
-                    fis.close();
-                }
-                if (repos != null) {
-                    repos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            IOUtils.closeQuietly(fis);
+            IOUtils.closeQuietly(repos);
         }
     }
 
@@ -4945,6 +4949,19 @@ public class AdministrationEnforceManagerAction extends BaseAction {
                     ATTR_ERROR);
             return null;
         }
+
+        // DynaActionForm dyna = (DynaActionForm) form;
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> keyValue = new HashMap<String, String>();
+        // String reportYear = dyna.getString("reportYear");
+        // if (StringUtils.isBlank(reportYear)) {
+        // Calendar now = Calendar.getInstance();
+        // reportYear = String.valueOf(now.get(Calendar.YEAR));
+        // }
+
+        // keyValue.put("YEAR", reportYear);
+        params.put("ORGNO", loginOrgNo);
+        HSSFWorkbook wb = null;
         int objId = 0;
         try {
             objId = Integer.valueOf(request.getParameter("obj"));
@@ -4952,41 +4969,60 @@ public class AdministrationEnforceManagerAction extends BaseAction {
             super.printMessage(request, response, String.format("参数错误：%s", e.getMessage()), ATTR_ERROR);
             return null;
         }
-
-        FileInputStream fis = null;
+        String fileName = null;
+        switch (objId) {
+        case 5:
+            fileName = "行政执法立项";
+            wb = admenforceStsicSvce.generateExcel(request.getParameter("obj"),
+                    admenforceStsicSvce.doStatistics(params), keyValue);
+            break;
+        case 6:
+            fileName = "工作检查记录";
+            wb = aeinspectionStsicSvce.generateExcel(request.getParameter("obj"),
+                    aeinspectionStsicSvce.doStatistics(params), keyValue);
+            break;
+        case 7:
+            fileName = "检查结论";
+            wb = aeconclusionStsicSvce.generateExcel(request.getParameter("obj"),
+                    aeconclusionStsicSvce.doStatistics(params), keyValue);
+            break;
+        case 8:
+            fileName = "整改情况";
+            wb = aerectificationStsicSvce.generateExcel(request.getParameter("obj"),
+                    aerectificationStsicSvce.doStatistics(params), keyValue);
+            break;
+        case 9:
+            fileName = "行政处罚立项";
+            wb = admpunishStsicSvce.generateExcel(request.getParameter("obj"),
+                    admpunishStsicSvce.doStatistics(params), keyValue);
+            break;
+        case 10:
+            fileName = "行政处罚结论";
+            wb = admpunishconsStsicSvce.generateExcel(request.getParameter("obj"),
+                    admpunishconsStsicSvce.doStatistics(params), keyValue);
+            break;
+        default:
+            super.printMessage(request, response, String.format("参数错误，objId = " + objId), ATTR_ERROR);
+            return null;
+        }
         OutputStream repos = null;
         try {
-            List<?> datas = enforceService.getExportData(objId, loginOrgNo);
-            if (CollectionUtils.isEmpty(datas)) {
-                super.printMessage(request, response, "当前没有数据可供导出！", ATTR_ERROR);
-                return null;
-            }
-            // 设置response的Header
-            response.setContentType("application/vnd.ms-excel");
-            response.addHeader("Content-Disposition",
-                    "attachment;filename=" + this.getDownloadCvsFileName("export_", StringUtils.EMPTY));
             repos = response.getOutputStream();
-
-            enforceService.generateCvs(repos, datas);
-
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader(
+                    "Content-Disposition",
+                    "attachment;filename="
+                            + this.getDownloadCvsFileName(fileName,
+                                    DateFormatUtils.format(new Date(), DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS)));
+            wb.write(repos);
             repos.flush();
-            return null;
         } catch (Exception e) {
-            LOGGER.error("导出数据到cvs文件发生错误", e);
-            super.printMessage(request, response, "导出数据到cvs文件失败！错误原因:" + e.getMessage(), ATTR_ERROR);
+            super.printMessage(request, response, "导出数据到xls文件失败！错误原因:" + e.getMessage(), ATTR_ERROR);
             return null;
         } finally {
-            try {
-                if (fis != null) {
-                    fis.close();
-                }
-                if (repos != null) {
-                    repos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            IOUtils.closeQuietly(repos);
         }
+        return null;
     }
 
     /**
@@ -5099,6 +5135,30 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 
     public void setAeFeedbackStsicSvce(AeFeedbackStsicSvce aeFeedbackStsicSvce) {
         this.aeFeedbackStsicSvce = aeFeedbackStsicSvce;
+    }
+
+    public void setAdmenforceStsicSvce(AdmenforceStsicSvce admenforceStsicSvce) {
+        this.admenforceStsicSvce = admenforceStsicSvce;
+    }
+
+    public void setAeinspectionStsicSvce(AeinspectionStsicSvce aeinspectionStsicSvce) {
+        this.aeinspectionStsicSvce = aeinspectionStsicSvce;
+    }
+
+    public void setAeconclusionStsicSvce(AeconclusionStsicSvce aeconclusionStsicSvce) {
+        this.aeconclusionStsicSvce = aeconclusionStsicSvce;
+    }
+
+    public void setAerectificationStsicSvce(AerectificationStsicSvce aerectificationStsicSvce) {
+        this.aerectificationStsicSvce = aerectificationStsicSvce;
+    }
+
+    public void setAdmpunishStsicSvce(AdmpunishStsicSvce admpunishStsicSvce) {
+        this.admpunishStsicSvce = admpunishStsicSvce;
+    }
+
+    public void setAdmpunishconsStsicSvce(AdmpunishconsStsicSvce admpunishconsStsicSvce) {
+        this.admpunishconsStsicSvce = admpunishconsStsicSvce;
     }
 
 }

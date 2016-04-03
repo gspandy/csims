@@ -58,7 +58,7 @@ Ext.MessageBox.minWidth = 400;
 	}
     
     function exportCvs(){
-        document.forms[0].action="./AdminEnforceManagerAction.do?method=exportCvs&obj=2";
+        document.forms[0].action="./AdminEnforceManagerAction.do?method=exportXls&obj=6";
         document.forms[0].submit();
     }
     

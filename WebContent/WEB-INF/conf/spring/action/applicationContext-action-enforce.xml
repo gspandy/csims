@@ -19,6 +19,13 @@
 		<property name="wordGenerator" ref="wordGenerator" />
 		<property name="aeinspectionAnlStsicSvce" ref="aeinspectionAnlStsicSvce" />
 		<property name="aeFeedbackStsicSvce" ref="aeFeedbackStsicSvce" />
+		
+		<property name="admenforceStsicSvce" ref="admenforceStsicSvce" />
+		<property name="aeinspectionStsicSvce" ref="aeinspectionStsicSvce" />
+		<property name="aeconclusionStsicSvce" ref="aeconclusionStsicSvce" />
+		<property name="aerectificationStsicSvce" ref="aerectificationStsicSvce" />
+		<property name="admpunishStsicSvce" ref="admpunishStsicSvce" />
+		<property name="admpunishconsStsicSvce" ref="admpunishconsStsicSvce" />
 	</bean>
 
 	<bean name="/AdminSanctionManagerAction"

@@ -147,14 +147,14 @@ public class AeFeedbackStsicSvce extends BaseStatisticsService implements Statis
                 continue;
             }
             resultMap.put(j + "-" + 1, j);
-            for (int i = 1; i <= this.getxCount(); i++) {// 17列(A1-Q1)
+            for (int i = 2; i <= this.getxCount(); i++) {// 17列(A1-Q1)
                 try {
-                    resultMap
-                            .put(j + "-" + (i + 1), row.getValue(i - 1) == null ? "0" : row.getValue(i - 1).toString());
+                    resultMap.put(j + "-" + i, row.getValue(i - 1 - 1) == null ? "0" : row.getValue(i - 1 - 1)
+                            .toString());
                     // System.out.println("set map" + j + "-" + i + ":"
                     // + row.getValue(i - 1));
                 } catch (Exception e) {// 如果返回的数据不能按照坐标取到数据（有可能返回数据少于预计列）,则用0补位
-                    resultMap.put(j + "-" + (i + 1), "0");
+                    resultMap.put(j + "-" + i, "0");
                     // System.out.println("set map" + j + "-" + i + ":" + "0");
                 }
             }

@@ -11,6 +11,11 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  * 
  */
 public interface StatisticsService {
+
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     /**
      * 统计方法
      */
@@ -27,8 +32,7 @@ public interface StatisticsService {
      * 
      * @return html字符串
      */
-    String getHTMLString(String tableIndex, Map<String, Object> data,
-            Map<String, String> keyValue);
+    String getHTMLString(String tableIndex, Map<String, Object> data, Map<String, String> keyValue);
 
     /**
      * 根据组装后的结果集生成Excel poi对象
@@ -38,7 +42,6 @@ public interface StatisticsService {
      * @param keyValue
      * @return
      */
-    HSSFWorkbook generateExcel(String tableIndex, Map<String, Object> data,
-            Map<String, String> keyValue);
+    HSSFWorkbook generateExcel(String tableIndex, Map<String, Object> data, Map<String, String> keyValue);
 
 }
