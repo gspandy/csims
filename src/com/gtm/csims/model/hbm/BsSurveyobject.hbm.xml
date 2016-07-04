@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsSurveyobject"
+		table="BS_SURVEYOBJECT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+
+		<property
+			name="Questionaireid"
+			column="QUESTIONAIREID"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qorgno"
+			column="QORGNO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qorg"
+			column="QORG"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="Qorgtypeno"
+			column="QORGTYPENO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qorgtype"
+			column="QORGTYPE"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="Isfinished"
+			column="ISFINISHED"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="Stat"
+			column="STAT"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Createdate"
+			column="CREATEDATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+		<property
+			name="Updateate"
+			column="UPDATEATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

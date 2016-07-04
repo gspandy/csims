@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class
+		name="BsQuestionaire"
+		table="BS_QUESTIONAIRE"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="string"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		</id>
+
+		<property
+			name="Qtitle"
+			column="QTITLE"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="Dsumry"
+			column="DSUMRY"
+			type="string"
+			not-null="false"
+			length="1000"
+		/>
+		<property
+			name="Creator"
+			column="CREATOR"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Creatororg"
+			column="CREATORORG"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Creatororgno"
+			column="CREATORORGNO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Crtdate"
+			column="CRTDATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+		<property
+			name="Isenable"
+			column="ISENABLE"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="Isfinished"
+			column="ISFINISHED"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="Enddatetime"
+			column="ENDDATETIME"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+		<property
+			name="Stat"
+			column="STAT"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Flag"
+			column="FLAG"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Createdate"
+			column="CREATEDATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+		<property
+			name="Updateate"
+			column="UPDATEATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
+		/>
+
+
+	</class>	
+</hibernate-mapping>
