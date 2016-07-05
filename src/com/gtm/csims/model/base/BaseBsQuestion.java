@@ -19,10 +19,10 @@ public abstract class BaseBsQuestion  implements Serializable {
 	public static String PROP_QUESTIONAIREID = "Questionaireid";
 	public static String PROP_FLAG = "Flag";
 	public static String PROP_STAT = "Stat";
+	public static String PROP_QINDEX = "Qindex";
 	public static String PROP_QTITLE = "Qtitle";
 	public static String PROP_CREATEDATE = "Createdate";
 	public static String PROP_ID = "Id";
-	public static String PROP_QANSWERLIST = "Qanswerlist";
 
 
 	// constructors
@@ -50,7 +50,7 @@ public abstract class BaseBsQuestion  implements Serializable {
 	// fields
 	private java.lang.String questionaireid;
 	private java.lang.String qtitle;
-	private java.lang.String qanswerlist;
+	private java.lang.Short qindex;
 	private java.lang.String stat;
 	private java.lang.String flag;
 	private java.util.Date createdate;
@@ -115,18 +115,18 @@ public abstract class BaseBsQuestion  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: QANSWERLIST
+	 * Return the value associated with the column: QINDEX
 	 */
-	public java.lang.String getQanswerlist () {
-		return qanswerlist;
+	public java.lang.Short getQindex () {
+		return qindex;
 	}
 
 	/**
-	 * Set the value related to the column: QANSWERLIST
-	 * @param qanswerlist the QANSWERLIST value
+	 * Set the value related to the column: QINDEX
+	 * @param qindex the QINDEX value
 	 */
-	public void setQanswerlist (java.lang.String qanswerlist) {
-		this.qanswerlist = qanswerlist;
+	public void setQindex (java.lang.Short qindex) {
+		this.qindex = qindex;
 	}
 
 

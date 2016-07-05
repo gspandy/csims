@@ -15,19 +15,14 @@ import java.io.Serializable;
 public abstract class BaseBsAnswer  implements Serializable {
 
 	public static String REF = "BsAnswer";
-	public static String PROP_QORGNO = "Qorgno";
 	public static String PROP_UPDATEATE = "Updateate";
-	public static String PROP_STAT = "Stat";
-	public static String PROP_CREATEDATE = "Createdate";
-	public static String PROP_CREATOR = "Creator";
-	public static String PROP_QORG = "Qorg";
 	public static String PROP_QUESTIONAIREID = "Questionaireid";
 	public static String PROP_FLAG = "Flag";
-	public static String PROP_QORGTYPENO = "Qorgtypeno";
-	public static String PROP_QORGTYPE = "Qorgtype";
-	public static String PROP_CRTDATE = "Crtdate";
-	public static String PROP_QUESTIONID = "Questionid";
+	public static String PROP_STAT = "Stat";
+	public static String PROP_CREATEDATE = "Createdate";
+	public static String PROP_QANSWERTITLE = "Qanswertitle";
 	public static String PROP_QANSWERNO = "Qanswerno";
+	public static String PROP_QUESTIONID = "Questionid";
 	public static String PROP_ID = "Id";
 
 
@@ -56,13 +51,8 @@ public abstract class BaseBsAnswer  implements Serializable {
 	// fields
 	private java.lang.String questionaireid;
 	private java.lang.String questionid;
-	private java.lang.String qorgno;
-	private java.lang.String qorg;
-	private java.lang.String qorgtypeno;
-	private java.lang.String qorgtype;
 	private java.lang.String qanswerno;
-	private java.lang.String creator;
-	private java.util.Date crtdate;
+	private java.lang.String qanswertitle;
 	private java.lang.String stat;
 	private java.lang.String flag;
 	private java.util.Date createdate;
@@ -127,74 +117,6 @@ public abstract class BaseBsAnswer  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: QORGNO
-	 */
-	public java.lang.String getQorgno () {
-		return qorgno;
-	}
-
-	/**
-	 * Set the value related to the column: QORGNO
-	 * @param qorgno the QORGNO value
-	 */
-	public void setQorgno (java.lang.String qorgno) {
-		this.qorgno = qorgno;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORG
-	 */
-	public java.lang.String getQorg () {
-		return qorg;
-	}
-
-	/**
-	 * Set the value related to the column: QORG
-	 * @param qorg the QORG value
-	 */
-	public void setQorg (java.lang.String qorg) {
-		this.qorg = qorg;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORGTYPENO
-	 */
-	public java.lang.String getQorgtypeno () {
-		return qorgtypeno;
-	}
-
-	/**
-	 * Set the value related to the column: QORGTYPENO
-	 * @param qorgtypeno the QORGTYPENO value
-	 */
-	public void setQorgtypeno (java.lang.String qorgtypeno) {
-		this.qorgtypeno = qorgtypeno;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORGTYPE
-	 */
-	public java.lang.String getQorgtype () {
-		return qorgtype;
-	}
-
-	/**
-	 * Set the value related to the column: QORGTYPE
-	 * @param qorgtype the QORGTYPE value
-	 */
-	public void setQorgtype (java.lang.String qorgtype) {
-		this.qorgtype = qorgtype;
-	}
-
-
-
-	/**
 	 * Return the value associated with the column: QANSWERNO
 	 */
 	public java.lang.String getQanswerno () {
@@ -212,35 +134,18 @@ public abstract class BaseBsAnswer  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: CREATOR
+	 * Return the value associated with the column: QANSWERTITLE
 	 */
-	public java.lang.String getCreator () {
-		return creator;
+	public java.lang.String getQanswertitle () {
+		return qanswertitle;
 	}
 
 	/**
-	 * Set the value related to the column: CREATOR
-	 * @param creator the CREATOR value
+	 * Set the value related to the column: QANSWERTITLE
+	 * @param qanswertitle the QANSWERTITLE value
 	 */
-	public void setCreator (java.lang.String creator) {
-		this.creator = creator;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: CRTDATE
-	 */
-	public java.util.Date getCrtdate () {
-		return crtdate;
-	}
-
-	/**
-	 * Set the value related to the column: CRTDATE
-	 * @param crtdate the CRTDATE value
-	 */
-	public void setCrtdate (java.util.Date crtdate) {
-		this.crtdate = crtdate;
+	public void setQanswertitle (java.lang.String qanswertitle) {
+		this.qanswertitle = qanswertitle;
 	}
 
 

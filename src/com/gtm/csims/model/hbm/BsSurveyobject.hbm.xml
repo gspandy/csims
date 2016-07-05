@@ -9,6 +9,9 @@
 		table="BS_SURVEYOBJECT"
 	>
 		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
 		<id
 			name="Id"
 			type="string"

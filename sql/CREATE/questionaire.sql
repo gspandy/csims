@@ -48,7 +48,7 @@ create table BS_Question
    ID                 VARCHAR(50)            not null,
    QuestionaireID     VARCHAR(50), 
    QTitle             VARCHAR(1000),
-   QAnswerList        VARCHAR(1000),
+   QIndex             SMALLINT,
    Stat               VARCHAR(50),
    Flag               VARCHAR(50),
    CreateDate         TIMESTAMP,
@@ -63,10 +63,30 @@ create table BS_Answer
    ID                 VARCHAR(50)            not null,
    QuestionaireID     VARCHAR(50),
    QuestionID         VARCHAR(50), 
+   QAnswerNo          CHAR(1),
+   QAnswerTitle       VARCHAR(1000),
+   Stat               VARCHAR(50),
+   Flag               VARCHAR(50),
+   CreateDate         TIMESTAMP,
+   Updateate          TIMESTAMP,
+   constraint P_Key_1 primary key (ID)
+);
+CREATE INDEX idx_an_qid_an ON BS_Answer (QuestionaireID);
+CREATE INDEX idx_an_quesid ON BS_Answer (QuestionID);
+
+drop table BS_AnswerResult;
+create table BS_AnswerResult
+(
+   ID                 VARCHAR(50)            not null,
+   QuestionaireID     VARCHAR(50),
+   QuestionID         VARCHAR(50),
+   QAnswerID          VARCHAR(50),
    QOrgNo             VARCHAR(50),
    QOrg               VARCHAR(500),
    QOrgTypeNo         VARCHAR(50),
    QOrgType           VARCHAR(500),
+   QAreaNo            VARCHAR(50),
+   QArea              VARCHAR(500),
    QAnswerNo          CHAR(1),
    Creator            VARCHAR(50),
    CrtDate            TIMESTAMP,
@@ -76,5 +96,6 @@ create table BS_Answer
    Updateate          TIMESTAMP,
    constraint P_Key_1 primary key (ID)
 );
-CREATE INDEX idx_ques_qid_an ON BS_Answer (QuestionaireID);
-CREATE INDEX idx_ques_quesid ON BS_Answer (QuestionID);
+CREATE INDEX idx_ar_qid_an ON BS_AnswerResult (QuestionaireID);
+CREATE INDEX idx_ar_quesid ON BS_AnswerResult (QuestionID);
+CREATE INDEX idx_ar_anid ON BS_AnswerResult (QAnswerID);

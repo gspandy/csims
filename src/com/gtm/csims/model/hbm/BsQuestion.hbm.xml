@@ -9,6 +9,9 @@
 		table="BS_QUESTION"
 	>
 		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
 		<id
 			name="Id"
 			type="string"
@@ -32,11 +35,11 @@
 			length="1000"
 		/>
 		<property
-			name="Qanswerlist"
-			column="QANSWERLIST"
-			type="string"
+			name="Qindex"
+			column="QINDEX"
+			type="java.lang.Short"
 			not-null="false"
-			length="1000"
+			length="5"
 		/>
 		<property
 			name="Stat"

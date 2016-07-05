@@ -5,13 +5,10 @@
 
 <hibernate-mapping package="com.gtm.csims.model">
 	<class
-		name="BsAnswer"
-		table="BS_ANSWER"
+		name="BsAnswerresult"
+		table="BS_ANSWERRESULT"
 	>
 		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
 		<id
 			name="Id"
 			type="string"
@@ -35,6 +32,55 @@
 			length="50"
 		/>
 		<property
+			name="Qanswerid"
+			column="QANSWERID"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qorgno"
+			column="QORGNO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qorg"
+			column="QORG"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="Qorgtypeno"
+			column="QORGTYPENO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qorgtype"
+			column="QORGTYPE"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
+			name="Qareano"
+			column="QAREANO"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="Qarea"
+			column="QAREA"
+			type="string"
+			not-null="false"
+			length="500"
+		/>
+		<property
 			name="Qanswerno"
 			column="QANSWERNO"
 			type="string"
@@ -42,11 +88,18 @@
 			length="1"
 		/>
 		<property
-			name="Qanswertitle"
-			column="QANSWERTITLE"
+			name="Creator"
+			column="CREATOR"
 			type="string"
 			not-null="false"
-			length="1000"
+			length="50"
+		/>
+		<property
+			name="Crtdate"
+			column="CRTDATE"
+			type="timestamp"
+			not-null="false"
+			length="26"
 		/>
 		<property
 			name="Stat"
