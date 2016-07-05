@@ -1,6 +1,7 @@
 package com.gtm.csims.business.question;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.sweet.dao.generic.support.Page;
@@ -14,6 +15,7 @@ import com.gtm.csims.dao.BsAnswerresultDAO;
 import com.gtm.csims.dao.BsQuestionDAO;
 import com.gtm.csims.dao.BsQuestionaireDAO;
 import com.gtm.csims.dao.BsSurveyobjectDAO;
+import com.gtm.csims.model.BsQuestionaire;
 
 /**
  * 问卷调查.
@@ -48,7 +50,29 @@ public class QuestionService {
 		sb.append(" order by createdate DESC");
 		Page page = bsQuestionaireDao.pagedQuery(sb.toString(), pageNo, pageSize, param.toArray());
 		return page;
+	}
 
+	/**
+	 * 新增问卷调查.
+	 * 
+	 */
+	@Transactional(readOnly = false)
+	public void create(BsQuestionaire questionaire) {
+		if (questionaire == null) {
+			throw new IllegalArgumentException("对象为空");
+		}
+		if (StringUtils.isBlank(questionaire.getQtitle())) {
+			throw new IllegalArgumentException("名称为空");
+		}
+		if (questionaire.getQtitle().length() > 500) {
+			throw new IllegalArgumentException("名称超过允许长度500");
+		}
+		if (StringUtils.isBlank(questionaire.getId())) {
+			questionaire.setCreatedate(new Date());
+		} else {
+			questionaire.setUpdateate(new Date());
+		}
+		bsQuestionaireDao.save(questionaire);
 	}
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

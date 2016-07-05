@@ -1,6 +1,6 @@
 package com.gtm.csims.controll.question;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +15,12 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 
 import com.gtm.csims.base.BaseAction;
+import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
 import com.gtm.csims.business.question.QuestionService;
 import com.gtm.csims.jaas.UserCredentialName;
+import com.gtm.csims.model.BsOrg;
+import com.gtm.csims.model.BsQuestionaire;
+import com.gtm.csims.utils.RequestUtil;
 
 /**
  * 问卷调查.
@@ -34,6 +38,8 @@ public class QuestionAction extends BaseAction {
 	private static Logger LOGGER = Logger.getLogger(QuestionAction.class);
 
 	private QuestionService questionService;
+
+	private SystemBaseInfoManager systemBaseInfoManager;
 
 	/**
 	 * 跳转问卷调查列表页面.
@@ -99,8 +105,53 @@ public class QuestionAction extends BaseAction {
 		return mapping.findForward("toQuestionairesList");
 	}
 
+	/**
+	 * 新增问卷调查.
+	 */
+	public ActionForward createQuestionaire(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		if (this.isTokenValid(request)) {// 正常提交
+			this.resetToken(request);// 清空当前会话中的token值
+			// 如果当前用户不属于人行用户，则不能使用该功能
+			if (!super.isPcbUser(request, response)) {
+				this.printMessage(request, response, ERROR1, ATTR_ERROR);
+				return null;
+			}
+			// DynaActionForm dyna = (DynaActionForm) form;
+			String nowLoginUser = this.getPubCredential(UserCredentialName.nickname.name(), request, response);
+			String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
+			BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
+			try {
+				BsQuestionaire questionaire = RequestUtil.getBeanFromParams(request, BsQuestionaire.class);
+				Date now = new Date();
+				questionaire.setCreatedate(now);
+				questionaire.setCreator(nowLoginUser);
+				questionaire.setCreatororgno(loginOrgNo);
+				questionaire.setCreatororg(bsorg.getName());
+				questionaire.setCrtdate(now);
+
+				questionService.create(questionaire);
+				LOGGER.info(String.format(LOG_FORMAT, bsorg.getName(), nowLoginUser, "保存问卷调查", "操作成功!"));
+				this.printMessage(request, response, "保存成功", "");
+				return null;
+			} catch (Exception e) {
+				LOGGER.error("行政执法登记保存方法发生错误", e);
+				this.printMessage(request, response, "保存行政执法登记操作失败，错误原因：" + e.getMessage(), "");
+				return null;
+			}
+		} else {
+			// 重复提交
+			this.printMessage(request, response, String.format(ERROR2, "行政执法立项登记"), ATTR_ERROR);
+			return null;
+		}
+	}
+
 	public void setQuestionService(QuestionService questionService) {
 		this.questionService = questionService;
+	}
+
+	public void setSystemBaseInfoManager(SystemBaseInfoManager systemBaseInfoManager) {
+		this.systemBaseInfoManager = systemBaseInfoManager;
 	}
 
 }
