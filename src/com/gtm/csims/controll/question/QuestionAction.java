@@ -45,6 +45,15 @@ public class QuestionAction extends BaseAction {
 			this.printMessage(request, response, ERROR1, ATTR_ERROR);
 			return null;
 		}
+
+		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
+		if (StringUtils.isBlank(loginOrgNo)) {
+			this.printMessage(request, response,
+			        String.format(ERROR3, this.getPrivCredential(UserCredentialName.login.name(), request, response)),
+			        ATTR_ERROR);
+			return null;
+		}
+
 		DynaActionForm dyna = (DynaActionForm) form;
 		String pageNo = (dyna.get("pageNo") == null || dyna.get("pageNo").equals(StringUtils.EMPTY)) ? "1"
 		        : (String) dyna.get("pageNo");
@@ -53,15 +62,6 @@ public class QuestionAction extends BaseAction {
 		String qtitle = (dyna.get("qtitle") == null || dyna.get("qtitle").equals(StringUtils.EMPTY)) ? null
 		        : (String) dyna.get("qtitle");
 		int pageCountTemp = 0;
-		// 列表循环
-		// 调用获取行政执法分页方法
-		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
-		if (StringUtils.isBlank(loginOrgNo)) {
-			request.setAttribute(ATTR_MESSAGE,
-			        String.format(ERROR3, this.getPrivCredential(UserCredentialName.login.name(), request, response)));
-			request.setAttribute("methodname", "toAdminEnforceList");
-			return mapping.findForward("toAdminEnforceMessage");
-		}
 
 		Page page = questionService.queryQuestionairs(qtitle, Integer.parseInt(pageNo), Integer.parseInt(pageSize));
 		pageCountTemp = Long.valueOf(page.getTotalCount()).intValue();
@@ -95,9 +95,8 @@ public class QuestionAction extends BaseAction {
 		dyna.set("pageCount", pageCountTemp);
 		request.setAttribute("totalNo", page.getTotalCount());
 		// 再次将分页相关数据返回页面End
-		List<?> list = (List<?>) page.getResult();
-		request.setAttribute("list", list);
-		return mapping.findForward("toAdminEnforceList");
+		request.setAttribute("list", page.getResult());
+		return mapping.findForward("toQuestionairesList");
 	}
 
 	public void setQuestionService(QuestionService questionService) {

@@ -11,6 +11,7 @@
 			<form-property name="createdate" type="java.lang.String"></form-property>
 			<form-property name="flag" type="java.lang.String"></form-property>
 			<form-property name="stat" type="java.lang.String"></form-property>
+			<form-property name="qtitle" type="java.lang.String"></form-property>
 		</form-bean>
 	</form-beans>
 
@@ -18,10 +19,9 @@
 		<action path="/QuestionAction" parameter="method"
 			scope="request" type="org.springframework.web.struts.DelegatingActionProxy"
 			name="questionForm">
-			<forward name="toAdminEnforceInitPage"
-				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceInitPage.jsp"
+			<forward name="toQuestionairesList"
+				path="/WEB-INF/page/question/questionairList.jsp"
 				redirect="false" />
 		</action>
-
 	</action-mappings>
 </struts-config>

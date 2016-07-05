@@ -858,6 +858,16 @@ function goMainPage(type,url){
                                                                                                 </td>
                                                                                             </tr>
                                                                                     </jguard:authorized>
+                                                                                    <jguard:authorized
+                                                                                            uri="/QuestionAction.do?method=toQuestionairesList">
+                                                                                            <tr class="h30">
+                                                                                                <td>
+                                                                                                    <a
+                                                                                                        href="<%=request.getContextPath()%>/QuestionAction.do?method=toQuestionairesList"
+                                                                                                        target="mainFrame" class="left">问卷调查管理</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                    </jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>
