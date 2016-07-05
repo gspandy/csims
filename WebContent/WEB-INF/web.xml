@@ -25,6 +25,7 @@
 			/WEB-INF/conf/spring/action/applicationContext-action-file.xml,
 			/WEB-INF/conf/spring/action/applicationContext-action-zxmarket.xml,
 			/WEB-INF/conf/spring/action/applicationContext-action-exam.xml,
+			/WEB-INF/conf/spring/action/applicationContext-action-question.xml,
 			
 			/WEB-INF/conf/spring/service/applicationContext-service-jaas.xml,
 			/WEB-INF/conf/spring/service/applicationContext-service-system.xml,
@@ -35,7 +36,8 @@
 			/WEB-INF/conf/spring/service/applicationContext-service-message.xml,
 			/WEB-INF/conf/spring/service/applicationContext-service-statisticcs.xml,
 			/WEB-INF/conf/spring/service/applicationContext-service-zxmarket.xml,
-			/WEB-INF/conf/spring/service/applicationContext-service-exam.xml
+			/WEB-INF/conf/spring/service/applicationContext-service-exam.xml,
+			/WEB-INF/conf/spring/service/applicationContext-service-question.xml
 		</param-value>
 	</context-param>
 
@@ -160,7 +162,8 @@
 				/WEB-INF/conf/struts/struts-config-zxmarket.xml,
 				/WEB-INF/conf/struts/struts-config-exam.xml,
                 /WEB-INF/conf/struts/struts-config-dataapp.xml,
-                /WEB-INF/conf/struts/struts-config-file.xml
+                /WEB-INF/conf/struts/struts-config-file.xml,
+                /WEB-INF/conf/struts/struts-config-question.xml
 			</param-value>
 		</init-param>
 		<init-param>

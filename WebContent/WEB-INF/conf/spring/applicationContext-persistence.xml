@@ -171,5 +171,8 @@
 	<bean id="bsSurveyobjectDao" class="com.gtm.csims.dao.hibernate.BsSurveyobjectDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="bsAnswerresultDao" class="com.gtm.csims.dao.hibernate.BsAnswerresultDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 </beans>

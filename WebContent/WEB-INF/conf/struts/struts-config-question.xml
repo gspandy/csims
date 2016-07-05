@@ -1,0 +1,27 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="questionForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="pageNo" type="java.lang.String" />
+			<form-property name="pageSize" type="java.lang.String" />
+			<form-property name="pageCount" type="java.lang.Integer" />
+			<form-property name="previous" type="java.lang.String" />
+			<form-property name="next" type="java.lang.String" />
+			<form-property name="updateate" type="java.lang.String"></form-property>
+			<form-property name="createdate" type="java.lang.String"></form-property>
+			<form-property name="flag" type="java.lang.String"></form-property>
+			<form-property name="stat" type="java.lang.String"></form-property>
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/QuestionAction" parameter="method"
+			scope="request" type="org.springframework.web.struts.DelegatingActionProxy"
+			name="questionForm">
+			<forward name="toAdminEnforceInitPage"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceInitPage.jsp"
+				redirect="false" />
+		</action>
+
+	</action-mappings>
+</struts-config>
