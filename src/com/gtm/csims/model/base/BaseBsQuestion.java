@@ -16,12 +16,19 @@ public abstract class BaseBsQuestion  implements Serializable {
 
 	public static String REF = "BsQuestion";
 	public static String PROP_UPDATEATE = "Updateate";
-	public static String PROP_QUESTIONAIREID = "Questionaireid";
-	public static String PROP_FLAG = "Flag";
+	public static String PROP_ANSWERE = "Answere";
+	public static String PROP_ANSWERG = "Answerg";
+	public static String PROP_QQTITLE = "Qqtitle";
+	public static String PROP_ANSWERA = "Answera";
 	public static String PROP_STAT = "Stat";
-	public static String PROP_QINDEX = "Qindex";
-	public static String PROP_QTITLE = "Qtitle";
+	public static String PROP_ANSWERD = "Answerd";
 	public static String PROP_CREATEDATE = "Createdate";
+	public static String PROP_QQUESTIONAIREID = "Qquestionaireid";
+	public static String PROP_ANSWERC = "Answerc";
+	public static String PROP_FLAG = "Flag";
+	public static String PROP_QQINDEX = "Qqindex";
+	public static String PROP_ANSWERF = "Answerf";
+	public static String PROP_ANSWERB = "Answerb";
 	public static String PROP_ID = "Id";
 
 
@@ -48,12 +55,19 @@ public abstract class BaseBsQuestion  implements Serializable {
 	private java.lang.String id;
 
 	// fields
-	private java.lang.String questionaireid;
-	private java.lang.String qtitle;
-	private java.lang.Short qindex;
-	private java.lang.String stat;
-	private java.lang.String flag;
+	private java.lang.String answera;
+	private java.lang.String answerb;
+	private java.lang.String answerc;
+	private java.lang.String answerd;
+	private java.lang.String answere;
+	private java.lang.String answerf;
+	private java.lang.String answerg;
 	private java.util.Date createdate;
+	private java.lang.String flag;
+	private java.lang.Short qqindex;
+	private java.lang.String qqtitle;
+	private java.lang.String qquestionaireid;
+	private java.lang.String stat;
 	private java.util.Date updateate;
 
 
@@ -81,69 +95,137 @@ public abstract class BaseBsQuestion  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: QUESTIONAIREID
+	 * Return the value associated with the column: ANSWERA
 	 */
-	public java.lang.String getQuestionaireid () {
-		return questionaireid;
+	public java.lang.String getAnswera () {
+		return answera;
 	}
 
 	/**
-	 * Set the value related to the column: QUESTIONAIREID
-	 * @param questionaireid the QUESTIONAIREID value
+	 * Set the value related to the column: ANSWERA
+	 * @param answera the ANSWERA value
 	 */
-	public void setQuestionaireid (java.lang.String questionaireid) {
-		this.questionaireid = questionaireid;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QTITLE
-	 */
-	public java.lang.String getQtitle () {
-		return qtitle;
-	}
-
-	/**
-	 * Set the value related to the column: QTITLE
-	 * @param qtitle the QTITLE value
-	 */
-	public void setQtitle (java.lang.String qtitle) {
-		this.qtitle = qtitle;
+	public void setAnswera (java.lang.String answera) {
+		this.answera = answera;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QINDEX
+	 * Return the value associated with the column: ANSWERB
 	 */
-	public java.lang.Short getQindex () {
-		return qindex;
+	public java.lang.String getAnswerb () {
+		return answerb;
 	}
 
 	/**
-	 * Set the value related to the column: QINDEX
-	 * @param qindex the QINDEX value
+	 * Set the value related to the column: ANSWERB
+	 * @param answerb the ANSWERB value
 	 */
-	public void setQindex (java.lang.Short qindex) {
-		this.qindex = qindex;
+	public void setAnswerb (java.lang.String answerb) {
+		this.answerb = answerb;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: STAT
+	 * Return the value associated with the column: ANSWERC
 	 */
-	public java.lang.String getStat () {
-		return stat;
+	public java.lang.String getAnswerc () {
+		return answerc;
 	}
 
 	/**
-	 * Set the value related to the column: STAT
-	 * @param stat the STAT value
+	 * Set the value related to the column: ANSWERC
+	 * @param answerc the ANSWERC value
 	 */
-	public void setStat (java.lang.String stat) {
-		this.stat = stat;
+	public void setAnswerc (java.lang.String answerc) {
+		this.answerc = answerc;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ANSWERD
+	 */
+	public java.lang.String getAnswerd () {
+		return answerd;
+	}
+
+	/**
+	 * Set the value related to the column: ANSWERD
+	 * @param answerd the ANSWERD value
+	 */
+	public void setAnswerd (java.lang.String answerd) {
+		this.answerd = answerd;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ANSWERE
+	 */
+	public java.lang.String getAnswere () {
+		return answere;
+	}
+
+	/**
+	 * Set the value related to the column: ANSWERE
+	 * @param answere the ANSWERE value
+	 */
+	public void setAnswere (java.lang.String answere) {
+		this.answere = answere;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ANSWERF
+	 */
+	public java.lang.String getAnswerf () {
+		return answerf;
+	}
+
+	/**
+	 * Set the value related to the column: ANSWERF
+	 * @param answerf the ANSWERF value
+	 */
+	public void setAnswerf (java.lang.String answerf) {
+		this.answerf = answerf;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ANSWERG
+	 */
+	public java.lang.String getAnswerg () {
+		return answerg;
+	}
+
+	/**
+	 * Set the value related to the column: ANSWERG
+	 * @param answerg the ANSWERG value
+	 */
+	public void setAnswerg (java.lang.String answerg) {
+		this.answerg = answerg;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: CREATEDATE
+	 */
+	public java.util.Date getCreatedate () {
+		return createdate;
+	}
+
+	/**
+	 * Set the value related to the column: CREATEDATE
+	 * @param createdate the CREATEDATE value
+	 */
+	public void setCreatedate (java.util.Date createdate) {
+		this.createdate = createdate;
 	}
 
 
@@ -166,18 +248,69 @@ public abstract class BaseBsQuestion  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: CREATEDATE
+	 * Return the value associated with the column: QQINDEX
 	 */
-	public java.util.Date getCreatedate () {
-		return createdate;
+	public java.lang.Short getQqindex () {
+		return qqindex;
 	}
 
 	/**
-	 * Set the value related to the column: CREATEDATE
-	 * @param createdate the CREATEDATE value
+	 * Set the value related to the column: QQINDEX
+	 * @param qqindex the QQINDEX value
 	 */
-	public void setCreatedate (java.util.Date createdate) {
-		this.createdate = createdate;
+	public void setQqindex (java.lang.Short qqindex) {
+		this.qqindex = qqindex;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: QQTITLE
+	 */
+	public java.lang.String getQqtitle () {
+		return qqtitle;
+	}
+
+	/**
+	 * Set the value related to the column: QQTITLE
+	 * @param qqtitle the QQTITLE value
+	 */
+	public void setQqtitle (java.lang.String qqtitle) {
+		this.qqtitle = qqtitle;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: QQUESTIONAIREID
+	 */
+	public java.lang.String getQquestionaireid () {
+		return qquestionaireid;
+	}
+
+	/**
+	 * Set the value related to the column: QQUESTIONAIREID
+	 * @param qquestionaireid the QQUESTIONAIREID value
+	 */
+	public void setQquestionaireid (java.lang.String qquestionaireid) {
+		this.qquestionaireid = qquestionaireid;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: STAT
+	 */
+	public java.lang.String getStat () {
+		return stat;
+	}
+
+	/**
+	 * Set the value related to the column: STAT
+	 * @param stat the STAT value
+	 */
+	public void setStat (java.lang.String stat) {
+		this.stat = stat;
 	}
 
 

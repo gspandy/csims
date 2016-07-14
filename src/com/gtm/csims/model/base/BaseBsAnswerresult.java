@@ -15,23 +15,28 @@ import java.io.Serializable;
 public abstract class BaseBsAnswerresult  implements Serializable {
 
 	public static String REF = "BsAnswerresult";
-	public static String PROP_QORGNO = "Qorgno";
 	public static String PROP_UPDATEATE = "Updateate";
+	public static String PROP_AN_B = "AnB";
 	public static String PROP_STAT = "Stat";
-	public static String PROP_QANSWERID = "Qanswerid";
-	public static String PROP_QAREA = "Qarea";
+	public static String PROP_ARQUESTIONID = "Arquestionid";
+	public static String PROP_ARORG = "Arorg";
+	public static String PROP_ARORGNO = "Arorgno";
+	public static String PROP_AN_G = "AnG";
 	public static String PROP_CREATEDATE = "Createdate";
-	public static String PROP_CREATOR = "Creator";
-	public static String PROP_QORG = "Qorg";
-	public static String PROP_QUESTIONAIREID = "Questionaireid";
+	public static String PROP_ARAREANO = "Arareano";
+	public static String PROP_ARORGTYPENO = "Arorgtypeno";
+	public static String PROP_AN_C = "AnC";
+	public static String PROP_AN_F = "AnF";
+	public static String PROP_ARORGTYPE = "Arorgtype";
 	public static String PROP_FLAG = "Flag";
-	public static String PROP_QAREANO = "Qareano";
-	public static String PROP_QORGTYPENO = "Qorgtypeno";
-	public static String PROP_QORGTYPE = "Qorgtype";
-	public static String PROP_CRTDATE = "Crtdate";
-	public static String PROP_QUESTIONID = "Questionid";
-	public static String PROP_QANSWERNO = "Qanswerno";
+	public static String PROP_AN_D = "AnD";
+	public static String PROP_ARQUESTIONAIREID = "Arquestionaireid";
+	public static String PROP_ARCREATOR = "Arcreator";
+	public static String PROP_ARCRTDATE = "Arcrtdate";
+	public static String PROP_ARAREA = "Ararea";
+	public static String PROP_AN_E = "AnE";
 	public static String PROP_ID = "Id";
+	public static String PROP_AN_A = "AnA";
 
 
 	// constructors
@@ -57,21 +62,26 @@ public abstract class BaseBsAnswerresult  implements Serializable {
 	private java.lang.String id;
 
 	// fields
-	private java.lang.String questionaireid;
-	private java.lang.String questionid;
-	private java.lang.String qanswerid;
-	private java.lang.String qorgno;
-	private java.lang.String qorg;
-	private java.lang.String qorgtypeno;
-	private java.lang.String qorgtype;
-	private java.lang.String qareano;
-	private java.lang.String qarea;
-	private java.lang.String qanswerno;
-	private java.lang.String creator;
-	private java.util.Date crtdate;
-	private java.lang.String stat;
-	private java.lang.String flag;
+	private java.lang.String anA;
+	private java.lang.String anB;
+	private java.lang.String anC;
+	private java.lang.String anD;
+	private java.lang.String anE;
+	private java.lang.String anF;
+	private java.lang.String anG;
+	private java.lang.String ararea;
+	private java.lang.String arareano;
+	private java.lang.String arcreator;
+	private java.util.Date arcrtdate;
+	private java.lang.String arorg;
+	private java.lang.String arorgno;
+	private java.lang.String arorgtype;
+	private java.lang.String arorgtypeno;
+	private java.lang.String arquestionaireid;
+	private java.lang.String arquestionid;
 	private java.util.Date createdate;
+	private java.lang.String flag;
+	private java.lang.String stat;
 	private java.util.Date updateate;
 
 
@@ -99,222 +109,307 @@ public abstract class BaseBsAnswerresult  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: QUESTIONAIREID
+	 * Return the value associated with the column: AN_A
 	 */
-	public java.lang.String getQuestionaireid () {
-		return questionaireid;
+	public java.lang.String getAnA () {
+		return anA;
 	}
 
 	/**
-	 * Set the value related to the column: QUESTIONAIREID
-	 * @param questionaireid the QUESTIONAIREID value
+	 * Set the value related to the column: AN_A
+	 * @param anA the AN_A value
 	 */
-	public void setQuestionaireid (java.lang.String questionaireid) {
-		this.questionaireid = questionaireid;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QUESTIONID
-	 */
-	public java.lang.String getQuestionid () {
-		return questionid;
-	}
-
-	/**
-	 * Set the value related to the column: QUESTIONID
-	 * @param questionid the QUESTIONID value
-	 */
-	public void setQuestionid (java.lang.String questionid) {
-		this.questionid = questionid;
+	public void setAnA (java.lang.String anA) {
+		this.anA = anA;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QANSWERID
+	 * Return the value associated with the column: AN_B
 	 */
-	public java.lang.String getQanswerid () {
-		return qanswerid;
+	public java.lang.String getAnB () {
+		return anB;
 	}
 
 	/**
-	 * Set the value related to the column: QANSWERID
-	 * @param qanswerid the QANSWERID value
+	 * Set the value related to the column: AN_B
+	 * @param anB the AN_B value
 	 */
-	public void setQanswerid (java.lang.String qanswerid) {
-		this.qanswerid = qanswerid;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORGNO
-	 */
-	public java.lang.String getQorgno () {
-		return qorgno;
-	}
-
-	/**
-	 * Set the value related to the column: QORGNO
-	 * @param qorgno the QORGNO value
-	 */
-	public void setQorgno (java.lang.String qorgno) {
-		this.qorgno = qorgno;
+	public void setAnB (java.lang.String anB) {
+		this.anB = anB;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QORG
+	 * Return the value associated with the column: AN_C
 	 */
-	public java.lang.String getQorg () {
-		return qorg;
+	public java.lang.String getAnC () {
+		return anC;
 	}
 
 	/**
-	 * Set the value related to the column: QORG
-	 * @param qorg the QORG value
+	 * Set the value related to the column: AN_C
+	 * @param anC the AN_C value
 	 */
-	public void setQorg (java.lang.String qorg) {
-		this.qorg = qorg;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORGTYPENO
-	 */
-	public java.lang.String getQorgtypeno () {
-		return qorgtypeno;
-	}
-
-	/**
-	 * Set the value related to the column: QORGTYPENO
-	 * @param qorgtypeno the QORGTYPENO value
-	 */
-	public void setQorgtypeno (java.lang.String qorgtypeno) {
-		this.qorgtypeno = qorgtypeno;
+	public void setAnC (java.lang.String anC) {
+		this.anC = anC;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QORGTYPE
+	 * Return the value associated with the column: AN_D
 	 */
-	public java.lang.String getQorgtype () {
-		return qorgtype;
+	public java.lang.String getAnD () {
+		return anD;
 	}
 
 	/**
-	 * Set the value related to the column: QORGTYPE
-	 * @param qorgtype the QORGTYPE value
+	 * Set the value related to the column: AN_D
+	 * @param anD the AN_D value
 	 */
-	public void setQorgtype (java.lang.String qorgtype) {
-		this.qorgtype = qorgtype;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QAREANO
-	 */
-	public java.lang.String getQareano () {
-		return qareano;
-	}
-
-	/**
-	 * Set the value related to the column: QAREANO
-	 * @param qareano the QAREANO value
-	 */
-	public void setQareano (java.lang.String qareano) {
-		this.qareano = qareano;
+	public void setAnD (java.lang.String anD) {
+		this.anD = anD;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QAREA
+	 * Return the value associated with the column: AN_E
 	 */
-	public java.lang.String getQarea () {
-		return qarea;
+	public java.lang.String getAnE () {
+		return anE;
 	}
 
 	/**
-	 * Set the value related to the column: QAREA
-	 * @param qarea the QAREA value
+	 * Set the value related to the column: AN_E
+	 * @param anE the AN_E value
 	 */
-	public void setQarea (java.lang.String qarea) {
-		this.qarea = qarea;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QANSWERNO
-	 */
-	public java.lang.String getQanswerno () {
-		return qanswerno;
-	}
-
-	/**
-	 * Set the value related to the column: QANSWERNO
-	 * @param qanswerno the QANSWERNO value
-	 */
-	public void setQanswerno (java.lang.String qanswerno) {
-		this.qanswerno = qanswerno;
+	public void setAnE (java.lang.String anE) {
+		this.anE = anE;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: CREATOR
+	 * Return the value associated with the column: AN_F
 	 */
-	public java.lang.String getCreator () {
-		return creator;
+	public java.lang.String getAnF () {
+		return anF;
 	}
 
 	/**
-	 * Set the value related to the column: CREATOR
-	 * @param creator the CREATOR value
+	 * Set the value related to the column: AN_F
+	 * @param anF the AN_F value
 	 */
-	public void setCreator (java.lang.String creator) {
-		this.creator = creator;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: CRTDATE
-	 */
-	public java.util.Date getCrtdate () {
-		return crtdate;
-	}
-
-	/**
-	 * Set the value related to the column: CRTDATE
-	 * @param crtdate the CRTDATE value
-	 */
-	public void setCrtdate (java.util.Date crtdate) {
-		this.crtdate = crtdate;
+	public void setAnF (java.lang.String anF) {
+		this.anF = anF;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: STAT
+	 * Return the value associated with the column: AN_G
 	 */
-	public java.lang.String getStat () {
-		return stat;
+	public java.lang.String getAnG () {
+		return anG;
 	}
 
 	/**
-	 * Set the value related to the column: STAT
-	 * @param stat the STAT value
+	 * Set the value related to the column: AN_G
+	 * @param anG the AN_G value
 	 */
-	public void setStat (java.lang.String stat) {
-		this.stat = stat;
+	public void setAnG (java.lang.String anG) {
+		this.anG = anG;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARAREA
+	 */
+	public java.lang.String getArarea () {
+		return ararea;
+	}
+
+	/**
+	 * Set the value related to the column: ARAREA
+	 * @param ararea the ARAREA value
+	 */
+	public void setArarea (java.lang.String ararea) {
+		this.ararea = ararea;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARAREANO
+	 */
+	public java.lang.String getArareano () {
+		return arareano;
+	}
+
+	/**
+	 * Set the value related to the column: ARAREANO
+	 * @param arareano the ARAREANO value
+	 */
+	public void setArareano (java.lang.String arareano) {
+		this.arareano = arareano;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARCREATOR
+	 */
+	public java.lang.String getArcreator () {
+		return arcreator;
+	}
+
+	/**
+	 * Set the value related to the column: ARCREATOR
+	 * @param arcreator the ARCREATOR value
+	 */
+	public void setArcreator (java.lang.String arcreator) {
+		this.arcreator = arcreator;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARCRTDATE
+	 */
+	public java.util.Date getArcrtdate () {
+		return arcrtdate;
+	}
+
+	/**
+	 * Set the value related to the column: ARCRTDATE
+	 * @param arcrtdate the ARCRTDATE value
+	 */
+	public void setArcrtdate (java.util.Date arcrtdate) {
+		this.arcrtdate = arcrtdate;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARORG
+	 */
+	public java.lang.String getArorg () {
+		return arorg;
+	}
+
+	/**
+	 * Set the value related to the column: ARORG
+	 * @param arorg the ARORG value
+	 */
+	public void setArorg (java.lang.String arorg) {
+		this.arorg = arorg;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARORGNO
+	 */
+	public java.lang.String getArorgno () {
+		return arorgno;
+	}
+
+	/**
+	 * Set the value related to the column: ARORGNO
+	 * @param arorgno the ARORGNO value
+	 */
+	public void setArorgno (java.lang.String arorgno) {
+		this.arorgno = arorgno;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARORGTYPE
+	 */
+	public java.lang.String getArorgtype () {
+		return arorgtype;
+	}
+
+	/**
+	 * Set the value related to the column: ARORGTYPE
+	 * @param arorgtype the ARORGTYPE value
+	 */
+	public void setArorgtype (java.lang.String arorgtype) {
+		this.arorgtype = arorgtype;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARORGTYPENO
+	 */
+	public java.lang.String getArorgtypeno () {
+		return arorgtypeno;
+	}
+
+	/**
+	 * Set the value related to the column: ARORGTYPENO
+	 * @param arorgtypeno the ARORGTYPENO value
+	 */
+	public void setArorgtypeno (java.lang.String arorgtypeno) {
+		this.arorgtypeno = arorgtypeno;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARQUESTIONAIREID
+	 */
+	public java.lang.String getArquestionaireid () {
+		return arquestionaireid;
+	}
+
+	/**
+	 * Set the value related to the column: ARQUESTIONAIREID
+	 * @param arquestionaireid the ARQUESTIONAIREID value
+	 */
+	public void setArquestionaireid (java.lang.String arquestionaireid) {
+		this.arquestionaireid = arquestionaireid;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ARQUESTIONID
+	 */
+	public java.lang.String getArquestionid () {
+		return arquestionid;
+	}
+
+	/**
+	 * Set the value related to the column: ARQUESTIONID
+	 * @param arquestionid the ARQUESTIONID value
+	 */
+	public void setArquestionid (java.lang.String arquestionid) {
+		this.arquestionid = arquestionid;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: CREATEDATE
+	 */
+	public java.util.Date getCreatedate () {
+		return createdate;
+	}
+
+	/**
+	 * Set the value related to the column: CREATEDATE
+	 * @param createdate the CREATEDATE value
+	 */
+	public void setCreatedate (java.util.Date createdate) {
+		this.createdate = createdate;
 	}
 
 
@@ -337,18 +432,18 @@ public abstract class BaseBsAnswerresult  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: CREATEDATE
+	 * Return the value associated with the column: STAT
 	 */
-	public java.util.Date getCreatedate () {
-		return createdate;
+	public java.lang.String getStat () {
+		return stat;
 	}
 
 	/**
-	 * Set the value related to the column: CREATEDATE
-	 * @param createdate the CREATEDATE value
+	 * Set the value related to the column: STAT
+	 * @param stat the STAT value
 	 */
-	public void setCreatedate (java.util.Date createdate) {
-		this.createdate = createdate;
+	public void setStat (java.lang.String stat) {
+		this.stat = stat;
 	}
 
 

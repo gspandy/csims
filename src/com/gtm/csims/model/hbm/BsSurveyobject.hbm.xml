@@ -12,6 +12,10 @@
 
 		<meta attribute="sync-DAO">false</meta>
 
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
 		<id
 			name="Id"
 			type="string"
@@ -21,43 +25,43 @@
 		</id>
 
 		<property
-			name="Questionaireid"
-			column="QUESTIONAIREID"
+			name="Soquestionaireid"
+			column="SOQUESTIONAIREID"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qorgno"
-			column="QORGNO"
+			name="Soqorgno"
+			column="SOQORGNO"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qorg"
-			column="QORG"
+			name="Soqorg"
+			column="SOQORG"
 			type="string"
 			not-null="false"
 			length="500"
 		/>
 		<property
-			name="Qorgtypeno"
-			column="QORGTYPENO"
+			name="Soqorgtypeno"
+			column="SOQORGTYPENO"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qorgtype"
-			column="QORGTYPE"
+			name="Soqorgtype"
+			column="SOQORGTYPE"
 			type="string"
 			not-null="false"
 			length="500"
 		/>
 		<property
-			name="Isfinished"
-			column="ISFINISHED"
+			name="Soisfinished"
+			column="SOISFINISHED"
 			type="string"
 			not-null="false"
 			length="1"

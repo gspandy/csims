@@ -15,17 +15,17 @@ import java.io.Serializable;
 public abstract class BaseBsSurveyobject  implements Serializable {
 
 	public static String REF = "BsSurveyobject";
-	public static String PROP_QORG = "Qorg";
-	public static String PROP_QORGNO = "Qorgno";
 	public static String PROP_UPDATEATE = "Updateate";
-	public static String PROP_ISFINISHED = "Isfinished";
-	public static String PROP_QUESTIONAIREID = "Questionaireid";
+	public static String PROP_SOISFINISHED = "Soisfinished";
+	public static String PROP_SOQORGTYPE = "Soqorgtype";
 	public static String PROP_FLAG = "Flag";
 	public static String PROP_STAT = "Stat";
-	public static String PROP_QORGTYPENO = "Qorgtypeno";
-	public static String PROP_QORGTYPE = "Qorgtype";
+	public static String PROP_SOQORGTYPENO = "Soqorgtypeno";
 	public static String PROP_CREATEDATE = "Createdate";
+	public static String PROP_SOQORG = "Soqorg";
+	public static String PROP_SOQUESTIONAIREID = "Soquestionaireid";
 	public static String PROP_ID = "Id";
+	public static String PROP_SOQORGNO = "Soqorgno";
 
 
 	// constructors
@@ -51,12 +51,12 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	private java.lang.String id;
 
 	// fields
-	private java.lang.String questionaireid;
-	private java.lang.String qorgno;
-	private java.lang.String qorg;
-	private java.lang.String qorgtypeno;
-	private java.lang.String qorgtype;
-	private java.lang.String isfinished;
+	private java.lang.String soquestionaireid;
+	private java.lang.String soqorgno;
+	private java.lang.String soqorg;
+	private java.lang.String soqorgtypeno;
+	private java.lang.String soqorgtype;
+	private java.lang.String soisfinished;
 	private java.lang.String stat;
 	private java.lang.String flag;
 	private java.util.Date createdate;
@@ -87,103 +87,103 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: QUESTIONAIREID
+	 * Return the value associated with the column: SOQUESTIONAIREID
 	 */
-	public java.lang.String getQuestionaireid () {
-		return questionaireid;
+	public java.lang.String getSoquestionaireid () {
+		return soquestionaireid;
 	}
 
 	/**
-	 * Set the value related to the column: QUESTIONAIREID
-	 * @param questionaireid the QUESTIONAIREID value
+	 * Set the value related to the column: SOQUESTIONAIREID
+	 * @param soquestionaireid the SOQUESTIONAIREID value
 	 */
-	public void setQuestionaireid (java.lang.String questionaireid) {
-		this.questionaireid = questionaireid;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORGNO
-	 */
-	public java.lang.String getQorgno () {
-		return qorgno;
-	}
-
-	/**
-	 * Set the value related to the column: QORGNO
-	 * @param qorgno the QORGNO value
-	 */
-	public void setQorgno (java.lang.String qorgno) {
-		this.qorgno = qorgno;
+	public void setSoquestionaireid (java.lang.String soquestionaireid) {
+		this.soquestionaireid = soquestionaireid;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QORG
+	 * Return the value associated with the column: SOQORGNO
 	 */
-	public java.lang.String getQorg () {
-		return qorg;
+	public java.lang.String getSoqorgno () {
+		return soqorgno;
 	}
 
 	/**
-	 * Set the value related to the column: QORG
-	 * @param qorg the QORG value
+	 * Set the value related to the column: SOQORGNO
+	 * @param soqorgno the SOQORGNO value
 	 */
-	public void setQorg (java.lang.String qorg) {
-		this.qorg = qorg;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QORGTYPENO
-	 */
-	public java.lang.String getQorgtypeno () {
-		return qorgtypeno;
-	}
-
-	/**
-	 * Set the value related to the column: QORGTYPENO
-	 * @param qorgtypeno the QORGTYPENO value
-	 */
-	public void setQorgtypeno (java.lang.String qorgtypeno) {
-		this.qorgtypeno = qorgtypeno;
+	public void setSoqorgno (java.lang.String soqorgno) {
+		this.soqorgno = soqorgno;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: QORGTYPE
+	 * Return the value associated with the column: SOQORG
 	 */
-	public java.lang.String getQorgtype () {
-		return qorgtype;
+	public java.lang.String getSoqorg () {
+		return soqorg;
 	}
 
 	/**
-	 * Set the value related to the column: QORGTYPE
-	 * @param qorgtype the QORGTYPE value
+	 * Set the value related to the column: SOQORG
+	 * @param soqorg the SOQORG value
 	 */
-	public void setQorgtype (java.lang.String qorgtype) {
-		this.qorgtype = qorgtype;
+	public void setSoqorg (java.lang.String soqorg) {
+		this.soqorg = soqorg;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: ISFINISHED
+	 * Return the value associated with the column: SOQORGTYPENO
 	 */
-	public java.lang.String getIsfinished () {
-		return isfinished;
+	public java.lang.String getSoqorgtypeno () {
+		return soqorgtypeno;
 	}
 
 	/**
-	 * Set the value related to the column: ISFINISHED
-	 * @param isfinished the ISFINISHED value
+	 * Set the value related to the column: SOQORGTYPENO
+	 * @param soqorgtypeno the SOQORGTYPENO value
 	 */
-	public void setIsfinished (java.lang.String isfinished) {
-		this.isfinished = isfinished;
+	public void setSoqorgtypeno (java.lang.String soqorgtypeno) {
+		this.soqorgtypeno = soqorgtypeno;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: SOQORGTYPE
+	 */
+	public java.lang.String getSoqorgtype () {
+		return soqorgtype;
+	}
+
+	/**
+	 * Set the value related to the column: SOQORGTYPE
+	 * @param soqorgtype the SOQORGTYPE value
+	 */
+	public void setSoqorgtype (java.lang.String soqorgtype) {
+		this.soqorgtype = soqorgtype;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: SOISFINISHED
+	 */
+	public java.lang.String getSoisfinished () {
+		return soisfinished;
+	}
+
+	/**
+	 * Set the value related to the column: SOISFINISHED
+	 * @param soisfinished the SOISFINISHED value
+	 */
+	public void setSoisfinished (java.lang.String soisfinished) {
+		this.soisfinished = soisfinished;
 	}
 
 

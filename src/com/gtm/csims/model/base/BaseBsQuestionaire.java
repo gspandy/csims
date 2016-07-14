@@ -15,20 +15,21 @@ import java.io.Serializable;
 public abstract class BaseBsQuestionaire  implements Serializable {
 
 	public static String REF = "BsQuestionaire";
-	public static String PROP_DSUMRY = "Dsumry";
 	public static String PROP_UPDATEATE = "Updateate";
-	public static String PROP_CREATORORG = "Creatororg";
 	public static String PROP_STAT = "Stat";
+	public static String PROP_QCREATORORG = "Qcreatororg";
 	public static String PROP_QTITLE = "Qtitle";
+	public static String PROP_QSUMRY = "Qsumry";
 	public static String PROP_CREATEDATE = "Createdate";
-	public static String PROP_CREATOR = "Creator";
-	public static String PROP_ISENABLE = "Isenable";
-	public static String PROP_ISFINISHED = "Isfinished";
+	public static String PROP_QCRTDATE = "Qcrtdate";
+	public static String PROP_QENDDATETIME = "Qenddatetime";
 	public static String PROP_FLAG = "Flag";
-	public static String PROP_ENDDATETIME = "Enddatetime";
-	public static String PROP_CRTDATE = "Crtdate";
-	public static String PROP_CREATORORGNO = "Creatororgno";
+	public static String PROP_QISFINISHED = "Qisfinished";
+	public static String PROP_QSTAT = "Qstat";
+	public static String PROP_QCREATORORGNO = "Qcreatororgno";
+	public static String PROP_QCREATOR = "Qcreator";
 	public static String PROP_ID = "Id";
+	public static String PROP_QISENABLE = "Qisenable";
 
 
 	// constructors
@@ -55,14 +56,15 @@ public abstract class BaseBsQuestionaire  implements Serializable {
 
 	// fields
 	private java.lang.String qtitle;
-	private java.lang.String dsumry;
-	private java.lang.String creator;
-	private java.lang.String creatororg;
-	private java.lang.String creatororgno;
-	private java.util.Date crtdate;
-	private java.lang.String isenable;
-	private java.lang.String isfinished;
-	private java.util.Date enddatetime;
+	private java.lang.String qsumry;
+	private java.lang.String qcreator;
+	private java.lang.String qcreatororg;
+	private java.lang.String qcreatororgno;
+	private java.util.Date qcrtdate;
+	private java.lang.String qisenable;
+	private java.lang.String qisfinished;
+	private java.lang.Short qstat;
+	private java.util.Date qenddatetime;
 	private java.lang.String stat;
 	private java.lang.String flag;
 	private java.util.Date createdate;
@@ -110,137 +112,154 @@ public abstract class BaseBsQuestionaire  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: DSUMRY
+	 * Return the value associated with the column: QSUMRY
 	 */
-	public java.lang.String getDsumry () {
-		return dsumry;
+	public java.lang.String getQsumry () {
+		return qsumry;
 	}
 
 	/**
-	 * Set the value related to the column: DSUMRY
-	 * @param dsumry the DSUMRY value
+	 * Set the value related to the column: QSUMRY
+	 * @param qsumry the QSUMRY value
 	 */
-	public void setDsumry (java.lang.String dsumry) {
-		this.dsumry = dsumry;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: CREATOR
-	 */
-	public java.lang.String getCreator () {
-		return creator;
-	}
-
-	/**
-	 * Set the value related to the column: CREATOR
-	 * @param creator the CREATOR value
-	 */
-	public void setCreator (java.lang.String creator) {
-		this.creator = creator;
+	public void setQsumry (java.lang.String qsumry) {
+		this.qsumry = qsumry;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: CREATORORG
+	 * Return the value associated with the column: QCREATOR
 	 */
-	public java.lang.String getCreatororg () {
-		return creatororg;
+	public java.lang.String getQcreator () {
+		return qcreator;
 	}
 
 	/**
-	 * Set the value related to the column: CREATORORG
-	 * @param creatororg the CREATORORG value
+	 * Set the value related to the column: QCREATOR
+	 * @param qcreator the QCREATOR value
 	 */
-	public void setCreatororg (java.lang.String creatororg) {
-		this.creatororg = creatororg;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: CREATORORGNO
-	 */
-	public java.lang.String getCreatororgno () {
-		return creatororgno;
-	}
-
-	/**
-	 * Set the value related to the column: CREATORORGNO
-	 * @param creatororgno the CREATORORGNO value
-	 */
-	public void setCreatororgno (java.lang.String creatororgno) {
-		this.creatororgno = creatororgno;
+	public void setQcreator (java.lang.String qcreator) {
+		this.qcreator = qcreator;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: CRTDATE
+	 * Return the value associated with the column: QCREATORORG
 	 */
-	public java.util.Date getCrtdate () {
-		return crtdate;
+	public java.lang.String getQcreatororg () {
+		return qcreatororg;
 	}
 
 	/**
-	 * Set the value related to the column: CRTDATE
-	 * @param crtdate the CRTDATE value
+	 * Set the value related to the column: QCREATORORG
+	 * @param qcreatororg the QCREATORORG value
 	 */
-	public void setCrtdate (java.util.Date crtdate) {
-		this.crtdate = crtdate;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: ISENABLE
-	 */
-	public java.lang.String getIsenable () {
-		return isenable;
-	}
-
-	/**
-	 * Set the value related to the column: ISENABLE
-	 * @param isenable the ISENABLE value
-	 */
-	public void setIsenable (java.lang.String isenable) {
-		this.isenable = isenable;
+	public void setQcreatororg (java.lang.String qcreatororg) {
+		this.qcreatororg = qcreatororg;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: ISFINISHED
+	 * Return the value associated with the column: QCREATORORGNO
 	 */
-	public java.lang.String getIsfinished () {
-		return isfinished;
+	public java.lang.String getQcreatororgno () {
+		return qcreatororgno;
 	}
 
 	/**
-	 * Set the value related to the column: ISFINISHED
-	 * @param isfinished the ISFINISHED value
+	 * Set the value related to the column: QCREATORORGNO
+	 * @param qcreatororgno the QCREATORORGNO value
 	 */
-	public void setIsfinished (java.lang.String isfinished) {
-		this.isfinished = isfinished;
+	public void setQcreatororgno (java.lang.String qcreatororgno) {
+		this.qcreatororgno = qcreatororgno;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: ENDDATETIME
+	 * Return the value associated with the column: QCRTDATE
 	 */
-	public java.util.Date getEnddatetime () {
-		return enddatetime;
+	public java.util.Date getQcrtdate () {
+		return qcrtdate;
 	}
 
 	/**
-	 * Set the value related to the column: ENDDATETIME
-	 * @param enddatetime the ENDDATETIME value
+	 * Set the value related to the column: QCRTDATE
+	 * @param qcrtdate the QCRTDATE value
 	 */
-	public void setEnddatetime (java.util.Date enddatetime) {
-		this.enddatetime = enddatetime;
+	public void setQcrtdate (java.util.Date qcrtdate) {
+		this.qcrtdate = qcrtdate;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: QISENABLE
+	 */
+	public java.lang.String getQisenable () {
+		return qisenable;
+	}
+
+	/**
+	 * Set the value related to the column: QISENABLE
+	 * @param qisenable the QISENABLE value
+	 */
+	public void setQisenable (java.lang.String qisenable) {
+		this.qisenable = qisenable;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: QISFINISHED
+	 */
+	public java.lang.String getQisfinished () {
+		return qisfinished;
+	}
+
+	/**
+	 * Set the value related to the column: QISFINISHED
+	 * @param qisfinished the QISFINISHED value
+	 */
+	public void setQisfinished (java.lang.String qisfinished) {
+		this.qisfinished = qisfinished;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: QSTAT
+	 */
+	public java.lang.Short getQstat () {
+		return qstat;
+	}
+
+	/**
+	 * Set the value related to the column: QSTAT
+	 * @param qstat the QSTAT value
+	 */
+	public void setQstat (java.lang.Short qstat) {
+		this.qstat = qstat;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: QENDDATETIME
+	 */
+	public java.util.Date getQenddatetime () {
+		return qenddatetime;
+	}
+
+	/**
+	 * Set the value related to the column: QENDDATETIME
+	 * @param qenddatetime the QENDDATETIME value
+	 */
+	public void setQenddatetime (java.util.Date qenddatetime) {
+		this.qenddatetime = qenddatetime;
 	}
 
 

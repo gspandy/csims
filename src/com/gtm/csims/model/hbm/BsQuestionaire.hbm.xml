@@ -12,6 +12,10 @@
 
 		<meta attribute="sync-DAO">false</meta>
 
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
 		<id
 			name="Id"
 			type="string"
@@ -28,57 +32,64 @@
 			length="500"
 		/>
 		<property
-			name="Dsumry"
-			column="DSUMRY"
+			name="Qsumry"
+			column="QSUMRY"
 			type="string"
 			not-null="false"
 			length="1000"
 		/>
 		<property
-			name="Creator"
-			column="CREATOR"
+			name="Qcreator"
+			column="QCREATOR"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Creatororg"
-			column="CREATORORG"
+			name="Qcreatororg"
+			column="QCREATORORG"
 			type="string"
 			not-null="false"
 			length="100"
 		/>
 		<property
-			name="Creatororgno"
-			column="CREATORORGNO"
+			name="Qcreatororgno"
+			column="QCREATORORGNO"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Crtdate"
-			column="CRTDATE"
+			name="Qcrtdate"
+			column="QCRTDATE"
 			type="timestamp"
 			not-null="false"
 			length="26"
 		/>
 		<property
-			name="Isenable"
-			column="ISENABLE"
+			name="Qisenable"
+			column="QISENABLE"
 			type="string"
 			not-null="false"
 			length="1"
 		/>
 		<property
-			name="Isfinished"
-			column="ISFINISHED"
+			name="Qisfinished"
+			column="QISFINISHED"
 			type="string"
 			not-null="false"
 			length="1"
 		/>
 		<property
-			name="Enddatetime"
-			column="ENDDATETIME"
+			name="Qstat"
+			column="QSTAT"
+			type="java.lang.Short"
+			not-null="false"
+			length="5"
+		/>
+		<property
+			name="Qenddatetime"
+			column="QENDDATETIME"
 			type="timestamp"
 			not-null="false"
 			length="26"

@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gtm.csims.dao.BsAnswerDAO;
 import com.gtm.csims.dao.BsAnswerresultDAO;
 import com.gtm.csims.dao.BsQuestionDAO;
 import com.gtm.csims.dao.BsQuestionaireDAO;
@@ -26,7 +25,6 @@ import com.gtm.csims.model.BsQuestionaire;
 public class QuestionService {
 
 	private JdbcTemplate jdbcTemplate;
-	private BsAnswerDAO bsAnswerDao;
 	private BsQuestionaireDAO bsQuestionaireDao;
 	private BsQuestionDAO bsQuestionDao;
 	private BsSurveyobjectDAO bsSurveyobjectDao;
@@ -77,10 +75,6 @@ public class QuestionService {
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
-	}
-
-	public void setBsAnswerDao(BsAnswerDAO bsAnswerDao) {
-		this.bsAnswerDao = bsAnswerDao;
 	}
 
 	public void setBsQuestionaireDao(BsQuestionaireDAO bsQuestionaireDao) {

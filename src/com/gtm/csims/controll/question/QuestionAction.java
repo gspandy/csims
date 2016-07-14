@@ -124,11 +124,11 @@ public class QuestionAction extends BaseAction {
 			try {
 				BsQuestionaire questionaire = RequestUtil.getBeanFromParams(request, BsQuestionaire.class);
 				Date now = new Date();
-				questionaire.setCreatedate(now);
-				questionaire.setCreator(nowLoginUser);
-				questionaire.setCreatororgno(loginOrgNo);
-				questionaire.setCreatororg(bsorg.getName());
-				questionaire.setCrtdate(now);
+				// questionaire.setCreatedate(now);
+				// questionaire.setCreator(nowLoginUser);
+				// questionaire.setCreatororgno(loginOrgNo);
+				// questionaire.setCreatororg(bsorg.getName());
+				// questionaire.setCrtdate(now);
 
 				questionService.create(questionaire);
 				LOGGER.info(String.format(LOG_FORMAT, bsorg.getName(), nowLoginUser, "保存问卷调查", "操作成功!"));

@@ -8,7 +8,6 @@
 
 	<bean id="questionService" class="com.gtm.csims.business.question.QuestionService">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
-		<property name="bsAnswerDao" ref="bsAnswerDao" />
 		<property name="bsQuestionaireDao" ref="bsQuestionaireDao" />
 		<property name="bsQuestionDao" ref="bsQuestionDao" />
 		<property name="bsSurveyobjectDao" ref="bsSurveyobjectDao" />

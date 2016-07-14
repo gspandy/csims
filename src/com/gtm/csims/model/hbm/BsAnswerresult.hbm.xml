@@ -9,6 +9,11 @@
 		table="BS_ANSWERRESULT"
 	>
 		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
 		<id
 			name="Id"
 			type="string"
@@ -18,85 +23,120 @@
 		</id>
 
 		<property
-			name="Questionaireid"
-			column="QUESTIONAIREID"
+			name="Arquestionaireid"
+			column="ARQUESTIONAIREID"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Questionid"
-			column="QUESTIONID"
+			name="Arquestionid"
+			column="ARQUESTIONID"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qanswerid"
-			column="QANSWERID"
+			name="Arorgno"
+			column="ARORGNO"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qorgno"
-			column="QORGNO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Qorg"
-			column="QORG"
+			name="Arorg"
+			column="ARORG"
 			type="string"
 			not-null="false"
 			length="500"
 		/>
 		<property
-			name="Qorgtypeno"
-			column="QORGTYPENO"
+			name="Arorgtypeno"
+			column="ARORGTYPENO"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qorgtype"
-			column="QORGTYPE"
+			name="Arorgtype"
+			column="ARORGTYPE"
 			type="string"
 			not-null="false"
 			length="500"
 		/>
 		<property
-			name="Qareano"
-			column="QAREANO"
+			name="Arareano"
+			column="ARAREANO"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qarea"
-			column="QAREA"
+			name="Ararea"
+			column="ARAREA"
 			type="string"
 			not-null="false"
 			length="500"
 		/>
 		<property
-			name="Qanswerno"
-			column="QANSWERNO"
+			name="AnA"
+			column="AN_A"
 			type="string"
 			not-null="false"
 			length="1"
 		/>
 		<property
-			name="Creator"
-			column="CREATOR"
+			name="AnB"
+			column="AN_B"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="AnC"
+			column="AN_C"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="AnD"
+			column="AN_D"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="AnE"
+			column="AN_E"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="AnF"
+			column="AN_F"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="AnG"
+			column="AN_G"
+			type="string"
+			not-null="false"
+			length="1"
+		/>
+		<property
+			name="Arcreator"
+			column="ARCREATOR"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Crtdate"
-			column="CRTDATE"
+			name="Arcrtdate"
+			column="ARCRTDATE"
 			type="timestamp"
 			not-null="false"
 			length="26"

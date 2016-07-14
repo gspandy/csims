@@ -12,6 +12,10 @@
 
 		<meta attribute="sync-DAO">false</meta>
 
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
 		<id
 			name="Id"
 			type="string"
@@ -21,25 +25,74 @@
 		</id>
 
 		<property
-			name="Questionaireid"
-			column="QUESTIONAIREID"
+			name="Qquestionaireid"
+			column="QQUESTIONAIREID"
 			type="string"
 			not-null="false"
 			length="50"
 		/>
 		<property
-			name="Qtitle"
-			column="QTITLE"
+			name="Qqtitle"
+			column="QQTITLE"
 			type="string"
 			not-null="false"
 			length="1000"
 		/>
 		<property
-			name="Qindex"
-			column="QINDEX"
+			name="Qqindex"
+			column="QQINDEX"
 			type="java.lang.Short"
 			not-null="false"
 			length="5"
+		/>
+		<property
+			name="Answera"
+			column="ANSWERA"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Answerb"
+			column="ANSWERB"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Answerc"
+			column="ANSWERC"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Answerd"
+			column="ANSWERD"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Answere"
+			column="ANSWERE"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Answerf"
+			column="ANSWERF"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="Answerg"
+			column="ANSWERG"
+			type="string"
+			not-null="false"
+			length="200"
 		/>
 		<property
 			name="Stat"

@@ -159,9 +159,6 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<bean id="bsAnswerDao" class="com.gtm.csims.dao.hibernate.BsAnswerDAOImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
 	<bean id="bsQuestionaireDao" class="com.gtm.csims.dao.hibernate.BsQuestionaireDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
