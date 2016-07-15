@@ -9,13 +9,6 @@
 		table="BS_SURVEYOBJECT"
 	>
 		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
 		<id
 			name="Id"
 			type="string"
@@ -23,14 +16,6 @@
 		>
 			<generator class="org.hibernate.id.UUIDHexGenerator"/>
 		</id>
-
-		<property
-			name="Soquestionaireid"
-			column="SOQUESTIONAIREID"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
 		<property
 			name="Soqorgno"
 			column="SOQORGNO"
@@ -39,8 +24,8 @@
 			length="50"
 		/>
 		<property
-			name="Soqorg"
-			column="SOQORG"
+			name="Soqorgname"
+			column="SOQORGNAME"
 			type="string"
 			not-null="false"
 			length="500"
@@ -67,8 +52,8 @@
 			length="1"
 		/>
 		<property
-			name="Stat"
-			column="STAT"
+			name="Status"
+			column="STATUS"
 			type="string"
 			not-null="false"
 			length="50"
@@ -94,7 +79,13 @@
 			not-null="false"
 			length="26"
 		/>
-
+		<many-to-one
+			name="BsQuestionaire"
+			column="BSQUESTIONAIRE"
+			class="BsQuestionaire"
+			not-null="false"
+		>
+		</many-to-one>
 
 	</class>	
 </hibernate-mapping>

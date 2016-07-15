@@ -20,10 +20,10 @@ public abstract class BaseBsQuestion  implements Serializable {
 	public static String PROP_ANSWERG = "Answerg";
 	public static String PROP_QQTITLE = "Qqtitle";
 	public static String PROP_ANSWERA = "Answera";
-	public static String PROP_STAT = "Stat";
+	public static String PROP_STATUS = "Status";
 	public static String PROP_ANSWERD = "Answerd";
 	public static String PROP_CREATEDATE = "Createdate";
-	public static String PROP_QQUESTIONAIREID = "Qquestionaireid";
+	public static String PROP_BSQUESTIONAIRE = "BsQuestionaire";
 	public static String PROP_ANSWERC = "Answerc";
 	public static String PROP_FLAG = "Flag";
 	public static String PROP_QQINDEX = "Qqindex";
@@ -66,9 +66,10 @@ public abstract class BaseBsQuestion  implements Serializable {
 	private java.lang.String flag;
 	private java.lang.Short qqindex;
 	private java.lang.String qqtitle;
-	private java.lang.String qquestionaireid;
-	private java.lang.String stat;
+	private java.lang.String status;
 	private java.util.Date updateate;
+	
+	private com.gtm.csims.model.BsQuestionaire bsQuestionaire;
 
 
 
@@ -90,9 +91,6 @@ public abstract class BaseBsQuestion  implements Serializable {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
-
-
-
 
 	/**
 	 * Return the value associated with the column: ANSWERA
@@ -279,42 +277,6 @@ public abstract class BaseBsQuestion  implements Serializable {
 		this.qqtitle = qqtitle;
 	}
 
-
-
-	/**
-	 * Return the value associated with the column: QQUESTIONAIREID
-	 */
-	public java.lang.String getQquestionaireid () {
-		return qquestionaireid;
-	}
-
-	/**
-	 * Set the value related to the column: QQUESTIONAIREID
-	 * @param qquestionaireid the QQUESTIONAIREID value
-	 */
-	public void setQquestionaireid (java.lang.String qquestionaireid) {
-		this.qquestionaireid = qquestionaireid;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: STAT
-	 */
-	public java.lang.String getStat () {
-		return stat;
-	}
-
-	/**
-	 * Set the value related to the column: STAT
-	 * @param stat the STAT value
-	 */
-	public void setStat (java.lang.String stat) {
-		this.stat = stat;
-	}
-
-
-
 	/**
 	 * Return the value associated with the column: UPDATEATE
 	 */
@@ -330,8 +292,21 @@ public abstract class BaseBsQuestion  implements Serializable {
 		this.updateate = updateate;
 	}
 
+	public java.lang.String getStatus() {
+		return status;
+	}
 
+	public void setStatus(java.lang.String status) {
+		this.status = status;
+	}
 
+	public com.gtm.csims.model.BsQuestionaire getBsQuestionaire() {
+		return bsQuestionaire;
+	}
+
+	public void setBsQuestionaire(com.gtm.csims.model.BsQuestionaire bsQuestionaire) {
+		this.bsQuestionaire = bsQuestionaire;
+	}
 
 	public boolean equals (Object obj) {
 		if (null == obj) return false;

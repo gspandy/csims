@@ -9,6 +9,8 @@
 	<bean name="/QuestionAction"
 		class="com.gtm.csims.controll.question.QuestionAction">
 		<property name="questionService" ref="questionService"></property>
+		<property name="remindService" ref="remindService"></property>
+		<property name="systemBaseInfoManager" ref="systemBaseInfoManager"></property>
 	</bean>
 
 </beans>

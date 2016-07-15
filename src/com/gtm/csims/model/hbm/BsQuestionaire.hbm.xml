@@ -46,8 +46,8 @@
 			length="50"
 		/>
 		<property
-			name="Qcreatororg"
-			column="QCREATORORG"
+			name="Qcreatororgname"
+			column="QCREATORORGNAME"
 			type="string"
 			not-null="false"
 			length="100"
@@ -60,46 +60,18 @@
 			length="50"
 		/>
 		<property
-			name="Qcrtdate"
-			column="QCRTDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Qisenable"
-			column="QISENABLE"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="Qisfinished"
-			column="QISFINISHED"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="Qstat"
-			column="QSTAT"
-			type="java.lang.Short"
-			not-null="false"
-			length="5"
-		/>
-		<property
 			name="Qenddatetime"
 			column="QENDDATETIME"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Stat"
-			column="STAT"
 			type="string"
 			not-null="false"
-			length="50"
+			length="20"
+		/>
+		<property
+			name="Status"
+			column="STATUS"
+			type="string"
+			not-null="false"
+			length="5"
 		/>
 		<property
 			name="Flag"

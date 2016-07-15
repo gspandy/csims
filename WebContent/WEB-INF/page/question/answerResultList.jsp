@@ -50,7 +50,7 @@ body {
 	src="<%=request.getContextPath()%>/js/WdatePicker.js" defer="defer"></script>
 <script type="text/javascript">
 	function search(){
-		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toQuestionairesList");
+		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toAnswerResultList");
         $("form[name='questionForm']").submit();
     }
     
@@ -58,42 +58,10 @@ body {
 		$("input[name='qtitle']").val("");
 	}
 	
-	function toCreatePage(id){
+	function toAnswerOrgPage(id){
 		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toCreateQuestionairesPage";
+		document.forms[0].action="./QuestionAction.do?method=toAnswerOrgPage";
         document.forms[0].submit();
-	}
-	
-	function toQuestionDetailPage(id){
-		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toQuestionDetailPage";
-        document.forms[0].submit();
-	}
-	
-	function toDeploy(id){
-		document.getElementById("status").value="1";
-		document.getElementById("qid").value=id;
-		if(confirm("操作将发布问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=changeQuestionairesStatus";
-			document.forms[0].submit();
-		}
-	}
-	
-	function toDelQuestionaires(id){
-		document.getElementById("qid").value=id;
-		if(confirm("操作将删除问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=delQuestionaires";
-			document.forms[0].submit();
-		}
-	}
-	
-	function toEnd(id){
-		document.getElementById("status").value="2";
-		document.getElementById("qid").value=id;
-		if(confirm("操作将结束问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=changeQuestionairesStatus";
-			document.forms[0].submit();
-		}
 	}
 </script>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -111,14 +79,15 @@ body {
 						问卷调查
 						<img src="<%=request.getContextPath()%>/images/index11.jpg"
 							width="6" height="10" hspace="5" />
-						问卷调查列表
+						问卷结果查询
 				</tr>
 			</table>
 		</td>
 	</tr>
 </table>
-<html:form action="/QuestionAction.do?method=toQuestionairesList">
+<html:form action="/QuestionAction.do?method=toAnswerResultList">
 	<html:hidden property="pageCount" />
+	<html:hidden property="qid" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td valign="top">
@@ -142,10 +111,6 @@ body {
 															<td align="right">
 																<input name="button" type="button" class="botton01"
 																	onclick="search();" value="查 询" />
-																<input name="button2" type="button" class="botton01"
-																	onclick="toCreatePage('');" value="新 增" />
-																<html:hidden property="qid" />
-																<html:hidden property="status" />
 																<input name="button2" type="button" class="botton01"
 																	onclick="resets();" value="重 置" />
 															</td>
@@ -211,22 +176,9 @@ body {
 														<logic:equal name="item" property="status" value="2">已完成</logic:equal>
 													</td>
 													<td align="center">
-														<logic:equal name="item" property="status" value="0">
-															<input name="button2" type="button" class="botton01"
-																onclick="toDeploy('<bean:write name="item" property="id"/>');" value="发 布" />
-															<input name="button2" type="button" class="botton01"
-																onclick="toDelQuestionaires'<bean:write name="item" property="id"/>');" value="删除标题" />
-														</logic:equal>
-														<logic:equal name="item" property="status" value="1">
-															<input name="button2" type="button" class="botton01"
-																onclick="toEnd('<bean:write name="item" property="id"/>');" value="结 束" />
-														</logic:equal>
 														<input name="button2" type="button" class="botton01"
-															onclick="toCreatePage('<bean:write name="item" property="id"/>');"
-															value="编辑标题" />
-														<input name="button2" type="button" class="botton01"
-															onclick="toQuestionDetailPage('<bean:write name="item" property="id"/>');"
-															value="编辑问题" />
+															onclick="toAnswerOrgPage('<bean:write name="item" property="id"/>');"
+															value="问卷机构" />
 													</td>
 												</tr>
 											</logic:iterate>

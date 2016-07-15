@@ -7,8 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><bean:message key="PROJECT_NAME" />
-		</title>
+		<title><bean:message key="PROJECT_NAME" /></title>
 
 		<script src="<%=path%>/js/JS.js" language="javascript"
 			type="text/javascript"></script>
@@ -134,21 +133,22 @@ function goMainPage(type,url){
 																							<tr class="h30">
 																								<td>
 																									<a
-																										href="<%=request.getContextPath()%>/Log.do?method=listLog4j"
+																										href="<%=request.getContextPath()%>/Log.do?method=listLog4j&flag=1"
 																										target="mainFrame" class="left"><bean:message
 																											key="left.jsp.text.viewlog" /> </a>
 																								</td>
 																							</tr>
 																						</jguard:authorized>
-																						 <jguard:authorized uri="/AdminSanctionManagerAction.do?method=toSetSystemParam">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=toSetSystemParam"
-                                                                                                        target="mainFrame" class="left">系统基础参数设置</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
+																						<jguard:authorized
+																							uri="/AdminSanctionManagerAction.do?method=toSetSystemParam">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=toSetSystemParam"
+																										target="mainFrame" class="left">系统基础参数设置</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>
@@ -159,200 +159,279 @@ function goMainPage(type,url){
 																	</td>
 																</tr>
 																<tr>
-                                                                    <td>
-                                                                        <table width="100%" border="0" cellspacing="0"
-                                                                            cellpadding="0">
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                                                        width="100%">
-                                                                                        <tr>
-                                                                                            <td id="t2" class="title"
-                                                                                                onclick="showObj(this,1)"
-                                                                                                onfocusout="change(this)">
-                                                                                                                用户管理
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                    <table id="odiv" style="display: none" border="0"
-                                                                                        cellpadding="0" cellspacing="0" width="100%">
-                                                                                        <jguard:authorized uri="/User.do?method=userList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=userList"
-                                                                                                        target="mainFrame" class="left"><bean:message
-                                                                                                            key="left.jsp.text.usermanagement" /> </a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/EnforceOfficerManagerAction.do?method=toEnOfficerList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/EnforceOfficerManagerAction.do?method=toEnOfficerList"
-                                                                                                        target="mainFrame" class="left">执法人员管理</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-											                                            <jguard:authorized
-                                                                                            uri="/User.do?method=toUploadUserComInfoPage">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=toUploadUserComInfoPage"
-                                                                                                        target="mainFrame" class="left">导入用户表彰信息</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=toUserStopExcelPage">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=toUserStopExcelPage"
-                                                                                                        target="mainFrame" class="left">征信系统用户批量停用</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=applyUserList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=applyUserList"
-                                                                                                        target="mainFrame" class="left">用户申请任务</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=auditUserList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=auditUserList"
-                                                                                                        target="mainFrame" class="left">查看用户申请回执
-                                                                                                    </a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=userReportListOfPersonal">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=userReportListOfPersonal"
-                                                                                                        target="mainFrame" class="left">个人用户报备查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=userReportListOfTotal">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=userReportListOfTotal"
-                                                                                                        target="mainFrame" class="left">汇总用户报备查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=personalInfoManagerPage">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=personalInfoManagerPage"
-                                                                                                        target="mainFrame" class="left">个人信息查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/User.do?method=userInfoQueryPage">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/User.do?method=userInfoQueryPage"
-                                                                                                        target="mainFrame" class="left">系统用户查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="2"></td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table width="100%" border="0" cellspacing="0"
-                                                                            cellpadding="0">
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                                                        width="100%">
-                                                                                        <tr>
-                                                                                            <td id="t2" class="title"
-                                                                                                onclick="showObj(this,2)"
-                                                                                                onfocusout="change(this)">
-                                                                                                机构管理
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                    <table id="odiv" style="display: none" border="0"
-                                                                                        cellpadding="0" cellspacing="0" width="100%">
-                                                                                        <jguard:authorized
-                                                                                            uri="/SystemBaseInfoManagerAction.do?method=toOrgMain">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toOrgMain"
-                                                                                                        class="left" target="mainFrame">机构维护</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/SystemBaseInfoManagerAction.do?method=toUploadOrgComInfoPage">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toUploadOrgComInfoPage"
-                                                                                                        class="left" target="mainFrame">导入机构表彰信息</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/SystemBaseInfoManagerAction.do?method=toOrgList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toOrgList"
-                                                                                                        class="left" target="mainFrame">机构查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/SystemBaseInfoManagerAction.do?method=toDeptMain">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toDeptMain"
-                                                                                                        class="left" target="mainFrame">部门维护</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="2"></td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
+																	<td>
+																		<table width="100%" border="0" cellspacing="0"
+																			cellpadding="0">
+																			<tr>
+																				<td>
+																					<table border="0" cellpadding="0" cellspacing="0"
+																						width="100%">
+																						<tr>
+																							<td id="t2" class="title"
+																								onclick="showObj(this,1)"
+																								onfocusout="change(this)">
+																								用户管理
+																							</td>
+																						</tr>
+																					</table>
+																					<table id="odiv" style="display: none" border="0"
+																						cellpadding="0" cellspacing="0" width="100%">
+																						<jguard:authorized uri="/User.do?method=userList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=userList"
+																										target="mainFrame" class="left"><bean:message
+																											key="left.jsp.text.usermanagement" /> </a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/EnforceOfficerManagerAction.do?method=toEnOfficerList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/EnforceOfficerManagerAction.do?method=toEnOfficerList"
+																										target="mainFrame" class="left">执法人员管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=toUploadUserComInfoPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=toUploadUserComInfoPage"
+																										target="mainFrame" class="left">导入用户表彰信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=toUploadUserRepInfoPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=toUploadUserRepInfoPage"
+																										target="mainFrame" class="left">导入用户惩戒信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=toUserStopExcelPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=toUserStopExcelPage"
+																										target="mainFrame" class="left">征信系统用户批量停用</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=toUserEnbleExcelPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=toUserEnbleExcelPage"
+																										target="mainFrame" class="left">征信系统用户批量启用</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=toUserAddExcelPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=toUserAddExcelPage"
+																										target="mainFrame" class="left">征信系统用户批量新增</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=applyUserList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=applyUserList"
+																										target="mainFrame" class="left">操作征信用户名回执</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=applyZxUserList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=applyZxUserList"
+																										target="mainFrame" class="left">新增征信用户名申请</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=auditZxUserList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=auditZxUserList"
+																										target="mainFrame" class="left">新增征信用户名任务</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=auditZxUserListDis">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=auditZxUserListDis"
+																										target="mainFrame" class="left">停用征信用户名任务</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=auditZxUserListEn">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=auditZxUserListEn"
+																										target="mainFrame" class="left">启用征信用户名任务</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=userReportListOfPersonal">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=userReportListOfPersonal"
+																										target="mainFrame" class="left">单个用户报备查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=userReportListOfTotal">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=userReportListOfTotal"
+																										target="mainFrame" class="left">汇总用户报备查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=personalInfoManagerPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=personalInfoManagerPage"
+																										target="mainFrame" class="left">本人信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/User.do?method=userInfoQueryPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/User.do?method=userInfoQueryPage"
+																										target="mainFrame" class="left">系统用户名查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width="100%" border="0" cellspacing="0"
+																			cellpadding="0">
+																			<tr>
+																				<td>
+																					<table border="0" cellpadding="0" cellspacing="0"
+																						width="100%">
+																						<tr>
+																							<td id="t2" class="title"
+																								onclick="showObj(this,2)"
+																								onfocusout="change(this)">
+																								机构管理
+																							</td>
+																						</tr>
+																					</table>
+																					<table id="odiv" style="display: none" border="0"
+																						cellpadding="0" cellspacing="0" width="100%">
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=toOrgMain">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toOrgMain"
+																										class="left" target="mainFrame">机构维护</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=toUploadOrgInfoPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toUploadOrgInfoPage"
+																										class="left" target="mainFrame">导入机构信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=toUploadOrgComInfoPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toUploadOrgComInfoPage"
+																										class="left" target="mainFrame">导入机构表彰信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=toUploadOrgRepInfoPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toUploadOrgRepInfoPage"
+																										target="mainFrame" class="left">导入机构惩戒信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=toOrgList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toOrgList"
+																										class="left" target="mainFrame">机构查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=toDeptMain">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=toDeptMain"
+																										class="left" target="mainFrame">部门维护</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
 																<tr>
 																	<td>
 																		<table width="100%" border="0" cellspacing="0"
@@ -483,15 +562,15 @@ function goMainPage(type,url){
 																							</tr>
 																						</jguard:authorized>
 																						<jguard:authorized
-                                                                                            uri="/AdminSanctionManagerAction.do?method=toPageAeconclusionInfo">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=toPageAeconclusionInfo"
-                                                                                                        target="mainFrame" class="left">行政执法相关信息</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
+																							uri="/AdminSanctionManagerAction.do?method=toPageAeconclusionInfo">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=toPageAeconclusionInfo"
+																										target="mainFrame" class="left">行政执法相关信息</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>
@@ -635,26 +714,26 @@ function goMainPage(type,url){
 																								</td>
 																							</tr>
 																						</jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/StatisticsAction.do?method=init">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/StatisticsAction.do?method=init"
-                                                                                                        target="mainFrame" class="left">辖内问题概况统计</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                         <jguard:authorized
-                                                                                            uri="/StatisticsAction.do?method=initFeedback">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/StatisticsAction.do?method=initFeedback"
-                                                                                                        target="mainFrame" class="left">反馈情况统计</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
+																						<jguard:authorized
+																							uri="/StatisticsAction.do?method=init">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/StatisticsAction.do?method=init"
+																										target="mainFrame" class="left">辖内问题概况统计</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/StatisticsAction.do?method=initFeedback">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/StatisticsAction.do?method=initFeedback"
+																										target="mainFrame" class="left">反馈情况统计</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>
@@ -684,12 +763,22 @@ function goMainPage(type,url){
 																					<table id="odiv" style="display: none" border="0"
 																						cellpadding="0" cellspacing="0" width="100%">
 																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toWorkDeployList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toWorkDeployList"
+																										target="mainFrame" class="left">工作动态管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
 																							uri="/DailyMgrAction.do?method=toTrainingList">
 																							<tr class="h30">
 																								<td>
 																									<a
 																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toTrainingList"
-																										target="mainFrame" class="left">培训管理</a>
+																										target="mainFrame" class="left">培训信息管理</a>
 																								</td>
 																							</tr>
 																						</jguard:authorized>
@@ -715,25 +804,85 @@ function goMainPage(type,url){
 																							</tr>
 																						</jguard:authorized>
 																						<jguard:authorized
-                                                                                            uri="/DailyMgrAction.do?method=toBusievalList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toBusievalList"
-                                                                                                        target="mainFrame" class="left">业务评价管理</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/DailyMgrAction.do?method=toBusievalStaPage">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toBusievalStaPage"
-                                                                                                        target="mainFrame" class="left">业务评价统计</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
+																							uri="/DailyMgrAction.do?method=toBusievalList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toBusievalList"
+																										target="mainFrame" class="left">业务评价评分管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toEvalInfoList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toEvalInfoList"
+																										target="mainFrame" class="left">业务评价信息管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toEvalRuleList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toEvalRuleList"
+																										target="mainFrame" class="left">业务评价细则管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toEvalProportionList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toEvalProportionList"
+																										target="mainFrame" class="left">业务评价占比管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toEvalBaseScoreList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toEvalBaseScoreList"
+																										target="mainFrame" class="left">业务评价基本分管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toEvalMarkingList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toEvalMarkingList"
+																										target="mainFrame" class="left">业务评价中支评分</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toBusievalStaPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toBusievalStaPage"
+																										target="mainFrame" class="left">业务评价统计</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/DailyMgrAction.do?method=toBusievalStaPage1">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/DailyMgrAction.do?method=toBusievalStaPage1"
+																										target="mainFrame" class="left">金融机构排名</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>
@@ -744,72 +893,92 @@ function goMainPage(type,url){
 																	</td>
 																</tr>
 																<tr>
-                                                                    <td>
-                                                                        <table width="100%" border="0" cellspacing="0"
-                                                                            cellpadding="0">
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                                                        width="100%">
-                                                                                        <tr>
-                                                                                            <td id="t2" class="title"
-                                                                                                onclick="showObj(this,9)"
-                                                                                                onfocusout="change(this)">
-                                                                                                	征信市场管理
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                    <table id="odiv" style="display: none" border="0"
-                                                                                        cellpadding="0" cellspacing="0" width="100%">
-                                                                                        <jguard:authorized
-                                                                                            uri="/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentInit">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentInit"
-                                                                                                        target="mainFrame" class="left">征信机构诚信档案录入</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentInit">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentInit"
-                                                                                                        target="mainFrame" class="left">征信人员诚信档案录入</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentList"
-                                                                                                        target="mainFrame" class="left">征信机构诚信档案查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                        <jguard:authorized
-                                                                                            uri="/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentList"
-                                                                                                        target="mainFrame" class="left">征信人员诚信档案查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </jguard:authorized>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="2"></td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
+																	<td>
+																		<table width="100%" border="0" cellspacing="0"
+																			cellpadding="0">
+																			<tr>
+																				<td>
+																					<table border="0" cellpadding="0" cellspacing="0"
+																						width="100%">
+																						<tr>
+																							<td id="t2" class="title"
+																								onclick="showObj(this,9)"
+																								onfocusout="change(this)">
+																								征信市场管理
+																							</td>
+																						</tr>
+																					</table>
+																					<table id="odiv" style="display: none" border="0"
+																						cellpadding="0" cellspacing="0" width="100%">
+																						<jguard:authorized
+																							uri="/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentInit">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentInit"
+																										target="mainFrame" class="left">机构诚信档案录入</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentInit">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentInit"
+																										target="mainFrame" class="left">人员诚信档案录入</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentListOfPJ">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentListOfPJ"
+																										target="mainFrame" class="left">评级机构诚信档案查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentListOfZX">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxOrgIntegrityDocumentListOfZX"
+																										target="mainFrame" class="left">征信机构诚信档案查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentListOfPJ">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentListOfPJ"
+																										target="mainFrame" class="left">评级人员诚信档案查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentListOfZX">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ZxMarketMgrAction.do?method=toZxPersonalIntegrityDocumentListOfZX"
+																										target="mainFrame" class="left">征信人员诚信档案查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
 																<tr>
 																	<td>
 																		<table width="100%" border="0" cellspacing="0"
@@ -822,52 +991,72 @@ function goMainPage(type,url){
 																							<td id="t2" class="title"
 																								onclick="showObj(this,10)"
 																								onfocusout="change(this)">
-																								考试系统
+																								文档资料管理
 																							</td>
 																						</tr>
 																					</table>
 																					<table id="odiv" style="display: none" border="0"
 																						cellpadding="0" cellspacing="0" width="100%">
-																						 <jguard:authorized
-                                                                                            uri="/toExam.do?method=toExam">
-																						<tr class="h30">
-																							<td>
-																								<a
-																									href="http://<bean:message key="exam.host"/>:<bean:message key="exam.port"/>/login"
-																									target="_blank" class="left">考试系统管理</a>
-																							</td>
-																						</tr>
-							                                             			</jguard:authorized>
-							                                             			<jguard:authorized
-																							uri="/ExamAction.do?method=toImportExamScoreExcel">
+																						<jguard:authorized
+																							uri="/SystemBaseInfoManagerAction.do?method=getDatabakList">
 																							<tr class="h30">
 																								<td>
 																									<a
-																										href="<%=request.getContextPath()%>/ExamAction.do?method=toImportExamScoreExcel"
-																										target="mainFrame" class="left">考试系统成绩导入</a>
+																										href="<%=request.getContextPath()%>/SystemBaseInfoManagerAction.do?method=getDatabakList"
+																										class="left" target="mainFrame">备份数据下载</a>
 																								</td>
 																							</tr>
 																						</jguard:authorized>
-																					<jguard:authorized
-                                                                                            uri="/ExamAction.do?method=toPageExamScoreInfo">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/ExamAction.do?method=toPageExamScoreInfo"
-                                                                                                        target="mainFrame" class="left">考试成绩查询</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                    </jguard:authorized>
-                                                                                    <jguard:authorized
-                                                                                            uri="/QuestionAction.do?method=toQuestionairesList">
-                                                                                            <tr class="h30">
-                                                                                                <td>
-                                                                                                    <a
-                                                                                                        href="<%=request.getContextPath()%>/QuestionAction.do?method=toQuestionairesList"
-                                                                                                        target="mainFrame" class="left">问卷调查管理</a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                    </jguard:authorized>
+																						<jguard:authorized
+																							uri="/FileHandlerManagerAction.do?method=toUploadFilePage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/FileHandlerManagerAction.do?method=toUploadFilePage"
+																										class="left" target="mainFrame">文档资料上传</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/FileHandlerManagerAction.do?method=toFileList&attType=1">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/FileHandlerManagerAction.do?method=toFileList&attType=1"
+																										target="mainFrame" class="left">管理规定下载</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/FileHandlerManagerAction.do?method=toFileList&attType=2">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/FileHandlerManagerAction.do?method=toFileList&attType=2"
+																										target="mainFrame" class="left">导入模板下载</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/FileHandlerManagerAction.do?method=toFileList&attType=3">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/FileHandlerManagerAction.do?method=toFileList&attType=3"
+																										target="mainFrame" class="left">培训资料下载</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/FileHandlerManagerAction.do?method=toFileList&attType=4">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/FileHandlerManagerAction.do?method=toFileList&attType=4"
+																										target="mainFrame" class="left">其他下载</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>
@@ -877,6 +1066,121 @@ function goMainPage(type,url){
 																		</table>
 																	</td>
 																</tr>
+																<tr>
+																	<td>
+																		<table width="100%" border="0" cellspacing="0"
+																			cellpadding="0">
+																			<tr>
+																				<td>
+																					<table border="0" cellpadding="0" cellspacing="0"
+																						width="100%">
+																						<tr>
+																							<td id="t2" class="title"
+																								onclick="showObj(this,11)"
+																								onfocusout="change(this)">
+																								问卷调查
+																							</td>
+																						</tr>
+																					</table>
+																					<table id="odiv" style="display: none" border="0"
+																						cellpadding="0" cellspacing="0" width="100%">
+																						<jguard:authorized
+																							uri="/QuestionAction.do?method=toQuestionairesList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/QuestionAction.do?method=toQuestionairesList"
+																										class="left" target="mainFrame">问卷调查管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/QuestionAction.do?method=toAnswerQuestionairesList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/QuestionAction.do?method=toAnswerQuestionairesList"
+																										class="left" target="mainFrame">我的问卷调查</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/QuestionAction.do?method=toAnswerResultList">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/QuestionAction.do?method=toAnswerResultList"
+																										class="left" target="mainFrame">问卷结果查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td>
+																		<table width="100%" border="0" cellspacing="0"
+																			cellpadding="0">
+																			<tr>
+																				<td>
+																					<table border="0" cellpadding="0" cellspacing="0"
+																						width="100%">
+																						<tr>
+																							<td id="t2" class="title"
+																								onclick="showObj(this,12)"
+																								onfocusout="change(this)">
+																								考试系统
+																							</td>
+																						</tr>
+																					</table>
+																					<table id="odiv" style="display: none" border="0"
+																						cellpadding="0" cellspacing="0" width="100%">
+																						<jguard:authorized uri="/toExam.do?method=toExam">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="http://<bean:message key="exam.host"/>:<bean:message key="exam.port"/>/MiniExam/login"
+																										target="_blank" class="left">考试系统管理</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ExamAction.do?method=toImportExamScoreExcel">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ExamAction.do?method=toImportExamScoreExcel"
+																										target="mainFrame" class="left">考试系统成绩导入</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/ExamAction.do?method=toPageExamScoreInfo">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/ExamAction.do?method=toPageExamScoreInfo"
+																										target="mainFrame" class="left">考试成绩查询</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																
 															</table>
 														</td>
 													</tr>

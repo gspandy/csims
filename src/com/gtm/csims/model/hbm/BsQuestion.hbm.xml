@@ -9,13 +9,6 @@
 		table="BS_QUESTION"
 	>
 		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
 		<id
 			name="Id"
 			type="string"
@@ -24,13 +17,6 @@
 			<generator class="org.hibernate.id.UUIDHexGenerator"/>
 		</id>
 
-		<property
-			name="Qquestionaireid"
-			column="QQUESTIONAIREID"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
 		<property
 			name="Qqtitle"
 			column="QQTITLE"
@@ -95,8 +81,8 @@
 			length="200"
 		/>
 		<property
-			name="Stat"
-			column="STAT"
+			name="Status"
+			column="STATUS"
 			type="string"
 			not-null="false"
 			length="50"
@@ -122,7 +108,13 @@
 			not-null="false"
 			length="26"
 		/>
-
+		<many-to-one
+			name="BsQuestionaire"
+			column="BSQUESTIONAIRE"
+			class="BsQuestionaire"
+			not-null="false"
+		>
+		</many-to-one>
 
 	</class>	
 </hibernate-mapping>

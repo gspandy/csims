@@ -19,11 +19,11 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	public static String PROP_SOISFINISHED = "Soisfinished";
 	public static String PROP_SOQORGTYPE = "Soqorgtype";
 	public static String PROP_FLAG = "Flag";
-	public static String PROP_STAT = "Stat";
+	public static String PROP_STATUS = "Status";
 	public static String PROP_SOQORGTYPENO = "Soqorgtypeno";
 	public static String PROP_CREATEDATE = "Createdate";
-	public static String PROP_SOQORG = "Soqorg";
-	public static String PROP_SOQUESTIONAIREID = "Soquestionaireid";
+	public static String PROP_SOQORGNAME = "Soqorgname";
+	public static String PROP_BSQUESTIONAIRE = "BsQuestionaire";
 	public static String PROP_ID = "Id";
 	public static String PROP_SOQORGNO = "Soqorgno";
 
@@ -51,17 +51,17 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	private java.lang.String id;
 
 	// fields
-	private java.lang.String soquestionaireid;
 	private java.lang.String soqorgno;
-	private java.lang.String soqorg;
+	private java.lang.String soqorgname;
 	private java.lang.String soqorgtypeno;
 	private java.lang.String soqorgtype;
 	private java.lang.String soisfinished;
-	private java.lang.String stat;
+	private java.lang.String status;
 	private java.lang.String flag;
 	private java.util.Date createdate;
 	private java.util.Date updateate;
 
+	private com.gtm.csims.model.BsQuestionaire bsQuestionaire;
 
 
 	/**
@@ -83,26 +83,6 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 		this.hashCode = Integer.MIN_VALUE;
 	}
 
-
-
-
-	/**
-	 * Return the value associated with the column: SOQUESTIONAIREID
-	 */
-	public java.lang.String getSoquestionaireid () {
-		return soquestionaireid;
-	}
-
-	/**
-	 * Set the value related to the column: SOQUESTIONAIREID
-	 * @param soquestionaireid the SOQUESTIONAIREID value
-	 */
-	public void setSoquestionaireid (java.lang.String soquestionaireid) {
-		this.soquestionaireid = soquestionaireid;
-	}
-
-
-
 	/**
 	 * Return the value associated with the column: SOQORGNO
 	 */
@@ -118,24 +98,13 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 		this.soqorgno = soqorgno;
 	}
 
-
-
-	/**
-	 * Return the value associated with the column: SOQORG
-	 */
-	public java.lang.String getSoqorg () {
-		return soqorg;
+	public java.lang.String getSoqorgname() {
+		return soqorgname;
 	}
 
-	/**
-	 * Set the value related to the column: SOQORG
-	 * @param soqorg the SOQORG value
-	 */
-	public void setSoqorg (java.lang.String soqorg) {
-		this.soqorg = soqorg;
+	public void setSoqorgname(java.lang.String soqorgname) {
+		this.soqorgname = soqorgname;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: SOQORGTYPENO
@@ -185,25 +154,6 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	public void setSoisfinished (java.lang.String soisfinished) {
 		this.soisfinished = soisfinished;
 	}
-
-
-
-	/**
-	 * Return the value associated with the column: STAT
-	 */
-	public java.lang.String getStat () {
-		return stat;
-	}
-
-	/**
-	 * Set the value related to the column: STAT
-	 * @param stat the STAT value
-	 */
-	public void setStat (java.lang.String stat) {
-		this.stat = stat;
-	}
-
-
 
 	/**
 	 * Return the value associated with the column: FLAG
@@ -255,7 +205,21 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	}
 
 
+	public java.lang.String getStatus() {
+		return status;
+	}
 
+	public void setStatus(java.lang.String status) {
+		this.status = status;
+	}
+
+	public com.gtm.csims.model.BsQuestionaire getBsQuestionaire() {
+		return bsQuestionaire;
+	}
+
+	public void setBsQuestionaire(com.gtm.csims.model.BsQuestionaire bsQuestionaire) {
+		this.bsQuestionaire = bsQuestionaire;
+	}
 
 	public boolean equals (Object obj) {
 		if (null == obj) return false;

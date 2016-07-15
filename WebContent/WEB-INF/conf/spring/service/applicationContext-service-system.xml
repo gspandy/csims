@@ -9,9 +9,12 @@
 	<bean id="SelectSystemDataBase"
 		class="com.gtm.csims.business.managment.system.SelectSystemDataBaseByDwr">
 		<property name="bsOrgDao" ref="bsOrgDao"></property>
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 		<property name="userService" ref="userService"></property>
 		<property name="bsDeptDao" ref="bsDeptDao"></property>
+		<property name="dailyManagementService" ref="dailyManagementService" />
+		<property name="bsBusievalDao" ref="bsBusievalDao" />
+		<property name="systemBaseInfoManager" ref="systemBaseInfoManager"></property>
+		<property name="questionService" ref="questionService" />
 	</bean>
 	<bean id="systemBaseInfoManager"
 		class="com.gtm.csims.business.managment.system.SystemBaseInfoManagerImpl">

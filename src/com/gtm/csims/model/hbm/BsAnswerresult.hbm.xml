@@ -4,172 +4,39 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.gtm.csims.model">
-	<class
-		name="BsAnswerresult"
-		table="BS_ANSWERRESULT"
-	>
+	<class name="BsAnswerresult" table="BS_ANSWERRESULT">
 		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
-		<meta attribute="sync-DAO">false</meta>
-
-		<id
-			name="Id"
-			type="string"
-			column="ID"
-		>
-			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		<id name="Id" type="string" column="ID">
+			<generator class="org.hibernate.id.UUIDHexGenerator" />
 		</id>
+		<property name="Arorgno" column="ARORGNO" type="string"
+			not-null="false" length="50" />
+		<property name="Arorgname" column="ARORGNAME" type="string"
+			not-null="false" length="500" />
+		<property name="Arorgtypeno" column="ARORGTYPENO" type="string"
+			not-null="false" length="50" />
+		<property name="Arorgtypename" column="ARORGTYPENAME"
+			type="string" not-null="false" length="500" />
+		<property name="Arareano" column="ARAREANO" type="string"
+			not-null="false" length="50" />
+		<property name="Ararea" column="ARAREA" type="string"
+			not-null="false" length="500" />
+		<property name="Answerresult" column="ANSWERRESULT"
+			type="string" not-null="false" length="5" />
+		<property name="Status" column="STATUS" type="string"
+			not-null="false" length="50" />
+		<property name="Flag" column="FLAG" type="string"
+			not-null="false" length="50" />
+		<property name="Createdate" column="CREATEDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Updateate" column="UPDATEATE" type="timestamp"
+			not-null="false" length="26" />
+		<many-to-one name="BsQuestionaire" column="BSQUESTIONAIRE"
+			class="BsQuestionaire" not-null="false">
+		</many-to-one>
+		<many-to-one name="BsQuestion" column="BSQUESTION"
+			class="BsQuestion" not-null="false">
+		</many-to-one>
 
-		<property
-			name="Arquestionaireid"
-			column="ARQUESTIONAIREID"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Arquestionid"
-			column="ARQUESTIONID"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Arorgno"
-			column="ARORGNO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Arorg"
-			column="ARORG"
-			type="string"
-			not-null="false"
-			length="500"
-		/>
-		<property
-			name="Arorgtypeno"
-			column="ARORGTYPENO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Arorgtype"
-			column="ARORGTYPE"
-			type="string"
-			not-null="false"
-			length="500"
-		/>
-		<property
-			name="Arareano"
-			column="ARAREANO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Ararea"
-			column="ARAREA"
-			type="string"
-			not-null="false"
-			length="500"
-		/>
-		<property
-			name="AnA"
-			column="AN_A"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="AnB"
-			column="AN_B"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="AnC"
-			column="AN_C"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="AnD"
-			column="AN_D"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="AnE"
-			column="AN_E"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="AnF"
-			column="AN_F"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="AnG"
-			column="AN_G"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="Arcreator"
-			column="ARCREATOR"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Arcrtdate"
-			column="ARCRTDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Stat"
-			column="STAT"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Flag"
-			column="FLAG"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Createdate"
-			column="CREATEDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Updateate"
-			column="UPDATEATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-
-
-	</class>	
+	</class>
 </hibernate-mapping>

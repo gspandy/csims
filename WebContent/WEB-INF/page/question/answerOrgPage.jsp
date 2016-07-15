@@ -19,8 +19,7 @@ body {
 	background-color: #F1F8FC;
 }
 </style>
-<title><bean:message key="PROJECT_NAME" />
-</title>
+<title><bean:message key="PROJECT_NAME" /></title>
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="css/manus.css" rel="stylesheet" type="text/css" />
 <link href="css/home.css" rel="stylesheet" type="text/css" />
@@ -49,51 +48,70 @@ body {
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/WdatePicker.js" defer="defer"></script>
 <script type="text/javascript">
+	var MyWindowUiOrg="";
+		   function getOrgTree(id){
+				Ext.BLANK_IMAGE_URL = "/csims/ext-3.2.0/resources/images/default/tree/s.gif";
+				var url="SystemBaseInfoManagerAction.do?method=orgTree";
+			    var config={
+			   			//指定当前的元素渲染的层Id
+			            autoScroll : true,
+			            height:420,
+						width:340,
+			             //指定当前树的根节点id
+			            root:new Ext.tree.AsyncTreeNode({
+			            url : url,      
+                                  	requestMethod : 'POST',  
+									id:'0'
+						}),
+					    listeners:{
+									"dblclick":function(node,event){
+									   if(confirm("是否选择:"+node.text)){
+									   		var ChoiceId = id+'Choice';
+									 		document.getElementById(ChoiceId).value= node.text;
+											document.getElementById(id).value= node.id;
+										 	MyWindowUiOrg.hide();
+									   }
+									  }
+					    }
+		         };
+   			var tree = new TreePanelFil(config,url,null)
+   		     var  totalId = id+'window';
+              if(MyWindowUiOrg == "" || typeof(MyWindowUiOrg) != "object" ){
+					MyWindowUiOrg = new Ext.Window({
+					    title: '机构',
+					    id: totalId,
+					    width: 350,
+					    height: 450,
+					    layout: 'column',
+					    resizable:false, //变大小 
+					    closeAction : 'hide' ,
+					    items: tree,
+					    listeners:{ 
+					       "close":function(){ 
+					          MyWindowUiOrg.hide();
+							} 
+			            }
+				    });   
+					MyWindowUiOrg.show();
+	         }else{
+	             MyWindowUiOrg.show();
+	         }
+          }
+	
 	function search(){
-		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toQuestionairesList");
-        $("form[name='questionForm']").submit();
+		document.forms[0].action="./QuestionAction.do?method=toAnswerOrgPage";
+        document.forms[0].submit();
     }
     
     function resets(){	
-		$("input[name='qtitle']").val("");
+		document.getElementById("org").value = "";
+		document.getElementById("orgChoice").value = "";
 	}
 	
-	function toCreatePage(id){
-		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toCreateQuestionairesPage";
+	function toAnswerOrgResultPage(id){
+		document.getElementById("sid").value=id;
+		document.forms[0].action="./QuestionAction.do?method=toAnswerOrgResultPage";
         document.forms[0].submit();
-	}
-	
-	function toQuestionDetailPage(id){
-		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toQuestionDetailPage";
-        document.forms[0].submit();
-	}
-	
-	function toDeploy(id){
-		document.getElementById("status").value="1";
-		document.getElementById("qid").value=id;
-		if(confirm("操作将发布问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=changeQuestionairesStatus";
-			document.forms[0].submit();
-		}
-	}
-	
-	function toDelQuestionaires(id){
-		document.getElementById("qid").value=id;
-		if(confirm("操作将删除问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=delQuestionaires";
-			document.forms[0].submit();
-		}
-	}
-	
-	function toEnd(id){
-		document.getElementById("status").value="2";
-		document.getElementById("qid").value=id;
-		if(confirm("操作将结束问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=changeQuestionairesStatus";
-			document.forms[0].submit();
-		}
 	}
 </script>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -111,14 +129,16 @@ body {
 						问卷调查
 						<img src="<%=request.getContextPath()%>/images/index11.jpg"
 							width="6" height="10" hspace="5" />
-						问卷调查列表
+						问卷结果查询
 				</tr>
 			</table>
 		</td>
 	</tr>
 </table>
-<html:form action="/QuestionAction.do?method=toQuestionairesList">
+<html:form action="/QuestionAction.do?method=toAnswerOrgPage">
 	<html:hidden property="pageCount" />
+	<html:hidden property="sid" />
+	<html:hidden property="qid" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td valign="top">
@@ -135,17 +155,16 @@ body {
 														cellspacing="0">
 														<tr>
 															<td align="left">
-																标题
-																<html:text property="qtitle" styleClass="text111"
-																	size="30" maxlength="30" />
+																机构
+																<html:text property="orgChoice" styleClass="text11155"
+																	readonly="true"></html:text>
+																<input type="button" value="选择" class="botton01"
+																	onclick="getOrgTree('org')" />
+																<html:hidden property="org" styleId="org" />
 															</td>
 															<td align="right">
 																<input name="button" type="button" class="botton01"
 																	onclick="search();" value="查 询" />
-																<input name="button2" type="button" class="botton01"
-																	onclick="toCreatePage('');" value="新 增" />
-																<html:hidden property="qid" />
-																<html:hidden property="status" />
 																<input name="button2" type="button" class="botton01"
 																	onclick="resets();" value="重 置" />
 															</td>
@@ -164,17 +183,8 @@ body {
 												<td width="5%" align="center">
 													序号
 												</td>
-												<td width="50%" align="center">
-													标题
-												</td>
-												<td width="10%" align="center">
-													创建者
-												</td>
-												<td width="10%" align="center">
-													调查结束时间
-												</td>
-												<td width="5%" align="center">
-													状态
+												<td width="75%" align="center">
+													机构名称
 												</td>
 												<td width="20%" align="center">
 													操作
@@ -182,7 +192,7 @@ body {
 											</tr>
 											<logic:empty name="list">
 												<tr>
-													<td colspan="6" align="center">
+													<td colspan="3" align="center">
 														无查询数据......
 													</td>
 												</tr>
@@ -194,39 +204,13 @@ body {
 														&nbsp;
 													</td>
 													<td align="left">
-														<bean:write name="item" property="qtitle" />
+														<bean:write name="item" property="soqorgname" />
 														&nbsp;
 													</td>
 													<td align="center">
-														<bean:write name="item" property="qcreator" />
-														&nbsp;
-													</td>
-													<td align="center">
-														<bean:write name="item" property="qenddatetime" />
-														&nbsp;
-													</td>
-													<td align="center">
-														<logic:equal name="item" property="status" value="0">未发布</logic:equal>
-														<logic:equal name="item" property="status" value="1">已发布</logic:equal>
-														<logic:equal name="item" property="status" value="2">已完成</logic:equal>
-													</td>
-													<td align="center">
-														<logic:equal name="item" property="status" value="0">
-															<input name="button2" type="button" class="botton01"
-																onclick="toDeploy('<bean:write name="item" property="id"/>');" value="发 布" />
-															<input name="button2" type="button" class="botton01"
-																onclick="toDelQuestionaires'<bean:write name="item" property="id"/>');" value="删除标题" />
-														</logic:equal>
-														<logic:equal name="item" property="status" value="1">
-															<input name="button2" type="button" class="botton01"
-																onclick="toEnd('<bean:write name="item" property="id"/>');" value="结 束" />
-														</logic:equal>
 														<input name="button2" type="button" class="botton01"
-															onclick="toCreatePage('<bean:write name="item" property="id"/>');"
-															value="编辑标题" />
-														<input name="button2" type="button" class="botton01"
-															onclick="toQuestionDetailPage('<bean:write name="item" property="id"/>');"
-															value="编辑问题" />
+															onclick="toAnswerOrgResultPage('<bean:write name="item" property="id"/>');"
+															value="问卷结果" />
 													</td>
 												</tr>
 											</logic:iterate>

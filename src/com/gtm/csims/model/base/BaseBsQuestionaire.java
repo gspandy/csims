@@ -16,20 +16,16 @@ public abstract class BaseBsQuestionaire  implements Serializable {
 
 	public static String REF = "BsQuestionaire";
 	public static String PROP_UPDATEATE = "Updateate";
-	public static String PROP_STAT = "Stat";
-	public static String PROP_QCREATORORG = "Qcreatororg";
+	public static String PROP_STATUS = "Status";
+	public static String PROP_QCREATORORGNAME = "Qcreatororgname";
 	public static String PROP_QTITLE = "Qtitle";
 	public static String PROP_QSUMRY = "Qsumry";
 	public static String PROP_CREATEDATE = "Createdate";
-	public static String PROP_QCRTDATE = "Qcrtdate";
 	public static String PROP_QENDDATETIME = "Qenddatetime";
 	public static String PROP_FLAG = "Flag";
-	public static String PROP_QISFINISHED = "Qisfinished";
-	public static String PROP_QSTAT = "Qstat";
 	public static String PROP_QCREATORORGNO = "Qcreatororgno";
 	public static String PROP_QCREATOR = "Qcreator";
 	public static String PROP_ID = "Id";
-	public static String PROP_QISENABLE = "Qisenable";
 
 
 	// constructors
@@ -58,14 +54,11 @@ public abstract class BaseBsQuestionaire  implements Serializable {
 	private java.lang.String qtitle;
 	private java.lang.String qsumry;
 	private java.lang.String qcreator;
-	private java.lang.String qcreatororg;
+	private java.lang.String qcreatororgname;
 	private java.lang.String qcreatororgno;
 	private java.util.Date qcrtdate;
-	private java.lang.String qisenable;
-	private java.lang.String qisfinished;
-	private java.lang.Short qstat;
-	private java.util.Date qenddatetime;
-	private java.lang.String stat;
+	private java.lang.String qenddatetime;
+	private java.lang.String status;
 	private java.lang.String flag;
 	private java.util.Date createdate;
 	private java.util.Date updateate;
@@ -143,24 +136,13 @@ public abstract class BaseBsQuestionaire  implements Serializable {
 		this.qcreator = qcreator;
 	}
 
-
-
-	/**
-	 * Return the value associated with the column: QCREATORORG
-	 */
-	public java.lang.String getQcreatororg () {
-		return qcreatororg;
+	public java.lang.String getQcreatororgname() {
+		return qcreatororgname;
 	}
 
-	/**
-	 * Set the value related to the column: QCREATORORG
-	 * @param qcreatororg the QCREATORORG value
-	 */
-	public void setQcreatororg (java.lang.String qcreatororg) {
-		this.qcreatororg = qcreatororg;
+	public void setQcreatororgname(java.lang.String qcreatororgname) {
+		this.qcreatororgname = qcreatororgname;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: QCREATORORGNO
@@ -195,91 +177,21 @@ public abstract class BaseBsQuestionaire  implements Serializable {
 	}
 
 
-
-	/**
-	 * Return the value associated with the column: QISENABLE
-	 */
-	public java.lang.String getQisenable () {
-		return qisenable;
-	}
-
-	/**
-	 * Set the value related to the column: QISENABLE
-	 * @param qisenable the QISENABLE value
-	 */
-	public void setQisenable (java.lang.String qisenable) {
-		this.qisenable = qisenable;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QISFINISHED
-	 */
-	public java.lang.String getQisfinished () {
-		return qisfinished;
-	}
-
-	/**
-	 * Set the value related to the column: QISFINISHED
-	 * @param qisfinished the QISFINISHED value
-	 */
-	public void setQisfinished (java.lang.String qisfinished) {
-		this.qisfinished = qisfinished;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QSTAT
-	 */
-	public java.lang.Short getQstat () {
-		return qstat;
-	}
-
-	/**
-	 * Set the value related to the column: QSTAT
-	 * @param qstat the QSTAT value
-	 */
-	public void setQstat (java.lang.Short qstat) {
-		this.qstat = qstat;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: QENDDATETIME
-	 */
-	public java.util.Date getQenddatetime () {
+	public java.lang.String getQenddatetime() {
 		return qenddatetime;
 	}
 
-	/**
-	 * Set the value related to the column: QENDDATETIME
-	 * @param qenddatetime the QENDDATETIME value
-	 */
-	public void setQenddatetime (java.util.Date qenddatetime) {
+	public void setQenddatetime(java.lang.String qenddatetime) {
 		this.qenddatetime = qenddatetime;
 	}
 
-
-
-	/**
-	 * Return the value associated with the column: STAT
-	 */
-	public java.lang.String getStat () {
-		return stat;
+	public java.lang.String getStatus() {
+		return status;
 	}
 
-	/**
-	 * Set the value related to the column: STAT
-	 * @param stat the STAT value
-	 */
-	public void setStat (java.lang.String stat) {
-		this.stat = stat;
+	public void setStatus(java.lang.String status) {
+		this.status = status;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: FLAG
