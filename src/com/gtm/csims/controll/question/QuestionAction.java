@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sweet.dao.generic.support.Page;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -210,12 +211,15 @@ public class QuestionAction extends BaseAction {
 			bs.setQtitle(qtitle.trim());
 			bs.setQenddatetime(qenddatetime.trim());
 			bs.setQsumry(qsumry.trim());
-			bs.setCreatedate(date);
 			bs.setQcreator(nowLoginUser);
 			bs.setQcreatororgname(bsorg.getName());
 			bs.setQcreatororgno(bsorg.getNo());
-			bs.setStatus("0");// 状态：0未发布，1已发布，2完成
-			questionService.saveBsQuestionaire(bs);
+			
+			bs.setStatus(QuestionService.Q_UNPUBLISHED_STATUS);
+			bs.setFlag(StringUtils.EMPTY);
+			bs.setCreatedate(date);
+			bs.setUpdateate(date);
+			questionService.createBsQuestionaire(bs);
 			request.setAttribute("message", "操作成功!");
 			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
 			// + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
@@ -278,7 +282,7 @@ public class QuestionAction extends BaseAction {
 		        .get("answerg");
 		try {
 			BsQuestion bs = new BsQuestion();
-			if (!"".equals(qqid)) {
+			if (StringUtils.isNotBlank(qqid)) {
 				bs = questionService.getBsQuestionById(qqid);
 			}
 			Date date = new Date();
@@ -293,6 +297,11 @@ public class QuestionAction extends BaseAction {
 			bs.setAnswerf(answerf.trim());
 			bs.setAnswerg(answerg.trim());
 			bs.setCreatedate(date);
+			// bs.setQqindex();
+			bs.setFlag(StringUtils.EMPTY);
+			bs.setStatus(StringUtils.EMPTY);
+			bs.setCreatedate(date);
+			bs.setUpdateate(date);
 			questionService.saveBsQuestion(bs);
 			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
 			// + "】下的 【" + nowLoginUser
@@ -419,7 +428,7 @@ public class QuestionAction extends BaseAction {
 		try {
 			BsQuestionaire bs = questionService.getBsQuestionaireById(qid);
 			bs.setStatus(status.trim());
-			questionService.saveBsQuestionaire(bs);
+			questionService.updateBsQuestionaire(bs);
 			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
 			// + "】下的 【" + nowLoginUser + "】 用户" + str
 			// + "问卷调查【操作成功!】", "", "", "HTTP", nowLoginUser, nowLoginUserId,
@@ -590,13 +599,18 @@ public class QuestionAction extends BaseAction {
 				bsqq = questionService.getBsQuestionById(stra.split("-")[0].trim());
 				bsa.setBsQuestion(bsqq);
 				bsa.setAnswerresult(stra.split("-")[1].trim());
-				// bsa.setArareano(cityId);
+				bsa.setArareano(bsorg.getP());
+				bsa.setArarea(bsorg.getQ());
 				bsa.setArorgno(loginOrgNo);
 				bsa.setArorgname(bsorg.getName());
 				// bsa.setArorgtypeno(bsorg.getOrgType() == null ? "" :
 				// bsorg.getOrgType().toString());
-				bsa.setArorgtypeno("");
+				bsa.setArorgtypeno(StringUtils.EMPTY);
+				bsa.setArorgtypename(StringUtils.EMPTY);
+				bsa.setFlag(StringUtils.EMPTY);
+				bsa.setStatus(StringUtils.EMPTY);
 				bsa.setCreatedate(date);
+				bsa.setUpdateate(date);
 				questionService.savaBsAnserResult(bsa);
 			}
 			request.setAttribute("message", "操作成功!");

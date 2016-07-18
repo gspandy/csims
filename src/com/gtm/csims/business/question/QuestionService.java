@@ -1,21 +1,26 @@
 package com.gtm.csims.business.question;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.sweet.dao.generic.support.Page;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gtm.csims.dao.BsAnswerresultDAO;
+import com.gtm.csims.dao.BsOrgDAO;
 import com.gtm.csims.dao.BsQuestionDAO;
 import com.gtm.csims.dao.BsQuestionaireDAO;
 import com.gtm.csims.dao.BsSurveyobjectDAO;
 import com.gtm.csims.model.BsAnswerresult;
+import com.gtm.csims.model.BsOrg;
 import com.gtm.csims.model.BsQuestion;
 import com.gtm.csims.model.BsQuestionaire;
 import com.gtm.csims.model.BsSurveyobject;
+import com.gtm.csims.utils.Constants;
 
 /**
  * 问卷调查.
@@ -25,11 +30,20 @@ import com.gtm.csims.model.BsSurveyobject;
  */
 public class QuestionService {
 
+	/**
+	 * 问卷调查状态：0未发布，1已发布，2完成
+	 */
+	public static final String Q_UNPUBLISHED_STATUS = "0";
+	public static final String Q_PUBLISHED_STATUS = "1";
+	public static final String Q_FINISH_STATUS = "2";
+
 	private JdbcTemplate jdbcTemplate;
 	private BsQuestionaireDAO bsQuestionaireDao;
 	private BsQuestionDAO bsQuestionDao;
 	private BsSurveyobjectDAO bsSurveyobjectDao;
 	private BsAnswerresultDAO bsAnswerresultDao;
+
+	protected BsOrgDAO bsOrgDao;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -51,6 +65,10 @@ public class QuestionService {
 		this.bsAnswerresultDao = bsAnswerresultDao;
 	}
 
+	public void setBsOrgDao(BsOrgDAO bsOrgDao) {
+		this.bsOrgDao = bsOrgDao;
+	}
+
 	/**
 	 * 
 	 * @param qtitle
@@ -59,8 +77,7 @@ public class QuestionService {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Page queryQuestionairs(String qtitle, Integer pageNo,
-			Integer pageSize) {
+	public Page queryQuestionairs(String qtitle, Integer pageNo, Integer pageSize) {
 		StringBuffer sb = new StringBuffer("FROM BsQuestionaire  ");
 		List<Object> param = new ArrayList<Object>();
 		if (!"".equals(qtitle)) {
@@ -68,8 +85,7 @@ public class QuestionService {
 			param.add("%" + qtitle.trim() + "%");
 		}
 		sb.append(" order by Createdate DESC");
-		Page page = bsQuestionaireDao.pagedQuery(sb.toString(), pageNo,
-				pageSize, param.toArray());
+		Page page = bsQuestionaireDao.pagedQuery(sb.toString(), pageNo, pageSize, param.toArray());
 		return page;
 	}
 
@@ -81,10 +97,8 @@ public class QuestionService {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Page queryAnswerQuestionairs(String qtitle, String loginOrgNo,
-			Integer pageNo, Integer pageSize) {
-		StringBuffer sb = new StringBuffer(
-				"FROM BsSurveyobject where BsQuestionaire.Status <> '0' ");
+	public Page queryAnswerQuestionairs(String qtitle, String loginOrgNo, Integer pageNo, Integer pageSize) {
+		StringBuffer sb = new StringBuffer("FROM BsSurveyobject where BsQuestionaire.Status <> '0' ");
 		List<Object> param = new ArrayList<Object>();
 		sb.append(" and Soqorgno =  ? ");
 		param.add(loginOrgNo.trim());
@@ -93,17 +107,14 @@ public class QuestionService {
 			param.add("%" + qtitle.trim() + "%");
 		}
 		sb.append(" order by Createdate DESC");
-		Page page = bsSurveyobjectDao.pagedQuery(sb.toString(), pageNo,
-				pageSize, param.toArray());
+		Page page = bsSurveyobjectDao.pagedQuery(sb.toString(), pageNo, pageSize, param.toArray());
 		return page;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public Page queryBsSurveyobject(String qid, String orgNo,
-			Integer pageNo, Integer pageSize) {
+	public Page queryBsSurveyobject(String qid, String orgNo, Integer pageNo, Integer pageSize) {
 		List<Object> param = new ArrayList<Object>();
-		StringBuffer sb = new StringBuffer(
-				"FROM BsSurveyobject where ");
+		StringBuffer sb = new StringBuffer("FROM BsSurveyobject where ");
 		sb.append(" BsQuestionaire.Id =  ? ");
 		param.add(qid.trim());
 		if (!"".equals(orgNo)) {
@@ -111,8 +122,7 @@ public class QuestionService {
 			param.add(orgNo.trim());
 		}
 		sb.append(" order by BsQuestionaire.Createdate DESC");
-		Page page = bsSurveyobjectDao.pagedQuery(sb.toString(), pageNo,
-				pageSize, param.toArray());
+		Page page = bsSurveyobjectDao.pagedQuery(sb.toString(), pageNo, pageSize, param.toArray());
 		return page;
 	}
 
@@ -120,7 +130,7 @@ public class QuestionService {
 	public BsSurveyobject getBsSurveyobject(String id) {
 		return bsSurveyobjectDao.get(id);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public BsQuestionaire getBsQuestionaireById(String id) {
 		return bsQuestionaireDao.get(id);
@@ -156,10 +166,10 @@ public class QuestionService {
 		param.add(pid.trim());
 		return bsSurveyobjectDao.find(sb.toString(), param.toArray());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
-	public List<BsAnswerresult> getBsAnswerresultsByOrgnoAndQqid(String orgNo,String qqid,String result) {
+	public List<BsAnswerresult> getBsAnswerresultsByOrgnoAndQqid(String orgNo, String qqid, String result) {
 		StringBuffer sb = new StringBuffer("FROM BsAnswerresult where ");
 		List<Object> param = new ArrayList<Object>();
 		sb.append("  BsQuestion.Id =  ? ");
@@ -176,15 +186,48 @@ public class QuestionService {
 	 * 
 	 */
 	@Transactional(readOnly = false)
-	public void saveBsQuestionaire(BsQuestionaire bs) {
-		bsQuestionaireDao.save(bs);
+	public void createBsQuestionaire(BsQuestionaire q) {
+		bsQuestionaireDao.save(q);
+
+		/*
+		 * FIXME for test.
+		 */
+		Date now = new Date();
+		BsSurveyobject suo = new BsSurveyobject();
+		suo.setBsQuestionaire(q);
+
+		BsOrg org = this.bsOrgDao.get(Constants.PCB_SC_ORG_NO);
+		suo.setSoqorgname(org.getName());
+		suo.setSoqorgno(org.getNo());
+
+		suo.setSoqorgtype(org.getName());
+		suo.setSoqorgtypeno(org.getNo());
+
+		suo.setSoisfinished("N");
+		suo.setFlag(StringUtils.EMPTY);
+		suo.setStatus(StringUtils.EMPTY);
+		suo.setCreatedate(now);
+		suo.setUpdateate(now);
+
+		this.bsSurveyobjectDao.save(suo);
+	}
+
+	/**
+	 * 新增问卷调查.
+	 * 
+	 */
+	@Transactional(readOnly = false)
+	public void updateBsQuestionaire(BsQuestionaire q) {
+		Date now = new Date();
+		q.setUpdateate(now);
+		bsQuestionaireDao.save(q);
 	}
 
 	@Transactional(readOnly = false)
 	public void saveBsQuestion(BsQuestion bs) {
 		bsQuestionDao.save(bs);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void savaBsAnserResult(BsAnswerresult bs) {
 		bsAnswerresultDao.save(bs);
@@ -202,93 +245,90 @@ public class QuestionService {
 
 	@Transactional(readOnly = false)
 	public void delBsQuestionaire(String qid) {
-		jdbcTemplate.execute(" delete from BS_QUESTION where BSQUESTIONAIRE='"
-				+ qid + "' ");
-		jdbcTemplate
-				.execute(" delete from BS_SURVEYOBJECT where BSQUESTIONAIRE='"
-						+ qid + "' ");
-		jdbcTemplate.execute(" delete from BS_QUESTIONAIRE where ID='" + qid
-				+ "' ");
+		jdbcTemplate.execute(" delete from BS_QUESTION where BSQUESTIONAIRE='" + qid + "' ");
+		jdbcTemplate.execute(" delete from BS_SURVEYOBJECT where BSQUESTIONAIRE='" + qid + "' ");
+		jdbcTemplate.execute(" delete from BS_QUESTIONAIRE where ID='" + qid + "' ");
 	}
-	
+
 	@Transactional(readOnly = false)
-	public void delAnserResult(String qid,String orgno) {
-		jdbcTemplate.execute(" delete from BS_ANSWERRESULT where BSQUESTIONAIRE='" + qid
-				+ "' and ARORGNO='"+orgno+"' ");
+	public void delAnserResult(String qid, String orgno) {
+		jdbcTemplate.execute(" delete from BS_ANSWERRESULT where BSQUESTIONAIRE='" + qid + "' and ARORGNO='" + orgno
+		        + "' ");
 	}
 
 	@Transactional(readOnly = true)
-	public String getBsQuestionStrByQuestionaireId(String qid,String qtitle,String orgNo) {
+	public String getBsQuestionStrByQuestionaireId(String qid, String qtitle, String orgNo) {
 		List<BsQuestion> list = this.getBsQuestionByQuestionaireId(qid);
 		StringBuffer sb = new StringBuffer("");
 		sb.append("<tr><td class='text' align='center'>").append(qtitle).append("<br>").append("问卷调查</td></tr>");
 		BsQuestion bs = new BsQuestion();
 		List<BsAnswerresult> bsAnswerresultList = new ArrayList<BsAnswerresult>();
-		for(int i=0;i<list.size();i++){
+		for (int i = 0; i < list.size(); i++) {
 			bs = list.get(i);
-			sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;").append(i+1).append("、").append(bs.getQqtitle().trim()).append("</td></tr>");
-			if(!"".equals(bs.getAnswera().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'"); 
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"A");
-				if(bsAnswerresultList.size()>0){
+			sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;").append(i + 1).append("、")
+			        .append(bs.getQqtitle().trim()).append("</td></tr>");
+			if (!"".equals(bs.getAnswera().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "A");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-A'>A:").append(bs.getAnswera()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-A'>A.").append(bs.getAnswera()).append("</td></tr>");
 			}
-			if(!"".equals(bs.getAnswerb().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'");
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"B");
-				if(bsAnswerresultList.size()>0){
+			if (!"".equals(bs.getAnswerb().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "B");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-B'>B:").append(bs.getAnswerb()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-B'>B.").append(bs.getAnswerb()).append("</td></tr>");
 			}
-			if(!"".equals(bs.getAnswerc().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'");
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"C");
-				if(bsAnswerresultList.size()>0){
+			if (!"".equals(bs.getAnswerc().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "C");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-C'>C:").append(bs.getAnswerc()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-C'>C.").append(bs.getAnswerc()).append("</td></tr>");
 			}
-			if(!"".equals(bs.getAnswerd().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'");
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"D");
-				if(bsAnswerresultList.size()>0){
+			if (!"".equals(bs.getAnswerd().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "D");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-D'>D:").append(bs.getAnswerd()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-D'>D.").append(bs.getAnswerd()).append("</td></tr>");
 			}
-			if(!"".equals(bs.getAnswere().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'");
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"E");
-				if(bsAnswerresultList.size()>0){
+			if (!"".equals(bs.getAnswere().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "E");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-E'>E:").append(bs.getAnswere()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-E'>E.").append(bs.getAnswere()).append("</td></tr>");
 			}
-			if(!"".equals(bs.getAnswerf().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'");
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"F");
-				if(bsAnswerresultList.size()>0){
+			if (!"".equals(bs.getAnswerf().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "F");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-F'>F:").append(bs.getAnswerf()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-F'>F.").append(bs.getAnswerf()).append("</td></tr>");
 			}
-			if(!"".equals(bs.getAnswerg().trim())){
-				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				  .append("<input type='checkbox' name='checkbox'");
-				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo,bs.getId(),"G");
-				if(bsAnswerresultList.size()>0){
+			if (!"".equals(bs.getAnswerg().trim())) {
+				sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(
+				        "<input type='checkbox' name='checkbox' ");
+				bsAnswerresultList = this.getBsAnswerresultsByOrgnoAndQqid(orgNo, bs.getId(), "G");
+				if (bsAnswerresultList.size() > 0) {
 					sb.append(" checked ");
 				}
-				sb.append("value='").append(bs.getId()).append("-G'>G:").append(bs.getAnswerg()).append("</td></tr>");
+				sb.append(" value='").append(bs.getId()).append("-G'>G.").append(bs.getAnswerg()).append("</td></tr>");
 			}
 		}
 		return sb.toString();

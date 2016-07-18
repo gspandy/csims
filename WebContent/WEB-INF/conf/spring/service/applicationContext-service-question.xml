@@ -12,6 +12,7 @@
 		<property name="bsQuestionDao" ref="bsQuestionDao" />
 		<property name="bsSurveyobjectDao" ref="bsSurveyobjectDao" />
 		<property name="bsAnswerresultDao" ref="bsAnswerresultDao" />
+		<property name="bsOrgDao" ref="bsOrgDao" />
 	</bean>
 
 </beans>

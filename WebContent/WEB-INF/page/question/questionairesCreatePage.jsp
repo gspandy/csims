@@ -119,7 +119,6 @@
 	function createQuestionaire(){
 		var qtitle = $("input[name='qtitle']").val();
 		var qenddatetime = $("input[name='qenddatetime']").val(); 
-		alert(qtitle);
 		if(qtitle.length <=0){
 			alert("请输入问卷调查标题!");
 			return false;
@@ -208,7 +207,7 @@
 																		标题
 																	</td>
 																	<td align="left">
-																		<html:text property="qtitle"></html:text>
+																		<html:text property="qtitle" styleClass="text111" size="100" maxlength="100"></html:text>
 																		<html:hidden property="qid" />
 																		<html:hidden property="sid" />
 																		<html:hidden property="status" />
