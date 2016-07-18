@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sweet.dao.generic.support.Page;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -40,6 +42,8 @@ import com.gtm.csims.model.BsSurveyobject;
  * @since JDK1.0
  */
 public class QuestionAction extends BaseAction {
+
+	private static final String[] DATE_FORMAT = new String[] { "yyyy-MM-dd HH:mm:ss" };
 
 	private QuestionService questionService;
 
@@ -221,7 +225,15 @@ public class QuestionAction extends BaseAction {
 
 			Date date = new Date();
 			bs.setQtitle(qtitle.trim());
-			bs.setQenddatetime(qenddatetime.trim());
+
+			Date endDate = DateUtils.parseDate(qenddatetime.trim(), DATE_FORMAT);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(endDate);
+			cal.set(Calendar.HOUR, 0);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			endDate = cal.getTime();
+			bs.setQenddatetime(DateFormatUtils.format(endDate, DATE_FORMAT[0]));
 			bs.setQsumry(qsumry.trim());
 			bs.setQcreator(nowLoginUser);
 			bs.setQcreatororgname(bsorg.getName());
