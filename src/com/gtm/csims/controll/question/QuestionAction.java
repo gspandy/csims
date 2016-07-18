@@ -1,7 +1,11 @@
 package com.gtm.csims.controll.question;
 
+import java.io.OutputStream;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sweet.dao.generic.support.Page;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -17,6 +22,7 @@ import org.apache.struts.action.DynaActionForm;
 import com.gtm.csims.base.BaseAction;
 import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
 import com.gtm.csims.business.question.QuestionService;
+import com.gtm.csims.business.question.QuestionStsicSvce;
 import com.gtm.csims.business.remind.RemindService;
 import com.gtm.csims.jaas.UserCredentialName;
 import com.gtm.csims.model.BsAnswerresult;
@@ -37,6 +43,8 @@ public class QuestionAction extends BaseAction {
 
 	private QuestionService questionService;
 
+	private QuestionStsicSvce questionStsicSvce;
+
 	private SystemBaseInfoManager systemBaseInfoManager;
 
 	@SuppressWarnings("unused")
@@ -52,6 +60,10 @@ public class QuestionAction extends BaseAction {
 
 	public void setRemindService(RemindService remindService) {
 		this.remindService = remindService;
+	}
+
+	public void setQuestionStsicSvce(QuestionStsicSvce questionStsicSvce) {
+		this.questionStsicSvce = questionStsicSvce;
 	}
 
 	/**
@@ -214,7 +226,7 @@ public class QuestionAction extends BaseAction {
 			bs.setQcreator(nowLoginUser);
 			bs.setQcreatororgname(bsorg.getName());
 			bs.setQcreatororgno(bsorg.getNo());
-			
+
 			bs.setStatus(QuestionService.Q_UNPUBLISHED_STATUS);
 			bs.setFlag(StringUtils.EMPTY);
 			bs.setCreatedate(date);
@@ -743,6 +755,76 @@ public class QuestionAction extends BaseAction {
 		request.setAttribute("str", str);
 		request.setAttribute("status", "2");
 		return mapping.findForward("toAnswerQuestionairesPage");
+	}
+
+	/**
+	 * 以HTML视图方式展示统计结果.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws SaveTargetException
+	 * @throws Exception
+	 */
+	public ActionForward displayHtml(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) throws Exception {
+		DynaActionForm dyna = (DynaActionForm) form;
+		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> keyValue = new HashMap<String, String>();
+		String qid = dyna.getString("qid");
+		BsQuestionaire bs = questionService.getBsQuestionaireById(qid);
+		params.put("qid", qid);
+		if (bs != null) {
+			keyValue.put("TITLE", bs.getQtitle());
+		} else {
+			keyValue.put("TITLE", StringUtils.EMPTY);
+		}
+		String htmlStr = questionStsicSvce.getHTMLString("11", questionStsicSvce.doStatistics(params), keyValue);
+		request.setAttribute("htmlStr", htmlStr);
+		dyna.set("qid", qid);
+		return mapping.findForward("toresultPage");
+	}
+
+	/**
+	 * 以Excel视图方式展示辖内问题概况统计结果.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward displayExcel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		DynaActionForm dyna = (DynaActionForm) form;
+		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> keyValue = new HashMap<String, String>();
+		String qid = dyna.getString("qid");
+		BsQuestionaire bs = questionService.getBsQuestionaireById(qid);
+		params.put("qid", qid);
+		if (bs != null) {
+			keyValue.put("TITLE", bs.getQtitle());
+		} else {
+			keyValue.put("TITLE", StringUtils.EMPTY);
+		}
+		HSSFWorkbook wb = null;
+		wb = questionStsicSvce.generateExcel("11", questionStsicSvce.doStatistics(params), keyValue);
+		String excelFileName = "调查问卷统计表";
+		try {
+			OutputStream repos = response.getOutputStream();
+			String fileName = excelFileName + "_" + System.currentTimeMillis() + ".xls";
+			response.setContentType("application/vnd.ms-excel");
+			response.addHeader("Content-Disposition", "attachment;filename="
+			        + new String(fileName.getBytes("gb2312"), "ISO8859-1"));
+			wb.write(repos);
+			repos.flush();
+			repos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

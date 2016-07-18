@@ -32,32 +32,25 @@
 	</form-beans>
 
 	<action-mappings>
-		<action path="/QuestionAction" parameter="method"
-			scope="request" type="org.springframework.web.struts.DelegatingActionProxy"
-			name="questionForm">
-			<forward name="toQuestionairesList"
-				path="/WEB-INF/page/question/questionairList.jsp"
+		<action path="/QuestionAction" parameter="method" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy" name="questionForm">
+			<forward name="toQuestionairesList" path="/WEB-INF/page/question/questionairList.jsp"
 				redirect="false" />
 			<forward name="toCreateQuestionairesPage"
-				path="/WEB-INF/page/question/questionairesCreatePage.jsp"
+				path="/WEB-INF/page/question/questionairesCreatePage.jsp" redirect="false" />
+			<forward name="toMessage" path="/WEB-INF/page/question/message.jsp"
 				redirect="false" />
-			<forward name="toMessage"
-				path="/WEB-INF/page/question/message.jsp"
-				redirect="false" />
-			<forward name="toQuestionDetailPage"
-				path="/WEB-INF/page/question/questionDetailPage.jsp"
+			<forward name="toQuestionDetailPage" path="/WEB-INF/page/question/questionDetailPage.jsp"
 				redirect="false" />
 			<forward name="toAnswerQuestionairesList"
-				path="/WEB-INF/page/question/answerQuestionairList.jsp"
-				redirect="false" />
+				path="/WEB-INF/page/question/answerQuestionairList.jsp" redirect="false" />
 			<forward name="toAnswerQuestionairesPage"
-				path="/WEB-INF/page/question/answerQuestionairesPage.jsp"
+				path="/WEB-INF/page/question/answerQuestionairesPage.jsp" redirect="false" />
+			<forward name="toAnswerResultList" path="/WEB-INF/page/question/answerResultList.jsp"
 				redirect="false" />
-			<forward name="toAnswerResultList"
-				path="/WEB-INF/page/question/answerResultList.jsp"
+			<forward name="toAnswerOrgPage" path="/WEB-INF/page/question/answerOrgPage.jsp"
 				redirect="false" />
-			<forward name="toAnswerOrgPage"
-				path="/WEB-INF/page/question/answerOrgPage.jsp"
+			<forward name="toresultPage" path="/WEB-INF/page/question/statistics_result.jsp"
 				redirect="false" />
 		</action>
 	</action-mappings>

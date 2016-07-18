@@ -15,4 +15,8 @@
 		<property name="bsOrgDao" ref="bsOrgDao" />
 	</bean>
 
+	<bean id="questionStsicSvce" class="com.gtm.csims.business.question.QuestionStsicSvce"
+		parent="baseStatisticsService">
+	</bean>
+
 </beans>

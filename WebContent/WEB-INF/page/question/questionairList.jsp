@@ -70,6 +70,12 @@ body {
 		$("form[name='questionForm']").submit();
 	}
 	
+	function stastic(id){
+		$("input[name='qid']").val(id);
+		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=displayHtml");
+		$("form[name='questionForm']").submit();
+	}
+	
 	function toDeploy(id){
 		$("input[name='status']").val("1");
 		$("input[name='qid']").val(id);
@@ -227,6 +233,9 @@ body {
 														<input name="button2" type="button" class="botton01"
 															onclick="toQuestionDetailPage('<bean:write name="item" property="id"/>');"
 															value="编辑问题" />
+														<input name="button2" type="button" class="botton01"
+															onclick="stastic('<bean:write name="item" property="id"/>');"
+															value="统计" />
 													</td>
 												</tr>
 											</logic:iterate>

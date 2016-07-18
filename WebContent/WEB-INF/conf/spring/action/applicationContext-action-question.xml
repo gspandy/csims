@@ -11,6 +11,7 @@
 		<property name="questionService" ref="questionService"></property>
 		<property name="remindService" ref="remindService"></property>
 		<property name="systemBaseInfoManager" ref="systemBaseInfoManager"></property>
+		<property name="questionStsicSvce" ref="questionStsicSvce"></property>
 	</bean>
 
 </beans>
