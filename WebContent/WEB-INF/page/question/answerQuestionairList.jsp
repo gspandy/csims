@@ -59,9 +59,9 @@ body {
 	}
 	
 	function toAnswerQuestionaires(qid){
-		document.getElementById("qid").value=qid;
-		document.forms[0].action="./QuestionAction.do?method=toAnswerQuestionairesPage";
-        document.forms[0].submit();
+		$("input[name='qid']").val(qid);
+        $("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toAnswerQuestionairesPage");
+        $("form[name='questionForm']").submit();
 	}
 	
 </script>

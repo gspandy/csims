@@ -48,50 +48,50 @@ body {
 			src='<%=request.getContextPath()%>/dwr/util.js'></script>
 		<script type="text/javascript">
 			function showQuestionCreate(){
-				document.getElementById("qqid").value="";
-				document.getElementById("qqtitle").value="";
-				document.getElementById("answera").value="";
-				document.getElementById("answerb").value="";
-				document.getElementById("answerc").value="";
-				document.getElementById("answerd").value="";
-				document.getElementById("answere").value="";
-				document.getElementById("answerf").value="";
-				document.getElementById("answerg").value="";
+				$("input[name='qqid']").val("");
+				$("textarea[name='qqtitle']").val("");
+				$("textarea[name='answera']").val("");
+				$("textarea[name='answerb']").val("");
+				$("textarea[name='answerc']").val("");
+				$("textarea[name='answerd']").val("");
+				$("textarea[name='answere']").val("");
+				$("textarea[name='answerf']").val("");
+				$("textarea[name='answerg']").val("");
 				document.getElementById("newQuestion").style.display = "inline";
 			}
 			
 			function showQuestionDetail(id){
-				document.getElementById("qqid").value=id;
+				$("input[name='qqid']").val(id);
 				SelectSystemDataBase.getQuestionById(id,setQuestion);
 			}
 			
 			function setQuestion(data){
-				document.getElementById("qqtitle").value=data[0];
-				document.getElementById("answera").value=data[1];
-				document.getElementById("answerb").value=data[2];
-				document.getElementById("answerc").value=data[3];
-				document.getElementById("answerd").value=data[4];
-				document.getElementById("answere").value=data[5];
-				document.getElementById("answerf").value=data[6];
-				document.getElementById("answerg").value=data[7];
+				$("textarea[name='qqtitle']").val(data[0]);
+				$("textarea[name='answera']").val(data[1]);
+				$("textarea[name='answerb']").val(data[2]);
+				$("textarea[name='answerc']").val(data[3]);
+				$("textarea[name='answerd']").val(data[4]);
+				$("textarea[name='answere']").val(data[5]);
+				$("textarea[name='answerf']").val(data[6]);
+				$("textarea[name='answerg']").val(data[7]);
 				document.getElementById("newQuestion").style.display = "inline";
 			}
 			
 			function hiddenQuestionCreate(){
 				document.getElementById("newQuestion").style.display = "none";
-				document.getElementById("qqid").value="";
-				document.getElementById("qqtitle").value="";
-				document.getElementById("answera").value="";
-				document.getElementById("answerb").value="";
-				document.getElementById("answerc").value="";
-				document.getElementById("answerd").value="";
-				document.getElementById("answere").value="";
-				document.getElementById("answerf").value="";
-				document.getElementById("answerg").value="";
+				$("input[name='qqid']").val("");
+				$("textarea[name='qqtitle']").val("");
+				$("textarea[name='answera']").val("");
+				$("textarea[name='answerb']").val("");
+				$("textarea[name='answerc']").val("");
+				$("textarea[name='answerd']").val("");
+				$("textarea[name='answere']").val("");
+				$("textarea[name='answerf']").val("");
+				$("textarea[name='answerg']").val("");
 			}
 			
 			function questionCreate(){
-				var qqtitle = document.getElementById("qqtitle").value;
+				var qqtitle = $("textarea[name='qqtitle']").val();
 				if(qqtitle.length<=0){
 					alert("请输入题干内容!");
 					return false;
@@ -103,7 +103,7 @@ body {
 			}
 			
 			function delQuestion(id){
-				document.getElementById("qqid").value=id;
+				$("input[name='qqid']").val(id);
 				if(confirm("操作将保存删除问卷调查问题信息,确认?")){
 					document.forms[0].action="QuestionAction.do?method=delQuestion";
 					document.forms[0].submit();

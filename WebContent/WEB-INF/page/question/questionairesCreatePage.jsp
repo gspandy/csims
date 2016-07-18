@@ -117,8 +117,9 @@
           }
           
 	function createQuestionaire(){
-		var qtitle = document.getElementById("qtitle").value;
-		var qenddatetime = document.getElementById("qenddatetime").value;
+		var qtitle = $("input[name='qtitle']").val();
+		var qenddatetime = $("input[name='qenddatetime']").val(); 
+		alert(qtitle);
 		if(qtitle.length <=0){
 			alert("请输入问卷调查标题!");
 			return false;
@@ -128,16 +129,16 @@
 			return false;
 		}
 		if(confirm("操作将保存问卷调查信息,确认?")){
-			document.forms[0].action="QuestionAction.do?method=createQuestionaire";
-			document.forms[0].submit();
+			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=createQuestionaire");
+			$("form[name='questionForm']").submit();
 		}
 	}
 	
 	function delBsSurveyobject(id){
-		document.getElementById("sid").value=id;
+		$("#sid").val(id)
 		if(confirm("操作将删除问卷调查参与机构,确认?")){
-			document.forms[0].action="QuestionAction.do?method=delBsSurveyobject";
-			document.forms[0].submit();
+			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=delBsSurveyobject");
+			$("form[name='questionForm']").submit();
 		}
 	}
 	
@@ -207,7 +208,7 @@
 																		标题
 																	</td>
 																	<td align="left">
-																		<html:textarea property="qtitle" cols="140%" rows="5"></html:textarea>
+																		<html:text property="qtitle"></html:text>
 																		<html:hidden property="qid" />
 																		<html:hidden property="sid" />
 																		<html:hidden property="status" />

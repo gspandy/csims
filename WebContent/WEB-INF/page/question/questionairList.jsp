@@ -59,40 +59,40 @@ body {
 	}
 	
 	function toCreatePage(id){
-		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toCreateQuestionairesPage";
-        document.forms[0].submit();
+		$("input[name='qid']").val(id);
+		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toCreateQuestionairesPage");
+		$("form[name='questionForm']").submit();
 	}
 	
 	function toQuestionDetailPage(id){
-		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toQuestionDetailPage";
-        document.forms[0].submit();
+		$("input[name='qid']").val(id);
+		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toQuestionDetailPage");
+		$("form[name='questionForm']").submit();
 	}
 	
 	function toDeploy(id){
-		document.getElementById("status").value="1";
-		document.getElementById("qid").value=id;
+		$("input[name='status']").val("1");
+		$("input[name='qid']").val(id);
 		if(confirm("操作将发布问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=changeQuestionairesStatus";
-			document.forms[0].submit();
+			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=changeQuestionairesStatus");
+			$("form[name='questionForm']").submit();
 		}
 	}
 	
 	function toDelQuestionaires(id){
-		document.getElementById("qid").value=id;
+		$("input[name='qid']").val(id);
 		if(confirm("操作将删除问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=delQuestionaires";
-			document.forms[0].submit();
+			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=delQuestionaires");
+			$("form[name='questionForm']").submit();
 		}
 	}
 	
 	function toEnd(id){
-		document.getElementById("status").value="2";
-		document.getElementById("qid").value=id;
+		$("input[name='status']").val("2");
+		$("input[name='qid']").val(id);
 		if(confirm("操作将结束问卷调查,确认?")){
-			document.forms[0].action="QuestionAction.do?method=changeQuestionairesStatus";
-			document.forms[0].submit();
+			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=changeQuestionairesStatus");
+			$("form[name='questionForm']").submit();
 		}
 	}
 </script>
@@ -215,7 +215,7 @@ body {
 															<input name="button2" type="button" class="botton01"
 																onclick="toDeploy('<bean:write name="item" property="id"/>');" value="发 布" />
 															<input name="button2" type="button" class="botton01"
-																onclick="toDelQuestionaires'<bean:write name="item" property="id"/>');" value="删除标题" />
+																onclick="toDelQuestionaires('<bean:write name="item" property="id"/>');" value="删除标题" />
 														</logic:equal>
 														<logic:equal name="item" property="status" value="1">
 															<input name="button2" type="button" class="botton01"

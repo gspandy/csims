@@ -59,9 +59,9 @@ body {
 	}
 	
 	function toAnswerOrgPage(id){
-		document.getElementById("qid").value=id;
-		document.forms[0].action="./QuestionAction.do?method=toAnswerOrgPage";
-        document.forms[0].submit();
+		$("#qid").val(id);
+		$("form[name='questionForm']").attr("action", "./QuestionAction.do?method=toAnswerOrgPage");
+		$("form[name='questionForm']").submit();
 	}
 </script>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

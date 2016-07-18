@@ -217,14 +217,13 @@ public class QuestionService {
 				+ "' and ARORGNO='"+orgno+"' ");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public String getBsQuestionStrByQuestionaireId(String qid,String qtitle,String orgNo) {
 		List<BsQuestion> list = this.getBsQuestionByQuestionaireId(qid);
 		StringBuffer sb = new StringBuffer("");
 		sb.append("<tr><td class='text' align='center'>").append(qtitle).append("<br>").append("问卷调查</td></tr>");
 		BsQuestion bs = new BsQuestion();
-		List<BsAnswerresult> bsAnswerresultList = new ArrayList();
+		List<BsAnswerresult> bsAnswerresultList = new ArrayList<BsAnswerresult>();
 		for(int i=0;i<list.size();i++){
 			bs = list.get(i);
 			sb.append("<tr><td class='text' align='left'>&nbsp;&nbsp;&nbsp;&nbsp;").append(i+1).append("、").append(bs.getQqtitle().trim()).append("</td></tr>");

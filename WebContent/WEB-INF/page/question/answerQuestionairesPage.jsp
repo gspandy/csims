@@ -51,9 +51,9 @@ body {
    				chestr+=str[i].value+",";
   			}
 		}
-		document.getElementById("answerResult").value=chestr;
-		document.forms[0].action="./QuestionAction.do?method=savaAnserResult";
-        document.forms[0].submit();
+		$("input[name='answerResult']").val(chestr);
+        $("form[name='questionForm']").attr("action", "./QuestionAction.do?method=savaAnserResult");
+        $("form[name='questionForm']").submit();
 	}
 	
 	function myLoad(status){
