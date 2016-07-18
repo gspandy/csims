@@ -1,105 +1,11 @@
-drop table BS_Questionaire;
-create table BS_Questionaire
-(
-   ID                 VARCHAR(50)            not null,
-   QTitle             VARCHAR(500),
-   QSumry             VARCHAR(1000),
-   QCreator            VARCHAR(50),
-   QCreatorOrg         VARCHAR(100),
-   QCreatorOrgNo       VARCHAR(50),
-   QCrtDate            TIMESTAMP,
-   QisEnable           char(1),
-   QisFinished         char(1),
-   QStat              SMALLINT,
-   QendDateTime        TIMESTAMP,
-   Stat               VARCHAR(50),
-   Flag               VARCHAR(50),
-   CreateDate         TIMESTAMP,
-   Updateate          TIMESTAMP,
-   check(QisEnable in ('Y','N')),
-   check(QisFinished in ('Y','N')),
-   constraint P_Key_1 primary key (ID)
-);
- 
+DROP TABLE BS_ANSWERRESULT;
+CREATE TABLE BS_ANSWERRESULT ( ID VARCHAR(50) NOT NULL, BSQUESTIONAIRE VARCHAR(50), BSQUESTION VARCHAR(50), ARORGNO VARCHAR(50), ARORGNAME VARCHAR(500), ARORGTYPENO VARCHAR(50), ARORGTYPENAME VARCHAR(500), ARAREANO VARCHAR(50), ARAREA VARCHAR(500), ANSWERRESULT VARCHAR(5), STATUS VARCHAR(50), FLAG VARCHAR(50), CREATEDATE TIMESTAMP, UPDATEATE TIMESTAMP, CONSTRAINT P_KEY_1 PRIMARY KEY (ID) );
 
-drop table BS_SurveyObject;
-create table BS_SurveyObject
-(
-   ID                 VARCHAR(50)            not null,
-   SOQuestionaireID     VARCHAR(50),
-   SOQOrgNo             VARCHAR(50),
-   SOQOrg               VARCHAR(500),
-   SOQOrgTypeNo         VARCHAR(50),
-   SOQOrgType           VARCHAR(500),
-   SOisFinished         char(1),
-   Stat               VARCHAR(50),
-   Flag               VARCHAR(50),
-   CreateDate         TIMESTAMP,
-   Updateate          TIMESTAMP,
-   check(SOisFinished in ('Y','N')),
-   constraint P_Key_1 primary key (ID)
-);
-CREATE INDEX idx_survey_qid ON BS_SurveyObject (SOQuestionaireID);
-CREATE INDEX idx_survey_orgno ON BS_SurveyObject (SOQOrgNo);
-CREATE INDEX idx_survey_orgtypeno ON BS_SurveyObject (SOQOrgTypeNo);
+DROP TABLE BS_QUESTION;
+CREATE TABLE BS_QUESTION ( ID VARCHAR(50) NOT NULL, BSQUESTIONAIRE VARCHAR(50), QQTITLE VARCHAR(1000), QQINDEX SMALLINT, ANSWERA VARCHAR(200), ANSWERB VARCHAR(200), ANSWERC VARCHAR(200), ANSWERD VARCHAR(200), ANSWERE VARCHAR(200), ANSWERF VARCHAR(200), ANSWERG VARCHAR(200), STATUS VARCHAR(50), FLAG VARCHAR(50), CREATEDATE TIMESTAMP, UPDATEATE TIMESTAMP, CONSTRAINT P_KEY_1 PRIMARY KEY (ID) );
 
-drop table BS_Question;
-create table BS_Question
-(
-   ID                 VARCHAR(50)            not null,
-   QQuestionaireID     VARCHAR(50), 
-   QQTitle             VARCHAR(1000),
-   QQIndex             SMALLINT,
-   AnswerA            VARCHAR(200),
-   AnswerB            VARCHAR(200),
-   AnswerC            VARCHAR(200),
-   AnswerD            VARCHAR(200),
-   AnswerE            VARCHAR(200),
-   AnswerF            VARCHAR(200),
-   AnswerG            VARCHAR(200),
-   Stat               VARCHAR(50),
-   Flag               VARCHAR(50),
-   CreateDate         TIMESTAMP,
-   Updateate          TIMESTAMP,
-   constraint P_Key_1 primary key (ID)
-);
-CREATE INDEX idx_ques_qid ON BS_Question (QQuestionaireID);
+DROP TABLE BS_QUESTIONAIRE;
+CREATE TABLE BS_QUESTIONAIRE ( ID VARCHAR(50) NOT NULL, QTITLE VARCHAR(500), QSUMRY VARCHAR(1000), QCREATOR VARCHAR(50), QCREATORORGNAME VARCHAR(100), QCREATORORGNO VARCHAR(50), QENDDATETIME VARCHAR(20), STATUS VARCHAR(5), FLAG VARCHAR(50), CREATEDATE TIMESTAMP, UPDATEATE TIMESTAMP, CONSTRAINT P_KEY_1 PRIMARY KEY (ID) );
 
-drop table BS_Answer;
-
-drop table BS_AnswerResult;
-create table BS_AnswerResult
-(
-   ID                 VARCHAR(50)            not null,
-   ARQuestionaireID     VARCHAR(50),
-   ARQuestionID         VARCHAR(50),
-   AROrgNo             VARCHAR(50),
-   AROrg               VARCHAR(500),
-   AROrgTypeNo         VARCHAR(50),
-   AROrgType           VARCHAR(500),
-   ARAreaNo            VARCHAR(50),
-   ARArea              VARCHAR(500),
-   An_A               char(1),
-   An_B               char(1),
-   An_C               char(1),
-   An_D               char(1),
-   An_E               char(1),
-   An_F               char(1),
-   An_G               char(1),
-   ARCreator            VARCHAR(50),
-   ARCrtDate            TIMESTAMP,
-   Stat               VARCHAR(50),
-   Flag               VARCHAR(50),
-   CreateDate         TIMESTAMP,
-   Updateate          TIMESTAMP,
-   check(An_A in ('Y','N')),
-   check(An_B in ('Y','N')),
-   check(An_C in ('Y','N')),
-   check(An_D in ('Y','N')),
-   check(An_E in ('Y','N')),
-   check(An_F in ('Y','N')),
-   check(An_G in ('Y','N')),
-   constraint P_Key_1 primary key (ID)
-);
-CREATE INDEX idx_ar_qid_an ON BS_AnswerResult (ARQuestionaireID);
-CREATE INDEX idx_ar_quesid ON BS_AnswerResult (ARQuestionID);
+DROP TABLE BS_SURVEYOBJECT;
+CREATE TABLE BS_SURVEYOBJECT ( ID VARCHAR(50) NOT NULL, BSQUESTIONAIRE VARCHAR(50), SOQORGNO VARCHAR(50), SOQORGNAME VARCHAR(500), SOQORGTYPENO VARCHAR(50), SOQORGTYPE VARCHAR(500), SOISFINISHED CHARACTER(1), STATUS VARCHAR(50), FLAG VARCHAR(50), CREATEDATE TIMESTAMP, UPDATEATE TIMESTAMP, CONSTRAINT P_KEY_1 PRIMARY KEY (ID) );
