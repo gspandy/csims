@@ -95,7 +95,7 @@ public class ReportTitleServiceImpl implements ReportTitleService {
 			        .append("<td align = 'center'>信息质量平均分</td>").append("</tr>");
 			break;
 
-		case 5:
+		case 11:
 			titleText.append("<tr><td class='tabletext01' colspan = '3' align = 'center'>问卷调查结果统计表</td></tr>")
 			        .append("<tr><td  colspan = '3' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
 			        .append("<td align = 'center'>试题</td>").append("<td align = 'center'>选择答案</td>")

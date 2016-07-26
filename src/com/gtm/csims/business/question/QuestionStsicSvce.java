@@ -98,14 +98,14 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 		// 根据字典表查询所有问题概况条款
 		StringBuffer query_sql = new StringBuffer();
 		query_sql
-		        .append("select BSQUESTION, ANSWERRESULT, COUNT(ANSWERRESULT) * 100 / 2 AS P from BS_ANSWERRESULT where BSQUESTIONAIRE = '"
+		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT, COUNT(ANSWERRESULT) * 100 / 2 AS P from BS_ANSWERRESULT where BSQUESTIONAIRE = '"
 		                + paramsMap.get("qid") + "' group by BSQUESTION,ANSWERRESULT order by BSQUESTION");
 		List<Map> results = jdbcTemplate.queryForList(query_sql.toString());
 		if (!CollectionUtils.isEmpty(results)) {
 			for (int i = 0; i < results.size(); i++) {
 				Map eachMap = results.get(i);
 				// 从第二行开始填充数据
-				resultMap.put((i + 1) + "-1", eachMap.get("BSQUESTION"));
+				resultMap.put((i + 1) + "-1", eachMap.get("qqtitle"));
 				resultMap.put((i + 1) + "-2", eachMap.get("ANSWERRESULT"));
 				resultMap.put((i + 1) + "-3", eachMap.get("P"));
 			}
