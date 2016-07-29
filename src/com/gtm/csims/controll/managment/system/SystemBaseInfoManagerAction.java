@@ -747,5 +747,69 @@ public class SystemBaseInfoManagerAction extends BaseAction {
             e.printStackTrace();
         }
     }
+    
+
+	@SuppressWarnings("unchecked")
+	public void areaTreeQ(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		String areaId = request.getParameter("node");
+		boolean isFirst = false;
+		if (areaId.equals("0")) {
+			areaId = "510000";
+			isFirst = true;
+		}
+		try {
+			List list = new ArrayList();
+			List resultArea = systemBaseInfoManager.areaList(areaId, isFirst);
+			for (int i = 0; i < resultArea.size(); i++) {
+				BsArea ba = (BsArea) resultArea.get(i);
+				JSONObject object = new JSONObject();
+				object.put("id", ba.getId());
+				object.put("text", ba.getName());
+				if ("0".equals(ba.getIsleaf().toString())) {
+					object.put("leaf", false);
+				} else {
+					object.put("leaf", true);
+				}
+				object.put("checked", false);
+				list.add(object);
+			}
+			JSONArray array = JSONArray.fromObject(list);
+			response.getWriter().write(array.toString());
+			response.getWriter().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void orgTreeQ(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		String parent = request.getParameter("node");
+		try {
+			List list = new ArrayList();
+			List resultOrg = systemBaseInfoManager.orgListByParentNo(parent);
+			for (int i = 0; i < resultOrg.size(); i++) {
+				BsOrg bc = (BsOrg) resultOrg.get(i);
+				JSONObject object = new JSONObject();
+				object.put("id", bc.getNo());
+				object.put("text", bc.getName());
+				if ("0".equals(bc.getIsleaf().toString())) {
+					object.put("leaf", false);
+				} else {
+					object.put("leaf", true);
+				}
+				object.put("checked", false);
+				list.add(object);
+			}
+			JSONArray array = JSONArray.fromObject(list);
+			response.getWriter().write(array.toString());
+			response.getWriter().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -15,110 +15,55 @@
 	<head>
 		<style type="text/css">
 </style>
-		<title><bean:message key="PROJECT_NAME" />
-		</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="template report">
-		<link href="css/css.css" rel="stylesheet" type="text/css" />
-		<link href="css/manus.css" rel="stylesheet" type="text/css" />
-		<link href="css/home.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="<%=basePath%>css/css2.css"
-			type="text/css"></link>
-		<link rel="stylesheet"
-			href="<%=basePath%>ext-3.2.0/resources/css/ext-all.css"
-			type="text/css"></link>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/home.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/home03.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/manu.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/common.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/WdatePicker.js" defer="defer"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/idCard.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/zxPrincipal.js"></script>
-		<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
-		<script type="text/javascript"
-			src="<%=basePath%>ext-3.2.0/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="<%=basePath%>ext-3.2.0/ext-all.js"></script>
-		<script type="text/javascript"
-			src="<%=basePath%>ext-3.2.0/epandsTree.js"></script>
-		<script type="text/javascript"
-			src="<%=basePath%>ext-3.2.0/epandsTreeOne.js"></script>
-		<script type='text/javascript'
-			src='<%=request.getContextPath()%>/dwr/interface/SelectSystemDataBase.js'></script>
-		<script type='text/javascript'
-			src='<%=request.getContextPath()%>/dwr/engine.js'></script>
-		<script type='text/javascript'
-			src='<%=request.getContextPath()%>/dwr/util.js'></script>
-		<script type="text/javascript" src="js/organization.js"></script>
-		<link href="css/menu.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/windowopen.js"></script>
-		<script type="text/javascript">	
-			String.prototype.trim = function(){
-		   		return this.replace(/(^\s+)|\s+$/g,"");
-			} 
-       	   var MyWindowUiOrg="";
-		   function getOrgTree(id){
-				Ext.BLANK_IMAGE_URL = "/csims/ext-3.2.0/resources/images/default/tree/s.gif";
-				var url="SystemBaseInfoManagerAction.do?method=orgTree";
-			    var config={
-			   			//指定当前的元素渲染的层Id
-			            autoScroll : true,
-			            height:420,
-						width:340,
-			             //指定当前树的根节点id
-			            root:new Ext.tree.AsyncTreeNode({
-			            url : url,      
-                                  	requestMethod : 'POST',  
-									id:'0'
-						}),
-					    listeners:{
-									"dblclick":function(node,event){
-									   if(confirm("是否选择:"+node.text)){
-									   		var ChoiceId = id+'Choice';
-									 		document.getElementById(ChoiceId).value= node.text;
-											document.getElementById(id).value= node.id;
-										 	MyWindowUiOrg.hide();
-									   }
-									  }
-					    }
-		         };
-   			var tree = new TreePanelFil(config,url,null)
-   		     var  totalId = id+'window';
-              if(MyWindowUiOrg == "" || typeof(MyWindowUiOrg) != "object" ){
-					MyWindowUiOrg = new Ext.Window({
-					    title: '机构',
-					    id: totalId,
-					    width: 350,
-					    height: 450,
-					    layout: 'column',
-					    resizable:false, //变大小 
-					    closeAction : 'hide' ,
-					    items: tree,
-					    listeners:{ 
-					       "close":function(){ 
-					          MyWindowUiOrg.hide();
-							} 
-			            }
-				    });   
-					MyWindowUiOrg.show();
-	         }else{
-	             MyWindowUiOrg.show();
-	         }
-          }
+<title><bean:message key="PROJECT_NAME" />
+</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="template report">
+<link href="css/menu.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<link href="css/manus.css" rel="stylesheet" type="text/css" />
+<link href="css/home.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<%=basePath%>css/css2.css" type="text/css"></link>
+<link rel="stylesheet" href="<%=basePath%>ext-3.2.0/resources/css/ext-all.css" type="text/css"></link>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/home.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/home03.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/manu.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/WdatePicker.js" defer="defer"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/idCard.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/zxPrincipal.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
+<script type="text/javascript" src="<%=basePath%>ext-3.2.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="<%=basePath%>ext-3.2.0/ext-all.js"></script>
+<script type="text/javascript" src="<%=basePath%>ext-3.2.0/epandsTree.js"></script>
+<script type="text/javascript" src="<%=basePath%>ext-3.2.0/epandsTreeOne.js"></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/interface/SelectSystemDataBase.js'></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/engine.js'></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script>
+<script type="text/javascript" src="js/organization.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/windowopen.js"></script>
+<script type="text/javascript">	
+	String.prototype.trim = function(){
+		return this.replace(/(^\s+)|\s+$/g,"");
+	} 
           
 	function createQuestionaire(){
-		var qtitle = $("input[name='qtitle']").val();
-		var qenddatetime = $("input[name='qenddatetime']").val(); 
+		var qtitle = document.getElementById("qtitle").value;
+		var qenddatetime = document.getElementById("qenddatetime").value;
+		if(document.getElementsByName("nextArea")[0].checked){
+			document.getElementById("checkNextArea").value = "true";
+		}else{
+			document.getElementById("checkNextArea").value = "false";
+		}
+		if(document.getElementsByName("nextOrg")[0].checked){
+			document.getElementById("checkNextOrg").value = "true";
+		}else{
+			document.getElementById("checkNextOrg").value = "false";
+		}
 		if(qtitle.length <=0){
 			alert("请输入问卷调查标题!");
 			return false;
@@ -128,16 +73,18 @@
 			return false;
 		}
 		if(confirm("操作将保存问卷调查信息,确认?")){
-			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=createQuestionaire");
-			$("form[name='questionForm']").submit();
+			document.forms[0].action="QuestionAction.do?method=createQuestionaire";
+			document.forms[0].submit();
 		}
+		
+		
 	}
 	
 	function delBsSurveyobject(id){
-		$("#sid").val(id)
+		document.getElementById("sid").value=id;
 		if(confirm("操作将删除问卷调查参与机构,确认?")){
-			$("form[name='questionForm']").attr("action", "QuestionAction.do?method=delBsSurveyobject");
-			$("form[name='questionForm']").submit();
+			document.forms[0].action="QuestionAction.do?method=delBsSurveyobject";
+			document.forms[0].submit();
 		}
 	}
 	
@@ -207,10 +154,12 @@
 																		标题
 																	</td>
 																	<td align="left">
-																		<html:text property="qtitle" styleClass="text111" size="100" maxlength="100"></html:text>
+																		<html:textarea property="qtitle" cols="140%" rows="5"></html:textarea>
 																		<html:hidden property="qid" />
 																		<html:hidden property="sid" />
 																		<html:hidden property="status" />
+																		<html:hidden property="checkNextArea" />
+																		<html:hidden property="checkNextOrg" />
 																		&nbsp;
 																	</td>
 																</tr>
@@ -227,15 +176,31 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td align="right" class="tabletext02">
+																	<td align="right" class="tabletext02"  rowspan="2">
+																		问卷调查参与地区
+																	</td>
+																	<td>
+																		<input type="button" value="地区选择" class="botton01" onclick="getAreaTree('area')" />
+																		<html:hidden property="area" styleId="area" />
+																	</td>
+																	</tr>
+																	<tr>
+																	<td align="left">
+																		<html:textarea property="areaChoice" cols="140%" rows="5" readonly="true"></html:textarea>
+																	</td>
+																</tr>
+																<tr>
+																	<td align="right" class="tabletext02"  rowspan="2">
 																		问卷调查参与机构
 																	</td>
-																	<td align="left">
-																		<html:text property="orgChoice" styleClass="text11155"
-																			readonly="true"></html:text>
-																		<input type="button" value="选择" class="botton01"
-																			onclick="getOrgTree('org')" />
+																	<td>
+																		<input type="button" value="机构选择" class="botton01" onclick="getOrgTree('org')" />
 																		<html:hidden property="org" styleId="org" />
+																	</td>
+																	</tr>
+																	<tr>
+																	<td align="left">
+																		<html:textarea property="orgChoice" cols="140%" rows="5" readonly="true"></html:textarea>
 																	</td>
 																</tr>
 																<tr>
@@ -340,4 +305,137 @@
 			</table>
 		</html:form>
 	</body>
+	<script type="text/javascript">
+		var MyWindowUiArea="";
+		var tree = null;
+		var checkedAreaId = new Array();
+		var checkedAreaName = new Array();
+		function getAreaTree(id){
+			Ext.BLANK_IMAGE_URL = "/csims/ext-3.2.0/resources/images/default/tree/s.gif";
+			var url="SystemBaseInfoManagerAction.do?method=areaTreeQ";
+			var config={
+				//指定当前的元素渲染的层Id
+				autoScroll : true,
+				height:420,
+				width:340,
+				//指定当前树的根节点id
+				root:new Ext.tree.AsyncTreeNode({
+					url : url,      
+					requestMethod : 'POST',  
+					id:'0',
+					isCheck:'YES'
+				})
+			};
+			tree = new TreePanelFil(config,url,null)
+      		if(MyWindowUiArea == "" || typeof(MyWindowUiArea) != "object" ){
+				MyWindowUiArea = new Ext.Window({
+					id: id+'window',
+					width: 350,
+					height: 450,
+					layout: 'column',
+					resizable:false, //变大小 
+					closeAction : 'hide',
+					items: tree,
+					listeners:{
+						"close":function(){
+					    	MyWindowUiArea.hide();
+						} 
+			      	}
+				});   
+				MyWindowUiArea.show();
+			}else{
+	     		MyWindowUiArea.show();
+			}
+			tree.on('checkChange',function(node,checked){
+				node.checked = checked;
+				if(node.checked){
+					if(jQuery.inArray(node.id, checkedAreaId)==-1){
+						checkedAreaId.push(node.id);
+						checkedAreaName.push(node.text);
+					}
+				}
+				if(!node.checked){
+					if(jQuery.inArray(node.id, checkedAreaId)>-1){
+						checkedAreaId.splice(jQuery.inArray(node.id, checkedAreaId), 1);
+						checkedAreaName.splice(jQuery.inArray(node.text, checkedAreaName), 1);
+					}
+				}
+				if(node.isExpanded()){
+					node.eachChild(function(child) {
+						child.ui.toggleCheck(checked);    
+						child.attributes.checked = checked;    
+						child.fireEvent('checkchange', child, checked);
+					})
+				}
+				document.getElementById("areaChoice").value=checkedAreaName;
+				document.getElementById("area").value=checkedAreaId;
+ 			})
+		}
+		
+		var MyWindowUiOrg="";
+		var tree = null;
+		var checkedOrgId = new Array();
+		var checkedOrgName = new Array();
+		function getOrgTree(id){
+			Ext.BLANK_IMAGE_URL = "/csims/ext-3.2.0/resources/images/default/tree/s.gif";
+			var url="SystemBaseInfoManagerAction.do?method=orgTreeQ";
+			var config={
+				//指定当前的元素渲染的层Id
+				autoScroll : true,
+				height:420,
+				width:340,
+				//指定当前树的根节点id
+				root:new Ext.tree.AsyncTreeNode({
+					url : url,      
+					requestMethod : 'POST',  
+					id:'0',
+					isCheck:'YES'
+				})
+			};
+			tree = new TreePanelFil(config,url,null)
+      		if(MyWindowUiOrg == "" || typeof(MyWindowUiOrg) != "object" ){
+				MyWindowUiOrg = new Ext.Window({
+					id: id+'window',
+					width: 350,
+					height: 450,
+					layout: 'column',
+					resizable:false, //变大小 
+					closeAction : 'hide',
+					items: tree,
+					listeners:{
+						"close":function(){
+					    	MyWindowUiOrg.hide();
+						} 
+			      	}
+				});   
+				MyWindowUiOrg.show();
+			}else{
+	     		MyWindowUiOrg.show();
+			}
+			tree.on('checkChange',function(node,checked){
+				node.checked = checked;
+				if(node.checked){
+					if(jQuery.inArray(node.id, checkedOrgId)==-1){
+						checkedOrgId.push(node.id);
+						checkedOrgName.push(node.text);
+					}
+				}
+				if(!node.checked){
+					if(jQuery.inArray(node.id, checkedOrgId)>-1){
+						checkedOrgId.splice(jQuery.inArray(node.id, checkedOrgId), 1);
+						checkedOrgName.splice(jQuery.inArray(node.text, checkedOrgName), 1);
+					}
+				}
+				if(node.isExpanded()){
+					node.eachChild(function(child) {
+						child.ui.toggleCheck(checked);    
+						child.attributes.checked = checked;    
+						child.fireEvent('checkchange', child, checked);
+					})
+				}
+				document.getElementById("orgChoice").value=checkedOrgName;
+				document.getElementById("org").value=checkedOrgId;
+ 			})
+		}
+	</script>
 </html>

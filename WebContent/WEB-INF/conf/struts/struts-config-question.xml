@@ -28,6 +28,10 @@
 			<form-property name="answerf" type="java.lang.String"></form-property>
 			<form-property name="answerg" type="java.lang.String"></form-property>
 			<form-property name="answerResult" type="java.lang.String"></form-property>
+			<form-property name="area" type="java.lang.String"></form-property>
+			<form-property name="areaChoice" type="java.lang.String"></form-property>
+			<form-property name="checkNextArea" type="java.lang.String"></form-property>
+			<form-property name="checkNextOrg" type="java.lang.String"></form-property>
 		</form-bean>
 	</form-beans>
 

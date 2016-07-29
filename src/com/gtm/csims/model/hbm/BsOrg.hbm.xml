@@ -308,7 +308,13 @@
 			not-null="false"
 			length="10"
 		/>
-
+<property
+			name="Isleaf"
+			column="ISLEAF"
+			type="string"
+			not-null="false"
+			length="10"
+		/>
 
 	</class>	
 </hibernate-mapping>
