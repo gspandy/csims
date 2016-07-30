@@ -1,11 +1,11 @@
 package com.gtm.csims.controll.question;
 
 import java.io.OutputStream;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sweet.dao.generic.support.Page;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -249,12 +247,8 @@ public class QuestionAction extends BaseAction {
 			}
 			questionService.saveBsQuestionaire(bs);
 			request.setAttribute("message", "操作成功!");
-			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
-			        + qtitle + "】【操作成功!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, "");
 		} catch (Exception e) {
 			request.setAttribute("message", "操作失败!");
-			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
-			        + qtitle + "】【操作失败!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, "");
 		}
 		return mapping.findForward("toMessage");
 	}
@@ -399,12 +393,8 @@ public class QuestionAction extends BaseAction {
 		try {
 			BsSurveyobject bs = questionService.getBsSurveyobjectById(sid);
 			questionService.delBsSurveyobject(bs);
-			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser
-			        + "】 用户删除问卷调查参与机构【操作成功!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, bsorg.getOrgType());
 		} catch (Exception e) {
 			e.printStackTrace();
-			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser
-			        + "】 用户删除问卷调查参与【操作失败!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, bsorg.getOrgType());
 		}
 		dyna.set("qid", qid);
 		BsQuestionaire bs = questionService.getBsQuestionaireById(qid);
