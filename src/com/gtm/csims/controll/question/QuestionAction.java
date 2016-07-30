@@ -202,19 +202,17 @@ public class QuestionAction extends BaseAction {
 		DynaActionForm dyna = (DynaActionForm) form;
 		request.setAttribute("methodname", "toQuestionairesList");
 		String nowLoginUser = this.getPubCredential(UserCredentialName.nickname.name(), request, response);
-		// String nowLoginUserId =
-		// this.getPrivCredential(UserCredentialName.login.name(), request,
-		// response);
+		String nowLoginUserId = this.getPrivCredential(UserCredentialName.login.name(), request, response);
 		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
-		// String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
+		String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
 		BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
 		String id = (dyna.get("qid") == null || dyna.get("qid").equals("")) ? "" : (String) dyna.get("qid");
 		String qtitle = (dyna.get("qtitle") == null || dyna.get("qtitle").equals("")) ? "" : (String) dyna
 		        .get("qtitle");
 		String qenddatetime = (dyna.get("qenddatetime") == null || dyna.get("qenddatetime").equals("")) ? ""
 		        : (String) dyna.get("qenddatetime");
-		// String org = (dyna.get("org") == null || dyna.get("org").equals(""))
-		// ? "" : (String) dyna.get("org");
+		String orgStr = (dyna.get("org") == null || dyna.get("org").equals("")) ? "" : (String) dyna.get("org");
+		String areaStr = (dyna.get("area") == null || dyna.get("area").equals("")) ? "" : (String) dyna.get("area");
 		String qsumry = (dyna.get("qsumry") == null || dyna.get("qsumry").equals("")) ? "" : (String) dyna
 		        .get("qsumry");
 		try {
@@ -222,39 +220,41 @@ public class QuestionAction extends BaseAction {
 			if (!"".equals(id)) {
 				bs = questionService.getBsQuestionaireById(id);
 			}
-
 			Date date = new Date();
+			bs.setId(UUID.randomUUID().toString().replace("-", ""));
 			bs.setQtitle(qtitle.trim());
-
-			Date endDate = DateUtils.parseDate(qenddatetime.trim(), DATE_FORMAT);
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(endDate);
-			cal.set(Calendar.HOUR, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			endDate = cal.getTime();
-			bs.setQenddatetime(DateFormatUtils.format(endDate, DATE_FORMAT[0]));
+			bs.setQenddatetime(qenddatetime.trim());
 			bs.setQsumry(qsumry.trim());
+			bs.setCreatedate(date);
 			bs.setQcreator(nowLoginUser);
 			bs.setQcreatororgname(bsorg.getName());
 			bs.setQcreatororgno(bsorg.getNo());
+			bs.setStatus("0");// 状态：0未发布，1已发布，2完成
 
-			bs.setStatus(QuestionService.Q_UNPUBLISHED_STATUS);
-			bs.setFlag(StringUtils.EMPTY);
-			bs.setCreatedate(date);
-			bs.setUpdateate(date);
-			questionService.createBsQuestionaire(bs);
+			List<BsOrg> listOrg = systemBaseInfoManager.getBsOrgList(orgStr.toString().trim(), areaStr.toString()
+			        .trim());
+			BsOrg bsOrg = new BsOrg();
+			if (listOrg.size() > 0) {
+				for (int i = 0; i < listOrg.size(); i++) {
+					BsSurveyobject bss = new BsSurveyobject();
+					bsOrg = listOrg.get(i);
+					bss.setBsQuestionaire(bs);
+					bss.setSoqorgno(bsOrg.getNo());
+					bss.setSoqorgname(bsOrg.getName());
+					bss.setProvince(bsOrg.getN());
+					bss.setCity(bsOrg.getP() == null ? "" : bsOrg.getP());
+					bss.setCountry(bsOrg.getQ() == null ? "" : bsOrg.getQ());
+					questionService.savaBsSurveyobject(bss);
+				}
+			}
+			questionService.saveBsQuestionaire(bs);
 			request.setAttribute("message", "操作成功!");
-			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
-			// + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
-			// + qtitle + "】【操作成功!】", "", "", "HTTP", nowLoginUser,
-			// nowLoginUserId, "");
+			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
+			        + qtitle + "】【操作成功!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, "");
 		} catch (Exception e) {
 			request.setAttribute("message", "操作失败!");
-			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
-			// + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
-			// + qtitle + "】【操作失败!】", "", "", "HTTP", nowLoginUser,
-			// nowLoginUserId, "");
+			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser + "】 用户保存问卷调查【"
+			        + qtitle + "】【操作失败!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, "");
 		}
 		return mapping.findForward("toMessage");
 	}
@@ -389,32 +389,22 @@ public class QuestionAction extends BaseAction {
 	public ActionForward delBsSurveyobject(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 	        HttpServletResponse response) {
 		DynaActionForm dyna = (DynaActionForm) form;
-		// String nowLoginUser =
-		// this.getPubCredential(UserCredentialName.nickname.name(), request,
-		// response);
-		// String nowLoginUserId =
-		// this.getPrivCredential(UserCredentialName.login.name(), request,
-		// response);
-		// String loginOrgNo =
-		// this.getPubCredential(UserCredentialName.organization.name(),
-		// request, response);
-		// String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
-		// BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
+		String nowLoginUser = this.getPubCredential(UserCredentialName.nickname.name(), request, response);
+		String nowLoginUserId = this.getPrivCredential(UserCredentialName.login.name(), request, response);
+		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
+		String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
+		BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
 		String qid = (dyna.get("qid") == null || dyna.get("qid").equals("")) ? "" : (String) dyna.get("qid");
 		String sid = (dyna.get("sid") == null || dyna.get("sid").equals("")) ? "" : (String) dyna.get("sid");
 		try {
 			BsSurveyobject bs = questionService.getBsSurveyobjectById(sid);
 			questionService.delBsSurveyobject(bs);
-			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
-			// + "】下的 【" + nowLoginUser
-			// + "】 用户删除问卷调查参与机构【操作成功!】", "", "", "HTTP", nowLoginUser,
-			// nowLoginUserId, bsorg.getOrgType());
+			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser
+			        + "】 用户删除问卷调查参与机构【操作成功!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, bsorg.getOrgType());
 		} catch (Exception e) {
 			e.printStackTrace();
-			// remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName()
-			// + "】下的 【" + nowLoginUser
-			// + "】 用户删除问卷调查参与【操作失败!】", "", "", "HTTP", nowLoginUser,
-			// nowLoginUserId, bsorg.getOrgType());
+			remindService.writeLog(cityId, loginOrgNo, "【" + bsorg.getName() + "】下的 【" + nowLoginUser
+			        + "】 用户删除问卷调查参与【操作失败!】", "", "", "HTTP", nowLoginUser, nowLoginUserId, bsorg.getOrgType());
 		}
 		dyna.set("qid", qid);
 		BsQuestionaire bs = questionService.getBsQuestionaireById(qid);
@@ -423,6 +413,7 @@ public class QuestionAction extends BaseAction {
 		dyna.set("qsumry", bs.getQsumry());
 		List<BsSurveyobject> list = questionService.getBsSurveyobjectByQuestionaireId(qid);
 		request.setAttribute("list", list);
+		request.setAttribute("status", "0");
 		return mapping.findForward("toCreateQuestionairesPage");
 	}
 

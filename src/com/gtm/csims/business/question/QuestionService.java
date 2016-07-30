@@ -333,4 +333,19 @@ public class QuestionService {
 		}
 		return sb.toString();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = false)
+	public void savaBsSurveyobject(BsSurveyobject bs) { 
+		StringBuffer sb = new StringBuffer("FROM BsSurveyobject ");
+		List<Object> param = new ArrayList<Object>();
+		sb.append(" where BsQuestionaire.Id =  ? ");
+		param.add(bs.getBsQuestionaire().getId().trim());
+		sb.append(" and  Soqorgno =  ? ");
+		param.add(bs.getSoqorgno().trim());
+		List<BsSurveyobject> list = bsSurveyobjectDao.find(sb.toString(), param.toArray());
+		if(list.size()==0){
+			bsSurveyobjectDao.save(bs);
+		}
+	}
 }

@@ -2,17 +2,15 @@ package com.gtm.csims.model.base;
 
 import java.io.Serializable;
 
-
 /**
- * This is an object that contains data related to the BS_SURVEYOBJECT table.
- * Do not modify this class because it will be overwritten if the configuration file
- * related to this class is modified.
+ * This is an object that contains data related to the BS_SURVEYOBJECT table. Do
+ * not modify this class because it will be overwritten if the configuration
+ * file related to this class is modified.
  *
- * @hibernate.class
- *  table="BS_SURVEYOBJECT"
+ * @hibernate.class table="BS_SURVEYOBJECT"
  */
 
-public abstract class BaseBsSurveyobject  implements Serializable {
+public abstract class BaseBsSurveyobject implements Serializable {
 
 	public static String REF = "BsSurveyobject";
 	public static String PROP_UPDATEATE = "Updateate";
@@ -27,23 +25,21 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	public static String PROP_ID = "Id";
 	public static String PROP_SOQORGNO = "Soqorgno";
 
-
 	// constructors
-	public BaseBsSurveyobject () {
+	public BaseBsSurveyobject() {
 		initialize();
 	}
 
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseBsSurveyobject (java.lang.String id) {
+	public BaseBsSurveyobject(java.lang.String id) {
 		this.setId(id);
 		initialize();
 	}
 
-	protected void initialize () {}
-
-
+	protected void initialize() {
+	}
 
 	private int hashCode = Integer.MIN_VALUE;
 
@@ -61,24 +57,33 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	private java.util.Date createdate;
 	private java.util.Date updateate;
 
-	private com.gtm.csims.model.BsQuestionaire bsQuestionaire;
+	public static String PROP_PROVINCE = "Province";
+	public static String PROP_CITY = "City";
+	public static String PROP_COUNTRY = "Country";
 
+	private java.lang.String province;
+	private java.lang.String city;
+	private java.lang.String country;
+
+	private com.gtm.csims.model.BsQuestionaire bsQuestionaire;
 
 	/**
 	 * Return the unique identifier of this class
-     * @hibernate.id
-     *  generator-class="org.hibernate.id.UUIDHexGenerator"
-     *  column="ID"
-     */
-	public java.lang.String getId () {
+	 * 
+	 * @hibernate.id generator-class="org.hibernate.id.UUIDHexGenerator"
+	 *               column="ID"
+	 */
+	public java.lang.String getId() {
 		return id;
 	}
 
 	/**
 	 * Set the unique identifier of this class
-	 * @param id the new ID
+	 * 
+	 * @param id
+	 *            the new ID
 	 */
-	public void setId (java.lang.String id) {
+	public void setId(java.lang.String id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
@@ -86,15 +91,17 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	/**
 	 * Return the value associated with the column: SOQORGNO
 	 */
-	public java.lang.String getSoqorgno () {
+	public java.lang.String getSoqorgno() {
 		return soqorgno;
 	}
 
 	/**
 	 * Set the value related to the column: SOQORGNO
-	 * @param soqorgno the SOQORGNO value
+	 * 
+	 * @param soqorgno
+	 *            the SOQORGNO value
 	 */
-	public void setSoqorgno (java.lang.String soqorgno) {
+	public void setSoqorgno(java.lang.String soqorgno) {
 		this.soqorgno = soqorgno;
 	}
 
@@ -109,101 +116,104 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 	/**
 	 * Return the value associated with the column: SOQORGTYPENO
 	 */
-	public java.lang.String getSoqorgtypeno () {
+	public java.lang.String getSoqorgtypeno() {
 		return soqorgtypeno;
 	}
 
 	/**
 	 * Set the value related to the column: SOQORGTYPENO
-	 * @param soqorgtypeno the SOQORGTYPENO value
+	 * 
+	 * @param soqorgtypeno
+	 *            the SOQORGTYPENO value
 	 */
-	public void setSoqorgtypeno (java.lang.String soqorgtypeno) {
+	public void setSoqorgtypeno(java.lang.String soqorgtypeno) {
 		this.soqorgtypeno = soqorgtypeno;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: SOQORGTYPE
 	 */
-	public java.lang.String getSoqorgtype () {
+	public java.lang.String getSoqorgtype() {
 		return soqorgtype;
 	}
 
 	/**
 	 * Set the value related to the column: SOQORGTYPE
-	 * @param soqorgtype the SOQORGTYPE value
+	 * 
+	 * @param soqorgtype
+	 *            the SOQORGTYPE value
 	 */
-	public void setSoqorgtype (java.lang.String soqorgtype) {
+	public void setSoqorgtype(java.lang.String soqorgtype) {
 		this.soqorgtype = soqorgtype;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: SOISFINISHED
 	 */
-	public java.lang.String getSoisfinished () {
+	public java.lang.String getSoisfinished() {
 		return soisfinished;
 	}
 
 	/**
 	 * Set the value related to the column: SOISFINISHED
-	 * @param soisfinished the SOISFINISHED value
+	 * 
+	 * @param soisfinished
+	 *            the SOISFINISHED value
 	 */
-	public void setSoisfinished (java.lang.String soisfinished) {
+	public void setSoisfinished(java.lang.String soisfinished) {
 		this.soisfinished = soisfinished;
 	}
 
 	/**
 	 * Return the value associated with the column: FLAG
 	 */
-	public java.lang.String getFlag () {
+	public java.lang.String getFlag() {
 		return flag;
 	}
 
 	/**
 	 * Set the value related to the column: FLAG
-	 * @param flag the FLAG value
+	 * 
+	 * @param flag
+	 *            the FLAG value
 	 */
-	public void setFlag (java.lang.String flag) {
+	public void setFlag(java.lang.String flag) {
 		this.flag = flag;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: CREATEDATE
 	 */
-	public java.util.Date getCreatedate () {
+	public java.util.Date getCreatedate() {
 		return createdate;
 	}
 
 	/**
 	 * Set the value related to the column: CREATEDATE
-	 * @param createdate the CREATEDATE value
+	 * 
+	 * @param createdate
+	 *            the CREATEDATE value
 	 */
-	public void setCreatedate (java.util.Date createdate) {
+	public void setCreatedate(java.util.Date createdate) {
 		this.createdate = createdate;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: UPDATEATE
 	 */
-	public java.util.Date getUpdateate () {
+	public java.util.Date getUpdateate() {
 		return updateate;
 	}
 
 	/**
 	 * Set the value related to the column: UPDATEATE
-	 * @param updateate the UPDATEATE value
+	 * 
+	 * @param updateate
+	 *            the UPDATEATE value
 	 */
-	public void setUpdateate (java.util.Date updateate) {
+	public void setUpdateate(java.util.Date updateate) {
 		this.updateate = updateate;
 	}
-
 
 	public java.lang.String getStatus() {
 		return status;
@@ -221,19 +231,24 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 		this.bsQuestionaire = bsQuestionaire;
 	}
 
-	public boolean equals (Object obj) {
-		if (null == obj) return false;
-		if (!(obj instanceof com.gtm.csims.model.BsSurveyobject)) return false;
+	public boolean equals(Object obj) {
+		if (null == obj)
+			return false;
+		if (!(obj instanceof com.gtm.csims.model.BsSurveyobject))
+			return false;
 		else {
 			com.gtm.csims.model.BsSurveyobject bsSurveyobject = (com.gtm.csims.model.BsSurveyobject) obj;
-			if (null == this.getId() || null == bsSurveyobject.getId()) return false;
-			else return (this.getId().equals(bsSurveyobject.getId()));
+			if (null == this.getId() || null == bsSurveyobject.getId())
+				return false;
+			else
+				return (this.getId().equals(bsSurveyobject.getId()));
 		}
 	}
 
-	public int hashCode () {
+	public int hashCode() {
 		if (Integer.MIN_VALUE == this.hashCode) {
-			if (null == this.getId()) return super.hashCode();
+			if (null == this.getId())
+				return super.hashCode();
 			else {
 				String hashStr = this.getClass().getName() + ":" + this.getId().hashCode();
 				this.hashCode = hashStr.hashCode();
@@ -242,10 +257,32 @@ public abstract class BaseBsSurveyobject  implements Serializable {
 		return this.hashCode;
 	}
 
-
-	public String toString () {
+	public String toString() {
 		return super.toString();
 	}
 
+	public java.lang.String getProvince() {
+		return province;
+	}
+
+	public void setProvince(java.lang.String province) {
+		this.province = province;
+	}
+
+	public java.lang.String getCity() {
+		return city;
+	}
+
+	public void setCity(java.lang.String city) {
+		this.city = city;
+	}
+
+	public java.lang.String getCountry() {
+		return country;
+	}
+
+	public void setCountry(java.lang.String country) {
+		this.country = country;
+	}
 
 }

@@ -4,88 +4,38 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.gtm.csims.model">
-	<class
-		name="BsSurveyobject"
-		table="BS_SURVEYOBJECT"
-	>
+	<class name="BsSurveyobject" table="BS_SURVEYOBJECT">
 		<meta attribute="sync-DAO">false</meta>
-		<id
-			name="Id"
-			type="string"
-			column="ID"
-		>
-			<generator class="org.hibernate.id.UUIDHexGenerator"/>
+		<id name="Id" type="string" column="ID">
+			<generator class="org.hibernate.id.UUIDHexGenerator" />
 		</id>
-		<property
-			name="Soqorgno"
-			column="SOQORGNO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Soqorgname"
-			column="SOQORGNAME"
-			type="string"
-			not-null="false"
-			length="500"
-		/>
-		<property
-			name="Soqorgtypeno"
-			column="SOQORGTYPENO"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Soqorgtype"
-			column="SOQORGTYPE"
-			type="string"
-			not-null="false"
-			length="500"
-		/>
-		<property
-			name="Soisfinished"
-			column="SOISFINISHED"
-			type="string"
-			not-null="false"
-			length="1"
-		/>
-		<property
-			name="Status"
-			column="STATUS"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Flag"
-			column="FLAG"
-			type="string"
-			not-null="false"
-			length="50"
-		/>
-		<property
-			name="Createdate"
-			column="CREATEDATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<property
-			name="Updateate"
-			column="UPDATEATE"
-			type="timestamp"
-			not-null="false"
-			length="26"
-		/>
-		<many-to-one
-			name="BsQuestionaire"
-			column="BSQUESTIONAIRE"
-			class="BsQuestionaire"
-			not-null="false"
-		>
+		<property name="Soqorgno" column="SOQORGNO" type="string"
+			not-null="false" length="50" />
+		<property name="Soqorgname" column="SOQORGNAME" type="string"
+			not-null="false" length="500" />
+		<property name="Soqorgtypeno" column="SOQORGTYPENO" type="string"
+			not-null="false" length="50" />
+		<property name="Soqorgtype" column="SOQORGTYPE" type="string"
+			not-null="false" length="500" />
+		<property name="Soisfinished" column="SOISFINISHED" type="string"
+			not-null="false" length="1" />
+		<property name="Status" column="STATUS" type="string"
+			not-null="false" length="50" />
+		<property name="Flag" column="FLAG" type="string" not-null="false"
+			length="50" />
+		<property name="Createdate" column="CREATEDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Updateate" column="UPDATEATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Province" column="PROVINCE" type="string"
+			not-null="false" length="10" />
+		<property name="City" column="CITY" type="string" not-null="false"
+			length="10" />
+		<property name="Country" column="COUNTRY" type="string"
+			not-null="false" length="10" />
+		<many-to-one name="BsQuestionaire" column="BSQUESTIONAIRE"
+			class="BsQuestionaire" not-null="false">
 		</many-to-one>
 
-	</class>	
+	</class>
 </hibernate-mapping>
