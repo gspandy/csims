@@ -333,10 +333,10 @@ public class QuestionService {
 		}
 		return sb.toString();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = false)
-	public void savaBsSurveyobject(BsSurveyobject bs) { 
+	public void savaBsSurveyobject(BsSurveyobject bs) {
 		StringBuffer sb = new StringBuffer("FROM BsSurveyobject ");
 		List<Object> param = new ArrayList<Object>();
 		sb.append(" where BsQuestionaire.Id =  ? ");
@@ -344,8 +344,13 @@ public class QuestionService {
 		sb.append(" and  Soqorgno =  ? ");
 		param.add(bs.getSoqorgno().trim());
 		List<BsSurveyobject> list = bsSurveyobjectDao.find(sb.toString(), param.toArray());
-		if(list.size()==0){
+		if (list.size() == 0) {
 			bsSurveyobjectDao.save(bs);
 		}
+	}
+
+	@Transactional(readOnly = false)
+	public void saveBsQuestionaire(BsQuestionaire bs) {
+		bsQuestionaireDao.save(bs);
 	}
 }

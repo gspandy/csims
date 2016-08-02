@@ -202,7 +202,8 @@ public class QuestionAction extends BaseAction {
 		String nowLoginUser = this.getPubCredential(UserCredentialName.nickname.name(), request, response);
 		String nowLoginUserId = this.getPrivCredential(UserCredentialName.login.name(), request, response);
 		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
-		String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
+		// String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
+		String cityId = "";
 		BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
 		String id = (dyna.get("qid") == null || dyna.get("qid").equals("")) ? "" : (String) dyna.get("qid");
 		String qtitle = (dyna.get("qtitle") == null || dyna.get("qtitle").equals("")) ? "" : (String) dyna
@@ -386,7 +387,8 @@ public class QuestionAction extends BaseAction {
 		String nowLoginUser = this.getPubCredential(UserCredentialName.nickname.name(), request, response);
 		String nowLoginUserId = this.getPrivCredential(UserCredentialName.login.name(), request, response);
 		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
-		String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
+		// String cityId = systemBaseInfoManager.getCityIdByOrgNo(loginOrgNo);
+		String cityId = "";
 		BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
 		String qid = (dyna.get("qid") == null || dyna.get("qid").equals("")) ? "" : (String) dyna.get("qid");
 		String sid = (dyna.get("sid") == null || dyna.get("sid").equals("")) ? "" : (String) dyna.get("sid");
