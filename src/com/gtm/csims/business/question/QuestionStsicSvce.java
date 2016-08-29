@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,19 +99,26 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 		// 根据字典表查询所有问题概况条款
 		StringBuffer query_sql = new StringBuffer();
 		query_sql
-		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT, COUNT(ANSWERRESULT) * 100 / 2 AS P from BS_ANSWERRESULT where BSQUESTIONAIRE = '"
-		                + paramsMap.get("qid") + "' group by BSQUESTION,ANSWERRESULT order by BSQUESTION");
+		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT")
+		        .append(", dec(dec(COUNT(ANSWERRESULT) * 100,17,2) /  (SELECT dec(COUNT(BSQUESTION),17,2) FROM BS_ANSWERRESULT WHERE BSQUESTION = ans.BSQUESTION),17,2) AS P ")
+		        .append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '").append(paramsMap.get("qid"))
+		        .append("' group by BSQUESTION,ANSWERRESULT order by BSQUESTION");
 		List<Map> results = jdbcTemplate.queryForList(query_sql.toString());
 		if (!CollectionUtils.isEmpty(results)) {
+			int count = 0;
 			for (int i = 0; i < results.size(); i++) {
 				Map eachMap = results.get(i);
 				// 从第二行开始填充数据
 				resultMap.put((i + 1) + "-1", eachMap.get("qqtitle"));
 				resultMap.put((i + 1) + "-2", eachMap.get("ANSWERRESULT"));
 				resultMap.put((i + 1) + "-3", eachMap.get("P"));
+				count = i;
 			}
+			resultMap.put((count + 2) + "-1", StringUtils.EMPTY);
+			resultMap.put((count + 2) + "-2", StringUtils.EMPTY);
+			resultMap.put((count + 2) + "-3", StringUtils.EMPTY);
 		}
+
 		return resultMap;
 	}
-
 }
