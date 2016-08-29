@@ -12,6 +12,8 @@
 		<property name="remindService" ref="remindService"></property>
 		<property name="systemBaseInfoManager" ref="systemBaseInfoManager"></property>
 		<property name="questionStsicSvce" ref="questionStsicSvce"></property>
+		<property name="questionByAreaStsicSvce" ref="questionByAreaStsicSvce"></property>
+		<property name="questionByOrgStsicSvce" ref="questionByOrgStsicSvce"></property>
 	</bean>
 
 </beans>

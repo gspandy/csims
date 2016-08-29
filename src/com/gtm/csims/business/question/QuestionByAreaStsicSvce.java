@@ -20,11 +20,11 @@ import com.gtm.csims.business.dataapp.statistics.StatisticsService;
  * @author Sweet
  * 
  */
-public class QuestionStsicSvce extends BaseStatisticsService implements StatisticsService {
+public class QuestionByAreaStsicSvce extends BaseStatisticsService implements StatisticsService {
 
-	private static Log LOGGER = LogFactory.getLog(QuestionStsicSvce.class);
+	private static Log LOGGER = LogFactory.getLog(QuestionByAreaStsicSvce.class);
 
-	private int xCount = 3;
+	private int xCount = 4;
 
 	/**
 	 * 当前报表需要重新复制行
@@ -48,7 +48,7 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 	 * @return
 	 */
 	public int[] getMergedColumns() {
-		return new int[] { 0 };
+		return new int[] { 0, 1 };
 	}
 
 	/**
@@ -102,12 +102,13 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 		StringBuffer query_sql = new StringBuffer();
 		List<Map> results = null;
 		// 根据字典表查询所有问题概况条款
-		query_sql.append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT ,")
+		query_sql
+		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT, Max(ararea) as area, ")
 		        .append("dec(").append("dec(COUNT(ANSWERRESULT) * 100,17,2)").append(" /  ")
 		        .append("(SELECT dec(COUNT(BSQUESTION),17,2) FROM BS_ANSWERRESULT WHERE BSQUESTION = ans.BSQUESTION)")
 		        .append(",17,2) AS P ").append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '")
 		        .append(paramsMap.get("qid"))
-		        .append("' group by BSQUESTION,ANSWERRESULT order by BSQUESTION, ANSWERRESULT");
+		        .append("' group by BSQUESTION, ANSWERRESULT, arareaNo order by BSQUESTION, ANSWERRESULT");
 		results = jdbcTemplate.queryForList(query_sql.toString());
 		if (!CollectionUtils.isEmpty(results)) {
 			int count = 0;
@@ -116,12 +117,14 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 				// 从第二行开始填充数据
 				resultMap.put((i + 1) + "-1", eachMap.get("qqtitle"));
 				resultMap.put((i + 1) + "-2", eachMap.get("ANSWERRESULT"));
-				resultMap.put((i + 1) + "-3", eachMap.get("P"));
+				resultMap.put((i + 1) + "-3", eachMap.get("area"));
+				resultMap.put((i + 1) + "-4", eachMap.get("P"));
 				count = i;
 			}
 			resultMap.put((count + 2) + "-1", StringUtils.EMPTY);
 			resultMap.put((count + 2) + "-2", StringUtils.EMPTY);
 			resultMap.put((count + 2) + "-3", StringUtils.EMPTY);
+			resultMap.put((count + 2) + "-4", StringUtils.EMPTY);
 		}
 
 		return resultMap;

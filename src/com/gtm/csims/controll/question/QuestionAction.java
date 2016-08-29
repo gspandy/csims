@@ -21,6 +21,8 @@ import org.apache.struts.action.DynaActionForm;
 
 import com.gtm.csims.base.BaseAction;
 import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
+import com.gtm.csims.business.question.QuestionByAreaStsicSvce;
+import com.gtm.csims.business.question.QuestionByOrgStsicSvce;
 import com.gtm.csims.business.question.QuestionService;
 import com.gtm.csims.business.question.QuestionStsicSvce;
 import com.gtm.csims.business.remind.RemindService;
@@ -47,6 +49,10 @@ public class QuestionAction extends BaseAction {
 
 	private QuestionStsicSvce questionStsicSvce;
 
+	private QuestionByAreaStsicSvce questionByAreaStsicSvce;
+
+	private QuestionByOrgStsicSvce questionByOrgStsicSvce;
+
 	private SystemBaseInfoManager systemBaseInfoManager;
 
 	@SuppressWarnings("unused")
@@ -66,6 +72,14 @@ public class QuestionAction extends BaseAction {
 
 	public void setQuestionStsicSvce(QuestionStsicSvce questionStsicSvce) {
 		this.questionStsicSvce = questionStsicSvce;
+	}
+
+	public void setQuestionByAreaStsicSvce(QuestionByAreaStsicSvce questionByAreaStsicSvce) {
+		this.questionByAreaStsicSvce = questionByAreaStsicSvce;
+	}
+
+	public void setQuestionByOrgStsicSvce(QuestionByOrgStsicSvce questionByOrgStsicSvce) {
+		this.questionByOrgStsicSvce = questionByOrgStsicSvce;
 	}
 
 	/**
@@ -776,7 +790,28 @@ public class QuestionAction extends BaseAction {
 		} else {
 			keyValue.put("TITLE", StringUtils.EMPTY);
 		}
-		String htmlStr = questionStsicSvce.getHTMLString("11", questionStsicSvce.doStatistics(params), keyValue);
+		int stasticType = 2;
+		try {
+			Integer.valueOf(dyna.getString("stasticType")).intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String htmlStr = null;
+		switch (stasticType) {
+		case 0:
+			htmlStr = questionStsicSvce.getHTMLString("11", questionStsicSvce.doStatistics(params), keyValue);
+			break;
+		case 1:
+			htmlStr = questionByAreaStsicSvce.getHTMLString("12", questionByAreaStsicSvce.doStatistics(params),
+			        keyValue);
+			break;
+		case 2:
+			htmlStr = questionByOrgStsicSvce.getHTMLString("13", questionByOrgStsicSvce.doStatistics(params), keyValue);
+			break;
+		default:
+			break;
+		}
+
 		request.setAttribute("htmlStr", htmlStr);
 		dyna.set("qid", qid);
 		return mapping.findForward("toresultPage");
@@ -805,7 +840,26 @@ public class QuestionAction extends BaseAction {
 			keyValue.put("TITLE", StringUtils.EMPTY);
 		}
 		HSSFWorkbook wb = null;
-		wb = questionStsicSvce.generateExcel("11", questionStsicSvce.doStatistics(params), keyValue);
+		int stasticType = 2;
+		try {
+			Integer.valueOf(dyna.getString("stasticType")).intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		switch (stasticType) {
+		case 0:
+			wb = questionStsicSvce.generateExcel("11", questionStsicSvce.doStatistics(params), keyValue);
+			break;
+		case 1:
+			wb = questionByAreaStsicSvce.generateExcel("12", questionByAreaStsicSvce.doStatistics(params), keyValue);
+			break;
+		case 2:
+			wb = questionByOrgStsicSvce.generateExcel("13", questionByOrgStsicSvce.doStatistics(params), keyValue);
+			break;
+		default:
+			break;
+		}
+
 		String excelFileName = "调查问卷统计表";
 		try {
 			OutputStream repos = response.getOutputStream();

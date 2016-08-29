@@ -34,7 +34,7 @@ public abstract class BaseStatisticsService {
 	/**
 	 * 定义所有报表的统计Excel模板填充区域的起始行，以0开始计
 	 */
-	public static final int[] TABLEDATA_BEGIN_Y = { 4, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 6, 5, 0 };// 开始行
+	public static final int[] TABLEDATA_BEGIN_Y = { 4, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0 };// 开始行
 	/**
 	 * 根据报表编号设置是否需要HTML垂直表头
 	 */
