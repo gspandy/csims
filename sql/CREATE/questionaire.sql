@@ -18,3 +18,30 @@ ON
     (
         BSQUESTIONAIRE
     );
+    
+CREATE INDEX
+    idx_qn_q
+ON
+    BS_QUESTION
+    (
+        BSQUESTIONAIRE
+    );
+    
+CREATE INDEX
+    idx_qn_s
+ON
+    BS_SURVEYOBJECT
+    (
+        BSQUESTIONAIRE
+    );
+    
+CREATE INDEX
+    idx_orgno_s
+ON
+    BS_SURVEYOBJECT
+    (
+        SOQORGNO
+    );
+
+    
+
