@@ -20,9 +20,9 @@ import com.gtm.csims.business.dataapp.statistics.StatisticsService;
  * @author Sweet
  * 
  */
-public class QuestionStsicSvce extends BaseStatisticsService implements StatisticsService {
+public class QuestionBySingleOrgStsicSvce extends BaseStatisticsService implements StatisticsService {
 
-	private static Log LOGGER = LogFactory.getLog(QuestionStsicSvce.class);
+	private static Log LOGGER = LogFactory.getLog(QuestionByOrgStsicSvce.class);
 
 	private int xCount = 3;
 
@@ -48,7 +48,7 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 	 * @return
 	 */
 	public int[] getMergedColumns() {
-		return new int[] { 0 };
+		return new int[] { 0, 1 };
 	}
 
 	/**
@@ -98,19 +98,22 @@ public class QuestionStsicSvce extends BaseStatisticsService implements Statisti
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Map<String, Object> getResultData(String uuid, Map<String, String> paramsMap) {
 
+		String orgNo = paramsMap.get("orgno");
+
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		StringBuffer query_sql = new StringBuffer();
 		List<Map> results = null;
 		// 根据字典表查询所有问题概况条款
 		query_sql
-		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT ,")
+		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT,")
 		        .append("dec(")
 		        .append("dec(COUNT(ANSWERRESULT) * 100,17,2)")
 		        .append(" /  ")
 		        .append("(SELECT dec(COUNT(BSQUESTION),17,2) FROM BS_ANSWERRESULT WHERE BSQUESTION = ans.BSQUESTION AND BSQUESTIONAIRE = '")
-		        .append(paramsMap.get("qid")).append("')").append(",17,2) AS P ")
-		        .append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '").append(paramsMap.get("qid"))
-		        .append("' group by BSQUESTION,ANSWERRESULT order by BSQUESTION, ANSWERRESULT");
+		        .append(paramsMap.get("qid")).append("' AND ARORGNO = '").append(orgNo).append("' )")
+		        .append(",17,2) AS P ").append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '")
+		        .append(paramsMap.get("qid")).append("'").append(" and ARORGNO = '").append(orgNo)
+		        .append("' group by BSQUESTION, ANSWERRESULT order by BSQUESTION, ANSWERRESULT");
 		results = jdbcTemplate.queryForList(query_sql.toString());
 		if (!CollectionUtils.isEmpty(results)) {
 			int count = 0;

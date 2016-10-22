@@ -96,23 +96,38 @@ public class ReportTitleServiceImpl implements ReportTitleService {
 			break;
 
 		case 11:
-			titleText.append("<tr><td class='tabletext01' colspan = '3' align = 'center'>问卷调查结果统计表</td></tr>")
+			titleText.append("<tr><td class='tabletext01' colspan = '3' align = 'center'>问卷调查结果统计表（按问卷）</td></tr>")
 			        .append("<tr><td  colspan = '3' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
 			        .append("<td align = 'center'>试题</td>").append("<td align = 'center'>选择答案</td>")
 			        .append("<td align = 'center'>答案所占比重（%）</td>").append("</tr>");
 			break;
 		case 12:
-			titleText.append("<tr><td class='tabletext01' colspan = '4' align = 'center'>问卷调查结果统计表</td></tr>")
+			titleText.append("<tr><td class='tabletext01' colspan = '4' align = 'center'>问卷调查结果统计表（按地区）</td></tr>")
 			        .append("<tr><td  colspan = '4' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
 			        .append("<td align = 'center'>试题</td>").append("<td align = 'center'>选择答案</td>")
 			        .append("<td align = 'center'>地区</td>").append("<td align = 'center'>答案所占比重（%）</td>")
 			        .append("</tr>");
 			break;
 		case 13:
-			titleText.append("<tr><td class='tabletext01' colspan = '4' align = 'center'>问卷调查结果统计表</td></tr>")
+			titleText.append("<tr><td class='tabletext01' colspan = '4' align = 'center'>问卷调查结果统计表（按机构类型）</td></tr>")
 			        .append("<tr><td  colspan = '4' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
 			        .append("<td align = 'center'>试题</td>").append("<td align = 'center'>选择答案</td>")
 			        .append("<td align = 'center'>机构类型</td>").append("<td align = 'center'>答案所占比重（%）</td>")
+			        .append("</tr>");
+			break;
+		case 14:
+			titleText.append("<tr><td class='tabletext01' colspan = '3' align = 'center'>问卷调查结果统计表（按机构）</td></tr>")
+			        .append("<tr><td  colspan = '3' align = 'left'>#ORGNAME#&nbsp;&nbsp;问卷标题：#TITLE#</td></tr>")
+			        .append("<tr>").append("<td align = 'center'>试题</td>").append("<td align = 'center'>选择答案</td>")
+			        .append("<td align = 'center'>答案所占比重（%）</td>").append("</tr>");
+			break;
+
+		case 15:
+			titleText.append("<tr><td class='tabletext01' colspan = '6' align = 'center'>问卷调查结果明细表）</td></tr>")
+			        .append("<tr><td  colspan = '6' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
+			        .append("<td align = 'center'>作答人姓名</td>").append("<td align = 'center'>机构名称</td>")
+			        .append("<td align = 'center'>所在市州</td>").append("<td align = 'center'>用户类型</td>")
+			        .append("<td align = 'center'>试题内容</td>").append("<td align = 'center'>选择答案</td>")
 			        .append("</tr>");
 			break;
 

@@ -22,8 +22,17 @@
 	<bean id="questionByAreaStsicSvce" class="com.gtm.csims.business.question.QuestionByAreaStsicSvce"
 		parent="baseStatisticsService">
 	</bean>
-	
+
 	<bean id="questionByOrgStsicSvce" class="com.gtm.csims.business.question.QuestionByOrgStsicSvce"
+		parent="baseStatisticsService">
+	</bean>
+
+	<bean id="questionBySingleOrgStsicSvce"
+		class="com.gtm.csims.business.question.QuestionBySingleOrgStsicSvce"
+		parent="baseStatisticsService">
+	</bean>
+
+	<bean id="questionDetailStsicSvce" class="com.gtm.csims.business.question.QuestionDetailStsicSvce"
 		parent="baseStatisticsService">
 	</bean>
 
