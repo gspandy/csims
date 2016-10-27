@@ -2974,9 +2974,9 @@ function confirmAeheanman() {
                                                                         <select id="aeother" name="aeother" multiple="multiple" size='10'> 
                                                                             <logic:iterate id="other" name="aeothers">
                                                                                 <option
-                                                                                    value="<bean:write name="other" property="pepname" />--<bean:write name="master" property="certno" />">
+                                                                                    value="<bean:write name="other" property="pepname" />--<bean:write name="other" property="certno" />">
                                                                                     <bean:write name="other" property="pepname" />--
-                                                                                    <bean:write name="master" property="certno" />
+                                                                                    <bean:write name="other" property="certno" />
                                                                                 </option>
                                                                             </logic:iterate>
                                                                         </select>

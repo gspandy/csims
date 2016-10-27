@@ -12,7 +12,7 @@ create table BS_ADMENFORCE
    PRJNM                VARCHAR(200),
    PRJBASIS             VARCHAR(500),
    AEBASIS              VARCHAR(500),
-   AECONTENT            VARCHAR(500),
+   AECONTENT            VARCHAR(3000),
    AELIMT               VARCHAR(100),
    AEWAY                VARCHAR(50),
    AEPEOPLE             VARCHAR(100),
