@@ -127,7 +127,14 @@ public class ReportTitleServiceImpl implements ReportTitleService {
 			        .append("<tr><td  colspan = '6' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
 			        .append("<td align = 'center'>作答人姓名</td>").append("<td align = 'center'>机构名称</td>")
 			        .append("<td align = 'center'>所在市州</td>").append("<td align = 'center'>用户类型</td>")
-			        .append("<td align = 'center'>试题内容</td>").append("<td align = 'center'>选择答案</td>")
+			        .append("<td align = 'center'>试题内容</td>").append("<td align = 'center'>选择答案</td>").append("</tr>");
+			break;
+
+		case 16:
+			titleText.append("<tr><td class='tabletext01' colspan = '4' align = 'center'>问卷调查结果统计表（按顶级机构类型）</td></tr>")
+			        .append("<tr><td  colspan = '4' align = 'left'>问卷标题：#TITLE#</td></tr>").append("<tr>")
+			        .append("<td align = 'center'>试题</td>").append("<td align = 'center'>选择答案</td>")
+			        .append("<td align = 'center'>机构类型</td>").append("<td align = 'center'>答案所占比重（%）</td>")
 			        .append("</tr>");
 			break;
 

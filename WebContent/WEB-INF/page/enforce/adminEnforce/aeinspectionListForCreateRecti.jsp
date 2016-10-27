@@ -43,9 +43,8 @@ body {
 			src="<%=request.getContextPath()%>/js/WdatePicker.js" defer="defer"></script>
 <script type="text/javascript">
 Ext.MessageBox.minWidth = 400;
-
 	function search(){
-        document.forms[0].action="./AdminEnforceManagerAction.do?method=toAeinspectionList";
+        document.forms[0].action="./AdminEnforceManagerAction.do?method=toAeinspListForCreateRecti";
         document.forms[0].submit();
     }
     
@@ -87,7 +86,7 @@ Ext.MessageBox.minWidth = 400;
 	</tr>
 </table>
 <html:form
-	action="/AdminEnforceManagerAction.do?method=toAeinspectionList">
+	action="/AdminEnforceManagerAction.do?method=toAeinspListForCreateRecti">
 	<html:hidden property="pageCount" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>

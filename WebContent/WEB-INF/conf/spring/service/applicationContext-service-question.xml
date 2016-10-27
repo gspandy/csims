@@ -35,5 +35,9 @@
 	<bean id="questionDetailStsicSvce" class="com.gtm.csims.business.question.QuestionDetailStsicSvce"
 		parent="baseStatisticsService">
 	</bean>
+	
+	<bean id="questionByTopOrgStsicSvce" class="com.gtm.csims.business.question.QuestionByTopOrgStsicSvce"
+		parent="baseStatisticsService">
+	</bean>
 
 </beans>

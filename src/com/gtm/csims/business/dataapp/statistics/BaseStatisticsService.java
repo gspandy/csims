@@ -30,16 +30,16 @@ public abstract class BaseStatisticsService {
 	/**
 	 * 定义所有报表的统计Excel模板填充区域的起始列，以0开始计
 	 */
-	public static final int[] TABLEDATA_BEGIN_X = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };// 开始列
+	public static final int[] TABLEDATA_BEGIN_X = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };// 开始列
 	/**
 	 * 定义所有报表的统计Excel模板填充区域的起始行，以0开始计
 	 */
-	public static final int[] TABLEDATA_BEGIN_Y = { 4, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };// 开始行
+	public static final int[] TABLEDATA_BEGIN_Y = { 4, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };// 开始行
 	/**
 	 * 根据报表编号设置是否需要HTML垂直表头
 	 */
 	public static final boolean[] IS_FIRST_ROW_NOT_DISPLAY_ZERO = { false, false, false, false, false, false, false,
-	        true, true, false, false, false, false, false, false };
+	        true, true, false, false, false, false, false, false, false };
 
 	// 静态报表基础数据
 	public static final String[] AREA_INDEX_ARRAY = { "成都", "攀枝花", "自贡", "泸州", "乐山", "内江", "德阳", "绵阳", "广元", "遂宁",

@@ -44,7 +44,7 @@ body {
 <script type="text/javascript">
 Ext.MessageBox.minWidth = 400;
 	function search(){
-        document.forms[0].action="./AdminEnforceManagerAction.do?method=toAeinspectionList";
+        document.forms[0].action="./AdminEnforceManagerAction.do?method=toAeinspListForCreateConcl";
         document.forms[0].submit();
     }
     
@@ -86,7 +86,7 @@ Ext.MessageBox.minWidth = 400;
 	</tr>
 </table>
 <html:form
-	action="/AdminEnforceManagerAction.do?method=toAeinspectionList">
+	action="/AdminEnforceManagerAction.do?method=toAeinspListForCreateConcl">
 	<html:hidden property="pageCount" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
