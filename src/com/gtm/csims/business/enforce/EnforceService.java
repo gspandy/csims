@@ -2108,11 +2108,11 @@ public class EnforceService extends BaseEnforceService {
 			param.add("%" + b.trim() + "%");
 		}
 		if (StringUtils.isNotEmpty(stdate)) {
-			sb.append(" and anlDate > ? ");
+			sb.append(" and anlDate >= ? ");
 			param.add(StringUtil.convert(stdate, false));
 		}
 		if (StringUtils.isNotEmpty(tmdate)) {
-			sb.append(" and anlDate < ? ");
+			sb.append(" and anlDate <= ? ");
 			param.add(StringUtil.convert(tmdate, false));
 		}
 		if (StringUtils.isNotBlank(orgNo) && !orgNo.trim().equals(Constants.PCB_SC_ORG_NO)) {
