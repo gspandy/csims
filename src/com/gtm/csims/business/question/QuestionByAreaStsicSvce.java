@@ -101,16 +101,29 @@ public class QuestionByAreaStsicSvce extends BaseStatisticsService implements St
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		StringBuffer query_sql = new StringBuffer();
 		List<Map> results = null;
-		// 根据字典表查询所有问题概况条款
-		query_sql
-		        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT, Max(ararea) as area, ")
-		        .append("dec(")
-		        .append("dec(COUNT(ANSWERRESULT) * 100,17,2)")
-		        .append(" /  ")
-		        .append("(SELECT dec(COUNT(BSQUESTION),17,2) FROM BS_ANSWERRESULT WHERE BSQUESTION = ans.BSQUESTION AND BSQUESTIONAIRE = '")
-		        .append(paramsMap.get("qid")).append("')").append(",17,2) AS P ")
-		        .append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '").append(paramsMap.get("qid"))
-		        .append("' group by BSQUESTION, ANSWERRESULT, arareaNo order by BSQUESTION, ANSWERRESULT");
+
+		if (StringUtils.isNotBlank(paramsMap.get("objectId"))) {
+			query_sql
+			        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT, Max(ararea) as area, ")
+			        .append("dec(")
+			        .append("dec(COUNT(ANSWERRESULT) * 100,17,2)")
+			        .append(" /  ")
+			        .append("(SELECT dec(COUNT(BSQUESTION),17,2) FROM BS_ANSWERRESULT WHERE BSQUESTION = ans.BSQUESTION AND BSQUESTIONAIRE = '")
+			        .append(paramsMap.get("qid")).append("' and arareaNo = '").append(paramsMap.get("objectId"))
+			        .append("')").append(",17,2) AS P ").append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '")
+			        .append(paramsMap.get("qid")).append("' and arareaNo = '").append(paramsMap.get("objectId"))
+			        .append("' group by BSQUESTION, ANSWERRESULT, arareaNo order by BSQUESTION, ANSWERRESULT");
+		} else {
+			query_sql
+			        .append("select (select qqtitle from BS_QUESTION where id = BSQUESTION)  AS qqtitle , ANSWERRESULT, Max(ararea) as area, ")
+			        .append("dec(")
+			        .append("dec(COUNT(ANSWERRESULT) * 100,17,2)")
+			        .append(" /  ")
+			        .append("(SELECT dec(COUNT(BSQUESTION),17,2) FROM BS_ANSWERRESULT WHERE BSQUESTION = ans.BSQUESTION AND BSQUESTIONAIRE = '")
+			        .append(paramsMap.get("qid")).append("')").append(",17,2) AS P ")
+			        .append("from BS_ANSWERRESULT as ans where BSQUESTIONAIRE = '").append(paramsMap.get("qid"))
+			        .append("' group by BSQUESTION, ANSWERRESULT, arareaNo order by BSQUESTION, ANSWERRESULT");
+		}
 		results = jdbcTemplate.queryForList(query_sql.toString());
 		if (!CollectionUtils.isEmpty(results)) {
 			int count = 0;
