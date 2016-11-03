@@ -77,11 +77,13 @@ public class AeinspectionAnlStsicSvce extends BaseStatisticsService implements S
 		StringBuffer querySql = new StringBuffer("SELECT A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,P1 ")
 		        .append(" FROM ").append("BS_AEINSPECTION_ANL").append(" WHERE 1=1 ");
 		if (paramsMap.get("FROM_DATE") != null && !paramsMap.get("FROM_DATE").toString().trim().equals("")) {
-			querySql.append(" AND ANLDATE >= '").append(paramsMap.get("FROM_DATE").toString()).append(" 00:00:00' ");
+			querySql.append(" AND ANLDATE >= '").append(paramsMap.get("FROM_DATE").toString()).append(" 00:00:00")
+			        .append("' ");
 			// querySql.append(" AND ANLDATE >=  ? ");
 		}
 		if (paramsMap.get("TO_DATE") != null && !paramsMap.get("TO_DATE").toString().trim().equals("")) {
-			querySql.append(" AND  ANLDATE <= '").append(paramsMap.get("TO_DATE").toString()).append(" 23:59:59' ");
+			querySql.append(" AND  ANLDATE <= '").append(paramsMap.get("TO_DATE").toString()).append(" 23:59:59")
+			        .append("' ");
 			// querySql.append(" AND ANLDATE <= ? ");
 		}
 		if (paramsMap.get("A1") != null && !paramsMap.get("A1").toString().trim().equals("")) {
@@ -132,14 +134,20 @@ public class AeinspectionAnlStsicSvce extends BaseStatisticsService implements S
 		        .append(",SUM(decimal(H1,13,0)),SUM(decimal(I1,13,0)),SUM(decimal(J1,13,0)),SUM(decimal(K1,13,0))")
 		        .append(",SUM(decimal(L1,13,0)),SUM(decimal(M1,13,0)),SUM(decimal(P1,13,2))").append(" FROM ")
 		        .append("BS_AEINSPECTION_ANL WHERE 1=1 ");
-		if (paramsMap.get("FROM_DATE") != null && !paramsMap.get("FROM_DATE").toString().trim().equals(""))
-			querySql2.append(" AND ANLDATE >= '").append(paramsMap.get("FROM_DATE").toString()).append("' ");
-		if (paramsMap.get("TO_DATE") != null && !paramsMap.get("TO_DATE").toString().trim().equals(""))
-			querySql2.append(" AND  ANLDATE <= '").append(paramsMap.get("TO_DATE").toString()).append("' ");
-		if (paramsMap.get("A1") != null && !paramsMap.get("A1").toString().trim().equals(""))
+		if (paramsMap.get("FROM_DATE") != null && !paramsMap.get("FROM_DATE").toString().trim().equals("")) {
+			querySql2.append(" AND ANLDATE >= '").append(paramsMap.get("FROM_DATE").toString()).append(" 00:00:00")
+			        .append("' ");
+		}
+		if (paramsMap.get("TO_DATE") != null && !paramsMap.get("TO_DATE").toString().trim().equals("")) {
+			querySql2.append(" AND  ANLDATE <= '").append(paramsMap.get("TO_DATE").toString()).append(" 23:59:59")
+			        .append("' ");
+		}
+		if (paramsMap.get("A1") != null && !paramsMap.get("A1").toString().trim().equals("")) {
 			querySql2.append(" AND A1 Like '%").append(paramsMap.get("A1").toString()).append("%' ");
-		if (paramsMap.get("B1") != null && !paramsMap.get("B1").toString().trim().equals(""))
+		}
+		if (paramsMap.get("B1") != null && !paramsMap.get("B1").toString().trim().equals("")) {
 			querySql2.append(" AND B1 Like '%").append(paramsMap.get("B1").toString()).append("%' ");
+		}
 		// System.out.println(querySql2.toString());
 		result = jdbcTemplate.queryForList(querySql2.toString());
 		if (result != null && result.size() > 0) {
