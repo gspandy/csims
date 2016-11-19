@@ -100,7 +100,13 @@ public class AeconclusionStsicSvce extends BaseStatisticsService implements Stat
             resultMap.put(j + "-" + 4, row.getAeedorgnm());
             resultMap.put(j + "-" + 5, DateFormatUtils.format(row.getAeplanstdate(), DATE_FORMAT));
             resultMap.put(j + "-" + 6, DateFormatUtils.format(row.getAeplantmdate(), DATE_FORMAT));
-            resultMap.put(j + "-" + 7, row.getCrtlogin());
+           
+            
+            try {
+				 resultMap.put(j + "-" + 7,enforceService.getUsersByUserId(row.getCrtlogin()).getName());
+			} catch (Exception e) {
+				 resultMap.put(j + "-" + 7, row.getCrtlogin());
+			}
             resultMap.put(j + "-" + 8, DateFormatUtils.format(row.getCreatedate(), DATE_TIME_FORMAT));
         }
         return resultMap;

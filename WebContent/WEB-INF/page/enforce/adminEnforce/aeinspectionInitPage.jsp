@@ -105,7 +105,7 @@ function inputBasis() {
                     fieldLabel : '检查人',
                     name : 'field3',
                     id : 'field3',
-                    value : $("input[name='aeHeadmanToServer']").val(),
+                    value : '',
                     width : 250,
                     allowBlank : false
                 }]
@@ -2662,6 +2662,8 @@ function validateForm() {
             $('#aeheadman_span').html(okGif);
         }
     }
+    
+    
     if(isNullOrEmpty($("select[name='aemaster']").val())) {
         $('#aemaster_span').html(errorGif + '&nbsp;&nbsp;必填');
         isPass = false;
@@ -2676,14 +2678,26 @@ function validateForm() {
             $('#aemaster_span').html(errorGif + '&nbsp;&nbsp;检查组主查人最多只能选择2个');
             isPass = false;
         } else {
-            $('#aemaster_span').html(okGif);
+            if($("input[name='isSaveAemasterSelect']").val() == 'false') {
+                $('#aemaster_span').html(errorGif + '&nbsp;&nbsp;保存前请选择检查组主查人，然后点击选定按钮');
+                isPass = false;
+            } else {
+                $('#aemaster_span').html(okGif);
+            }
         }
     }
+    
+    
     if(isNullOrEmpty($("select[name='aeother']").val())) {
         $('#aeother_span').html(errorGif + '&nbsp;&nbsp;必填');
         isPass = false;
     } else {
-        $('#aeother_span').html(okGif);
+        if($("input[name='isSaveAeotherSelect']").val() == 'false') {
+            $('#aeother_span').html(errorGif + '&nbsp;&nbsp;保存前请选择检查组其他成员，然后点击选定按钮');
+            isPass = false;
+        } else {
+            $('#aeother_span').html(okGif);
+        }
     }
     return isPass;
 }
@@ -2785,6 +2799,22 @@ function confirmAeheanman() {
         });
     }
 }
+
+function confirmAemaster() {
+    if($("select[name='aemaster']").find("option:selected").text() == '') {
+        Ext.Msg.alert('提示', '请先选择检查组主查人');
+    } else {
+          $("#isSaveAemasterSelect").val("true");
+    }
+}
+
+function confirmAeother() {
+    if($("select[name='aeother']").find("option:selected").text() == '') {
+        Ext.Msg.alert('提示', '请先选择检查组其他成员');
+    } else {
+          $("#isSaveAeotherSelect").val("true");
+    }
+}
 </script>
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -2814,6 +2844,9 @@ function confirmAeheanman() {
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" id='isSaveAeedorgSelect' name="isSaveAeedorgSelect" value="false"/>
 			<input type="hidden" id='isSaveAeheadmanSelect' name="isSaveAeheadmanSelect" value="false"/>
+			<input type="hidden" id='isSaveAemasterSelect' name="isSaveAemasterSelect" value="false"/>
+			<input type="hidden" id='isSaveAeotherSelect' name="isSaveAeotherSelect" value="false"/>
+			
 			<input type="hidden" id='incomingDate' name="incomingDate" value=""/>
             <input type="hidden" id='reposiblitor' name="reposiblitor" value=""/>
 			<input type="hidden" id='goawayDate' name="goawayDate" value=""/>
@@ -2963,6 +2996,10 @@ function confirmAeheanman() {
                                                                                 </option>
                                                                             </logic:iterate>
                                                                         </select>
+                                                                         &nbsp;&nbsp;
+                                                                        <input type="button" value="选 定" class="botton01"
+                                                                            onclick="return confirmAemaster();" />
+                                                                            <br>
 																		<span id="aemaster_span"></span>
 																	</td>
 																</tr>
@@ -2980,6 +3017,10 @@ function confirmAeheanman() {
                                                                                 </option>
                                                                             </logic:iterate>
                                                                         </select>
+                                                                         &nbsp;&nbsp;
+                                                                        <input type="button" value="选 定" class="botton01"
+                                                                            onclick="return confirmAeother();" />
+                                                                            <br>
                                                                         <span id="aeother_span"></span>
                                                                     </td>
                                                                 </tr>
@@ -3007,7 +3048,7 @@ function confirmAeheanman() {
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="right" class="tabletext02">
-                                                                                                                                              上传询问笔录相关附件
+                                                                                                                                              上传询问笔录
                                                                     </td>
                                                                     <td align="left">
                                                                         <input type="file" name="enquirercdpath" id="aeplan"

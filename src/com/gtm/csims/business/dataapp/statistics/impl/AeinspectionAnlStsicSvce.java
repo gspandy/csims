@@ -33,7 +33,7 @@ public class AeinspectionAnlStsicSvce extends BaseStatisticsService implements S
 	 * 返回报表的横向单元格数量,从第A列（0）开始-AA列
 	 */
 	public Integer getxCount() {
-		return 15;
+		return 16;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class AeinspectionAnlStsicSvce extends BaseStatisticsService implements S
 	@SuppressWarnings("unchecked")
 	private Map<String, Object> getResultData(String uuid, Map<String, String> paramsMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		StringBuffer querySql = new StringBuffer("SELECT A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,P1 ")
+		StringBuffer querySql = new StringBuffer("SELECT A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,P1,ANLDATE ")
 		        .append(" FROM ").append("BS_AEINSPECTION_ANL").append(" WHERE 1=1 ");
 		if (paramsMap.get("FROM_DATE") != null && !paramsMap.get("FROM_DATE").toString().trim().equals("")) {
 			querySql.append(" AND ANLDATE >= '").append(paramsMap.get("FROM_DATE").toString()).append(" 00:00:00")
@@ -119,9 +119,14 @@ public class AeinspectionAnlStsicSvce extends BaseStatisticsService implements S
 			}
 			for (i = 1; i <= this.getxCount(); i++) {// 17列(A1-Q1)
 				try {
-					resultMap.put(j + "-" + i, row.getValue(i - 1) == null ? "0" : row.getValue(i - 1).toString());
-					// System.out.println("set map" + j + "-" + i + ":"
-					// + row.getValue(i - 1));
+					if (i == this.getxCount()) {
+						resultMap.put(j + "-" + i, row.getValue(i - 1) == null ? "0" : row.getValue(i - 1).toString()
+						        .substring(0, 4));
+					} else {
+						resultMap.put(j + "-" + i, row.getValue(i - 1) == null ? "0" : row.getValue(i - 1).toString());
+						// System.out.println("set map" + j + "-" + i + ":"
+						// + row.getValue(i - 1));
+					}
 				} catch (Exception e) {// 如果返回的数据不能按照坐标取到数据（有可能返回数据少于预计列）,则用0补位
 					resultMap.put(j + "-" + i, "0");
 					// System.out.println("set map" + j + "-" + i + ":" + "0");
@@ -168,6 +173,7 @@ public class AeinspectionAnlStsicSvce extends BaseStatisticsService implements S
 			resultMap.put(j + "-13", row.getValue(10) == null ? "0" : row.getValue(10).toString());
 			resultMap.put(j + "-14", "-");
 			resultMap.put(j + "-15", row.getValue(11) == null ? "0" : row.getValue(11).toString());
+			resultMap.put(j + "-16", "-");
 		}
 		return resultMap;
 	}

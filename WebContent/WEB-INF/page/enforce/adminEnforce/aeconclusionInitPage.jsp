@@ -504,7 +504,7 @@ function clearOrgs() {
 																</tr>
 																<tr>
                                                                     <td align="right" class="tabletext02" rowspan="2">
-                                                                                                                                          执法检查事实认定书中涉及机构
+                                                                                                                                          执法检查意见书中涉及机构
                                                                     </td>
                                                                     <td align="left">
                                                                         <input type="button" value="选择" class="botton01"
@@ -523,7 +523,7 @@ function clearOrgs() {
                                                                 </tr>
 																<tr>
 																	<td align="right" class="tabletext02" rowspan="2">
-																		执法检查事实认定书中涉及用户
+																		执法检查意见书中涉及用户
 																	</td>
 																	<td align="left">
 																		<input type="button" value="选择" class="botton01"

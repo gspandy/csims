@@ -1363,8 +1363,8 @@ public class EnforceService extends BaseEnforceService {
 		if (ae == null) {
 			throw new IllegalArgumentException("跟踪整改记录对象为空");
 		}
-		if (ae.getTrackcontend() != null && ae.getTrackcontend().length() > 250) {
-			throw new IllegalArgumentException("整改情况超过允许长度250");
+		if (ae.getTrackcontend() != null && ae.getTrackcontend().length() > 2300) {
+			throw new IllegalArgumentException("整改情况超过允许长度400");
 		}
 	}
 

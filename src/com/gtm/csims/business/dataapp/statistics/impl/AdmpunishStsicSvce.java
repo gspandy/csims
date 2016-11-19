@@ -110,7 +110,12 @@ public class AdmpunishStsicSvce extends BaseStatisticsService implements Statist
             resultMap.put(j + "-" + 13, StringEscapeUtils.unescapeJava(row.getChairopnion()));
             resultMap.put(j + "-" + 14, row.getChairer());
             resultMap.put(j + "-" + 15, DateFormatUtils.format(row.getChairerdate(), DATE_FORMAT));
-            resultMap.put(j + "-" + 16, row.getCrtlogin());
+            try {
+				 resultMap.put(j + "-" + 16, enforceService.getUsersByUserId(row.getCrtlogin()).getName());
+			} catch (Exception e) {
+				 resultMap.put(j + "-" + 16, row.getCrtlogin());
+			}
+           
             resultMap.put(j + "-" + 17, DateFormatUtils.format(row.getCreatedate(), DATE_TIME_FORMAT));
         }
         return resultMap;

@@ -100,7 +100,7 @@ Ext.MessageBox.minWidth = 400;
 						<img src="<%=request.getContextPath()%>/images/index11.jpg"
 							width="6" height="10" hspace="5" />
 						<c:if test="${source == 1}">
-						行政执法查询
+						行政执法立项查询
 						</c:if>
 						<c:if test="${source == 2}">
 						检查记录登记

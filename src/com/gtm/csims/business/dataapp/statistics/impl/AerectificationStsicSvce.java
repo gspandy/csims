@@ -103,7 +103,11 @@ public class AerectificationStsicSvce extends BaseStatisticsService implements S
             resultMap.put(j + "-" + 7, row.getTrackno());
             resultMap.put(j + "-" + 8, DateFormatUtils.format(row.getRectificationstdate(), DATE_FORMAT));
             resultMap.put(j + "-" + 9, row.getTrackcontend());
-            resultMap.put(j + "-" + 10, row.getCrtlogin());
+            try {
+				 resultMap.put(j + "-" + 10, enforceService.getUsersByUserId(row.getCrtlogin()).getName());
+			} catch (Exception e) {
+				 resultMap.put(j + "-" + 10, row.getCrtlogin());
+			}
             resultMap.put(j + "-" + 11, DateFormatUtils.format(row.getCreatedate(), DATE_TIME_FORMAT));
         }
         return resultMap;
