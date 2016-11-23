@@ -2804,7 +2804,11 @@ function confirmAemaster() {
     if($("select[name='aemaster']").find("option:selected").text() == '') {
         Ext.Msg.alert('提示', '请先选择检查组主查人');
     } else {
-          $("#isSaveAemasterSelect").val("true");
+    	Ext.Msg.confirm('提示', '是否确认选择主查人为-' + $("select[name='aemaster']").find("option:selected").text() + '?', function(btn) {
+            if(btn == 'yes') {
+          		$("#isSaveAemasterSelect").val("true");
+            }
+    	});
     }
 }
 
@@ -2812,7 +2816,11 @@ function confirmAeother() {
     if($("select[name='aeother']").find("option:selected").text() == '') {
         Ext.Msg.alert('提示', '请先选择检查组其他成员');
     } else {
-          $("#isSaveAeotherSelect").val("true");
+    	Ext.Msg.confirm('提示', '是否确认选择检查组其他成员为-' + $("select[name='aeother']").find("option:selected").text() + '?', function(btn) {
+            if(btn == 'yes') {
+          		$("#isSaveAeotherSelect").val("true");
+            }
+    	});
     }
 }
 </script>
