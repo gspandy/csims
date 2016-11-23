@@ -71,6 +71,7 @@
 	<bean name="/StatisticsAction" class="com.gtm.csims.controll.statistics.StatisticsAction">
 		<property name="wtgkStsicSvce" ref="wtgkStsicSvce"></property>
 		<property name="aeFeedbackStsicSvce" ref="aeFeedbackStsicSvce" />
+		<property name="systemBaseInfoManager" ref="systemBaseInfoManager"></property>
 	</bean>
 
 </beans>
