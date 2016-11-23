@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,7 +103,7 @@ public class AerectificationStsicSvce extends BaseStatisticsService implements S
             resultMap.put(j + "-" + 6, DateFormatUtils.format(row.getAeplantmdate(), DATE_FORMAT));
             resultMap.put(j + "-" + 7, row.getTrackno());
             resultMap.put(j + "-" + 8, DateFormatUtils.format(row.getRectificationstdate(), DATE_FORMAT));
-            resultMap.put(j + "-" + 9, row.getTrackcontend());
+            resultMap.put(j + "-" + 9, StringEscapeUtils.unescapeJava(row.getTrackcontend()));
             try {
 				 resultMap.put(j + "-" + 10, enforceService.getUsersByUserId(row.getCrtlogin()).getName());
 			} catch (Exception e) {

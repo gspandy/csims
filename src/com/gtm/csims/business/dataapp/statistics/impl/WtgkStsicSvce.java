@@ -1,5 +1,6 @@
 package com.gtm.csims.business.dataapp.statistics.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,17 +96,67 @@ public class WtgkStsicSvce extends BaseStatisticsService implements StatisticsSe
 		// 根据字典表查询所有问题概况条款
 		StringBuffer queryWTGK_sql = new StringBuffer();
 		queryWTGK_sql.append("SELECT id,dvalue FROM BS_DICTIONARY WHERE type = 'WTGK' ORDER BY dkey");
-		List<Map> wtgkDics = jdbcTemplate.queryForList(queryWTGK_sql.toString());
-		if (wtgkDics != null && wtgkDics.size() > 0) {
-			for (int i = 0; i < wtgkDics.size(); i++) {
-				Map wtgkDicsMap = wtgkDics.get(i);
-				// 从第二行开始填充数据
-				resultMap.put((i + 2) + "-1", i + 1);
-				resultMap.put((i + 2) + "-2", wtgkDicsMap.get("dvalue"));
-			}
-		} else {
-			return resultMap;
+		List<Map> wtgkDics = new ArrayList<Map>();
+		// if (CollectionUtils.isEmpty(wtgkDics)) {
+		// return resultMap;
+		// }
+
+		int index = 0;
+
+		// 一、制度建设
+		List<Map> wtgkDics_1 = jdbcTemplate
+		        .queryForList("SELECT id,dvalue FROM BS_DICTIONARY WHERE id = '000012' OR stat = '000012'  ORDER BY dkey");
+		for (Map dic : wtgkDics_1) {
+			// 从第二行开始填充数据
+			resultMap.put((index + 2) + "-1", index + 1);
+			resultMap.put((index + 2) + "-2", dic.get("dvalue"));
+			index++;
 		}
+		wtgkDics.addAll(wtgkDics_1);
+
+		// 一、制度建设
+		List<Map> wtgkDics_2 = jdbcTemplate
+		        .queryForList("SELECT id,dvalue FROM BS_DICTIONARY WHERE id = '000018' OR stat = '000018'  ORDER BY dkey");
+		for (Map dic : wtgkDics_2) {
+			// 从第二行开始填充数据
+			resultMap.put((index + 2) + "-1", index + 1);
+			resultMap.put((index + 2) + "-2", dic.get("dvalue"));
+			index++;
+		}
+		wtgkDics.addAll(wtgkDics_2);
+
+		// 一、制度建设
+		List<Map> wtgkDics_3 = jdbcTemplate
+		        .queryForList("SELECT id,dvalue FROM BS_DICTIONARY WHERE id = '000024' OR stat = '000024'  ORDER BY dkey");
+		for (Map dic : wtgkDics_3) {
+			// 从第二行开始填充数据
+			resultMap.put((index + 2) + "-1", index + 1);
+			resultMap.put((index + 2) + "-2", dic.get("dvalue"));
+			index++;
+		}
+		wtgkDics.addAll(wtgkDics_3);
+
+		// 一、制度建设
+		List<Map> wtgkDics_4 = jdbcTemplate
+		        .queryForList("SELECT id,dvalue FROM BS_DICTIONARY WHERE id = '000031' OR stat = '000031'  ORDER BY dkey");
+		for (Map dic : wtgkDics_4) {
+			// 从第二行开始填充数据
+			resultMap.put((index + 2) + "-1", index + 1);
+			resultMap.put((index + 2) + "-2", dic.get("dvalue"));
+			index++;
+		}
+		wtgkDics.addAll(wtgkDics_4);
+
+		// 一、制度建设
+		List<Map> wtgkDics_5 = jdbcTemplate
+		        .queryForList("SELECT id,dvalue FROM BS_DICTIONARY WHERE id = '000036' OR stat = '000036'  ORDER BY dkey");
+		for (Map dic : wtgkDics_5) {
+			// 从第二行开始填充数据
+			resultMap.put((index + 2) + "-1", index + 1);
+			resultMap.put((index + 2) + "-2", dic.get("dvalue"));
+			index++;
+		}
+		wtgkDics.addAll(wtgkDics_5);
 
 		// 按照被检查机构分组查询时间段内总的问题概要字符串
 		StringBuffer querySql = new StringBuffer();

@@ -816,7 +816,7 @@ function viewComingGrid() {
             xtype : 'displayfield',
             value : '--双击下面列表中记录查看--进场情况',
             fieldLabel : '',
-            height : 310,
+            height : 180,
             autoScroll: true
         }]
     };
@@ -1281,7 +1281,7 @@ function viewGoawayGrid() {
             xtype : 'displayfield',
             value : '--双击下面列表中记录查看--离场会谈纪要会谈内容',
             fieldLabel : '',
-            height : 310,
+            height : 180,
             autoScroll: true
         }]
     };
@@ -1735,7 +1735,7 @@ function viewTalkSummaryGrid() {
             xtype : 'displayfield',
             value : '--双击下面列表中记录查看--执法检查会谈纪要会谈内容',
             fieldLabel : '',
-            height : 310,
+            height : 180,
             autoScroll: true
         }]
     };

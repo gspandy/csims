@@ -326,7 +326,7 @@ function viewComingGrid() {
         // enableDragDrop : true,//容许行的拖曳
         // collapsible : true, // 面板可以折叠
         // titleCollapse : true,// 单击表头任何地方都可以折叠
-        floating : true,
+        // floating : true,
         viewConfig : {
             //True表示为自动展开/缩小列的宽度以适应grid的宽度，这样就不会出现水平的滚动条
             forceFit : true
@@ -347,7 +347,7 @@ function viewComingGrid() {
             xtype : 'displayfield',
             value : '--双击下面列表中记录查看--进场情况',
             fieldLabel : '',
-            height : 310,
+            height : 180,
             autoScroll: true
         }]
     };
@@ -355,11 +355,8 @@ function viewComingGrid() {
         title : '<%= request.getAttribute("inputComing_title")%> 进场情况    ' + $("input[name='ino']").val(),
         width : 800,
         height : 250,
-        // autoHeight:true,
         bodyStyle : 'padding:5px 5px 0',
-        // renderTo:Ext.getBody(),
-        frame : true, //在此，这个属性就很重要了，如果不为true，你会看到下面的button和panel看起来是分开的
-        // layout : 'form',
+        frame : true,
         region : 'north',
         url : '', //提交地址
         method : '', //提交方法
@@ -523,7 +520,7 @@ function viewGoawayGrid() {
             xtype : 'displayfield',
             value : '--双击下面列表中记录查看--离场会谈纪要会谈内容',
             fieldLabel : '',
-            height : 310,
+            height : 180,
             autoScroll: true
         }]
     };
@@ -690,7 +687,7 @@ function viewTalkSummaryGrid() {
             xtype : 'displayfield',
             value : '--双击下面列表中记录查看--执法检查会谈纪要会谈内容',
             fieldLabel : '',
-            height : 310,
+            height : 180,
             autoScroll: true
         }]
     };
