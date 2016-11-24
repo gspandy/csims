@@ -4975,7 +4975,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		String fileName = null;
 		switch (objId) {
 		case 5:
-			fileName = "行政执法立项";
+			fileName = "行政处罚立项";
 			wb = admenforceStsicSvce.generateExcel(request.getParameter("obj"),
 			        admenforceStsicSvce.doStatistics(params), keyValue);
 			break;
@@ -5012,11 +5012,10 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		try {
 			repos = response.getOutputStream();
 			response.setContentType("application/vnd.ms-excel");
-			response.addHeader(
-			        "Content-Disposition",
-			        "attachment;filename="
-			                + this.getDownloadCvsFileName(fileName,
-			                        DateFormatUtils.format(new Date(), DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS)));
+			response.addHeader("Content-Disposition", "attachment;filename=" + this.getDownloadCvsFileName(fileName,
+			// DateFormatUtils.format(new Date(),
+			// DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS)
+			        StringUtils.EMPTY));
 			wb.write(repos);
 			repos.flush();
 		} catch (Exception e) {
@@ -5035,12 +5034,15 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	 * @return
 	 */
 	protected String getDownloadCvsFileName(final String fileName, final String attType) {
-		LOGGER.debug("下载文件名（编码前）：fileName=" + fileName);
-		String attchName = fileName.replace("（", "").replace("）", "").replace("【", "").replace("】", "");
-		LOGGER.debug("下载文件名（替换符号后）：fileName=" + attchName + ",size is :" + attchName.length());
+		// LOGGER.debug("下载文件名（编码前）：fileName=" + fileName);
+		String attchName = null;
+		// = fileName.replace("（", "").replace("）",
+		// "").replace("【", "").replace("】", "");
+		// LOGGER.debug("下载文件名（替换符号后）：fileName=" + attchName + ",size is :" +
+		// attchName.length());
 		try {
 			attchName = URLEncoder.encode(
-			        String.format("%s_%s.xls", StringUtils.trimToEmpty(attchName), StringUtils.trimToEmpty(attType)),
+			        String.format("%s%s.xls", StringUtils.trimToEmpty(fileName), StringUtils.trimToEmpty(attType)),
 			        CharEncoding.UTF_8);
 			LOGGER.debug("下载文件名（URLEncoder.encode）：fileName=" + attchName);
 			attchName = new String(attchName.getBytes(CharEncoding.UTF_8), CharEncoding.ISO_8859_1);
