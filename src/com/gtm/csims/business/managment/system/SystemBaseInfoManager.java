@@ -22,6 +22,8 @@ import com.gtm.csims.model.BsArea;
 public interface SystemBaseInfoManager {
 
 	public BsOrg getOrgByNo(Serializable no);
+	
+	public BsOrg getOrgByName(Serializable name);
 
 	public BsDept getDeptByNo(Serializable no);
 

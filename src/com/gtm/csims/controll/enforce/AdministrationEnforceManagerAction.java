@@ -1300,6 +1300,10 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		}
 		if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 			wb.setAeedorgno(request.getParameter("aeedorgno"));
+		} else if (StringUtils.isBlank(wb.getAeedorgno())) {
+			BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+			wb.setAeedorgno(aeOrg.getNo());
+			wb.setAeedorgnm(aeOrg.getName());
 		}
 		if (StringUtils.isNotBlank(request.getParameter("aeedorgnm"))) {
 			wb.setAeedorgnm(request.getParameter("aeedorgnm"));
@@ -1629,12 +1633,22 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			wc.setFiled13(request.getParameter("field13"));
 			if (StringUtils.isNotBlank(request.getParameter("aeorgno"))) {
 				wc.setAeorgno(request.getParameter("aeorgno"));
+			} else if (StringUtils.isBlank(wc.getAeorgno())) {
+				BsAeinspection aeinspec = enforceService.getAeinspectionByIno(request.getParameter("field7"));
+				if (aeinspec != null) {
+					wc.setAeorgno(aeinspec.getAeorgno());
+					wc.setAeorgnm(aeinspec.getAeorgnm());
+				}
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeorgnm"))) {
 				wc.setAeorgnm(request.getParameter("aeorgnm"));
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				wc.setAeedorgno(request.getParameter("aeedorgno"));
+			} else if (StringUtils.isBlank(wc.getAeedorgno())) {
+				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+				wc.setAeedorgno(aeOrg.getNo());
+				wc.setAeedorgnm(aeOrg.getName());
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgnm"))) {
 				wc.setAeedorgnm(request.getParameter("aeedorgnm"));
@@ -1830,12 +1844,22 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			wb.setFiled15(request.getParameter("field15"));
 			if (StringUtils.isNotBlank(request.getParameter("aeorgno"))) {
 				wb.setAeorgno(request.getParameter("aeorgno"));
+			} else if (StringUtils.isBlank(wb.getAeorgno())) {
+				BsAeinspection aeinspec = enforceService.getAeinspectionByIno(request.getParameter("field14"));
+				if (aeinspec != null) {
+					wb.setAeorgno(aeinspec.getAeorgno());
+					wb.setAeorgnm(aeinspec.getAeorgnm());
+				}
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeorgnm"))) {
 				wb.setAeorgnm(request.getParameter("aeorgnm"));
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				wb.setAeedorgno(request.getParameter("aeedorgno"));
+			} else if (StringUtils.isBlank(wb.getAeedorgno())) {
+				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+				wb.setAeedorgno(aeOrg.getNo());
+				wb.setAeedorgnm(aeOrg.getName());
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgnm"))) {
 				wb.setAeedorgnm(request.getParameter("aeedorgnm"));
@@ -2025,12 +2049,23 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			ws.setFiled17(request.getParameter("field17"));
 			if (StringUtils.isNotBlank(request.getParameter("aeorgno"))) {
 				ws.setAeorgno(request.getParameter("aeorgno"));
+			} else if (StringUtils.isBlank(ws.getAeorgno())) {
+				BsAeinspection aeinspec = enforceService.getAeinspectionByIno(request.getParameter("field16"));
+				if (aeinspec != null) {
+					ws.setAeorgno(aeinspec.getAeorgno());
+					ws.setAeorgnm(aeinspec.getAeorgnm());
+				}
 			}
+
 			if (StringUtils.isNotBlank(request.getParameter("aeorgnm"))) {
 				ws.setAeorgnm(request.getParameter("aeorgnm"));
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				ws.setAeedorgno(request.getParameter("aeedorgno"));
+			} else if (StringUtils.isBlank(ws.getAeedorgno())) {
+				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+				ws.setAeedorgno(aeOrg.getNo());
+				ws.setAeedorgnm(aeOrg.getName());
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgnm"))) {
 				ws.setAeedorgnm(request.getParameter("aeedorgnm"));
@@ -2480,12 +2515,20 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeorgno"))) {
 				wb.setAeorgno(request.getParameter("aeorgno"));
+			} else if (StringUtils.isBlank(wb.getAeorgno())) {
+				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("a1"));
+				wb.setAeorgno(aeOrg.getNo());
+				wb.setAeorgnm(aeOrg.getName());
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeorgnm"))) {
 				wb.setAeorgnm(request.getParameter("aeorgnm"));
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				wb.setAeedorgno(request.getParameter("aeedorgno"));
+			} else if (StringUtils.isBlank(wb.getAeedorgno())) {
+				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("b1"));
+				wb.setAeedorgno(aeOrg.getNo());
+				wb.setAeedorgnm(aeOrg.getName());
 			}
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgnm"))) {
 				wb.setAeedorgnm(request.getParameter("aeedorgnm"));

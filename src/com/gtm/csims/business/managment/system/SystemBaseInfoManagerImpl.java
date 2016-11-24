@@ -48,6 +48,16 @@ public class SystemBaseInfoManagerImpl implements SystemBaseInfoManager {
 	}
 
 	@Transactional(readOnly = true)
+	public BsOrg getOrgByName(Serializable name) {
+		List<BsOrg> orgs = bsOrgDao.find("from BsOrg where name = ?", name);
+		if (orgs != null && orgs.size() > 0) {
+			return orgs.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@Transactional(readOnly = true)
 	public void setBsOrgComInfoDao(BsOrgComInfoDAO bsOrgComInfoDao) {
 		this.bsOrgComInfoDao = bsOrgComInfoDao;
 	}

@@ -54,6 +54,7 @@ Ext.MessageBox.minWidth = 400;
     function resets(){	
 		document.getElementById("aeopnionno").value="";
 		document.getElementById("aeorgChoice").value="";
+		document.getElementById("aeedorgChoice").value="";
 		document.getElementById("aeplanstdate").value="";
 		document.getElementById("aeplantmdate").value="";
 	}
