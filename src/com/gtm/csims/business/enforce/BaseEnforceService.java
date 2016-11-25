@@ -1,5 +1,6 @@
 package com.gtm.csims.business.enforce;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +93,16 @@ public class BaseEnforceService {
 		        new Object[] {});
 		if (list != null && list.size() > 0) {
 			return list.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@Transactional(readOnly = true)
+	public BsOrg getOrgByName(String name) {
+		List<BsOrg> orgs = bsOrgDao.find("from BsOrg where name = ?", name);
+		if (CollectionUtils.isNotEmpty(orgs)) {
+			return orgs.get(0);
 		} else {
 			return null;
 		}

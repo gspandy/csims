@@ -1301,7 +1301,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 			wb.setAeedorgno(request.getParameter("aeedorgno"));
 		} else if (StringUtils.isBlank(wb.getAeedorgno())) {
-			BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+			BsOrg aeOrg = enforceService.getOrgByName(request.getParameter("field1"));
 			wb.setAeedorgno(aeOrg.getNo());
 			wb.setAeedorgnm(aeOrg.getName());
 		}
@@ -1646,7 +1646,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				wc.setAeedorgno(request.getParameter("aeedorgno"));
 			} else if (StringUtils.isBlank(wc.getAeedorgno())) {
-				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+				BsOrg aeOrg = enforceService.getOrgByName(request.getParameter("field1"));
 				wc.setAeedorgno(aeOrg.getNo());
 				wc.setAeedorgnm(aeOrg.getName());
 			}
@@ -1857,7 +1857,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				wb.setAeedorgno(request.getParameter("aeedorgno"));
 			} else if (StringUtils.isBlank(wb.getAeedorgno())) {
-				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+				BsOrg aeOrg = enforceService.getOrgByName(request.getParameter("field1"));
 				wb.setAeedorgno(aeOrg.getNo());
 				wb.setAeedorgnm(aeOrg.getName());
 			}
@@ -2063,7 +2063,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				ws.setAeedorgno(request.getParameter("aeedorgno"));
 			} else if (StringUtils.isBlank(ws.getAeedorgno())) {
-				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("field1"));
+				BsOrg aeOrg = enforceService.getOrgByName(request.getParameter("field1"));
 				ws.setAeedorgno(aeOrg.getNo());
 				ws.setAeedorgnm(aeOrg.getName());
 			}
@@ -2516,7 +2516,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			if (StringUtils.isNotBlank(request.getParameter("aeorgno"))) {
 				wb.setAeorgno(request.getParameter("aeorgno"));
 			} else if (StringUtils.isBlank(wb.getAeorgno())) {
-				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("a1"));
+				BsOrg aeOrg = enforceService.getOrgByName(request.getParameter("a1"));
 				wb.setAeorgno(aeOrg.getNo());
 				wb.setAeorgnm(aeOrg.getName());
 			}
@@ -2526,7 +2526,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			if (StringUtils.isNotBlank(request.getParameter("aeedorgno"))) {
 				wb.setAeedorgno(request.getParameter("aeedorgno"));
 			} else if (StringUtils.isBlank(wb.getAeedorgno())) {
-				BsOrg aeOrg = systemBaseInfoManager.getOrgByName(request.getParameter("b1"));
+				BsOrg aeOrg = enforceService.getOrgByName(request.getParameter("b1"));
 				wb.setAeedorgno(aeOrg.getNo());
 				wb.setAeedorgnm(aeOrg.getName());
 			}
