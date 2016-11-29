@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,8 +67,8 @@ public class ExamScoreReader extends BaseReportReader {
                 es.setPeoid(ExcelUtil.getValue(sheet, row, 1).trim());
                 es.setCerttype(ExcelUtil.getValue(sheet, row, 2).trim());
                 es.setPeotype(ExcelUtil.getValue(sheet, row, 3).trim());
-                es.setOrgno(ExcelUtil.getValue(sheet, row, 5).trim());
                 es.setOrgname(ExcelUtil.getValue(sheet, row, 4).trim());
+                es.setOrgno(ExcelUtil.getValue(sheet, row, 5).trim());
                 // 同时查询该用户所属机构的机构类型以及机构所属人民银行保存到成绩表
                 // 供金融机构查询时使用
                 BsOrg org = bsOrgDao.get(ExcelUtil.getValue(sheet, row, 5));
@@ -85,14 +86,14 @@ public class ExamScoreReader extends BaseReportReader {
                 es.setExtmdt(DateUtils.parseDate(ExcelUtil.getValue(sheet, row, 10).trim(),
                         DateUtil.DATE_FORMAT_ARRAY));
                 es.setExtype(ExcelUtil.getValue(sheet, row, 11).trim());
-                es.setFullmark(new BigDecimal(ExcelUtil.getValue(sheet, row, 12).trim()));
+                es.setScore(new BigDecimal(ExcelUtil.getValue(sheet, row, 12).trim()));
                 es.setPass(new BigDecimal(ExcelUtil.getValue(sheet, row, 13).trim()));
-                es.setScore(new BigDecimal(ExcelUtil.getValue(sheet, row, 14).trim()));
+                es.setFullmark(new BigDecimal(ExcelUtil.getValue(sheet, row, 14).trim()));
                 es.setCrtor(reportParam.get("PARAMS_REPORTER").trim());
                 es.setCrtdt(anlDate);
 
-                es.setStat("");
-                es.setFlag("");
+                es.setStat(StringUtils.EMPTY);
+                es.setFlag(StringUtils.EMPTY);
                 es.setCreatedate(new Date());
                 es.setUpdateate(new Date());
 
