@@ -100,6 +100,8 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	 */
 	private static Logger LOGGER = Logger.getLogger(AdministrationEnforceManagerAction.class);
 
+	private static final boolean IS_NEED_RELATE_WITH_OPNION_BOOK = true;
+
 	/**
      * 
      */
@@ -3839,44 +3841,10 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 				BsAeconclusion bs = RequestUtil.getBeanFromParams(request, BsAeconclusion.class);
 				String[] decisionArr = request.getParameterValues("decision");
 				bs.setDecision(StringUtil.join(decisionArr, StringUtils.EMPTY, StringUtils.EMPTY, ","));
-				// 关闭关联违法人员档案信息
-				// String relpeoples = request.getParameter("relpeoples");
-				// if (StringUtils.isNotBlank(relpeoples)) {
-				// try {
-				// String[] relpeoplesArr = relpeoples.split(",");
-				// for (int i = 0; i < relpeoplesArr.length; i++) {
-				// // System.out.println(relpeoplesArr[i]);
-				// // 插入涉及用户档案信息
-				// String[] tempArr = relpeoplesArr[i].split("--");
-				// enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1],
-				// tempArr[0], "在《执法检查意见书（"
-				// + StringUtils.trimToEmpty(bs.getAeopnionno()) +
-				// "）》中被指定为涉及人员");
-				// }
-				// } catch (Exception e) {
-				// LOGGER.error("检查结论保存方法", e);
-				// }
-				// }
-				// 关闭关联违法机构档案信息
-				// String relorgnm = request.getParameter("relorgnm");
-				// if (StringUtils.isNotBlank(relorgnm)) {
-				// try {
-				// String[] relorgnmArr = relorgnm.split(",");
-				// for (int i = 0; i < relorgnmArr.length; i++) {
-				// // System.out.println(relpeoplesArr[i]);
-				// // 插入涉及用户档案信息
-				// String[] tempArr2 = relorgnmArr[i].split("--");
-				// enforceService.relateOrgProfile(tempArr2[1], tempArr2[0],
-				// "在《执法检查意见书（" + StringUtils.trimToEmpty(bs.getAeopnionno()) +
-				// "）》中被指定为涉及机构");
-				// }
-				// } catch (Exception e) {
-				// LOGGER.error("检查结论保存方法", e);
-				// }
-				// }
-				if (dyna.get("aeopnionno") != null) {
-					bs.setAeopnionno(dyna.get("aeopnionno").toString());
-				}
+
+				/*
+				 * 保存执法检查意见书附件.
+				 */
 				FormFile file = null;
 				String attchuuid = null;
 				/** 保存执法检查意见书 * */
@@ -3886,6 +3854,48 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 					        .getServletContext().getRealPath(File.separator));
 					bs.setAeopnionbook(attchuuid);
 				}
+
+				if (IS_NEED_RELATE_WITH_OPNION_BOOK) {
+					/*
+					 * 关联违法人员档案信息.
+					 */
+					String relpeoples = request.getParameter("relpeoples");
+					if (StringUtils.isNotBlank(relpeoples)) {
+						try {
+							String[] relpeoplesArr = relpeoples.split(",");
+							for (int i = 0; i < relpeoplesArr.length; i++) {
+								// System.out.println(relpeoplesArr[i]);
+								// 插入涉及用户档案信息
+								String[] tempArr = relpeoplesArr[i].split("--");
+								enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1], tempArr[0], attchuuid);
+							}
+						} catch (Exception e) {
+							LOGGER.error("检查结论保存方法", e);
+						}
+					}
+					/*
+					 * 关联违法机构档案信息
+					 */
+					String relorgnm = request.getParameter("relorgnm");
+					if (StringUtils.isNotBlank(relorgnm)) {
+						try {
+							String[] relorgnmArr = relorgnm.split(",");
+							for (int i = 0; i < relorgnmArr.length; i++) {
+								// System.out.println(relpeoplesArr[i]);
+								// 插入涉及用户档案信息
+								String[] tempArr2 = relorgnmArr[i].split("--");
+								enforceService.relateOrgProfile(tempArr2[1], tempArr2[0], attchuuid);
+							}
+						} catch (Exception e) {
+							LOGGER.error("检查结论保存方法", e);
+						}
+					}
+				}
+
+				if (dyna.get("aeopnionno") != null) {
+					bs.setAeopnionno(dyna.get("aeopnionno").toString());
+				}
+
 				// 保存创建人为当前登录人id
 				bs.setCrtlogin(this.getPrivCredential(UserCredentialName.login.name(), request, response));
 				bs.setIsfinished(false);
