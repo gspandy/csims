@@ -326,7 +326,8 @@ public class BaseEnforceService {
 	 * @param relateContent
 	 */
 	@Transactional(readOnly = false)
-	public void relatePersonProfile(String infoType, String personId, String personNm, String relateContent) {
+	public void relatePersonProfile(String infoType, String personId, String personNm, String relateContent,
+	        String relateId) {
 		if (StringUtils.isBlank(infoType)) {
 			return;
 		}
@@ -346,7 +347,7 @@ public class BaseEnforceService {
 			BsUserRelevantInfo uri = new BsUserRelevantInfo();
 			uri.setInfoType(infoType);
 			uri.setRelevantDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
-			uri.setRelevantId(StringUtils.EMPTY);
+			uri.setRelevantId(relateId);
 			uri.setRelevantInfo(relateContent.trim());
 			uri.setUserLoginId(personId.trim());
 			uri.setUserName(personNm.trim());
@@ -365,7 +366,7 @@ public class BaseEnforceService {
 	 * @param relateContent
 	 */
 	@Transactional(readOnly = false)
-	public void relateOrgProfile(String orgNo, String orgNm, String relateContent) {
+	public void relateOrgProfile(String orgNo, String orgNm, String relateContent, String relateId) {
 		if (StringUtils.isBlank(orgNo)) {
 			return;
 		}
@@ -388,7 +389,7 @@ public class BaseEnforceService {
 			BsOrgRelevantInfo ori = new BsOrgRelevantInfo();
 			ori.setInfoType("执法检查结论涉及机构");
 			ori.setRelevantDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
-			ori.setRelevantId(StringUtils.EMPTY);
+			ori.setRelevantId(relateId);
 			ori.setRelevantInfo(relateContent.trim());
 			ori.setOrgNo(orgNo.trim());
 			ori.setOrgName(orgNm.trim());

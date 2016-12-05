@@ -3855,6 +3855,10 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 					bs.setAeopnionbook(attchuuid);
 				}
 
+				if (dyna.get("aeopnionno") != null) {
+					bs.setAeopnionno(dyna.get("aeopnionno").toString());
+				}
+
 				if (IS_NEED_RELATE_WITH_OPNION_BOOK) {
 					/*
 					 * 关联违法人员档案信息.
@@ -3867,7 +3871,8 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 								// System.out.println(relpeoplesArr[i]);
 								// 插入涉及用户档案信息
 								String[] tempArr = relpeoplesArr[i].split("--");
-								enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1], tempArr[0], attchuuid);
+								enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1], tempArr[0], "在《执法检查意见书（"
+								        + bs.getAeopnionno() + "）》中被指定为涉及人员", attchuuid);
 							}
 						} catch (Exception e) {
 							LOGGER.error("检查结论保存方法", e);
@@ -3884,16 +3889,13 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 								// System.out.println(relpeoplesArr[i]);
 								// 插入涉及用户档案信息
 								String[] tempArr2 = relorgnmArr[i].split("--");
-								enforceService.relateOrgProfile(tempArr2[1], tempArr2[0], attchuuid);
+								enforceService.relateOrgProfile(tempArr2[1], tempArr2[0],
+								        "在《执法检查意见书（" + bs.getAeopnionno() + "）》中被指定为涉及机构", attchuuid);
 							}
 						} catch (Exception e) {
 							LOGGER.error("检查结论保存方法", e);
 						}
 					}
-				}
-
-				if (dyna.get("aeopnionno") != null) {
-					bs.setAeopnionno(dyna.get("aeopnionno").toString());
 				}
 
 				// 保存创建人为当前登录人id
