@@ -3871,8 +3871,8 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 								// System.out.println(relpeoplesArr[i]);
 								// 插入涉及用户档案信息
 								String[] tempArr = relpeoplesArr[i].split("--");
-								enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1], tempArr[0], "在《执法检查意见书（"
-								        + bs.getAeopnionno() + "）》中被指定为涉及人员", attchuuid);
+								enforceService.relatePersonProfile("执法检查结论涉及用户", tempArr[1], tempArr[0],
+								        "该员工在人民银行执法检查中，发现存在违规行为。详见文号：" + bs.getAeopnionno(), attchuuid);
 							}
 						} catch (Exception e) {
 							LOGGER.error("检查结论保存方法", e);
@@ -3890,7 +3890,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 								// 插入涉及用户档案信息
 								String[] tempArr2 = relorgnmArr[i].split("--");
 								enforceService.relateOrgProfile(tempArr2[1], tempArr2[0],
-								        "在《执法检查意见书（" + bs.getAeopnionno() + "）》中被指定为涉及机构", attchuuid);
+										"该机构在人民银行执法检查中，发现存在违规行为。详见文号：" + bs.getAeopnionno(), attchuuid);
 							}
 						} catch (Exception e) {
 							LOGGER.error("检查结论保存方法", e);
