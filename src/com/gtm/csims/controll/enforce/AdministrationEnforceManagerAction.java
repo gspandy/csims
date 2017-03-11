@@ -291,7 +291,6 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	 */
 	public ActionForward toAdminEnforceInitPage(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 	        HttpServletResponse response) {
-		LOGGER.info("Test for apache log");
 		this.saveToken(request);// 产生令牌值
 		// 如果当前用户不属于人行用户，则不能使用该功能
 		if (!super.isPcbUser(request, response)) {
@@ -3890,7 +3889,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 								// 插入涉及用户档案信息
 								String[] tempArr2 = relorgnmArr[i].split("--");
 								enforceService.relateOrgProfile(tempArr2[1], tempArr2[0],
-										"该机构在人民银行执法检查中，发现存在违规行为。详见文号：" + bs.getAeopnionno(), attchuuid);
+								        "该机构在人民银行执法检查中，发现存在违规行为。详见文号：" + bs.getAeopnionno(), attchuuid);
 							}
 						} catch (Exception e) {
 							LOGGER.error("检查结论保存方法", e);
@@ -5153,6 +5152,234 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			IOUtils.closeQuietly(repos);
 		}
 		return null;
+	}
+
+	/**
+	 * 跳转到筛选执法人员和被检查机构页面.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward toSiftPage(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		// TODO
+		return mapping.findForward("toSiftPage");
+	}
+
+	/**
+	 * 筛选其他组成员.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward siftOthers(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			LOGGER.error("保存离场记录发生错误", e);
+			return null;
+		}
+
+		if (out != null) {
+			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		}
+		return null;
+	}
+
+	/**
+	 * 筛选组长.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward siftHeadman(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			LOGGER.error("保存离场记录发生错误", e);
+			return null;
+		}
+
+		if (out != null) {
+			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		}
+		return null;
+	}
+
+	/**
+	 * 筛选主查人.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward siftMaster(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			LOGGER.error("保存离场记录发生错误", e);
+			return null;
+		}
+
+		if (out != null) {
+			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		}
+		return null;
+	}
+
+	/**
+	 * 筛选被检查机构.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward siftAeedOrg(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			LOGGER.error("保存离场记录发生错误", e);
+			return null;
+		}
+
+		if (out != null) {
+			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		}
+		return null;
+	}
+
+	/**
+	 * 保存筛选结果.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward saveSiftResult(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			LOGGER.error("保存离场记录发生错误", e);
+			return null;
+		}
+
+		if (out != null) {
+			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		}
+		return null;
+	}
+
+	/**
+	 * 筛选结果列表页面.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward toSiftResultList(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			LOGGER.error("保存离场记录发生错误", e);
+			return null;
+		}
+
+		if (out != null) {
+			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		}
+		return null;
+	}
+
+	/**
+	 * 从筛选结果跳转行政执法登记页面.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward toAdminEnforceInitPageFromSiftResult(ActionMapping mapping, ActionForm form,
+	        HttpServletRequest request, HttpServletResponse response) {
+		this.saveToken(request);// 产生令牌值
+		// 如果当前用户不属于人行用户，则不能使用该功能
+		if (!super.isPcbUser(request, response)) {
+			this.printMessage(request, response, ERROR1, ATTR_ERROR);
+			return null;
+		}
+		DynaActionForm dyna = (DynaActionForm) form;
+		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
+		BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
+
+		request.setAttribute("aeorg", bsorg.getNo());
+		request.setAttribute("aeorgChoice", bsorg.getName());
+		request.setAttribute("aeorgno", bsorg.getNo());
+		request.setAttribute("aeorgnm", bsorg.getName());
+
+		// 获取执法检查编号
+		BsNogenerate bs = noGenerator.getNoGenerate(loginOrgNo, noGenerator.getYear());
+		// 没有行政执法编号规则
+		if (bs == null) {
+			request.setAttribute("methodname", "toAdminEnforceList&source=1");
+			request.setAttribute(ATTR_MESSAGE, "<b>登记行政执法发生错误</b><br><b>失败原因:</b>不能获取当前机构的执法编号规则： " + loginOrgNo
+			        + "<br><b>解决方法:</b>需要联系管理员维护该机构执法立项规则!");
+			return mapping.findForward("toAdminEnforceMessage");
+		} else {
+			dyna.set("aetext", bs.getAenotext());
+			dyna.set("aeyear", bs.getAenoyear());
+			dyna.set("aeindex", bs.getAenoindex());
+			request.setAttribute("lxyjList", super.getDicMap("LXYJ"));
+			request.setAttribute("jcyjList", super.getDicMap("JCYJ"));
+			request.setAttribute("jcfsList", super.getDicMap("JCFS"));
+			return mapping.findForward("toAdminEnforceInitPageFromSiftResult");
+		}
 	}
 
 	public void setAeinspectionAnlStsicSvce(AeinspectionAnlStsicSvce aeinspectionAnlStsicSvce) {

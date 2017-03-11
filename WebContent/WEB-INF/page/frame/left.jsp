@@ -451,6 +451,16 @@ function goMainPage(type,url){
 																					<table id="odiv" style="display: none" border="0"
 																						cellpadding="0" cellspacing="0" width="100%">
 																						<jguard:authorized
+																							uri="/AdminEnforceManagerAction.do?method=toSiftPage">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=toSiftPage"
+																										target="mainFrame" class="left">随机筛选</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
+																						<jguard:authorized
 																							uri="/AdminEnforceManagerAction.do?method=toAdminEnforceInitPage">
 																							<tr class="h30">
 																								<td>

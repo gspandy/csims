@@ -296,6 +296,9 @@
 			<forward name="toAEInspectionAnalyse"
 				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionAnalyse.jsp"
 				redirect="false" />
+			<forward name="toSiftPage"
+				path="/WEB-INF/page/enforce/adminEnforce/siftInitPage.jsp"
+				redirect="false" />
 
 		</action>
 
