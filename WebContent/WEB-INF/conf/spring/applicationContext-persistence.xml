@@ -171,5 +171,12 @@
 	<bean id="bsAnswerresultDao" class="com.gtm.csims.dao.hibernate.BsAnswerresultDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="bsAePeopleJoinHistoryDao" class="com.gtm.csims.dao.hibernate.BsAePeopleJoinHistoryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="bsAeedOrgJoinHistoryDao" class="com.gtm.csims.dao.hibernate.BsAeedOrgJoinHistoryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 </beans>

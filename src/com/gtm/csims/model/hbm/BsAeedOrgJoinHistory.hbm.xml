@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.gtm.csims.model">
+	<class name="BsAeedOrgJoinHistory" table="BS_AEedOrgJoinHistory">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="Id" type="string" column="ID">
+			<generator class="org.hibernate.id.UUIDHexGenerator" />
+		</id>
+
+		<property name="Pricipal" column="Pricipal" type="java.lang.Integer"
+			not-null="false" length="100" />
+
+
+		<property name="Aeno" column="AENO" type="string" not-null="true"
+			length="50" />
+		<property name="Aeorgnm" column="AEORGNM" type="string"
+			not-null="true" length="100" />
+		<property name="Aeorgno" column="AEORGNO" type="string"
+			not-null="true" length="50" />
+		<property name="Aeedorgnm" column="AEEDORGNM" type="string"
+			not-null="true" length="1000" />
+		<property name="Aeedorgno" column="AEEDORGNO" type="string"
+			not-null="true" length="1000" />
+		<property name="AeEnforceCreateDate" column="aeEnforceCreateDate" type="string"
+			not-null="true" length="1000" />
+
+
+		<property name="Aeplanstdate" column="AEPLANSTDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Aeplantmdate" column="AEPLANTMDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="AeEnforceCreateDate" column="aeEnforceCreateDate"
+			type="timestamp" not-null="false" length="26" />
+
+
+		<property name="Stat" column="STAT" type="string" not-null="false"
+			length="50" />
+		<property name="Flag" column="FLAG" type="string" not-null="false"
+			length="50" />
+		<property name="Createdate" column="CREATEDATE" type="timestamp"
+			not-null="false" length="26" />
+		<property name="Updatedate" column="UPDATEDATE" type="timestamp"
+			not-null="false" length="50" />
+	</class>
+</hibernate-mapping>

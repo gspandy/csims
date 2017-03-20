@@ -11,7 +11,6 @@ create table BS_AEPeopleJoinHistory
    OrgNo                VARCHAR(50),
    OrgNm                VARCHAR(100),
    DptNm                VARCHAR(100),
-    
 
    AENO                 VARCHAR(50)            not null,
    AEORGNM              VARCHAR(100)           not null,
@@ -22,7 +21,6 @@ create table BS_AEPeopleJoinHistory
    aeEnforceCreateDate  TIMESTAMP,
    AEPLANSTDATE         TIMESTAMP,
    AEPLANTMDATE         TIMESTAMP,
-   
    
    Stat                 VARCHAR(50),
    Flag                 VARCHAR(50),
@@ -49,7 +47,6 @@ create table BS_AEedOrgJoinHistory
    aeEnforceCreateDate  TIMESTAMP,
    AEPLANSTDATE         TIMESTAMP,
    AEPLANTMDATE         TIMESTAMP,
-   
    
    Stat                 VARCHAR(50),
    Flag                 VARCHAR(50),
