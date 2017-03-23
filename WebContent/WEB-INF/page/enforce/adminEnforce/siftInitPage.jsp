@@ -81,22 +81,46 @@ var row1 = {
         columnWidth : .5,
         layout : 'form',
         items : [{
-            xtype : 'textfield',
-            fieldLabel : '近两年是否参加过',
-            name : 'iNo',
-            id : 'iNo',
-            width : 180
-        }]
+	        id : 'isJoinWithin2Years',
+	        name : 'isJoinWithin2Years',
+	        xtype : 'combo',
+	        fieldLabel : '近两年是否参加过',
+	        displayField : 'isJoin',
+	        triggerAction : 'all',
+	        emptyText : '请选择',
+	        mode : 'local',
+	        // readOnly:true,
+	        width : 180,
+	        allowBlank : false,
+	        editable : false,
+	        forceSelection : true,
+	        store : new Ext.data.SimpleStore({
+	            fields : ['isJoin'],
+	            data : [['是']]
+	        })
+	    }]
     }, {
         columnWidth : .5,
         layout : 'form',
         items : [{
-            xtype : 'textfield',
-            fieldLabel : '执法能力等级',
-            name : 'aeOpnionNo',
-            id : 'aeOpnionNo',
-            width : 180
-        }]
+	        id : 'aeLevel',
+	        name : 'aeLevel',
+	        xtype : 'combo',
+	        fieldLabel : '执法能力等级',
+	        displayField : 'levels',
+	        triggerAction : 'all',
+	        emptyText : '请选择',
+	        mode : 'local',
+	        // readOnly:true,
+	        width : 180,
+	        allowBlank : false,
+	        editable : false,
+	        forceSelection : true,
+	        store : new Ext.data.SimpleStore({
+	            fields : ['levels'],
+	            data : [['A'], ['B'], ['C']]
+	        })
+	    }]
     }]
 };
 
@@ -108,8 +132,10 @@ var row2 = {
 	        items : [{
 	            xtype : 'textfield',
 	            fieldLabel : '参与执法检查次数',
-	            name : 'aeorgName',
-	            id : 'aeorgName',
+	            name : 'joinTime',
+	            id : 'joinTime',
+	            regex : /^\d+$/,
+                regexText : '请输入正确的数据类型',
 	            width : 180
 	        }]
 	    }, {
@@ -118,8 +144,10 @@ var row2 = {
 	        items : [{
 	            xtype : 'textfield',
 	            fieldLabel : '筛选人数',
-	            name : 'aa',
-	            id : 'aa',
+	            name : 'peopleQuantity',
+	            id : 'peopleQuantity',
+	            regex : /^\d+$/,
+                regexText : '请输入正确的数据类型',
 	            width : 180
 	        }]
 	    }]
@@ -145,11 +173,12 @@ var form = new Ext.form.FormPanel({
         handler : function() {
             grid.store.reload({
                 params : {
-                    iNo : Ext.getCmp('iNo').getValue(),
-                    aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-                    aeorgName : Ext.getCmp('aeorgName').getValue(),
+                	isJoinWithin2Years : Ext.getCmp('isJoinWithin2Years').getValue(),
+                	aeLevel : Ext.getCmp('aeLevel').getValue(),
+                	joinTime : Ext.getCmp('joinTime').getValue(),
+                	peopleQuantity : Ext.getCmp('peopleQuantity').getValue(),
                     start : 0,
-                    limit : 10
+                    limit : 100
                 }
             });
         }
@@ -166,50 +195,50 @@ var cm = new Ext.grid.ColumnModel([{
     dataIndex : 'id',
     hidden : true
 }, {
-    header : '工作检查记录编号',
-    dataIndex : 'aeno',
+    header : '姓名',
+    dataIndex : 'pepname',
     width : 200
 }, {
-    header : '执法意见书编号',
-    dataIndex : 'aeopnionno'
+    header : '执法证编号',
+    dataIndex : 'certno'
 }, {
-    header : '检查机构',
-    dataIndex : 'aeorgnm'
+    header : '身份证号',
+    dataIndex : 'cardid'
 }, {
-    header : '被检查机构',
-    dataIndex : 'aeedorgnm'
-}, {
-    header : '录入时间',
-    dataIndex : 'createdate'
+    header : '所属机构',
+    dataIndex : 'orgnm'
 }]);
 var ds = new Ext.data.Store({
     proxy : new Ext.data.HttpProxy({
-        url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=pageAeconclusionInfo',
+        url : '<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=siftAePeoples',
         method : 'POST',
         baseParams : {
-            iNo : Ext.getCmp('iNo').getValue(),
-            aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-            aeorgName : Ext.getCmp('aeorgName').getValue()
+        	isJoinWithin2Years : Ext.getCmp('isJoinWithin2Years').getValue(),
+        	aeLevel : Ext.getCmp('aeLevel').getValue(),
+        	joinTime : Ext.getCmp('joinTime').getValue(),
+        	peopleQuantity : Ext.getCmp('peopleQuantity').getValue()
         }
     }),
     reader : new Ext.data.JsonReader({
         totalProperty : 'totalProperty',
         root : 'root'
-    }, ['id', 'aeno', 'aeopnionno', 'aeorgnm', 'aeedorgnm', 'createdate'])
+    }, ['id', 'pepname', 'certno', 'cardid', 'orgnm'])
 });
 ds.load({
     params : {
-        iNo : Ext.getCmp('iNo').getValue(),
-        aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-        aeorgName : Ext.getCmp('aeorgName').getValue(),
+    	isJoinWithin2Years : Ext.getCmp('isJoinWithin2Years').getValue(),
+    	aeLevel : Ext.getCmp('aeLevel').getValue(),
+    	joinTime : Ext.getCmp('joinTime').getValue(),
+    	peopleQuantity : Ext.getCmp('peopleQuantity').getValue(),
         start : 0,
-        limit : 10
+        limit : 100
     }
 });
 ds.on("beforeload", function(thiz, options) {
-    thiz.baseParams["iNo"] = Ext.getCmp('iNo').getValue();
-    thiz.baseParams["aeOpnionNo"] = Ext.getCmp('aeOpnionNo').getValue();
-    thiz.baseParams["aeorgName"] = Ext.getCmp('aeorgName').getValue();
+    thiz.baseParams["isJoinWithin2Years"] = Ext.getCmp('isJoinWithin2Years').getValue();
+    thiz.baseParams["aeLevel"] = Ext.getCmp('aeLevel').getValue();
+    thiz.baseParams["joinTime"] = Ext.getCmp('joinTime').getValue();
+    thiz.baseParams["peopleQuantity"] = Ext.getCmp('peopleQuantity').getValue();
 });
 var grid = new Ext.grid.GridPanel({
     id : 'grid',
@@ -229,14 +258,14 @@ var grid = new Ext.grid.GridPanel({
     viewConfig : {
         forceFit : true
     },
-    bbar : new Ext.PagingToolbar({
-        id : 'pageBar',
-        pageSize : 10,
-        store : ds,
-        displayInfo : true,
-        displayMsg : '显示第{0}条到{1}条  记录共{2}条',
-        emptyMsg : '没有记录'
-    }),
+ //   bbar : new Ext.PagingToolbar({
+ //     id : 'pageBar',
+ //     pageSize : 10,
+       // store : ds,
+       // displayInfo : true,
+       // displayMsg : '显示第{0}条到{1}条  记录共{2}条',
+       // emptyMsg : '没有记录'
+    //}),
     listeners : {
         'rowdblclick' : function(grid, rowIndex, e) {
             var record = grid.getSelectionModel().getSelected();
@@ -264,49 +293,38 @@ var row3 = {
         columnWidth : .5,
         layout : 'form',
         items : [{
-            xtype : 'textfield',
-            fieldLabel : '近两年是否参加过',
-            name : 'iNo2',
-            id : 'iNo2',
-            width : 180
-        }]
+	        id : 'aeLevel2',
+	        name : 'aeLevel2',
+	        xtype : 'combo',
+	        fieldLabel : '执法能力等级',
+	        displayField : 'levels',
+	        triggerAction : 'all',
+	        emptyText : '请选择',
+	        mode : 'local',
+	        // readOnly:true,
+	        width : 180,
+	        allowBlank : false,
+	        editable : false,
+	        forceSelection : true,
+	        store : new Ext.data.SimpleStore({
+	            fields : ['levels'],
+	            data : [['A'], ['B'], ['C']]
+	        })
+	    }]
     }, {
         columnWidth : .5,
         layout : 'form',
         items : [{
             xtype : 'textfield',
-            fieldLabel : '执法能力等级',
-            name : 'aeOpnionNo2',
-            id : 'aeOpnionNo2',
+            fieldLabel : '筛选人数',
+            name : 'peopleQuantity2',
+            id : 'peopleQuantity2',
+            regex : /^\d+$/,
+            regexText : '请输入正确的数据类型',
             width : 180
         }]
     }]
 };
-
-var row4 = {
-	    layout : 'column',
-	    items : [{
-	        columnWidth : .5,
-	        layout : 'form',
-	        items : [{
-	            xtype : 'textfield',
-	            fieldLabel : '参与执法检查次数',
-	            name : 'aeorgName3',
-	            id : 'aeorgName3',
-	            width : 180
-	        }]
-	    }, {
-	        columnWidth : .5,
-	        layout : 'form',
-	        items : [{
-	            xtype : 'textfield',
-	            fieldLabel : '筛选人数',
-	            name : 'aa4',
-	            id : 'aa4',
-	            width : 180
-	        }]
-	    }]
-	};
 
 var form2 = new Ext.form.FormPanel({
     title : '',
@@ -320,7 +338,7 @@ var form2 = new Ext.form.FormPanel({
     method : 'post',
     labelWidth : 120,
     labelAlign : 'right',
-    items : [row3, row4],
+    items : [row3],
     buttonAlign : 'center',
     style : 'padding:10px',
     buttons : [{
@@ -328,11 +346,10 @@ var form2 = new Ext.form.FormPanel({
         handler : function() {
             grid2.store.reload({
                 params : {
-                    iNo : Ext.getCmp('iNo').getValue(),
-                    aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-                    aeorgName : Ext.getCmp('aeorgName').getValue(),
+                	aeLevel : Ext.getCmp('aeLevel2').getValue(),
+                	peopleQuantity : Ext.getCmp('peopleQuantity2').getValue(),
                     start : 0,
-                    limit : 10
+                    limit : 100
                 }
             });
         }
@@ -349,50 +366,44 @@ var cm2 = new Ext.grid.ColumnModel([{
     dataIndex : 'id',
     hidden : true
 }, {
-    header : '工作检查记录编号',
-    dataIndex : 'aeno',
+    header : '姓名',
+    dataIndex : 'pepname',
     width : 200
 }, {
-    header : '执法意见书编号',
-    dataIndex : 'aeopnionno'
+    header : '执法证编号',
+    dataIndex : 'certno'
 }, {
-    header : '检查机构',
-    dataIndex : 'aeorgnm'
+    header : '身份证号',
+    dataIndex : 'cardid'
 }, {
-    header : '被检查机构',
-    dataIndex : 'aeedorgnm'
-}, {
-    header : '录入时间',
-    dataIndex : 'createdate'
+    header : '所属机构',
+    dataIndex : 'orgnm'
 }]);
 var ds2 = new Ext.data.Store({
     proxy : new Ext.data.HttpProxy({
-        url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=pageAeconclusionInfo',
+        url : '<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=siftAePeoples',
         method : 'POST',
         baseParams : {
-            iNo : Ext.getCmp('iNo').getValue(),
-            aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-            aeorgName : Ext.getCmp('aeorgName').getValue()
+        	aeLevel : Ext.getCmp('aeLevel2').getValue(),
+        	peopleQuantity : Ext.getCmp('peopleQuantity2').getValue()
         }
     }),
     reader : new Ext.data.JsonReader({
         totalProperty : 'totalProperty',
         root : 'root'
-    }, ['id', 'aeno', 'aeopnionno', 'aeorgnm', 'aeedorgnm', 'createdate'])
+    }, ['id', 'pepname', 'certno', 'cardid', 'orgnm'])
 });
 ds2.load({
     params : {
-        iNo : Ext.getCmp('iNo').getValue(),
-        aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-        aeorgName : Ext.getCmp('aeorgName').getValue(),
+    	aeLevel : Ext.getCmp('aeLevel2').getValue(),
+    	peopleQuantity : Ext.getCmp('peopleQuantity2').getValue(),
         start : 0,
-        limit : 10
+        limit : 100
     }
 });
 ds2.on("beforeload", function(thiz, options) {
-    thiz.baseParams["iNo"] = Ext.getCmp('iNo').getValue();
-    thiz.baseParams["aeOpnionNo"] = Ext.getCmp('aeOpnionNo').getValue();
-    thiz.baseParams["aeorgName"] = Ext.getCmp('aeorgName').getValue();
+    thiz.baseParams["aeLevel"] = Ext.getCmp('aeLevel2').getValue();
+    thiz.baseParams["peopleQuantity"] = Ext.getCmp('peopleQuantity2').getValue();
 });
 var grid2 = new Ext.grid.GridPanel({
     id : 'grid2',
@@ -412,14 +423,6 @@ var grid2 = new Ext.grid.GridPanel({
     viewConfig : {
         forceFit : true
     },
-    bbar : new Ext.PagingToolbar({
-        id : 'pageBar2',
-        pageSize : 10,
-        store : ds2,
-        displayInfo : true,
-        displayMsg : '显示第{0}条到{1}条  记录共{2}条',
-        emptyMsg : '没有记录'
-    }),
     listeners : {
         'rowdblclick' : function(grid, rowIndex, e) {
             var record = grid.getSelectionModel().getSelected();
@@ -445,22 +448,46 @@ var row5 = {
         columnWidth : .5,
         layout : 'form',
         items : [{
-            xtype : 'textfield',
-            fieldLabel : '近两年是否参加过',
-            name : 'iNo25',
-            id : 'iNo25',
-            width : 180
-        }]
+	        id : 'hasNotBeCheckWithin2Years',
+	        name : 'hasNotBeCheckWithin2Years',
+	        xtype : 'combo',
+	        fieldLabel : '近两年未接受过检查',
+	        displayField : 'hasNotBeCheck',
+	        triggerAction : 'all',
+	        emptyText : '请选择',
+	        mode : 'local',
+	        // readOnly:true,
+	        width : 180,
+	        allowBlank : false,
+	        editable : false,
+	        forceSelection : true,
+	        store : new Ext.data.SimpleStore({
+	            fields : ['hasNotBeCheck'],
+	            data : [['是']]
+	        })
+	    }]
     }, {
         columnWidth : .5,
         layout : 'form',
         items : [{
-            xtype : 'textfield',
-            fieldLabel : '执法能力等级',
-            name : 'aeOpnionNo25',
-            id : 'aeOpnionNo25',
-            width : 180
-        }]
+	        id : 'adjustResult',
+	        name : 'adjustResult',
+	        xtype : 'combo',
+	        fieldLabel : '综合评价结果',
+	        displayField : 'ar',
+	        triggerAction : 'all',
+	        emptyText : '请选择',
+	        mode : 'local',
+	        // readOnly:true,
+	        width : 180,
+	        allowBlank : false,
+	        editable : false,
+	        forceSelection : true,
+	        store : new Ext.data.SimpleStore({
+	            fields : ['ar'],
+	            data : [['A'], ['B'], ['C']]
+	        })
+	    }]
     }]
 };
 
@@ -471,9 +498,11 @@ var row6 = {
 	        layout : 'form',
 	        items : [{
 	            xtype : 'textfield',
-	            fieldLabel : '参与执法检查次数',
-	            name : 'aeorgName36',
-	            id : 'aeorgName36',
+	            fieldLabel : '机构被检查次数',
+	            name : 'aeedTime',
+	            id : 'aeedTime',
+	            regex : /^\d+$/,
+                regexText : '请输入正确的数据类型',
 	            width : 180
 	        }]
 	    }, {
@@ -481,9 +510,11 @@ var row6 = {
 	        layout : 'form',
 	        items : [{
 	            xtype : 'textfield',
-	            fieldLabel : '筛选人数',
-	            name : 'aa46',
-	            id : 'aa46',
+	            fieldLabel : '筛选数量',
+	            name : 'peopleQuantity3',
+	            id : 'peopleQuantity3',
+	            regex : /^\d+$/,
+                regexText : '请输入正确的数据类型',
 	            width : 180
 	        }]
 	    }]
@@ -507,13 +538,14 @@ var form3 = new Ext.form.FormPanel({
     buttons : [{
         text : '筛选',
         handler : function() {
-            grid2.store.reload({
+            grid3.store.reload({
                 params : {
-                    iNo : Ext.getCmp('iNo').getValue(),
-                    aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-                    aeorgName : Ext.getCmp('aeorgName').getValue(),
+                	hasNotBeCheckWithin2Years : Ext.getCmp('hasNotBeCheckWithin2Years').getValue(),
+                	adjustResult : Ext.getCmp('adjustResult').getValue(),
+                	aeedTime : Ext.getCmp('aeedTime').getValue(),
+                	peopleQuantity : Ext.getCmp('peopleQuantity3').getValue(),
                     start : 0,
-                    limit : 10
+                    limit : 100
                 }
             });
         }
@@ -527,53 +559,47 @@ var form3 = new Ext.form.FormPanel({
 
 var cm3 = new Ext.grid.ColumnModel([{
     header : 'ID',
-    dataIndex : 'id',
+    dataIndex : 'no',
     hidden : true
 }, {
-    header : '工作检查记录编号',
-    dataIndex : 'aeno',
+    header : '机构名称',
+    dataIndex : 'name',
     width : 200
 }, {
-    header : '执法意见书编号',
-    dataIndex : 'aeopnionno'
-}, {
-    header : '检查机构',
-    dataIndex : 'aeorgnm'
-}, {
-    header : '被检查机构',
-    dataIndex : 'aeedorgnm'
-}, {
-    header : '录入时间',
-    dataIndex : 'createdate'
+    header : '所属人民银行',
+    dataIndex : 'pcbname'
 }]);
 var ds3 = new Ext.data.Store({
     proxy : new Ext.data.HttpProxy({
-        url : '<%=request.getContextPath()%>/AdminSanctionManagerAction.do?method=pageAeconclusionInfo',
+    	url : '<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=siftAeedOrg',
         method : 'POST',
         baseParams : {
-            iNo : Ext.getCmp('iNo').getValue(),
-            aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-            aeorgName : Ext.getCmp('aeorgName').getValue()
+        	hasNotBeCheckWithin2Years : Ext.getCmp('hasNotBeCheckWithin2Years').getValue(),
+        	adjustResult : Ext.getCmp('adjustResult').getValue(),
+        	aeedTime : Ext.getCmp('aeedTime').getValue(),
+        	peopleQuantity : Ext.getCmp('peopleQuantity3').getValue()
         }
     }),
     reader : new Ext.data.JsonReader({
         totalProperty : 'totalProperty',
         root : 'root'
-    }, ['id', 'aeno', 'aeopnionno', 'aeorgnm', 'aeedorgnm', 'createdate'])
+    }, ['no', 'name', 'pcbname'])
 });
 ds3.load({
     params : {
-        iNo : Ext.getCmp('iNo').getValue(),
-        aeOpnionNo : Ext.getCmp('aeOpnionNo').getValue(),
-        aeorgName : Ext.getCmp('aeorgName').getValue(),
+    	hasNotBeCheckWithin2Years : Ext.getCmp('hasNotBeCheckWithin2Years').getValue(),
+    	adjustResult : Ext.getCmp('adjustResult').getValue(),
+    	aeedTime : Ext.getCmp('aeedTime').getValue(),
+    	peopleQuantity : Ext.getCmp('peopleQuantity3').getValue(),
         start : 0,
-        limit : 10
+        limit : 100
     }
 });
 ds3.on("beforeload", function(thiz, options) {
-    thiz.baseParams["iNo"] = Ext.getCmp('iNo').getValue();
-    thiz.baseParams["aeOpnionNo"] = Ext.getCmp('aeOpnionNo').getValue();
-    thiz.baseParams["aeorgName"] = Ext.getCmp('aeorgName').getValue();
+    thiz.baseParams["hasNotBeCheckWithin2Years"] = Ext.getCmp('hasNotBeCheckWithin2Years').getValue();
+    thiz.baseParams["adjustResult"] = Ext.getCmp('adjustResult').getValue();
+    thiz.baseParams["aeedTime"] = Ext.getCmp('aeedTime').getValue();
+    thiz.baseParams["peopleQuantity"] = Ext.getCmp('peopleQuantity3').getValue();
 });
 var grid3 = new Ext.grid.GridPanel({
     id : 'grid3',
@@ -593,14 +619,6 @@ var grid3 = new Ext.grid.GridPanel({
     viewConfig : {
         forceFit : true
     },
-    bbar : new Ext.PagingToolbar({
-        id : 'pageBar3',
-        pageSize : 10,
-        store : ds2,
-        displayInfo : true,
-        displayMsg : '显示第{0}条到{1}条  记录共{2}条',
-        emptyMsg : '没有记录'
-    }),
     listeners : {
         'rowdblclick' : function(grid, rowIndex, e) {
             var record = grid.getSelectionModel().getSelected();

@@ -14,6 +14,7 @@ import net.sweet.dao.generic.support.Page;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,10 @@ import com.gtm.csims.dao.BsAdmenforceDAO;
 import com.gtm.csims.dao.BsAdmpunishDAO;
 import com.gtm.csims.dao.BsAdmpunishconsDAO;
 import com.gtm.csims.dao.BsAeFeedBackDAO;
+import com.gtm.csims.dao.BsAePeopleJoinHistoryDAO;
 import com.gtm.csims.dao.BsAePublishFeedBackDAO;
 import com.gtm.csims.dao.BsAeconclusionDAO;
+import com.gtm.csims.dao.BsAeedOrgJoinHistoryDAO;
 import com.gtm.csims.dao.BsAeinspectionAnlDAO;
 import com.gtm.csims.dao.BsAeinspectionDAO;
 import com.gtm.csims.dao.BsAerectificationDAO;
@@ -43,6 +46,7 @@ import com.gtm.csims.model.BsAePublishFeedBack;
 import com.gtm.csims.model.BsAeconclusion;
 import com.gtm.csims.model.BsAeinspection;
 import com.gtm.csims.model.BsAeinspectionAnl;
+import com.gtm.csims.model.BsAepeople;
 import com.gtm.csims.model.BsAerectification;
 import com.gtm.csims.model.BsDictionary;
 import com.gtm.csims.model.BsFactbook;
@@ -81,6 +85,9 @@ public class EnforceService extends BaseEnforceService {
 	private BsAdmpunishconsDAO bsAdmpunishconsDao;
 	private BsAeFeedBackDAO bsAeFeedBackDao;
 	private BsAePublishFeedBackDAO bsAePublishFeedBackDao;
+
+	private BsAePeopleJoinHistoryDAO bsAePeopleJoinHistoryDao;
+	private BsAeedOrgJoinHistoryDAO BsAeedOrgJoinHistoryDao;
 
 	/**
 	 * 保存行政执法登记.
@@ -3133,6 +3140,159 @@ public class EnforceService extends BaseEnforceService {
 		// TODO
 	}
 
+	/**
+	 * 筛选检查组其他成员.
+	 * 
+	 * @param isJoinWithin2Years
+	 * @param aeLevel
+	 * @param joinTime
+	 * @param peopleQuantity
+	 * @return
+	 */
+	public List<BsAepeople> siftAepeople(boolean isJoinWithin2Years, String aeLevel, Integer minJoinTime,
+	        Integer maxJoinTime, Integer peopleQuantity) {
+
+		String selectByIsJoinWithin2Years = "SELECT DISTINCT his.certno FROM BS_AEPEOPLEJOINHISTORY AS his WHERE timestampdiff(16,CHAR(CURRENT TIMESTAMP - his.AEENFORCECREATEDATE)) <= 365 * 2";
+		String selectByAeLevel = "SELECT certno FROM BS_AEPEOPLE WHERE sex = ? ";
+		String selectByJoinTime = "SELECT CERTNO FROM BS_AEPEOPLEJOINHISTORY AS his GROUP BY his.CERTNO HAVING COUNT(his.ID) > ? AND COUNT(his.ID) < ?";
+
+		List<String> retainList = new ArrayList<String>();
+		List<String> resultByIsJoinWithin2Years = null, resultByAeLevel = null, resultByJoinTime = null;
+
+		if (isJoinWithin2Years) {
+			resultByIsJoinWithin2Years = jdbcTemplate.queryForList(selectByIsJoinWithin2Years, String.class);
+			if (resultByIsJoinWithin2Years.size() <= 0) {
+				return null;
+			} else {
+				if (CollectionUtils.isEmpty(retainList)) {
+					retainList.addAll(resultByIsJoinWithin2Years);
+				} else {
+					retainList.retainAll(resultByIsJoinWithin2Years);
+				}
+			}
+		}
+
+		if (minJoinTime != null && maxJoinTime != null && minJoinTime.compareTo(maxJoinTime) <= 0) {
+			resultByJoinTime = jdbcTemplate.queryForList(selectByJoinTime, new Object[] { minJoinTime, maxJoinTime },
+			        String.class);
+			if (resultByJoinTime.size() <= 0) {
+				return null;
+			} else {
+				if (CollectionUtils.isEmpty(retainList)) {
+					retainList.addAll(resultByJoinTime);
+				} else {
+					retainList.retainAll(resultByJoinTime);
+				}
+			}
+		}
+
+		if (aeLevel != null) {
+			resultByAeLevel = jdbcTemplate.queryForList(selectByAeLevel, new Object[] { "男" }
+			// aeLevel
+			        , String.class);
+			if (resultByAeLevel.size() <= 0) {
+				return null;
+			} else {
+				if (CollectionUtils.isEmpty(retainList)) {
+					retainList.addAll(resultByAeLevel);
+				} else {
+					retainList.retainAll(resultByAeLevel);
+				}
+			}
+		}
+
+		if (CollectionUtils.isEmpty(retainList)) {
+			return null;
+		}
+
+		List<BsAepeople> result = bsAepeopleDao.find("from BsAepeople where certNo in ("
+		        + StringUtil.join(retainList.toArray(), "'", "'", ",") + ")");
+
+		if (CollectionUtils.isEmpty(result)) {
+			return null;
+		}
+
+		if (result.size() <= peopleQuantity) {
+			return result;
+		}
+
+		while (result.size() > peopleQuantity) {
+			result.remove(RandomUtils.nextInt(result.size()));
+		}
+
+		return result;
+	}
+
+	private static final String[] RANDOM_ORDER_FIELDS_NAME = { "NO", "AA", "AB", "AC", "AH" };
+	private static final String[] RANDOM_ORDER_ASC_NAME = { "ASC", "DESC" };
+
+	/**
+	 * 筛选被检查机构.
+	 * 
+	 * @param isAeedOrgWithin2Years
+	 * @param adjustResult
+	 * @param minAeedTime
+	 * @param maxAeedTime
+	 * @param orgType
+	 * @param peopleQuantity
+	 * @return
+	 */
+	public List<BsOrg> siftAeedOrg(boolean hasNotBeCheckWithin2Years, String adjustResult, Integer minAeedTime,
+	        Integer maxAeedTime, String orgType, Integer peopleQuantity) {
+
+		String selectByHasBeCheckWithin2Years = "SELECT DISTINCT his.AEORGNO FROM BS_AEEDORGJOINHISTORY AS his WHERE timestampdiff(16,CHAR(CURRENT TIMESTAMP - his.AEENFORCECREATEDATE)) <= 365 * 2";
+		String selectByAeedTime = "SELECT AEEDORGNO FROM BS_AEEDORGJOINHISTORY AS his GROUP BY his.AEEDORGNO HAVING COUNT(his.ID) > ? AND COUNT(his.ID) < ?";
+
+		List<String> resultByIsJoinWithin2Years = null, resultByAeedTime = null;
+
+		String expectOrgs = null;
+		if (hasNotBeCheckWithin2Years) {
+			resultByIsJoinWithin2Years = jdbcTemplate.queryForList(selectByHasBeCheckWithin2Years, String.class);
+			if (resultByIsJoinWithin2Years.size() > 0) {
+				expectOrgs = StringUtil.join(resultByIsJoinWithin2Years.toArray(), "'", "'", ",");
+			}
+		}
+
+		String hasBeCheckOrgWithSpecialTime = null;
+		if (minAeedTime != null && maxAeedTime != null && minAeedTime.compareTo(maxAeedTime) <= 0) {
+			resultByAeedTime = jdbcTemplate.queryForList(selectByAeedTime, new Object[] { minAeedTime, maxAeedTime },
+			        String.class);
+			if (resultByAeedTime.size() <= 0) {
+				return null;
+			} else {
+				hasBeCheckOrgWithSpecialTime = StringUtil.join(resultByAeedTime.toArray(), "'", "'", ",");
+			}
+		}
+
+		StringBuffer selectOrg = new StringBuffer("from BsOrg where ispcb = 'NO' ");
+		if (StringUtils.isNotEmpty(orgType)) {
+			selectOrg.append("And 1=1 ");
+		}
+		if (StringUtils.isNotEmpty(adjustResult)) {
+			selectOrg.append("And 1=1 ");
+		}
+
+		if (StringUtils.isNotEmpty(hasBeCheckOrgWithSpecialTime)) {
+			selectOrg.append("And no in (" + hasBeCheckOrgWithSpecialTime + ") ");
+		}
+
+		if (StringUtils.isNotEmpty(expectOrgs)) {
+			selectOrg.append("And no Not in (" + expectOrgs + ") ");
+		}
+
+		selectOrg.append(" order by " + RANDOM_ORDER_FIELDS_NAME[RandomUtils.nextInt(RANDOM_ORDER_FIELDS_NAME.length)]
+		        + " " + RANDOM_ORDER_ASC_NAME[RandomUtils.nextInt(RANDOM_ORDER_ASC_NAME.length)]);
+
+		int size = 10;
+		if (peopleQuantity != null) {
+			size = peopleQuantity.intValue();
+		}
+
+		List<BsOrg> result = (List<BsOrg>) bsAepeopleDao.pagedQuery(selectOrg.toString(), 1, size).getResult();
+
+		return result;
+	}
+
 	public void setBsAdmenforceDao(BsAdmenforceDAO bsAdmenforceDao) {
 		this.bsAdmenforceDao = bsAdmenforceDao;
 	}
@@ -3204,4 +3364,13 @@ public class EnforceService extends BaseEnforceService {
 	public void setBsAePublishFeedBackDao(BsAePublishFeedBackDAO bsAePublishFeedBackDao) {
 		this.bsAePublishFeedBackDao = bsAePublishFeedBackDao;
 	}
+
+	public void setBsAePeopleJoinHistoryDao(BsAePeopleJoinHistoryDAO bsAePeopleJoinHistoryDao) {
+		this.bsAePeopleJoinHistoryDao = bsAePeopleJoinHistoryDao;
+	}
+
+	public void setBsAeedOrgJoinHistoryDao(BsAeedOrgJoinHistoryDAO bsAeedOrgJoinHistoryDao) {
+		BsAeedOrgJoinHistoryDao = bsAeedOrgJoinHistoryDao;
+	}
+
 }

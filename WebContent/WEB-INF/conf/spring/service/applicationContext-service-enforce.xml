@@ -30,6 +30,8 @@
 		<property name="bsAdmpunishconsDao" ref="bsAdmpunishconsDao" />
 		<property name="bsAeFeedBackDao" ref="bsAeFeedBackDao" />
 		<property name="bsAePublishFeedBackDao" ref="bsAePublishFeedBackDao" />
+		<property name="bsAePeopleJoinHistoryDao" ref="bsAePeopleJoinHistoryDao" />
+		<property name="bsAeedOrgJoinHistoryDao" ref="bsAeedOrgJoinHistoryDao" />
 	</bean>
 	<bean id="punishService" class="com.gtm.csims.business.enforce.PunishService">
 		<property name="bsAdmpunishDao" ref="bsAdmpunishDao" />

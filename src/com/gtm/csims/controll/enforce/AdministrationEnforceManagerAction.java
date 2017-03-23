@@ -45,6 +45,7 @@ import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.upload.FormFile;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.alibaba.fastjson.JSON;
 import com.gtm.csims.base.BaseAction;
 import com.gtm.csims.business.dataapp.statistics.impl.AdmenforceStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AdmpunishStsicSvce;
@@ -5178,11 +5179,28 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	 * @param response
 	 * @return
 	 */
-	public ActionForward siftOthers(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward siftAePeoples(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 	        HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
+
+		String aeLevel = request.getParameter("aeLevel");
+		String isJoinWithin2Years = request.getParameter("isJoinWithin2Years");
+		Integer joinTime;
+		if (StringUtils.isEmpty(request.getParameter("joinTime"))) {
+			joinTime = null;
+		} else {
+			joinTime = Integer.valueOf(request.getParameter("joinTime"));
+		}
+
+		Integer peopleQuantity;
+		if (StringUtils.isEmpty(request.getParameter("peopleQuantity"))) {
+			peopleQuantity = 10;
+		} else {
+			peopleQuantity = Integer.valueOf(request.getParameter("peopleQuantity"));
+		}
+
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -5191,64 +5209,11 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			return null;
 		}
 
-		if (out != null) {
-			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
-		}
-		return null;
-	}
-
-	/**
-	 * 筛选组长.
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public ActionForward siftHeadman(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-	        HttpServletResponse response) {
-		response.setContentType("text/html;charset=UTF-8");
-		response.setHeader("Content-type", "text/html;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			LOGGER.error("保存离场记录发生错误", e);
-			return null;
-		}
+		List<BsAepeople> peoples = enforceService.siftAepeople(StringUtils.isNotEmpty(isJoinWithin2Years), aeLevel,
+		        joinTime, 100, peopleQuantity);
 
 		if (out != null) {
-			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
-		}
-		return null;
-	}
-
-	/**
-	 * 筛选主查人.
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public ActionForward siftMaster(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-	        HttpServletResponse response) {
-		response.setContentType("text/html;charset=UTF-8");
-		response.setHeader("Content-type", "text/html;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			LOGGER.error("保存离场记录发生错误", e);
-			return null;
-		}
-
-		if (out != null) {
-			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+			out.print(JSON.toJSONString(new RestResponse(100, peoples)));
 		}
 		return null;
 	}
@@ -5267,6 +5232,23 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		response.setContentType("text/html;charset=UTF-8");
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
+
+		String hasNotBeCheckWithin2Years = request.getParameter("hasNotBeCheckWithin2Years");
+		
+		Integer aeedTime;
+		if (StringUtils.isEmpty(request.getParameter("aeedTime"))) {
+			aeedTime = null;
+		} else {
+			aeedTime = Integer.valueOf(request.getParameter("aeedTime"));
+		}
+
+		Integer peopleQuantity;
+		if (StringUtils.isEmpty(request.getParameter("peopleQuantity"))) {
+			peopleQuantity = 10;
+		} else {
+			peopleQuantity = Integer.valueOf(request.getParameter("peopleQuantity"));
+		}
+
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -5275,8 +5257,10 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			return null;
 		}
 
+		List<BsOrg> aeOrgs = enforceService.siftAeedOrg(StringUtils.isNotEmpty(hasNotBeCheckWithin2Years), "", aeedTime, 100, "", peopleQuantity);
+
 		if (out != null) {
-			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+			out.print(JSON.toJSONString(new RestResponse(100, aeOrgs)));
 		}
 		return null;
 	}

@@ -24,9 +24,6 @@
 			not-null="true" length="1000" />
 		<property name="Aeedorgno" column="AEEDORGNO" type="string"
 			not-null="true" length="1000" />
-		<property name="AeEnforceCreateDate" column="aeEnforceCreateDate" type="string"
-			not-null="true" length="1000" />
-
 
 		<property name="Aeplanstdate" column="AEPLANSTDATE" type="timestamp"
 			not-null="false" length="26" />
