@@ -3264,7 +3264,7 @@ public class EnforceService extends BaseEnforceService {
 			}
 		}
 
-		StringBuffer selectOrg = new StringBuffer("from BsOrg where ispcb = 'NO' ");
+		StringBuffer selectOrg = new StringBuffer("select no, name, pcbname from Bs_Org where ispcb = 'NO' ");
 		if (StringUtils.isNotEmpty(orgType)) {
 			selectOrg.append("And 1=1 ");
 		}
@@ -3280,15 +3280,20 @@ public class EnforceService extends BaseEnforceService {
 			selectOrg.append("And no Not in (" + expectOrgs + ") ");
 		}
 
-		selectOrg.append(" order by " + RANDOM_ORDER_FIELDS_NAME[RandomUtils.nextInt(RANDOM_ORDER_FIELDS_NAME.length)]
-		        + " " + RANDOM_ORDER_ASC_NAME[RandomUtils.nextInt(RANDOM_ORDER_ASC_NAME.length)]);
-
 		int size = 10;
 		if (peopleQuantity != null) {
 			size = peopleQuantity.intValue();
 		}
 
-		List<BsOrg> result = (List<BsOrg>) bsAepeopleDao.pagedQuery(selectOrg.toString(), 1, size).getResult();
+		selectOrg.append(" order by rand() fetch first " + size + " rows only");
+		// selectOrg.append(" order by " +
+		// RANDOM_ORDER_FIELDS_NAME[RandomUtils.nextInt(RANDOM_ORDER_FIELDS_NAME.length)]
+		// + " " +
+		// RANDOM_ORDER_ASC_NAME[RandomUtils.nextInt(RANDOM_ORDER_ASC_NAME.length)]);
+		// List<BsOrg> result = (List<BsOrg>)
+		// bsAepeopleDao.pagedQuery(selectOrg.toString(), 1, size).getResult();
+		List<BsOrg> result = jdbcTemplate.queryForList(selectOrg.toString());
+		
 
 		return result;
 	}

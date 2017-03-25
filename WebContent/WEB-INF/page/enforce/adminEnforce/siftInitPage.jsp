@@ -560,18 +560,18 @@ var form3 = new Ext.form.FormPanel({
     }]
 });
 
-var sm3 = new Ext.grid.CheckboxSelectionModel({ dataIndex: "no", singleSelect: false } ); 
+var sm3 = new Ext.grid.CheckboxSelectionModel({ dataIndex: "NO", singleSelect: false } ); 
 var cm3 = new Ext.grid.ColumnModel([sm3, {
     header : 'ID',
-    dataIndex : 'no',
+    dataIndex : 'NO',
     hidden : true
 }, {
     header : '机构名称',
-    dataIndex : 'name',
+    dataIndex : 'NAME',
     width : 200
 }, {
     header : '所属人民银行',
-    dataIndex : 'pcbname'
+    dataIndex : 'PCBNAME'
 }]);
 var ds3 = new Ext.data.Store({
     proxy : new Ext.data.HttpProxy({
@@ -587,7 +587,7 @@ var ds3 = new Ext.data.Store({
     reader : new Ext.data.JsonReader({
         totalProperty : 'totalProperty',
         root : 'root'
-    }, ['no', 'name', 'pcbname'])
+    }, ['NO', 'NAME', 'PCBNAME'])
 });
 ds3.load({
     params : {
@@ -688,7 +688,7 @@ var _panel = new Ext.Panel({
     		var record3 = selectionModel3.getSelections();
     		var ids3 = "";
             for(var i = 0; i < record3.length; i++){
-                ids3 += (record3[i].get("name") + '--' + record3[i].get("no"));
+                ids3 += (record3[i].get("NAME") + '--' + record3[i].get("NO"));
                 if(i < record3.length-1){
                     ids3 = ids3 + ",";
                 }
