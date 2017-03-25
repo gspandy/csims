@@ -220,6 +220,12 @@
 			<form-property name="aeedorgxzhno" type="java.lang.String"></form-property>
 			<form-property name="aeedorgzznm" type="java.lang.String"></form-property>
 			<form-property name="aeedorgxzhnm" type="java.lang.String"></form-property>
+
+			<form-property name="selectAeOthers" type="java.lang.String"></form-property>
+			<form-property name="selectAeMasterMans" type="java.lang.String"></form-property>
+			<form-property name="selectAeedOrg" type="java.lang.String"></form-property>
+
+
 		</form-bean>
 	</form-beans>
 
@@ -229,6 +235,9 @@
 			name="enforceInfoForm">
 			<forward name="toAdminEnforceInitPage"
 				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceInitPage.jsp"
+				redirect="false" />
+			<forward name="toAdminEnforceInitPageFromSift"
+				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceInitPageFromSift.jsp"
 				redirect="false" />
 			<forward name="toAdminEnforceExcel"
 				path="/WEB-INF/page/enforce/adminEnforce/adminEnforceExcel.jsp"
@@ -297,8 +306,7 @@
 				path="/WEB-INF/page/enforce/adminEnforce/aeinspectionAnalyse.jsp"
 				redirect="false" />
 			<forward name="toSiftPage"
-				path="/WEB-INF/page/enforce/adminEnforce/siftInitPage.jsp"
-				redirect="false" />
+				path="/WEB-INF/page/enforce/adminEnforce/siftInitPage.jsp" redirect="false" />
 
 		</action>
 
@@ -335,8 +343,7 @@
 			<forward name="toPageAeconclusionInfo"
 				path="/WEB-INF/page/enforce/adminSanction/aeconclusionInfoList.jsp"
 				redirect="false" />
-			<forward name="toTools"
-				path="/WEB-INF/page/enforce/tools.jsp"
+			<forward name="toTools" path="/WEB-INF/page/enforce/tools.jsp"
 				redirect="false" />
 		</action>
 

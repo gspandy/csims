@@ -54,7 +54,11 @@
 			function generateLxspbWord(wordId){
                 document.forms[0].action="AdminEnforceManagerAction.do?method=generateLxspbWord&wordTemplateId="+wordId+"&from=detail";
                 document.forms[0].submit(); 
-            }   
+            }
+            function generateSjsxjgWord(wordId){
+                document.forms[0].action="AdminEnforceManagerAction.do?method=generateSjsxjgWord&wordTemplateId="+wordId+"&from=detail";
+                document.forms[0].submit(); 
+            }
 		</script>
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -363,6 +367,8 @@
 																		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																		<input type="button" value="导出行政执法立项审批表" class="botton0001"
 																			onclick="return generateLxspbWord('lxspb');" />
+																		<input type="button" value="导出执法检查随机筛选结果" class="botton0001"
+																			onclick="return generateSjsxjgWord('sjsxjg');" />
 																	</td>
 																</tr>
 															</table>

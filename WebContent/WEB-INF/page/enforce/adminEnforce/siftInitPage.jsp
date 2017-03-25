@@ -1,5 +1,5 @@
 <%@ taglib prefix="html" uri="/WEB-INF/tld/struts-html.tld"%>
-<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
+<%@ taglib prefix="bean" uri="/WEB-INF/tld/struts-bean.tld"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
@@ -11,8 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<style type="text/css">
-</style>
+		<style type="text/css"></style>
 		<title><bean:message key="PROJECT_NAME" />
 		</title>
 		<meta http-equiv="pragma" content="no-cache">
@@ -38,6 +37,7 @@
 			src="<%=request.getContextPath()%>/ext-3.2.0/adapter/ext/ext-base.js"> </script>
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/ext-3.2.0/ext-all.js"> </script>
+	</head>
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -64,11 +64,12 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td align="center" valign="top">
-						<html:form
-				            action="/AdminEnforceManagerAction.do?method=downloadAtt"
-				            method="post">
-				        </html:form>
-						<div id="_panel" align="center"></div>
+						<html:form action="/AdminEnforceManagerAction.do?method=toAdminEnforceInitPageFromSift" method="post" >
+						<html:hidden property="selectAeOthers"/>
+						<html:hidden property="selectAeMasterMans"/>
+						<html:hidden property="selectAeedOrg"/>
+					</html:form>
+					<div id="_panel" align="center"></div>
 					</td>
 				</tr>
 			</table>
@@ -189,8 +190,8 @@ var form = new Ext.form.FormPanel({
         }
     }]
 });
-
-var cm = new Ext.grid.ColumnModel([{
+var sm = new Ext.grid.CheckboxSelectionModel({ dataIndex: "id", singleSelect: false } ); 
+var cm = new Ext.grid.ColumnModel([sm, {
     header : 'ID',
     dataIndex : 'id',
     hidden : true
@@ -269,7 +270,8 @@ var grid = new Ext.grid.GridPanel({
     listeners : {
         'rowdblclick' : function(grid, rowIndex, e) {
             var record = grid.getSelectionModel().getSelected();
-            viewAeCon(record.get('id'));
+            // alert(record.get('id'));
+            grid.store.remove(record);
         }
     }
 });
@@ -361,7 +363,8 @@ var form2 = new Ext.form.FormPanel({
     }]
 });
 
-var cm2 = new Ext.grid.ColumnModel([{
+var sm2 = new Ext.grid.CheckboxSelectionModel({ dataIndex: "id", singleSelect: false } ); 
+var cm2 = new Ext.grid.ColumnModel([sm2, {
     header : 'ID',
     dataIndex : 'id',
     hidden : true
@@ -425,8 +428,8 @@ var grid2 = new Ext.grid.GridPanel({
     },
     listeners : {
         'rowdblclick' : function(grid, rowIndex, e) {
-            var record = grid.getSelectionModel().getSelected();
-            viewAeCon(record.get('id'));
+            var record = grid2.getSelectionModel().getSelected();
+            grid2.store.remove(record);
         }
     }
 });
@@ -557,7 +560,8 @@ var form3 = new Ext.form.FormPanel({
     }]
 });
 
-var cm3 = new Ext.grid.ColumnModel([{
+var sm3 = new Ext.grid.CheckboxSelectionModel({ dataIndex: "no", singleSelect: false } ); 
+var cm3 = new Ext.grid.ColumnModel([sm3, {
     header : 'ID',
     dataIndex : 'no',
     hidden : true
@@ -621,8 +625,8 @@ var grid3 = new Ext.grid.GridPanel({
     },
     listeners : {
         'rowdblclick' : function(grid, rowIndex, e) {
-            var record = grid.getSelectionModel().getSelected();
-            viewAeCon(record.get('id'));
+            var record = grid3.getSelectionModel().getSelected();
+            grid3.store.remove(record);
         }
     }
 });
@@ -652,6 +656,56 @@ var _panel = new Ext.Panel({
         handler : function() {
             window.history.go(-1);
         }
+    },{
+        text : "立项",
+        handler : function() {
+        	var selectionModel = grid.getSelectionModel();
+        	selectionModel.selectAll();
+    		var record = selectionModel.getSelections();
+    		var ids = "";
+            for(var i = 0; i < record.length; i++){
+                ids += (record[i].get("pepname") + '--' + record[i].get("certno"));
+                if(i < record.length - 1){
+                    ids = ids + ",";
+                }
+            }
+            $("input[name='selectAeOthers']").val(ids);
+            
+            var selectionModel2 = grid2.getSelectionModel();
+        	selectionModel2.selectAll();
+    		var record2 = selectionModel2.getSelections();
+    		var ids2 = "";
+            for(var i = 0; i < record2.length; i++){
+                ids2 += (record2[i].get("pepname") + '--' + record2[i].get("certno"));
+                if(i < record2.length-1){
+                    ids2 = ids2 + ",";
+                }
+            }
+            $("input[name='selectAeMasterMans']").val(ids2);
+            
+            var selectionModel3 = grid3.getSelectionModel();
+        	selectionModel3.selectAll();
+    		var record3 = selectionModel3.getSelections();
+    		var ids3 = "";
+            for(var i = 0; i < record3.length; i++){
+                ids3 += (record3[i].get("name") + '--' + record3[i].get("no"));
+                if(i < record3.length-1){
+                    ids3 = ids3 + ",";
+                }
+            }
+            $("input[name='selectAeedOrg']").val(ids3);
+            
+            // alert($("input[name='selectAeOthers']").val());
+            // alert($("input[name='selectAeMasterMans']").val());
+            // alert($("input[name='selectAeedOrg']").val());
+            
+            Ext.Msg.confirm('提示', '是否确认将所筛选结果用于立项？', function(btn) {
+				if(btn == 'yes') {
+					document.forms[0].action="AdminEnforceManagerAction.do?method=toAdminEnforceInitPageFromSift";
+                    document.forms[0].submit(); 
+				}
+			});
+        }
     }]
 })
 
@@ -659,4 +713,5 @@ var _panel = new Ext.Panel({
 
  
 </script>
+
 </html>

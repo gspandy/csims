@@ -3071,6 +3071,88 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	}
 
 	/**
+	 * 生成执法检查随机筛选结果Word文件.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward generateSjsxjgWord(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse response) {
+		String wordTemplateId = request.getParameter("wordTemplateId").toString();
+		String aeNo = request.getParameter("aeno");
+		FileInputStream fis = null;
+		OutputStream repos = null;
+		try {
+			BsAdmenforce fb = enforceService.getAdminEnforce(aeNo);
+			if (fb == null) {
+				super.printMessage(request, response, "还未添加立项信息:" + aeNo + "，请添加后再导出！", ATTR_ERROR);
+				return null;
+			}
+			// String nowloginerOrgNo = this.getPubCredential(
+			// UserCredentialName.organization.name(), request, response);
+			// BsOrg bsorg = systemBaseInfoManager.getOrgByNo(nowloginerOrgNo);
+			Map<String, String> map = new HashMap<String, String>();
+
+			map.put("DOCNO", String.valueOf(Math.abs(fb.getAeorgnm().hashCode())));
+			map.put("CREATEDATE", DateFormatUtils.format(fb.getCreatedate(), DateUtil.DATE_FORMAT_ZH));
+
+			map.put("AEORGNM", fb.getAeorgnm());
+			// 如果当前立项信息行内编号不为空，则采用行内编号，否则采用征信编号
+			if (StringUtils.isBlank(fb.getInnerno())) {
+				map.put("AENO", StringUtils.trimToEmpty(fb.getAeno()));
+			} else {
+				map.put("AENO", StringUtils.trimToEmpty(fb.getInnerno()));
+			}
+			map.put("PRJNM", fb.getPrjnm());
+
+			map.put("AEEDORGNM", fb.getAeedorgnm());
+			map.put("AECONTENT", StringEscapeUtils.unescapeJava(fb.getAecontent()));
+			map.put("AELIMT", fb.getAelimt());
+
+			map.put("AEPLANSTDATE", DateFormatUtils.format(fb.getAeplanstdate(), DateUtil.DATE_FORMAT_ZH));
+			map.put("AEPLANTMDATE", DateFormatUtils.format(fb.getAeplantmdate(), DateUtil.DATE_FORMAT_ZH));
+			map.put("AEHEADMAN", fb.getAeheadman());
+			map.put("AEMASTER", fb.getAemaster());
+			map.put("AEOTHER", fb.getAeother());
+			map.put("AESUMMARY", StringEscapeUtils.unescapeJava(fb.getAesummary()));
+			map.put("DPTOPNION", StringEscapeUtils.unescapeJava(fb.getDptopnion()));
+			map.put("DEPTMAN", fb.getDeptman());
+			map.put("DEPTAUDITDATE", DateFormatUtils.format(fb.getDeptauditdate(), DateUtil.DATE_FORMAT_ZH));
+			map.put("CHAIROPNION", StringEscapeUtils.unescapeJava(fb.getChairopnion()));
+			map.put("CHAIRMAN", fb.getChairman());
+			map.put("CHAIRAUDITDATE", DateFormatUtils.format(fb.getChairauditdate(), DateUtil.DATE_FORMAT_ZH));
+			fis = new FileInputStream(request.getSession().getServletContext().getRealPath(File.separator)
+			        + FileHandler.WORD_TEMPLATE_FILE_PATH + File.separator + wordTemplateId + ".doc");
+			// 设置response的Header
+			response.setContentType("application/vnd.ms-word");
+			response.addHeader("Content-Disposition",
+			        "attachment;filename=" + super.getDownloadFileName(fb.getAeno(), "筛选"));
+			repos = response.getOutputStream();
+			wordGenerator.replaceDoc(fis, map, repos);
+			repos.flush();
+			return null;
+		} catch (Exception e) {
+			LOGGER.error("生成筛选结果表Word文件发生错误", e);
+			super.printMessage(request, response, "筛选结果" + aeNo + "导出失败！错误原因:" + e.getMessage(), ATTR_ERROR);
+			return null;
+		} finally {
+			try {
+				if (fis != null) {
+					fis.close();
+				}
+				if (repos != null) {
+					repos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
 	 * 跳转检查工作记录列表页面.
 	 */
 	public ActionForward toAeinspectionList(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -5234,7 +5316,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		response.setCharacterEncoding("UTF-8");
 
 		String hasNotBeCheckWithin2Years = request.getParameter("hasNotBeCheckWithin2Years");
-		
+
 		Integer aeedTime;
 		if (StringUtils.isEmpty(request.getParameter("aeedTime"))) {
 			aeedTime = null;
@@ -5257,7 +5339,8 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			return null;
 		}
 
-		List<BsOrg> aeOrgs = enforceService.siftAeedOrg(StringUtils.isNotEmpty(hasNotBeCheckWithin2Years), "", aeedTime, 100, "", peopleQuantity);
+		List<BsOrg> aeOrgs = enforceService.siftAeedOrg(StringUtils.isNotEmpty(hasNotBeCheckWithin2Years), "",
+		        aeedTime, 100, "", peopleQuantity);
 
 		if (out != null) {
 			out.print(JSON.toJSONString(new RestResponse(100, aeOrgs)));
@@ -5274,23 +5357,47 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 	 * @param response
 	 * @return
 	 */
-	public ActionForward saveSiftResult(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-	        HttpServletResponse response) {
-		response.setContentType("text/html;charset=UTF-8");
-		response.setHeader("Content-type", "text/html;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			LOGGER.error("保存离场记录发生错误", e);
+	public ActionForward toAdminEnforceInitPageFromSift(ActionMapping mapping, ActionForm form,
+	        HttpServletRequest request, HttpServletResponse response) {
+		this.saveToken(request);// 产生令牌值
+		// 如果当前用户不属于人行用户，则不能使用该功能
+		if (!super.isPcbUser(request, response)) {
+			this.printMessage(request, response, ERROR1, ATTR_ERROR);
 			return null;
 		}
+		DynaActionForm dyna = (DynaActionForm) form;
+		String loginOrgNo = this.getPubCredential(UserCredentialName.organization.name(), request, response);
+		BsOrg bsorg = systemBaseInfoManager.getOrgByNo(loginOrgNo);
 
-		if (out != null) {
-			out.print("{success:true,msg:'保存离场记录失败，不能获取工作记录编号'}");
+		request.setAttribute("aeorg", bsorg.getNo());
+		request.setAttribute("aeorgChoice", bsorg.getName());
+		request.setAttribute("aeorgno", bsorg.getNo());
+		request.setAttribute("aeorgnm", bsorg.getName());
+
+		String selectAeOthers = dyna.getString("selectAeOthers");
+		String selectAeMasterMans = dyna.getString("selectAeMasterMans");
+		String selectAeedOrg = dyna.getString("selectAeedOrg");
+		dyna.set("aeedorgChoice", selectAeedOrg);
+		dyna.set("aemaster", selectAeMasterMans);
+		dyna.set("aeother", selectAeOthers);
+
+		// 获取执法检查编号
+		BsNogenerate bs = noGenerator.getNoGenerate(loginOrgNo, noGenerator.getYear());
+		// 没有行政执法编号规则
+		if (bs == null) {
+			request.setAttribute("methodname", "toAdminEnforceList&source=1");
+			request.setAttribute(ATTR_MESSAGE, "<b>登记行政执法发生错误</b><br><b>失败原因:</b>不能获取当前机构的执法编号规则： " + loginOrgNo
+			        + "<br><b>解决方法:</b>需要联系管理员维护该机构执法立项规则!");
+			return mapping.findForward("toAdminEnforceMessage");
+		} else {
+			dyna.set("aetext", bs.getAenotext());
+			dyna.set("aeyear", bs.getAenoyear());
+			dyna.set("aeindex", bs.getAenoindex());
+			request.setAttribute("lxyjList", super.getDicMap("LXYJ"));
+			request.setAttribute("jcyjList", super.getDicMap("JCYJ"));
+			request.setAttribute("jcfsList", super.getDicMap("JCFS"));
+			return mapping.findForward("toAdminEnforceInitPageFromSift");
 		}
-		return null;
 	}
 
 	/**
