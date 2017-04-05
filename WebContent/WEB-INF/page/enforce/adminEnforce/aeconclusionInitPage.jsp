@@ -44,9 +44,11 @@
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/WdatePicker.js" defer="defer"></script>
 		<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
+		
 		<script type="text/javascript"
 			src="<%=basePath%>ext-3.2.0/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="<%=basePath%>ext-3.2.0/ext-all.js"></script>
+		<script type="text/javascript" src="<%=basePath%>ext-3.2.0/build/locale/ext-lang-zh_CN.js"></script>  
 		<script type="text/javascript" src="<%=basePath%>ext-3.2.0/MultiSelect.js"></script>
 		<script type="text/javascript" src="<%=basePath%>ext-3.2.0/ItemSelector.js"></script>
 		
@@ -369,6 +371,7 @@ function selectUsers() {
     });
     addBasisWin.show();
 }
+
 function clearUsers() {
     $("textarea[name='relpeoples']").val('');
 }
@@ -376,6 +379,117 @@ function clearUsers() {
 function clearOrgs() {
     $("textarea[name='relorgnm']").val('');
 }
+
+//=====================================选择问题概况==============================
+function selectWtgk() { 
+        var trNode;
+        var loader = new Ext.tree.TreeLoader({
+            dataUrl : '<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=getProblemSummay',
+            listeners : {
+                "beforeload" : function(treeLoader, node) {
+                    treeLoader.baseParams.id = (node.id != "0" ? node.id : "");
+                }
+            }
+        });
+        
+        Ext.BLANK_IMAGE_URL = "<%=request.getContextPath()%>/ext-3.2.0/resources/images/default/tree/s.gif";
+        
+        var tree = new Ext.tree.TreePanel({
+            title : '选择问题概况',
+            useArrows : true,
+            autoScroll : true,
+            containerScroll : true,
+            region : 'center',
+            animate : true,
+            height : 200,
+            width : 210,
+            loader : loader,
+            listeners : {
+                "click" : function(node) {
+                    trNode = node;
+                },
+                "checkchange" : function(node, state) {
+                    if(node.hasChildNodes()) {
+                        for( i = 0; i < node.childNodes.length; i++) {
+                            node.childNodes[i].getUI().checkbox.checked = state;
+                        }
+                    }
+                }
+            },
+            buttons : [{
+                text : '选择',
+                handler : function() {
+                    //var nodes = tree.getChecked();
+                    var nodes = tree.getRootNode().childNodes;
+                    var selectedIds = '';
+                    var selectedwtgkTexts = '';
+                    for(var j = 0; j < nodes.length; j++) {
+                        var node = tree.getRootNode().childNodes[j];
+                        if(node.hasChildNodes()) {
+                            for(var i = 0; i < node.childNodes.length; i++) {
+                                if(node.childNodes[i].getUI().checkbox.checked) {
+                                    // alert(node.childNodes[i].id);
+                                    selectedIds = selectedIds + node.childNodes[i].id + ',';
+                                    selectedwtgkTexts = selectedwtgkTexts + node.childNodes[i].text + ',';
+                                }
+                            }
+                        }
+                    }
+                    
+                    $("#selectedwtgkIds").val(selectedIds);
+                    $("textarea[name='selectedwtgkTexts']").val(selectedwtgkTexts);
+                    
+                    addBasisWin.close();
+                    
+                   //alert($("#selectedwtgkIds").val() + $("textarea[name='selectedwtgkTexts']").val());
+                   // Ext.getCmp('selectedwtgk').setValue(selectedIds);
+                    
+                //    Ext.Ajax.request({
+                //        url : '<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=generateFactBook',
+                //        method : 'post',
+                //        params : {
+                //            selectIds : selectedIds
+                //        },
+                //        success : function(response, options) {
+                //            var o = Ext.util.JSON.decode(response.responseText);
+                //            Ext.getCmp('factBookContent').setValue(o.content);
+                //        },
+                //        failure : function() {
+                //            Ext.Msg.alert('提示', '生成事实认定书发生错误');
+                //        }
+                //    });
+
+                }
+            }],
+            buttonAlign : 'center'
+        });
+
+        var root = new Ext.tree.AsyncTreeNode({
+            text : '问题概况',
+            draggable : false,
+            id : '000011'
+        });
+        tree.setRootNode(root);
+        //        tree.render();
+        root.expand();
+
+        var addBasisWin = new Ext.Window({
+            title : '编辑事实认定书',
+            layout : 'border',
+            width : 600,
+            height : 520,
+            resizable : false,
+            closeAction : 'close',
+            //autoHeight : true,
+            constrainHeader : true,
+            modal : true,
+            plain : true,
+            items : [tree]
+        });
+        addBasisWin.show();
+    }
+
+
 		</script>
 	<body>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -492,6 +606,23 @@ function clearOrgs() {
                                                                         <span id="decision_span"></span>
 																	</td>
 																</tr>
+																
+																<tr>
+																	<td align="right" class="tabletext02" rowspan="2">
+																		<font color='#FF0000'>*</font>问题概况
+																	</td>
+																	<td align="left">
+                                                                        <input type="button" value="选择" class="botton01"
+                                                                            onclick="selectWtgk()" />&nbsp;&nbsp;
+                                                                        <input type="hidden" name="selectedwtgkIds" id="selectedwtgkIds" value="">
+                                                                    </td>
+																</tr>
+																<tr>
+                                                                    <td align="left">
+                                                                        <html:textarea property="selectedwtgkTexts" cols="100%"
+                                                                            rows="8" readonly="true"></html:textarea>
+                                                                    </td>
+                                                                </tr>
 																<tr>
 																	<td align="right" class="tabletext02">
 																		<font color='#FF0000'>*</font>上传执法检查意见书
@@ -504,7 +635,7 @@ function clearOrgs() {
 																</tr>
 																<tr>
                                                                     <td align="right" class="tabletext02" rowspan="2">
-                                                                                                                                          执法检查意见书中涉及机构
+                                                                                                                                                                                                                                                                   执法检查意见书中涉及机构
                                                                     </td>
                                                                     <td align="left">
                                                                         <input type="button" value="选择" class="botton01"

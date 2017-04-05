@@ -224,6 +224,9 @@
 			<form-property name="selectAeOthers" type="java.lang.String"></form-property>
 			<form-property name="selectAeMasterMans" type="java.lang.String"></form-property>
 			<form-property name="selectAeedOrg" type="java.lang.String"></form-property>
+			
+			<form-property name="selectedwtgkIds" type="java.lang.String"></form-property>
+			<form-property name="selectedwtgkTexts" type="java.lang.String"></form-property>
 
 
 		</form-bean>

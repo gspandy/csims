@@ -1859,7 +1859,7 @@ function addFactBook() {
                     fieldLabel : '检查内容',
                     name : 'filed9',
                     id : 'filed9',
-                    width : 596,
+                    width : 700,
                     allowBlank : false,
                     value : '<%= request.getAttribute("filed9")%>'
                 }]
@@ -1873,7 +1873,7 @@ function addFactBook() {
                 name : 'factBookContent',
                 id : 'factBookContent',
                 height : 300,
-                width : 596,
+                width : 700,
                 // createLinkText: "创建超链接",
                 // defaultLinkValue: "http://",
                 enableAlignments : false,
@@ -1971,6 +1971,8 @@ function addFactBook() {
                 }
             }]
         });
+        
+        
         var trNode;
         var loader = new Ext.tree.TreeLoader({
             dataUrl : '<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=getProblemSummay',
@@ -2063,7 +2065,7 @@ function addFactBook() {
             constrainHeader : true,
             modal : true,
             plain : true,
-            items : [tree, form]
+            items : [form]
         });
         addBasisWin.show();
     }
@@ -3056,7 +3058,7 @@ function confirmAeother() {
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="right" class="tabletext02">
-                                                                                                                                              上传询问笔录
+                                                                                                                                                                                                                                                                     上传询问笔录
                                                                     </td>
                                                                     <td align="left">
                                                                         <input type="file" name="enquirercdpath" id="aeplan"

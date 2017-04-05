@@ -2228,11 +2228,42 @@ public class EnforceService extends BaseEnforceService {
 		if (StringUtils.isNotEmpty(aeedorgnm)) {
 			fb.setAeedorgnm(aeedorgnm);
 		}
+
+		if (StringUtils.isBlank(fb.getAeorgno())) {
+			BsAeinspection aeinspec = this.getAeinspectionByIno(fb.getFiled11());
+			if (aeinspec != null) {
+				fb.setAeorgno(aeinspec.getAeorgno());
+				fb.setAeorgnm(aeinspec.getAeorgnm());
+			}
+		}
+
+		if (StringUtils.isBlank(fb.getAeedorgno())) {
+			BsAeinspection aeinspec = this.getAeinspectionByIno(fb.getFiled11());
+			fb.setAeedorgno(aeinspec.getAeedorgno());
+			fb.setAeedorgnm(aeinspec.getAeedorgnm());
+			
+			/*
+			 * 同时查询该用户所属机构的机构类型以及机构所属人民银行 供金融机构查询时使用
+			 */
+			BsOrg aeedorg = bsOrgDao.get(aeinspec.getAeedorgno());
+			if (aeedorg != null) {
+				fb.setOrgtpno(aeedorg.getH());
+				fb.setOrgtpnm(aeedorg.getI());
+				fb.setPcbno(aeedorg.getPcbno());
+				fb.setPcbnm(aeedorg.getPcbname());
+			}
+		}
+
 		if (StringUtils.isNotEmpty(inspectToken)) {
 			fb.setStat(inspectToken);
 		}
 		this.bsFactbookDao.save(fb);
 		return fb.getFiled7();
+	}
+
+	@Transactional(readOnly = false)
+	public void saveFactBook(BsFactbook fb) {
+		this.bsFactbookDao.save(fb);
 	}
 
 	/**
@@ -3293,7 +3324,6 @@ public class EnforceService extends BaseEnforceService {
 		// List<BsOrg> result = (List<BsOrg>)
 		// bsAepeopleDao.pagedQuery(selectOrg.toString(), 1, size).getResult();
 		List<BsOrg> result = jdbcTemplate.queryForList(selectOrg.toString());
-		
 
 		return result;
 	}

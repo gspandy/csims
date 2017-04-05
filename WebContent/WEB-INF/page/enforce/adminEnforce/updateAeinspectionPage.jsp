@@ -2374,7 +2374,7 @@ function addFactBook() {
                     fieldLabel : '检查内容',
                     name : 'filed9',
                     id : 'filed9',
-                    width : 596,
+                    width : 700,
                     allowBlank : false,
                     value : ''
                 }]
@@ -2388,7 +2388,7 @@ function addFactBook() {
                 name : 'factBookContent',
                 id : 'factBookContent',
                 height : 300,
-                width : 596,
+                width : 700,
                 // createLinkText: "创建超链接",
                 // defaultLinkValue: "http://",
                 enableAlignments : false,
@@ -2612,7 +2612,7 @@ function addFactBook() {
             constrainHeader : true,
             modal : true,
             plain : true,
-            items : [tree, form]
+            items : [form]
         });
         addBasisWin.show();
     }

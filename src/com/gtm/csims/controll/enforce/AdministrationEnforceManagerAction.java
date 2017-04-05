@@ -3920,6 +3920,22 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			request.setAttribute("methodname", "toAeconclusionList");
 			// 调用检查结论保存方法
 			try {
+
+				// 检查结论流程中增加选择问题概况，此功能原来在录入工作检查记录步骤
+				String selectwtgkIds = dyna.getString("selectedwtgkIds");
+				if (StringUtils.isNotBlank(selectwtgkIds)) {
+					// 更新事实认定书中的问题概要
+					BsFactbook fb = enforceService.getFactBook(dyna.getString("aeno"));
+					if (fb != null) {
+						fb.setSelectedwtgk(selectwtgkIds);
+						enforceService.saveFactBook(fb);
+					} else {
+						request.setAttribute(ATTR_MESSAGE,
+						        "<b>该工作检查记录尚未录入事实认定书，暂时不能添加问题概况</b><br><b>解决方法:</b>请先录入事实认定书信息!");
+						return mapping.findForward("toAdminEnforceMessage");
+					}
+				}
+
 				BsAeconclusion bs = RequestUtil.getBeanFromParams(request, BsAeconclusion.class);
 				String[] decisionArr = request.getParameterValues("decision");
 				bs.setDecision(StringUtil.join(decisionArr, StringUtils.EMPTY, StringUtils.EMPTY, ","));
@@ -3992,6 +4008,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 					        + bs.getAeopnionno() + " 系统已经存在<br><b>解决方法:</b>请确认该执法检查意见书编号唯一，再输入保存!");
 					return mapping.findForward("toAdminEnforceMessage");
 				}
+
 				request.setAttribute(ATTR_MESSAGE, "保存行政执法检查结论【" + bs.getAeno() + "】操作成功!");
 				LOGGER.info(String.format(LOG_FORMAT, bsorg.getName(), nowLoginUser, "保存检查结论", "操作成功！"));
 			} catch (Exception e) {
