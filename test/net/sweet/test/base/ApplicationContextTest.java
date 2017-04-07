@@ -47,9 +47,10 @@ public class ApplicationContextTest extends AbstractAnnotationAwareTransactional
 		        WORKPATH + "service/applicationContext-service-statisticcs.xml",
 		        WORKPATH + "service/applicationContext-service-enforce.xml",
 		        WORKPATH + "service/applicationContext-service-log.xml",
-		        WORKPATH + "applicationContext-serial-number.xml", WORKPATH + "applicationContext-schedule.xml"
-		// WORKPATH + "service/applicationContext-service-statisticcs.xml"
-		};
+		        WORKPATH + "applicationContext-serial-number.xml", WORKPATH + "applicationContext-schedule.xml",
+		        // WORKPATH +
+				// "service/applicationContext-service-statisticcs.xml"
+		        WORKPATH + "service/applicationContext-service-system.xml" };
 	}
 
 	@Override
