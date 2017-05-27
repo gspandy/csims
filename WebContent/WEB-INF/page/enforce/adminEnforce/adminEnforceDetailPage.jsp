@@ -40,6 +40,7 @@
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/common.js"></script>
 		<script type="text/javascript">
+		
 			function toUpdateAdminEnforcePage(){
 				document.forms[0].action="AdminEnforceManagerAction.do?method=toUpdateAdminEnforcePage";
 				document.forms[0].submit();	
@@ -55,8 +56,14 @@
                 document.forms[0].action="AdminEnforceManagerAction.do?method=generateLxspbWord&wordTemplateId="+wordId+"&from=detail";
                 document.forms[0].submit(); 
             }
+			
             function generateSjsxjgWord(wordId){
                 document.forms[0].action="AdminEnforceManagerAction.do?method=generateSjsxjgWord&wordTemplateId="+wordId+"&from=detail";
+                document.forms[0].submit(); 
+            }
+            
+            function generateDesktopClientFile(){
+                document.forms[0].action="AdminEnforceManagerAction.do?method=generateDesktopClientInitialFile";
                 document.forms[0].submit(); 
             }
 		</script>
@@ -369,6 +376,8 @@
 																			onclick="return generateLxspbWord('lxspb');" />
 																		<input type="button" value="导出执法检查随机筛选结果" class="botton0001"
 																			onclick="return generateSjsxjgWord('sjsxjg');" />
+																		<input type="button" value="导出单机版初始化文件" class="botton0001"
+																			onclick="return generateDesktopClientFile();" />
 																	</td>
 																</tr>
 															</table>

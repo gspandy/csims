@@ -12,9 +12,11 @@ import java.util.UUID;
 
 import net.sweet.dao.generic.support.Page;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,6 +71,9 @@ import com.gtm.csims.utils.StringUtil;
  */
 @SuppressWarnings("unchecked")
 public class EnforceService extends BaseEnforceService {
+
+	private static Logger LOGGER = Logger.getLogger(EnforceService.class);
+
 	private BsAdmenforceDAO bsAdmenforceDao;
 	private BsAeconclusionDAO bsAeconclusionDao;
 	private BsAeinspectionDAO bsAeinspectionDao;
@@ -2241,7 +2246,7 @@ public class EnforceService extends BaseEnforceService {
 			BsAeinspection aeinspec = this.getAeinspectionByIno(fb.getFiled11());
 			fb.setAeedorgno(aeinspec.getAeedorgno());
 			fb.setAeedorgnm(aeinspec.getAeedorgnm());
-			
+
 			/*
 			 * 同时查询该用户所属机构的机构类型以及机构所属人民银行 供金融机构查询时使用
 			 */
@@ -3326,6 +3331,76 @@ public class EnforceService extends BaseEnforceService {
 		List<BsOrg> result = jdbcTemplate.queryForList(selectOrg.toString());
 
 		return result;
+	}
+
+	/**
+	 * 根据执法编号查找执法人员.
+	 * 
+	 * @param certNo
+	 * @return
+	 */
+	public BsAepeople findAepeople(String certNo) {
+		List<BsAepeople> ps = bsAepeopleDao.find("from BsAepeople where Certno = ?", certNo);
+		if (CollectionUtils.isNotEmpty(ps)) {
+			return ps.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param ae
+	 * @return
+	 */
+	public AeEnforceDTO convert(BsAdmenforce ae) {
+
+		if (ae != null) {
+			AeEnforceDTO dto = new AeEnforceDTO();
+			try {
+				BeanUtils.copyProperties(dto, ae);
+
+				if (StringUtils.isNotBlank(ae.getAeheadman())) {
+					String[] everyStr = ae.getAeheadman().split(",");
+
+					List<BsAepeople> list = new ArrayList<BsAepeople>();
+					for (int i = 0; i < everyStr.length; i++) {
+						list.add(this.findAepeople(everyStr[i].split("--")[1]));
+					}
+
+					dto.setAeheadmans(list);
+				}
+
+				if (StringUtils.isNotBlank(ae.getAemaster())) {
+					String[] everyStr = ae.getAemaster().split(",");
+
+					List<BsAepeople> list = new ArrayList<BsAepeople>();
+					for (int i = 0; i < everyStr.length; i++) {
+						list.add(this.findAepeople(everyStr[i].split("--")[1]));
+					}
+
+					dto.setMasters(list);
+				}
+
+				if (StringUtils.isNotBlank(ae.getAeother())) {
+					String[] everyStr = ae.getAeother().split(",");
+
+					List<BsAepeople> list = new ArrayList<BsAepeople>();
+					for (int i = 0; i < everyStr.length; i++) {
+						list.add(this.findAepeople(everyStr[i].split("--")[1]));
+					}
+
+					dto.setOtheres(list);
+				}
+
+			} catch (Exception e) {
+				LOGGER.error("convert error", e);
+			}
+			return dto;
+		} else {
+			return null;
+		}
+
 	}
 
 	public void setBsAdmenforceDao(BsAdmenforceDAO bsAdmenforceDao) {

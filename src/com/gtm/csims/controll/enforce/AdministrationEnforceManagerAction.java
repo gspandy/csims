@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +48,7 @@ import org.apache.struts.upload.FormFile;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.gtm.csims.base.BaseAction;
 import com.gtm.csims.business.dataapp.statistics.impl.AdmenforceStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AdmpunishStsicSvce;
@@ -55,6 +58,7 @@ import com.gtm.csims.business.dataapp.statistics.impl.AeconclusionStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AeinspectionAnlStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AeinspectionStsicSvce;
 import com.gtm.csims.business.dataapp.statistics.impl.AerectificationStsicSvce;
+import com.gtm.csims.business.enforce.AeEnforceDTO;
 import com.gtm.csims.business.enforce.EnforceService;
 import com.gtm.csims.business.enforce.PunishService;
 import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
@@ -5490,6 +5494,77 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 导出单机版初始化文件.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward generateDesktopClientInitialFile(ActionMapping mapping, ActionForm form,
+	        HttpServletRequest request, HttpServletResponse response) {
+		String aeNo = request.getParameter("aeno");
+		FileInputStream fis = null;
+		OutputStream repos = null;
+		ZipOutputStream zfo = null;
+		try {
+			BsAdmenforce ae = enforceService.getAdminEnforce(aeNo);
+			if (ae == null) {
+				super.printMessage(request, response, "还未添加立项信息:" + aeNo + "，请添加后再导出！", ATTR_ERROR);
+				return null;
+			}
+
+			// 设置response的Header
+			response.setContentType("application/x-zip-compressed");
+
+			String fileName = super.getDownloadFileNameAsZip(ae.getAeno(), "单机版初始文件");
+			response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+			repos = response.getOutputStream();
+
+			AeEnforceDTO dto = enforceService.convert(ae);
+			byte[] fileBytes = JSON.toJSONBytes(dto, SerializerFeature.WriteMapNullValue,
+			        SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullNumberAsZero);
+
+			// BufferedInputStream bis = new BufferedInputStream(new
+			// ByteArrayInputStream(fileBytes));
+
+			zfo = new ZipOutputStream(repos);
+			zfo.putNextEntry(new ZipEntry(ae.getId() + ".data"));
+			zfo.write(fileBytes);
+			zfo.finish();
+
+			repos.flush();
+			return null;
+		} catch (Exception e) {
+			LOGGER.error("生成单机版初始文件发生错误", e);
+			super.printMessage(request, response, "单机版初始文件" + aeNo + "导出失败！错误原因:" + e.getMessage(), ATTR_ERROR);
+			return null;
+		} finally {
+			try {
+				if (fis != null) {
+					fis.close();
+				}
+				if (repos != null) {
+					repos.close();
+				}
+
+				if (zfo != null) {
+					zfo.close();
+				}
+			} catch (IOException e) {
+				LOGGER.error("generateDesktopClientInitialFile", e);
+			}
+		}
+	}
+
+	/**
+	 * Set.
+	 * 
+	 * @param aeinspectionAnlStsicSvce
+	 */
 	public void setAeinspectionAnlStsicSvce(AeinspectionAnlStsicSvce aeinspectionAnlStsicSvce) {
 		this.aeinspectionAnlStsicSvce = aeinspectionAnlStsicSvce;
 	}
