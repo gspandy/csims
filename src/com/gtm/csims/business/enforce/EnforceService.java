@@ -3804,7 +3804,7 @@ public class EnforceService extends BaseEnforceService {
 			}
 
 			/*
-			 * Goaway.
+			 * Go away.
 			 */
 			if (inspecEntry.getValue().getBsWorkgoaway() != null) {
 				BsWorkgoaway wb = inspecEntry.getValue().getBsWorkgoaway();
@@ -3830,7 +3830,7 @@ public class EnforceService extends BaseEnforceService {
 				wb.setFiled14(bs.getIno());
 
 				try {
-					saveWorkgoaway(wb, false, admenforce.getAeorgno(), noGenerator.getYear());
+					saveWorkgoaway(wb, true, admenforce.getAeorgno(), noGenerator.getYear());
 				} catch (Exception e) {
 					LOGGER.error("保存离场记录发生错误", e);
 				}
