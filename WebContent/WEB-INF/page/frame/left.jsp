@@ -687,6 +687,16 @@ function goMainPage(type,url){
 																								</td>
 																							</tr>
 																						</jguard:authorized>
+																						<jguard:authorized
+																							uri="/AdminEnforceManagerAction.do?method=toImportDesktopClientFinalData">
+																							<tr class="h30">
+																								<td>
+																									<a
+																										href="<%=request.getContextPath()%>/AdminEnforceManagerAction.do?method=toImportDesktopClientFinalData"
+																										target="mainFrame" class="left">离线工作检查记录导入</a>
+																								</td>
+																							</tr>
+																						</jguard:authorized>
 																					</table>
 																				</td>
 																			</tr>

@@ -32,6 +32,8 @@
 		<property name="bsAePublishFeedBackDao" ref="bsAePublishFeedBackDao" />
 		<property name="bsAePeopleJoinHistoryDao" ref="bsAePeopleJoinHistoryDao" />
 		<property name="bsAeedOrgJoinHistoryDao" ref="bsAeedOrgJoinHistoryDao" />
+		<property name="fileHandler" ref="fileService"></property>
+		<property name="systemBaseInfoManager" ref="systemBaseInfoManager" />
 	</bean>
 	<bean id="punishService" class="com.gtm.csims.business.enforce.PunishService">
 		<property name="bsAdmpunishDao" ref="bsAdmpunishDao" />

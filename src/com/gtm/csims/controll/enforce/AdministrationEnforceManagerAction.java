@@ -1878,7 +1878,7 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 			try {
 				enforceService.saveWorkgoaway(wb, isNew, loginOrgNo, noGenerator.getYear());
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOGGER.error("保存离场记录发生错误", e);
 				out.print("{success:false,msg:'保存离场记录发生错误" + e.getMessage() + "'}");
 				return null;
 			}
@@ -5558,6 +5558,50 @@ public class AdministrationEnforceManagerAction extends BaseAction {
 				LOGGER.error("generateDesktopClientInitialFile", e);
 			}
 		}
+	}
+
+	/**
+	 * 跳转行政执法的工作检查记录单机版数据导入界面.
+	 */
+	public ActionForward toImportDesktopClientFinalData(ActionMapping mapping, ActionForm form,
+	        HttpServletRequest request, HttpServletResponse response) {
+		// 如果当前用户不属于人行用户，则不能使用该功能
+		if (!super.isPcbUser(request, response)) {
+			this.printMessage(request, response, ERROR1, ATTR_ERROR);
+			return null;
+		}
+		return mapping.findForward("toImportDesktopClientFinalData");
+	}
+
+	/**
+	 * 导入行政执法的工作检查记录单机版数据.
+	 */
+	public ActionForward importDesktopClientFinalData(ActionMapping mapping, ActionForm form,
+	        HttpServletRequest request, HttpServletResponse response) {
+		// 如果当前用户不属于人行用户，则不能使用该功能
+		if (!super.isPcbUser(request, response)) {
+			this.printMessage(request, response, ERROR1, ATTR_ERROR);
+			return null;
+		}
+		String nowLoginUser = this.getPubCredential(UserCredentialName.nickname.name(), request, response);
+
+		DynaActionForm dyna = (DynaActionForm) form;
+		FormFile file = null;
+		// 保存执法检查工作底稿附件
+		file = (FormFile) dyna.get("desktopClientFinalFile");
+		if (file != null && StringUtils.isNotBlank(file.getFileName())) {
+			System.out.println(file.getFileName());
+
+			enforceService.loadDesktopClientFinalFile(file, nowLoginUser, request.getSession().getServletContext()
+			        .getRealPath(File.separator));
+		}
+
+		try {
+			response.getWriter().print("{success:true}");
+		} catch (IOException e) {
+			LOGGER.error("Response error: ", e);
+		}
+		return null;
 	}
 
 	/**

@@ -224,10 +224,11 @@
 			<form-property name="selectAeOthers" type="java.lang.String"></form-property>
 			<form-property name="selectAeMasterMans" type="java.lang.String"></form-property>
 			<form-property name="selectAeedOrg" type="java.lang.String"></form-property>
-			
+
 			<form-property name="selectedwtgkIds" type="java.lang.String"></form-property>
 			<form-property name="selectedwtgkTexts" type="java.lang.String"></form-property>
-
+			<form-property name="desktopClientFinalFile" type="org.apache.struts.upload.FormFile">
+			</form-property>
 
 		</form-bean>
 	</form-beans>
@@ -310,6 +311,9 @@
 				redirect="false" />
 			<forward name="toSiftPage"
 				path="/WEB-INF/page/enforce/adminEnforce/siftInitPage.jsp" redirect="false" />
+			<forward name="toImportDesktopClientFinalData"
+				path="/WEB-INF/page/enforce/adminEnforce/importDesktopClientFinalData.jsp"
+				redirect="false" />
 
 		</action>
 

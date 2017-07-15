@@ -1,26 +1,39 @@
 package com.gtm.csims.business.enforce;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import net.sweet.dao.generic.support.Page;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts.upload.FormFile;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.csvreader.CsvWriter;
+import com.gtm.csims.business.managment.system.SystemBaseInfoManager;
 import com.gtm.csims.business.remind.RemindService;
 import com.gtm.csims.business.serialnumber.NoGenerator;
 import com.gtm.csims.dao.BsAdmenforceDAO;
@@ -40,6 +53,7 @@ import com.gtm.csims.dao.BsWorkbasisDAO;
 import com.gtm.csims.dao.BsWorkcomingDAO;
 import com.gtm.csims.dao.BsWorkgoawayDAO;
 import com.gtm.csims.dao.BsWorktalksummaryDAO;
+import com.gtm.csims.file.FileHandler;
 import com.gtm.csims.model.BsAdmenforce;
 import com.gtm.csims.model.BsAdmpunish;
 import com.gtm.csims.model.BsAdmpunishcons;
@@ -59,6 +73,7 @@ import com.gtm.csims.model.BsWorkcoming;
 import com.gtm.csims.model.BsWorkgoaway;
 import com.gtm.csims.model.BsWorktalksummary;
 import com.gtm.csims.utils.Constants;
+import com.gtm.csims.utils.DateUtil;
 import com.gtm.csims.utils.StringUtil;
 
 /**
@@ -93,6 +108,9 @@ public class EnforceService extends BaseEnforceService {
 
 	private BsAePeopleJoinHistoryDAO bsAePeopleJoinHistoryDao;
 	private BsAeedOrgJoinHistoryDAO BsAeedOrgJoinHistoryDao;
+
+	private SystemBaseInfoManager systemBaseInfoManager;
+	private FileHandler fileHandler;
 
 	/**
 	 * 保存行政执法登记.
@@ -1915,6 +1933,7 @@ public class EnforceService extends BaseEnforceService {
 			ae.setUpdateate(new Date());
 		}
 		bsWorkgoawayDao.save(ae);
+
 		if (isNew) {
 			noGenerator.updateNo(NoGenerator.GOAWAY_NO_TYPE, orgNo, String.valueOf(year));
 		}
@@ -2199,6 +2218,112 @@ public class EnforceService extends BaseEnforceService {
 				        String.valueOf(bs.getFactnoindex()));
 				fb.setFiled7(factBookNo);
 				noGenerator.updateNo(NoGenerator.FACTBOOK_NO_TYPE, aeOrg, yearStr);
+			}
+		}
+		fb.setUpdateate(date);
+		fb.setAeno(aeNo);
+		fb.setFiled5(factBookContent);
+		fb.setFiled6(filed6);
+		fb.setFiled9(filed9);
+		fb.setFiled8(aeedOrg);
+		fb.setFiled10(titleOrg);
+		fb.setFiled11(inspectionNo);
+		fb.setFiled12(filed12);
+		fb.setSelectedwtgk(selectedwtgk);
+		if (StringUtils.isNotEmpty(aeorgno)) {
+			fb.setAeorgno(aeorgno);
+		}
+		if (StringUtils.isNotEmpty(aeorgnm)) {
+			fb.setAeorgnm(aeorgnm);
+		}
+		if (StringUtils.isNotEmpty(aeedorgno)) {
+			fb.setAeedorgno(aeedorgno);
+			/*
+			 * 同时查询该用户所属机构的机构类型以及机构所属人民银行 供金融机构查询时使用
+			 */
+			BsOrg aeedorg = bsOrgDao.get(aeedorgno);
+			if (aeedorg != null) {
+				fb.setOrgtpno(aeedorg.getH());
+				fb.setOrgtpnm(aeedorg.getI());
+				fb.setPcbno(aeedorg.getPcbno());
+				fb.setPcbnm(aeedorg.getPcbname());
+			}
+		}
+		if (StringUtils.isNotEmpty(aeedorgnm)) {
+			fb.setAeedorgnm(aeedorgnm);
+		}
+
+		if (StringUtils.isBlank(fb.getAeorgno())) {
+			BsAeinspection aeinspec = this.getAeinspectionByIno(fb.getFiled11());
+			if (aeinspec != null) {
+				fb.setAeorgno(aeinspec.getAeorgno());
+				fb.setAeorgnm(aeinspec.getAeorgnm());
+			}
+		}
+
+		if (StringUtils.isBlank(fb.getAeedorgno())) {
+			BsAeinspection aeinspec = this.getAeinspectionByIno(fb.getFiled11());
+			fb.setAeedorgno(aeinspec.getAeedorgno());
+			fb.setAeedorgnm(aeinspec.getAeedorgnm());
+
+			/*
+			 * 同时查询该用户所属机构的机构类型以及机构所属人民银行 供金融机构查询时使用
+			 */
+			BsOrg aeedorg = bsOrgDao.get(aeinspec.getAeedorgno());
+			if (aeedorg != null) {
+				fb.setOrgtpno(aeedorg.getH());
+				fb.setOrgtpnm(aeedorg.getI());
+				fb.setPcbno(aeedorg.getPcbno());
+				fb.setPcbnm(aeedorg.getPcbname());
+			}
+		}
+
+		if (StringUtils.isNotEmpty(inspectToken)) {
+			fb.setStat(inspectToken);
+		}
+		this.bsFactbookDao.save(fb);
+		return fb.getFiled7();
+	}
+
+	/**
+	 * 保存事实认定书对象
+	 * 
+	 * @param aeNo
+	 * @param inspectionNo
+	 * @param titleOrg
+	 * @param aeOrg
+	 * @param aeedOrg
+	 * @param factBookContent
+	 * @param filed6
+	 * @param filed12
+	 * @param filed9
+	 * @param selectedwtgk
+	 * @param aeorgno
+	 * @param aeorgnm
+	 * @param aeedorgno
+	 * @param aeedorgnm
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public String saveFactBookWithOutNoUpdate(String aeNo, String inspectionNo, String titleOrg, String aeOrg,
+	        String aeedOrg, String factBookContent, String filed6, String filed12, String filed9, String selectedwtgk,
+	        String aeorgno, String aeorgnm, String aeedorgno, String aeedorgnm, String inspectToken) {
+		// BsFactbook fb = this.getFactBook(inspectionNo, inspectToken);
+		BsFactbook fb = this.getFactBook(inspectionNo);
+		Date date = new Date();
+		if (fb == null) {
+			fb = new BsFactbook();
+			fb.setCreatedate(date);
+			String yearStr = noGenerator.getYear();
+			BsNogenerate bs = noGenerator.getNoGenerate(aeOrg, yearStr);
+			if (bs == null) {
+				fb.setFiled7("未明确编号" + UUID.randomUUID().toString().replace("-", StringUtils.EMPTY));
+			} else {
+				String factBookNo = noGenerator.generateNoStr(bs.getFactnotext(), bs.getFactnoyear(),
+				        String.valueOf(bs.getFactnoindex()));
+				fb.setFiled7(factBookNo);
+				// noGenerator.updateNo(NoGenerator.FACTBOOK_NO_TYPE, aeOrg,
+				// yearStr);
 			}
 		}
 		fb.setUpdateate(date);
@@ -3403,6 +3528,437 @@ public class EnforceService extends BaseEnforceService {
 
 	}
 
+	/**
+	 * 
+	 * @param file
+	 */
+	@Transactional(readOnly = false)
+	public void loadDesktopClientFinalFile(FormFile file, String loginUser, String realPath) {
+
+		if (file == null) {
+			LOGGER.error("Data file is null.");
+			return;
+		}
+		BsAdmenforce admenforce = null;
+		Map<String, AeInspectDTO> AeInspectDTOMap = new HashMap<String, AeInspectDTO>();
+
+		ZipEntry zipEntry = null;
+		FileOutputStream out = null;
+		ZipInputStream zipIn = null;
+		InputStream in = null;
+		try {
+			in = file.getInputStream();
+			zipIn = new ZipInputStream(in);
+			while ((zipEntry = zipIn.getNextEntry()) != null) {
+				if (!zipEntry.isDirectory()) {
+					if (LOGGER.isDebugEnabled()) {
+						LOGGER.debug("zipEntry.getName():" + zipEntry.getName());
+					}
+
+					if (zipEntry.getName().endsWith(".data")) {
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						admenforce = JSON.parseObject(new String(bt, "UTF-8"), BsAdmenforce.class);
+						admenforce.setId(StringUtils.split(zipEntry.getName(), ".")[0]);
+						admenforce.setAecontent(StringEscapeUtils.unescapeJava(admenforce.getAecontent()));
+
+					} else if (zipEntry.getName().endsWith("_INCOMING.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						BsWorkcoming detail = JSON.parseObject(new String(bt, "UTF-8"), BsWorkcoming.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBsWorkcoming(detail);
+
+					} else if (zipEntry.getName().endsWith("_TALKING.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						BsWorktalksummary detail = JSON.parseObject(new String(bt, "UTF-8"), BsWorktalksummary.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBsWorktalksummary(detail);
+
+					} else if (zipEntry.getName().endsWith("_GOAWAY.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						BsWorkgoaway detail = JSON.parseObject(new String(bt, "UTF-8"), BsWorkgoaway.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBsWorkgoaway(detail);
+
+					} else if (zipEntry.getName().endsWith("_FACTBOOK.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						BsFactbook detail = JSON.parseObject(new String(bt, "UTF-8"), BsFactbook.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBsFactbook(detail);
+
+					} else if (zipEntry.getName().endsWith("_WORKBASIS.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						BsWorkbasis detail = JSON.parseObject(new String(bt, "UTF-8"), BsWorkbasis.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBsWorkbasis(detail);
+
+					} else if (zipEntry.getName().endsWith("_INS_ANL.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						BsAeinspectionAnl detail = JSON.parseObject(new String(bt, "UTF-8"), BsAeinspectionAnl.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBsAeinspectionAnl(detail);
+
+					} else if (zipEntry.getName().endsWith("_INSPEC_DTO.json")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bt = IOUtils.toByteArray(zipIn);
+						AeInspectDTO aeInspect = JSON.parseObject(new String(bt, "UTF-8"), AeInspectDTO.class);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setInnerNo(aeInspect.getInnerNo());
+						AeInspectDTOMap.get(aeedorgNo).setAeheadman(aeInspect.getAeheadman());
+						AeInspectDTOMap.get(aeedorgNo).setAemaster(aeInspect.getAemaster());
+						AeInspectDTOMap.get(aeedorgNo).setAeother(aeInspect.getAeother());
+
+					} else if (zipEntry.getName().endsWith("_AQUIR_ATTACH.atta")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bytes = IOUtils.toByteArray(zipIn);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setAquirAttaByteArray(bytes);
+					} else if (zipEntry.getName().endsWith("_FACTBOOK_ATTACH.atta")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bytes = IOUtils.toByteArray(zipIn);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setFactAttaByteArray(bytes);
+					} else if (zipEntry.getName().endsWith("_BASIS_ATTACH.atta")) {
+						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
+						byte[] bytes = IOUtils.toByteArray(zipIn);
+						if (AeInspectDTOMap.get(aeedorgNo) == null) {
+							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
+						}
+						AeInspectDTOMap.get(aeedorgNo).setBasisAttaByteArray(bytes);
+					} else {
+
+					}
+
+				} else {
+					LOGGER.warn("Data file format is error");
+				}
+			}
+
+			this.processImportDesktopClientFinalDataToDb(admenforce, AeInspectDTOMap, loginUser, realPath);
+		} catch (Exception ex) {
+			LOGGER.error("in unZip(InputStream in,String outputDirectory) has an error,e is ", ex);
+		} finally {
+			IOUtils.closeQuietly(zipIn);
+			IOUtils.closeQuietly(in);
+			IOUtils.closeQuietly(out);
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param admenforce
+	 * @param AeInspectDTOMap
+	 * @param aquirAttaByteArray
+	 * @param factAttaByteArray
+	 * @param basisAttaByteArray
+	 */
+	@Transactional(readOnly = false)
+	private void processImportDesktopClientFinalDataToDb(BsAdmenforce admenforce,
+	        Map<String, AeInspectDTO> AeInspectDTOMap, String loginUser, String realPath) {
+
+		BsAdmenforce af = getAdmenforce(admenforce.getId());
+
+		Date now = new Date();
+
+		Set<Map.Entry<String, AeInspectDTO>> inspecs = AeInspectDTOMap.entrySet();
+		for (Map.Entry<String, AeInspectDTO> inspecEntry : inspecs) {
+
+			Boolean isExsitAeInspc = isExsitAeInspc(af.getAeno(), inspecEntry.getKey());
+			if (isExsitAeInspc) {
+				LOGGER.warn("Inspection" + af.getAeno() + "," + inspecEntry.getKey() + " has exsit");
+				continue;
+			}
+
+			/*
+			 * Inspection.
+			 */
+			BsAeinspection bs = new BsAeinspection();
+			bs.setStat(UUID.randomUUID().toString());
+
+			bs.setAeedorgno(inspecEntry.getKey());
+			String aeedorgNo = bs.getAeedorgno();
+			if (StringUtils.isNotBlank(aeedorgNo)) {
+				BsOrg org = systemBaseInfoManager.getOrgByNo(aeedorgNo);
+				bs.setAeedorgnm(org.getName());
+			}
+			bs.setAeheadman(inspecEntry.getValue().getAeheadman());
+
+			if (StringUtils.isNotBlank(inspecEntry.getValue().getAemaster())) {
+				if (inspecEntry.getValue().getAemaster().endsWith(",")) {
+					bs.setAemaster(inspecEntry.getValue().getAemaster()
+					        .substring(0, inspecEntry.getValue().getAemaster().length() - 1));
+				} else {
+					bs.setAemaster(inspecEntry.getValue().getAemaster());
+				}
+			}
+
+			if (StringUtils.isNotBlank(inspecEntry.getValue().getAeother())) {
+				if (inspecEntry.getValue().getAeother().endsWith(",")) {
+					bs.setAeother(inspecEntry.getValue().getAeother()
+					        .substring(0, inspecEntry.getValue().getAeother().length() - 1));
+				} else {
+					bs.setAeother(inspecEntry.getValue().getAeother());
+				}
+			}
+
+			String ino = admenforce.getAeno() + "第【"
+			        + ((af != null && af.getMaxino() != null) ? String.valueOf(af.getMaxino()) : "1") + "】号";
+			bs.setIno(ino);
+
+			if (StringUtils.isBlank(inspecEntry.getValue().getInnerNo())) {
+				bs.setInnerno(StringUtils.EMPTY);
+			} else {
+				String innerno = inspecEntry.getValue().getInnerNo() + "第【"
+				        + ((af != null && af.getMaxino() != null) ? String.valueOf(af.getMaxino()) : "1") + "】号";
+				bs.setInnerno(innerno);
+			}
+
+			BsNogenerate noGen = noGenerator.getNoGenerate(admenforce.getAeorgno(), noGenerator.getYear());
+
+			/*
+			 * Incoming.
+			 */
+			if (inspecEntry.getValue().getBsWorkcoming() != null) {
+				BsWorkcoming wc = inspecEntry.getValue().getBsWorkcoming();
+				wc.setId(null);
+				wc.setCreatedate(now);
+
+				if (noGen == null) {
+					wc.setFiled10("未明确编号" + UUID.randomUUID().toString().replace("-", StringUtils.EMPTY));
+				} else {
+					wc.setFiled10(noGenerator.generateNoStr(noGen.getComeinnotext(), noGen.getComeinnoyear(),
+					        String.valueOf(noGen.getComeinindex())));
+				}
+
+				wc.setFiled7(bs.getIno());
+				wc.setAeorgno(admenforce.getAeorgno());
+				wc.setAeorgnm(admenforce.getAeorgnm());
+				wc.setAeedorgno(bs.getAeedorgno());
+				wc.setAeedorgnm(bs.getAeedorgnm());
+				wc.setStat(bs.getStat());
+				wc.setFiled9(loginUser);
+
+				wc.setFiled4(null);
+				wc.setFiled6(null);
+				wc.setFlag(null);
+
+				try {
+					saveWorkcoming(wc, true, admenforce.getAeorgno(), noGenerator.getYear());
+				} catch (Exception e) {
+					LOGGER.error("保存进场记录发生错误", e);
+				}
+
+				bs.setInrcdno(wc.getFiled10());
+			}
+
+			/*
+			 * Talk.
+			 */
+			if (inspecEntry.getValue().getBsWorktalksummary() != null) {
+				BsWorktalksummary ws = inspecEntry.getValue().getBsWorktalksummary();
+
+				ws.setId(null);
+				ws.setCreatedate(now);
+				ws.setAeorgno(admenforce.getAeorgno());
+				ws.setAeorgnm(admenforce.getAeorgnm());
+				ws.setAeedorgno(bs.getAeedorgno());
+				ws.setAeedorgnm(bs.getAeedorgnm());
+				ws.setStat(bs.getStat());
+				ws.setFiled11(loginUser);
+
+				ws.setFlag(null);
+				ws.setFiled7(null);
+				ws.setFiled8(null);
+				ws.setFiled12(bs.getIno() + DateFormatUtils.format(new Date(), DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS));
+				ws.setFiled16(bs.getIno());
+
+				try {
+					saveWorktalksummary(ws);
+				} catch (Exception e) {
+					LOGGER.error("保存会谈纪要发生错误", e);
+				}
+			}
+
+			/*
+			 * Goaway.
+			 */
+			if (inspecEntry.getValue().getBsWorkgoaway() != null) {
+				BsWorkgoaway wb = inspecEntry.getValue().getBsWorkgoaway();
+				wb.setId(null);
+				wb.setCreatedate(new Date());
+				if (noGen == null) {
+					wb.setFiled10("未明确编号" + UUID.randomUUID().toString().replace("-", StringUtils.EMPTY));
+				} else {
+					String filed10 = noGenerator.generateNoStr(noGen.getAwaynotext(), noGen.getAwaynoyear(),
+					        String.valueOf(noGen.getAwaynoindex()));
+					wb.setFiled10(filed10);
+				}
+
+				wb.setAeorgno(admenforce.getAeorgno());
+				wb.setAeorgnm(admenforce.getAeorgnm());
+				wb.setAeedorgno(bs.getAeedorgno());
+				wb.setAeedorgnm(bs.getAeedorgnm());
+				wb.setStat(bs.getStat());
+				wb.setFiled9(loginUser);
+
+				wb.setFlag(null);
+				wb.setFiled13(null);
+				wb.setFiled14(bs.getIno());
+
+				try {
+					saveWorkgoaway(wb, false, admenforce.getAeorgno(), noGenerator.getYear());
+				} catch (Exception e) {
+					LOGGER.error("保存离场记录发生错误", e);
+				}
+
+				bs.setOutrcdno(wb.getFiled10());
+			}
+
+			/*
+			 * FactBook.
+			 */
+			if (inspecEntry.getValue().getBsFactbook() != null) {
+				String factBookNo = null;
+				try {
+					factBookNo = saveFactBook(admenforce.getAeno(), bs.getIno(), admenforce.getAeorgnm(),
+					        admenforce.getAeorgno(), bs.getAeedorgnm(), inspecEntry.getValue().getBsFactbook()
+					                .getFiled5(), inspecEntry.getValue().getBsFactbook().getFiled6(), inspecEntry
+					                .getValue().getBsFactbook().getFiled12(), inspecEntry.getValue().getBsFactbook()
+					                .getFiled9(), "", admenforce.getAeorgno(), admenforce.getAeorgnm(),
+					        bs.getAeedorgno(), bs.getAeedorgnm(), bs.getStat());
+				} catch (Exception e) {
+					LOGGER.error("保存事实认定书内容发生错误", e);
+				}
+				bs.setActualrcdno(factBookNo);
+			}
+
+			/*
+			 * Basis.
+			 */
+			if (inspecEntry.getValue().getBsWorkbasis() != null) {
+				BsWorkbasis wb = inspecEntry.getValue().getBsWorkbasis();
+				wb.setId(null);
+				wb.setCreatedate(new Date());
+				wb.setAeorgno(admenforce.getAeorgno());
+				wb.setAeorgnm(admenforce.getAeorgnm());
+				wb.setAeedorgno(bs.getAeedorgno());
+				wb.setAeedorgnm(bs.getAeedorgnm());
+				wb.setStat(bs.getStat());
+
+				wb.setFlag(null);
+				wb.setFiled1(bs.getAeedorgnm());
+				wb.setFiled7(bs.getIno());
+				wb.setFiled9(loginUser);
+				wb.setFiled10(bs.getIno() + DateFormatUtils.format(new Date(), DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS));
+
+				try {
+					saveWorkBasis(wb);
+				} catch (Exception e) {
+					LOGGER.error("保存工作底稿发生错误", e);
+				}
+			}
+
+			/*
+			 * Ins_anl.
+			 */
+			if (inspecEntry.getValue().getBsAeinspectionAnl() != null) {
+				BsAeinspectionAnl wb = inspecEntry.getValue().getBsAeinspectionAnl();
+
+				wb.setId(null);
+				wb.setAeorgno(admenforce.getAeorgno());
+				wb.setAeorgnm(admenforce.getAeorgnm());
+				wb.setAeedorgno(bs.getAeedorgno());
+				wb.setAeedorgnm(bs.getAeedorgnm());
+				wb.setStat(bs.getStat());
+
+				wb.setAeinspectionno(bs.getIno());
+				wb.setAeno(admenforce.getAeno());
+				wb.setCreatedate(now);
+				wb.setReporter(loginUser);
+				wb.setAnldate(now);
+
+				wb.setFlag(null);
+				wb.setA1(admenforce.getAeorgnm());
+				wb.setB1(bs.getAeedorgnm());
+				wb.setO1(null);
+
+				try {
+					saveInspectionAnl(wb);
+				} catch (Exception e) {
+					LOGGER.error("保存执法统计情况发生错误", e);
+				}
+			}
+
+			if (inspecEntry.getValue().getAquirAttaByteArray() != null) {
+				String attchuuid = fileHandler.saveBsAttachment(loginUser, inspecEntry.getValue()
+				        .getAquirAttaByteArray(), realPath);
+				bs.setEnquirercd(attchuuid);
+			}
+
+			if (inspecEntry.getValue().getFactAttaByteArray() != null) {
+				String attchuuid = fileHandler.saveBsAttachment(loginUser, inspecEntry.getValue()
+				        .getFactAttaByteArray(), realPath);
+				bs.setActualrcd(attchuuid);
+			}
+
+			if (inspecEntry.getValue().getBasisAttaByteArray() != null) {
+				String attchuuid = fileHandler.saveBsAttachment(loginUser, inspecEntry.getValue()
+				        .getBasisAttaByteArray(), realPath);
+				bs.setAebasis(attchuuid);
+			}
+
+			// 保存创建人为当前登录人id
+			bs.setCreator(loginUser);
+			bs.setCrtdate(now);
+			bs.setCrtlogin(loginUser);
+			bs.setIsfinished(false);
+			bs.setIsfinishedRefti(false);
+			bs.setCanbeupdate(true);
+
+			bs.setAeno(admenforce.getAeno());
+			bs.setAeorgno(admenforce.getAeorgno());
+			bs.setAeorgnm(admenforce.getAeorgnm());
+			bs.setAeplanstdate(admenforce.getAeplanstdate());
+			bs.setAeplantmdate(admenforce.getAeplantmdate());
+
+			try {
+				saveAeinspection(bs);
+				updateAeStatu(admenforce.getAeno());
+			} catch (DataIntegrityViolationException e) {
+				try {
+					LOGGER.error("删除当前工作检查记录的所有相关信息失败", e);
+				} catch (Exception e1) {
+					LOGGER.error("删除当前工作检查记录的所有相关信息失败", e1);
+				}
+
+			}
+		}
+	}
+
 	public void setBsAdmenforceDao(BsAdmenforceDAO bsAdmenforceDao) {
 		this.bsAdmenforceDao = bsAdmenforceDao;
 	}
@@ -3481,6 +4037,14 @@ public class EnforceService extends BaseEnforceService {
 
 	public void setBsAeedOrgJoinHistoryDao(BsAeedOrgJoinHistoryDAO bsAeedOrgJoinHistoryDao) {
 		BsAeedOrgJoinHistoryDao = bsAeedOrgJoinHistoryDao;
+	}
+
+	public void setSystemBaseInfoManager(SystemBaseInfoManager systemBaseInfoManager) {
+		this.systemBaseInfoManager = systemBaseInfoManager;
+	}
+
+	public void setFileHandler(FileHandler fileHandler) {
+		this.fileHandler = fileHandler;
 	}
 
 }
