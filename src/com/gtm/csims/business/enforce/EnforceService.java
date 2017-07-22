@@ -3600,11 +3600,11 @@ public class EnforceService extends BaseEnforceService {
 					} else if (zipEntry.getName().endsWith("_WORKBASIS.json")) {
 						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
 						byte[] bt = IOUtils.toByteArray(zipIn);
-						BsWorkbasis detail = JSON.parseObject(new String(bt, "UTF-8"), BsWorkbasis.class);
+						List<BsWorkbasis> details = JSON.parseArray(new String(bt, "UTF-8"), BsWorkbasis.class);
 						if (AeInspectDTOMap.get(aeedorgNo) == null) {
 							AeInspectDTOMap.put(aeedorgNo, new AeInspectDTO());
 						}
-						AeInspectDTOMap.get(aeedorgNo).setBsWorkbasis(detail);
+						AeInspectDTOMap.get(aeedorgNo).setBsWorkbasis(details);
 
 					} else if (zipEntry.getName().endsWith("_INS_ANL.json")) {
 						String aeedorgNo = StringUtils.split(zipEntry.getName(), "_")[0];
@@ -3860,26 +3860,30 @@ public class EnforceService extends BaseEnforceService {
 			 * Basis.
 			 */
 			if (inspecEntry.getValue().getBsWorkbasis() != null) {
-				BsWorkbasis wb = inspecEntry.getValue().getBsWorkbasis();
-				wb.setId(null);
-				wb.setCreatedate(new Date());
-				wb.setAeorgno(admenforce.getAeorgno());
-				wb.setAeorgnm(admenforce.getAeorgnm());
-				wb.setAeedorgno(bs.getAeedorgno());
-				wb.setAeedorgnm(bs.getAeedorgnm());
-				wb.setStat(bs.getStat());
+				for (Iterator<BsWorkbasis> iterator = inspecEntry.getValue().getBsWorkbasis().iterator(); iterator
+				        .hasNext();) {
+					BsWorkbasis wb = iterator.next();
+					wb.setId(null);
+					wb.setCreatedate(new Date());
+					wb.setAeorgno(admenforce.getAeorgno());
+					wb.setAeorgnm(admenforce.getAeorgnm());
+					wb.setAeedorgno(bs.getAeedorgno());
+					wb.setAeedorgnm(bs.getAeedorgnm());
+					wb.setStat(bs.getStat());
 
-				wb.setFlag(null);
-				wb.setFiled1(bs.getAeedorgnm());
-				wb.setFiled7(bs.getIno());
-				wb.setFiled9(loginUser);
-				wb.setFiled10(bs.getIno() + DateFormatUtils.format(new Date(), DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS));
-
-				try {
-					saveWorkBasis(wb);
-				} catch (Exception e) {
-					LOGGER.error("保存工作底稿发生错误", e);
+					wb.setFlag(null);
+					wb.setFiled1(bs.getAeedorgnm());
+					wb.setFiled7(bs.getIno());
+					wb.setFiled9(loginUser);
+					wb.setFiled10(bs.getIno()
+					        + DateFormatUtils.format(new Date(), DateUtil.DATE_FORMAT_YYYYMMDDHHMMSSSSS));
+					try {
+						saveWorkBasis(wb);
+					} catch (Exception e) {
+						LOGGER.error("保存工作底稿发生错误", e);
+					}
 				}
+
 			}
 
 			/*
